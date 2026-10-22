@@ -18,6 +18,8 @@ import time
 import urllib.request
 import zipfile
 
+from net_tls import context
+
 MODS = {
     'kts': {
         'name': "Kagoni's Tyre Simulation", 'author': 'Kagoni', 'resource': 39079, 'version': '1.5.0-HOTFIX 2',
@@ -154,7 +156,7 @@ def fetch(url):
     if not re.match(HOSTS, url):
         raise ValueError('Optional mods download only from their official pages')
     request = urllib.request.Request(url, headers={'User-Agent': 'BJRME-optional-mods'})
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with urllib.request.urlopen(request, timeout=60, context=context()) as response:
         if not re.match(HOSTS, response.geturl()):
             raise ValueError('Refusing a redirect away from the official download hosts')
         data = response.read(MAX_DOWNLOAD + 1)

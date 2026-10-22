@@ -49,3 +49,5 @@ BeamMP 3.9 and BeamJoy-Revived 2.0.
 - Play and Custom editions, a standalone parts generator for Windows and Linux (no Python needed)
   that builds parts before the server starts, and console commands for updates and optional mods
   (`bjrme help`).
+- Build 2: update checks and optional-mod downloads work on every Linux distribution, not only
+  Ubuntu-based ones.

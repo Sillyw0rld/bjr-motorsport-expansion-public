@@ -13,6 +13,8 @@ import time
 import urllib.request
 import zipfile
 
+from net_tls import context
+
 PLACEHOLDER = 'OWNER/REPOSITORY'
 MANIFEST = 'bjrme-release.json'
 MAX_DOWNLOAD = 512 * 1024 * 1024
@@ -35,7 +37,7 @@ def fetch(url, limit=2 * 1024 * 1024):
     if not re.match(r'^https://(?:api\.github\.com|github\.com|release-assets\.githubusercontent\.com|objects\.githubusercontent\.com)/', url):
         raise ValueError('Updates must use HTTPS GitHub release URLs')
     request = urllib.request.Request(url, headers={'User-Agent': 'BJRME-release-updater', 'Accept': 'application/vnd.github+json'})
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with urllib.request.urlopen(request, timeout=30, context=context()) as response:
         if not re.match(r'^https://(?:api\.github\.com|github\.com|release-assets\.githubusercontent\.com|objects\.githubusercontent\.com)/', response.geturl()):
             raise ValueError('Refusing a redirect outside HTTPS GitHub release hosts')
         data = response.read(limit + 1)
