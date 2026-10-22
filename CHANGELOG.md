@@ -2,6 +2,14 @@
 
 Versions: v2.<minor>.<patch>.<build> (build = number of commits in this repository).
 
+## 2.16.0 — BJR:ME upgrades for BeamNG cars
+- **BeamNG's own cars get BJR:ME upgrades**, in both editions: weight-reduction stages (Street
+  −4 %, Sport −7 %, Race −15 %) for 33 models and Sport / Race brakes for 31 models.
+- **Tyre compounds and widths for BeamNG cars, in beta,** for the Covet, ETK 800, D-Series and SBR.
+  Their PI is still being tuned and currently reads about 30 PI high; the workshop says so.
+- Every part was spawned on BeamNG 0.40 before release: no broken beams, no fuel leaks, the right
+  mass.
+
 ## 2.15.12 — first public release (open beta)
 The first public release of BeamJoy-Revived: Motorsport Expansion, for BeamNG.drive 0.40,
 BeamMP 3.9 and BeamJoy-Revived 2.0.

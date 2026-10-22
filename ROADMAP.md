@@ -14,10 +14,9 @@ with what you report and what we find racing. Nothing here has a fixed date.
   before / after engine dyno.
 
 ## Planned
-- **Generated upgrades for BeamNG's own cars.** Their factory parts are in the workshop now.
-  Generated tyre compounds and widths, weight stages, aero kits and brakes like the Automation cars
-  have are being tested and need to rate correctly before they ship. See
-  [BeamNG cars in the workshop](docs/distribution/NATIVE-FACTORY-PARTS.md).
+- **More upgrades for BeamNG's own cars.** Weight stages, brakes and (in beta) tyres are in. Next:
+  tyre PI accuracy and more models for tyres, then aero kits (they need visible wings and a fit per
+  car) and engine stages. See [BeamNG cars in the workshop](docs/distribution/NATIVE-FACTORY-PARTS.md).
 - **Tyre compound accuracy in PI.** Re-measure the full compound ladder (road to race slicks) on
   every Automation car with its true tyre type, so a compound upgrade is worth the right PI on each
   car instead of an average.

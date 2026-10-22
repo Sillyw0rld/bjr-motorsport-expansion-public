@@ -46,7 +46,15 @@ class Release(unittest.TestCase):
                 self.assertFalse(any(n.endswith('ServerConfig.toml') or n.endswith('.key') for n in names))
                 self.assertFalse(any(n.startswith('Resources/Server/BeamJoyServer/') and n.endswith('BeamJoyServer.lua') for n in names))
                 with zipfile.ZipFile(io.BytesIO(z.read('Resources/Client/BJR_RacePrep.zip'))) as client:
-                    self.assertFalse(any(n.startswith('vehicles/') for n in client.namelist()))
+                    # only BeamNG cars' ready-made parts (client/native), never a server's Automation fleet
+                    native = {p.relative_to(ROOT / 'client/native').as_posix() for p in (ROOT / 'client/native').rglob('*') if p.is_file()}
+                    shipped = {n for n in client.namelist() if n.startswith('vehicles/')}
+                    self.assertEqual(shipped, native)
+                    self.assertTrue(all(n.split('/')[-1].startswith('rp_native_') for n in shipped))
+                    self.assertIn('lua/ge/extensions/raceprep/native-parts.json', client.namelist())
+                    # provenance paths are relative to the BeamNG install, never a build machine's disk
+                    native_catalog = client.read('lua/ge/extensions/raceprep/native-parts.json').decode('utf8')
+                    self.assertNotIn('"/', native_catalog.replace('"/lua', ''))
 
     def test_play_and_custom_editions(self):
         # owner 2026-10-21: play = with the bundled donors, custom = without; both

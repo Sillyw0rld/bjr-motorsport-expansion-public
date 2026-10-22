@@ -1,0 +1,252 @@
+{
+  "rp_native_dde69e32f198_holder": {
+    "information": {
+      "authors": "Sillyw0rld",
+      "name": "BJR:ME upgrades"
+    },
+    "slotType": "moonhawk_mod",
+    "slots": [
+      [
+        "type",
+        "default",
+        "description"
+      ],
+      [
+        "rp_body_dde69e32f198",
+        "",
+        "Body: weight reduction"
+      ]
+    ]
+  },
+  "rp_body_dde69e32f198_street": {
+    "information": {
+      "authors": "Sillyw0rld",
+      "name": "Street body: -4% weight"
+    },
+    "slotType": "rp_body_dde69e32f198",
+    "scalenodeWeight": 0.9563,
+    "scalebeamSpring": 0.9563,
+    "scalebeamDamp": 0.9563,
+    "scalebeamDampRebound": 0.9563,
+    "scalebeamDampFast": 0.9563,
+    "scalebeamDampReboundFast": 0.9563,
+    "scalebeamLimitSpring": 0.9563,
+    "scalebeamLimitDamp": 0.9563,
+    "scalebeamLimitDampRebound": 0.9563,
+    "scalespring": 0.9563,
+    "scaledamp": 0.9563,
+    "scalehubBeamDamp": 0.9563,
+    "scalehubBeamSpring": 0.9563,
+    "scalehubPeripheryBeamDamp": 0.9563,
+    "scalehubPeripheryBeamSpring": 0.9563,
+    "scalehubReinfBeamDamp": 0.9563,
+    "scalehubReinfBeamSpring": 0.9563,
+    "scalehubSideBeamDamp": 0.9563,
+    "scalehubSideBeamSpring": 0.9563,
+    "scalehubStabilizerBeamDamp": 0.9563,
+    "scalehubStabilizerBeamSpring": 0.9563,
+    "scalehubTreadBeamDamp": 0.9563,
+    "scalehubTreadBeamSpring": 0.9563,
+    "scalehubcapAttachBeamDamp": 0.9563,
+    "scalehubcapAttachBeamSpring": 0.9563,
+    "scalehubcapBeamDamp": 0.9563,
+    "scalehubcapBeamSpring": 0.9563,
+    "scalehubcapSupportBeamDamp": 0.9563,
+    "scalehubcapSupportBeamSpring": 0.9563,
+    "scaletireSupportBeamDamp": 0.9563,
+    "scaletireSupportBeamSpring": 0.9563,
+    "scalewheelPeripheryBeamDamp": 0.9563,
+    "scalewheelPeripheryBeamSpring": 0.9563,
+    "scalewheelPeripheryReinfBeamDamp": 0.9563,
+    "scalewheelPeripheryReinfBeamSpring": 0.9563,
+    "scalewheelReinfBeamDamp": 0.9563,
+    "scalewheelReinfBeamDampExpansion": 0.9563,
+    "scalewheelReinfBeamSpring": 0.9563,
+    "scalewheelReinfBeamSpringExpansion": 0.9563,
+    "scalewheelReinforcementBeamDamp": 0.9563,
+    "scalewheelReinforcementBeamDampExpansion": 0.9563,
+    "scalewheelReinforcementBeamSpring": 0.9563,
+    "scalewheelReinforcementBeamSpringExpansion": 0.9563,
+    "scalewheelSideBeamDamp": 0.9563,
+    "scalewheelSideBeamDampExpansion": 0.9563,
+    "scalewheelSideBeamSpring": 0.9563,
+    "scalewheelSideBeamSpringExpansion": 0.9563,
+    "scalewheelSideReinfBeamDamp": 0.9563,
+    "scalewheelSideReinfBeamDampExpansion": 0.9563,
+    "scalewheelSideReinfBeamSpring": 0.9563,
+    "scalewheelSideReinfBeamSpringExpansion": 0.9563,
+    "scalewheelTreadBeamDamp": 0.9563,
+    "scalewheelTreadBeamDampExpansion": 0.9563,
+    "scalewheelTreadBeamSpring": 0.9563,
+    "scalewheelTreadBeamSpringExpansion": 0.9563,
+    "scalewheelTreadReinfBeamDamp": 0.9563,
+    "scalewheelTreadReinfBeamSpring": 0.9563,
+    "scalewheelTreadReinforcementBeamDamp": 0.9563,
+    "scalewheelTreadReinforcementBeamSpring": 0.9563,
+    "raceprepBody": {
+      "scale": 0.96
+    },
+    "controller": [
+      [
+        "fileName"
+      ],
+      [
+        "raceprepWeight"
+      ]
+    ]
+  },
+  "rp_body_dde69e32f198_sport": {
+    "information": {
+      "authors": "Sillyw0rld",
+      "name": "Sport body: -7% weight"
+    },
+    "slotType": "rp_body_dde69e32f198",
+    "scalenodeWeight": 0.9235,
+    "scalebeamSpring": 0.9235,
+    "scalebeamDamp": 0.9235,
+    "scalebeamDampRebound": 0.9235,
+    "scalebeamDampFast": 0.9235,
+    "scalebeamDampReboundFast": 0.9235,
+    "scalebeamLimitSpring": 0.9235,
+    "scalebeamLimitDamp": 0.9235,
+    "scalebeamLimitDampRebound": 0.9235,
+    "scalespring": 0.9235,
+    "scaledamp": 0.9235,
+    "scalehubBeamDamp": 0.9235,
+    "scalehubBeamSpring": 0.9235,
+    "scalehubPeripheryBeamDamp": 0.9235,
+    "scalehubPeripheryBeamSpring": 0.9235,
+    "scalehubReinfBeamDamp": 0.9235,
+    "scalehubReinfBeamSpring": 0.9235,
+    "scalehubSideBeamDamp": 0.9235,
+    "scalehubSideBeamSpring": 0.9235,
+    "scalehubStabilizerBeamDamp": 0.9235,
+    "scalehubStabilizerBeamSpring": 0.9235,
+    "scalehubTreadBeamDamp": 0.9235,
+    "scalehubTreadBeamSpring": 0.9235,
+    "scalehubcapAttachBeamDamp": 0.9235,
+    "scalehubcapAttachBeamSpring": 0.9235,
+    "scalehubcapBeamDamp": 0.9235,
+    "scalehubcapBeamSpring": 0.9235,
+    "scalehubcapSupportBeamDamp": 0.9235,
+    "scalehubcapSupportBeamSpring": 0.9235,
+    "scaletireSupportBeamDamp": 0.9235,
+    "scaletireSupportBeamSpring": 0.9235,
+    "scalewheelPeripheryBeamDamp": 0.9235,
+    "scalewheelPeripheryBeamSpring": 0.9235,
+    "scalewheelPeripheryReinfBeamDamp": 0.9235,
+    "scalewheelPeripheryReinfBeamSpring": 0.9235,
+    "scalewheelReinfBeamDamp": 0.9235,
+    "scalewheelReinfBeamDampExpansion": 0.9235,
+    "scalewheelReinfBeamSpring": 0.9235,
+    "scalewheelReinfBeamSpringExpansion": 0.9235,
+    "scalewheelReinforcementBeamDamp": 0.9235,
+    "scalewheelReinforcementBeamDampExpansion": 0.9235,
+    "scalewheelReinforcementBeamSpring": 0.9235,
+    "scalewheelReinforcementBeamSpringExpansion": 0.9235,
+    "scalewheelSideBeamDamp": 0.9235,
+    "scalewheelSideBeamDampExpansion": 0.9235,
+    "scalewheelSideBeamSpring": 0.9235,
+    "scalewheelSideBeamSpringExpansion": 0.9235,
+    "scalewheelSideReinfBeamDamp": 0.9235,
+    "scalewheelSideReinfBeamDampExpansion": 0.9235,
+    "scalewheelSideReinfBeamSpring": 0.9235,
+    "scalewheelSideReinfBeamSpringExpansion": 0.9235,
+    "scalewheelTreadBeamDamp": 0.9235,
+    "scalewheelTreadBeamDampExpansion": 0.9235,
+    "scalewheelTreadBeamSpring": 0.9235,
+    "scalewheelTreadBeamSpringExpansion": 0.9235,
+    "scalewheelTreadReinfBeamDamp": 0.9235,
+    "scalewheelTreadReinfBeamSpring": 0.9235,
+    "scalewheelTreadReinforcementBeamDamp": 0.9235,
+    "scalewheelTreadReinforcementBeamSpring": 0.9235,
+    "raceprepBody": {
+      "scale": 0.93
+    },
+    "controller": [
+      [
+        "fileName"
+      ],
+      [
+        "raceprepWeight"
+      ]
+    ]
+  },
+  "rp_body_dde69e32f198_race": {
+    "information": {
+      "authors": "Sillyw0rld",
+      "name": "Race body: -15% weight"
+    },
+    "slotType": "rp_body_dde69e32f198",
+    "scalenodeWeight": 0.836,
+    "scalebeamSpring": 0.836,
+    "scalebeamDamp": 0.836,
+    "scalebeamDampRebound": 0.836,
+    "scalebeamDampFast": 0.836,
+    "scalebeamDampReboundFast": 0.836,
+    "scalebeamLimitSpring": 0.836,
+    "scalebeamLimitDamp": 0.836,
+    "scalebeamLimitDampRebound": 0.836,
+    "scalespring": 0.836,
+    "scaledamp": 0.836,
+    "scalehubBeamDamp": 0.836,
+    "scalehubBeamSpring": 0.836,
+    "scalehubPeripheryBeamDamp": 0.836,
+    "scalehubPeripheryBeamSpring": 0.836,
+    "scalehubReinfBeamDamp": 0.836,
+    "scalehubReinfBeamSpring": 0.836,
+    "scalehubSideBeamDamp": 0.836,
+    "scalehubSideBeamSpring": 0.836,
+    "scalehubStabilizerBeamDamp": 0.836,
+    "scalehubStabilizerBeamSpring": 0.836,
+    "scalehubTreadBeamDamp": 0.836,
+    "scalehubTreadBeamSpring": 0.836,
+    "scalehubcapAttachBeamDamp": 0.836,
+    "scalehubcapAttachBeamSpring": 0.836,
+    "scalehubcapBeamDamp": 0.836,
+    "scalehubcapBeamSpring": 0.836,
+    "scalehubcapSupportBeamDamp": 0.836,
+    "scalehubcapSupportBeamSpring": 0.836,
+    "scaletireSupportBeamDamp": 0.836,
+    "scaletireSupportBeamSpring": 0.836,
+    "scalewheelPeripheryBeamDamp": 0.836,
+    "scalewheelPeripheryBeamSpring": 0.836,
+    "scalewheelPeripheryReinfBeamDamp": 0.836,
+    "scalewheelPeripheryReinfBeamSpring": 0.836,
+    "scalewheelReinfBeamDamp": 0.836,
+    "scalewheelReinfBeamDampExpansion": 0.836,
+    "scalewheelReinfBeamSpring": 0.836,
+    "scalewheelReinfBeamSpringExpansion": 0.836,
+    "scalewheelReinforcementBeamDamp": 0.836,
+    "scalewheelReinforcementBeamDampExpansion": 0.836,
+    "scalewheelReinforcementBeamSpring": 0.836,
+    "scalewheelReinforcementBeamSpringExpansion": 0.836,
+    "scalewheelSideBeamDamp": 0.836,
+    "scalewheelSideBeamDampExpansion": 0.836,
+    "scalewheelSideBeamSpring": 0.836,
+    "scalewheelSideBeamSpringExpansion": 0.836,
+    "scalewheelSideReinfBeamDamp": 0.836,
+    "scalewheelSideReinfBeamDampExpansion": 0.836,
+    "scalewheelSideReinfBeamSpring": 0.836,
+    "scalewheelSideReinfBeamSpringExpansion": 0.836,
+    "scalewheelTreadBeamDamp": 0.836,
+    "scalewheelTreadBeamDampExpansion": 0.836,
+    "scalewheelTreadBeamSpring": 0.836,
+    "scalewheelTreadBeamSpringExpansion": 0.836,
+    "scalewheelTreadReinfBeamDamp": 0.836,
+    "scalewheelTreadReinfBeamSpring": 0.836,
+    "scalewheelTreadReinforcementBeamDamp": 0.836,
+    "scalewheelTreadReinforcementBeamSpring": 0.836,
+    "raceprepBody": {
+      "scale": 0.85
+    },
+    "controller": [
+      [
+        "fileName"
+      ],
+      [
+        "raceprepWeight"
+      ]
+    ]
+  }
+}

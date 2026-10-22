@@ -1,0 +1,4198 @@
+{
+  "rp_native_brake_5e09df59ca173246_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Heavy Duty Front Disc Brakes",
+      "value": 550
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.22,
+            "z": 1.22
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.22,
+            "z": 1.22
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*4500)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 155
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.34
+      },
+      {
+        "brakeMass": 14.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.5
+      }
+    ]
+  },
+  "rp_native_brake_5e09df59ca173246_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Heavy Duty Front Disc Brakes",
+      "value": 550
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.22,
+            "z": 1.22
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.22,
+            "z": 1.22
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.6,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*4500)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 155
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.34
+      },
+      {
+        "brakeMass": 14.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.5
+      }
+    ]
+  },
+  "rp_native_brake_3cd689fd13d990d5_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Heavy Duty Rear Drum Brakes",
+      "value": 310
+    },
+    "slotType": "van_brake_R_heavy",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "van_brakedrum_RR",
+        [
+          "wheel_RR1",
+          "wheelhub_RR1"
+        ],
+        [],
+        {
+          "scale": {
+            "x": 0.98,
+            "y": 1,
+            "z": 1
+          },
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      ],
+      [
+        "van_brakedrum_RL",
+        [
+          "wheel_RL1",
+          "wheelhub_RL1"
+        ],
+        [],
+        {
+          "scale": {
+            "x": 0.98,
+            "y": 1,
+            "z": 1
+          },
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      ],
+      [
+        "van_brakedrum_shield_R",
+        [
+          "van_axle_R"
+        ],
+        [],
+        {
+          "scale": {
+            "x": 0.98,
+            "y": 1,
+            "z": 1
+          },
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 3500
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 12
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.08
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_3cd689fd13d990d5_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Heavy Duty Rear Drum Brakes",
+      "value": 310
+    },
+    "slotType": "van_brake_R_heavy",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "van_brakedrum_RR",
+        [
+          "wheel_RR1",
+          "wheelhub_RR1"
+        ],
+        [],
+        {
+          "scale": {
+            "x": 0.98,
+            "y": 1,
+            "z": 1
+          },
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      ],
+      [
+        "van_brakedrum_RL",
+        [
+          "wheel_RL1",
+          "wheelhub_RL1"
+        ],
+        [],
+        {
+          "scale": {
+            "x": 0.98,
+            "y": 1,
+            "z": 1
+          },
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      ],
+      [
+        "van_brakedrum_shield_R",
+        [
+          "van_axle_R"
+        ],
+        [],
+        {
+          "scale": {
+            "x": 0.98,
+            "y": 1,
+            "z": 1
+          },
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 3500
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 12
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.35
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_1787a37b512a033e_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Front Disc Brakes",
+      "value": 350
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.18,
+            "z": 1.18
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.18,
+            "z": 1.18
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.05,
+            "z": 1.05
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.05,
+            "z": 1.05
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3400)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 155
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.33
+      },
+      {
+        "brakeMass": 12.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_1787a37b512a033e_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Front Disc Brakes",
+      "value": 350
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.18,
+            "z": 1.18
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.18,
+            "z": 1.18
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.05,
+            "z": 1.05
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.05,
+            "z": 1.05
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3400)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 155
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.33
+      },
+      {
+        "brakeMass": 12.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_9c028d2d3d92fab1_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rear Drum Brakes",
+      "value": 250
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "van_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_shield_R",
+        [
+          "van_axle_R"
+        ],
+        []
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2200)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 2000
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 11
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.08
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": 0.0
+      },
+      {
+        "hubWidth": 0.08
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_9c028d2d3d92fab1_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rear Drum Brakes",
+      "value": 250
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "van_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_shield_R",
+        [
+          "van_axle_R"
+        ],
+        []
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2200)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 2000
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 11
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.35
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": 0.0
+      },
+      {
+        "hubWidth": 0.08
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_f360b72afecb81f2_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rear Disc Brakes",
+      "value": 250
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.07,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.07,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_axle_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_axle_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "van_hub_R",
+        [
+          "wheelhub_RR",
+          "wheelhub_RL",
+          "van_axle_R",
+          "van_rearshockbottom"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "scale": {
+            "x": 0.98,
+            "y": 1.0,
+            "z": 1.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2200)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.65
+      },
+      {
+        "brakeSplitCoef": 0.1
+      },
+      {
+        "parkingTorque": 2000
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_f360b72afecb81f2_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rear Disc Brakes",
+      "value": 250
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.07,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.07,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_axle_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "van_axle_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "van_hub_R",
+        [
+          "wheelhub_RR",
+          "wheelhub_RL",
+          "van_axle_R",
+          "van_rearshockbottom"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "scale": {
+            "x": 0.98,
+            "y": 1.0,
+            "z": 1.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2200)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.65
+      },
+      {
+        "brakeSplitCoef": 0.1
+      },
+      {
+        "parkingTorque": 2000
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_75f790721e646be6_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Heavy Duty Rear Drum Brakes",
+      "value": 250
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "van_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_shield_R",
+        [
+          "van_axle_R"
+        ],
+        []
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 3500
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 12
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.08
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": 0.0
+      },
+      {
+        "hubWidth": 0.08
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_75f790721e646be6_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Heavy Duty Rear Drum Brakes",
+      "value": 250
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "van_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        []
+      ],
+      [
+        "van_brakedrum_shield_R",
+        [
+          "van_axle_R"
+        ],
+        []
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 3500
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 12
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.35
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": 0.0
+      },
+      {
+        "hubWidth": 0.08
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_41a53469c8439110_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Off-Road Front Disc Brakes",
+      "value": 600
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_yellow_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_yellow_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 155
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.33
+      },
+      {
+        "brakeMass": 12.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.2
+      }
+    ]
+  },
+  "rp_native_brake_41a53469c8439110_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Off-Road Front Disc Brakes",
+      "value": 600
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_yellow_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_yellow_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.07
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 155
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.33
+      },
+      {
+        "brakeMass": 12.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.2
+      }
+    ]
+  },
+  "rp_native_brake_10173d0cb5f3f009_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Off-Road Rear Disc Brakes",
+      "value": 500
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_yellow",
+        [
+          "van_axle_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_yellow",
+        [
+          "van_axle_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "van_hub_R",
+        [
+          "wheelhub_RR",
+          "wheelhub_RL",
+          "van_axle_R",
+          "van_rearshockbottom"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "scale": {
+            "x": 0.98,
+            "y": 1.0,
+            "z": 1.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2800)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.65
+      },
+      {
+        "brakeSplitCoef": 0.0
+      },
+      {
+        "parkingTorque": 3000
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_10173d0cb5f3f009_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Off-Road Rear Disc Brakes",
+      "value": 500
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_yellow",
+        [
+          "van_axle_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_yellow",
+        [
+          "van_axle_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 0.96,
+            "z": 0.96
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "van_hub_R",
+        [
+          "wheelhub_RR",
+          "wheelhub_RL",
+          "van_axle_R",
+          "van_rearshockbottom"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "scale": {
+            "x": 0.98,
+            "y": 1.0,
+            "z": 1.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2800)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.65
+      },
+      {
+        "brakeSplitCoef": 0.0
+      },
+      {
+        "parkingTorque": 3000
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "hubRadius": 0.165
+      },
+      {
+        "wheelOffset": -0.04
+      },
+      {
+        "hubWidth": 0.05
+      },
+      {
+        "numRays": 5
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.2
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_2f6bd77cad9aee79_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Front Disc Brakes",
+      "value": 1400
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": -160,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 160,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.68,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*4000*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.36
+      },
+      {
+        "brakeMass": 10.75
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.56
+      },
+      {
+        "absSlipRatioTarget": 0.22
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_2f6bd77cad9aee79_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Front Disc Brakes",
+      "value": 1400
+    },
+    "slotType": "van_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": -160,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "van_hub_F",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": -1.463,
+            "z": 0.46
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 160,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.68,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*4000*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.36
+      },
+      {
+        "brakeMass": 10.75
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.95
+      },
+      {
+        "absSlipRatioTarget": 0.22
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_877c1bf5425ec0f2_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Rear Disc Brakes",
+      "value": 1150
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 0.97,
+            "z": 0.97
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 0.97,
+            "z": 0.97
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "van_axle_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "van_axle_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "van_hub_R",
+        [
+          "wheelhub_RR",
+          "wheelhub_RL",
+          "van_axle_R",
+          "van_rearshockbottom"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "scale": {
+            "x": 0.98,
+            "y": 1.0,
+            "z": 1.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1400 or $brakestrength*4000*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 2500
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.32
+      },
+      {
+        "brakeMass": 8.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.17
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_877c1bf5425ec0f2_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Rear Disc Brakes",
+      "value": 1150
+    },
+    "slotType": "van_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 0.97,
+            "z": 0.97
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 0.97,
+            "z": 0.97
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "van_axle_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "van_axle_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.82,
+            "y": 2.037,
+            "z": 0.39
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "van_hub_R",
+        [
+          "wheelhub_RR",
+          "wheelhub_RL",
+          "van_axle_R",
+          "van_rearshockbottom"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "scale": {
+            "x": 0.98,
+            "y": 1.0,
+            "z": 1.0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1400 or $brakestrength*4000*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 2500
+      },
+      {
+        "brakeSpring": 150
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.32
+      },
+      {
+        "brakeMass": 8.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "absSlipRatioTarget": 0.17
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  }
+}

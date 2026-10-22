@@ -48,8 +48,11 @@ in this screenshot come from an earlier build, before the class curve).*
   and **drivetrain conversions** (FWD / RWD / AWD). The donors are included.
 
 **BeamNG's own cars** can fit their compatible factory parts (engines, gearboxes, suspension,
-brakes, wheels and tyres, wings), found through BeamNG's own part-slot compatibility. They are read
-from the installed game; no factory file is modified or redistributed.
+brakes, wheels and tyres, wings), found through BeamNG's own part-slot compatibility. They also get
+BJR:ME's own upgrades: **weight-reduction stages** (33 models), **Sport and Race brakes** (31 models)
+and, in beta, **tyre compounds and widths** (Covet, ETK 800, D-Series and SBR; their PI still reads
+about 30 high). These are separate add-on parts built from the cars' factory parts; the factory
+files themselves are never modified.
 
 Every section of the workshop and of **Setup** has a short guide with a picture: what the part or
 setting does and how to use it.

@@ -1,0 +1,5614 @@
+{
+  "rp_native_brake_2a51313bc91517f0_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 S-Sport Front Disc Brakes",
+      "value": 600
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_plain",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_plain",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3000)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.32
+      },
+      {
+        "brakeMass": 9.4
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.5
+      }
+    ]
+  },
+  "rp_native_brake_2a51313bc91517f0_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 S-Sport Front Disc Brakes",
+      "value": 600
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_plain",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_plain",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.1,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3000)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.32
+      },
+      {
+        "brakeMass": 9.4
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.5
+      }
+    ]
+  },
+  "rp_native_brake_e75d6f608812372a_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 S-Sport Rear Disc Brakes",
+      "value": 500
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1300)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.6
+      },
+      {
+        "brakeSplitCoef": 0.4
+      },
+      {
+        "parkingTorque": 1300
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 5.2
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_e75d6f608812372a_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 S-Sport Rear Disc Brakes",
+      "value": 500
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1300)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.6
+      },
+      {
+        "brakeSplitCoef": 0.4
+      },
+      {
+        "parkingTorque": 1300
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 5.2
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_5fbde4dbca1a0243_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Front Disc Brakes",
+      "value": 300
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.332,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.332,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2500)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 6.7
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_5fbde4dbca1a0243_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Front Disc Brakes",
+      "value": 300
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.332,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.332,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2500)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 6.7
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_afa3e0237bf7814b_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rear Disc Brakes",
+      "value": 250
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.85,
+            "z": 0.85
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.85,
+            "z": 0.85
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1200)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.6
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 1250
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.26
+      },
+      {
+        "brakeMass": 4.5
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_afa3e0237bf7814b_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rear Disc Brakes",
+      "value": 250
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.85,
+            "z": 0.85
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.93,
+            "y": 0.85,
+            "z": 0.85
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1200)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.6
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 1250
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.26
+      },
+      {
+        "brakeMass": 4.5
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_df47ce0420b07313_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 R-Sport Front Disc Brakes",
+      "value": 1100
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_semi_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.08,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.08,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3000)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.355
+      },
+      {
+        "brakeMass": 10.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.44
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.8
+      }
+    ]
+  },
+  "rp_native_brake_df47ce0420b07313_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 R-Sport Front Disc Brakes",
+      "value": 1100
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.08,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.08,
+            "y": 1.08,
+            "z": 1.08
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.1,
+            "z": 1.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3000)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.355
+      },
+      {
+        "brakeMass": 10.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.8
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.8
+      }
+    ]
+  },
+  "rp_native_brake_18653e9a87c195c2_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 R-Sport Rear Disc Brakes",
+      "value": 900
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_semi_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.89,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.89,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.34,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.34,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1400)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.4
+      },
+      {
+        "parkingTorque": 1400
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 6.0
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_18653e9a87c195c2_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 R-Sport Rear Disc Brakes",
+      "value": 900
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.89,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.89,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.34,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.34,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1400)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.4
+      },
+      {
+        "parkingTorque": 1400
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 6.0
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_e7b03f906fcbf003_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 E Rear Disc Brakes",
+      "value": 500
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1450)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.55
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 1300
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 5.2
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "absSlipRatioTarget": 0.17
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_e7b03f906fcbf003_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 E Rear Disc Brakes",
+      "value": 500
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_solid",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 1.03,
+            "z": 1.03
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.333,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.03,
+            "y": 0.89,
+            "z": 0.89
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1450)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.55
+      },
+      {
+        "brakeSplitCoef": 0.5
+      },
+      {
+        "parkingTorque": 1300
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.29
+      },
+      {
+        "brakeMass": 5.2
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.17
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_8d5e4049bc3e573d_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Front Disc Brakes",
+      "value": 1600
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.13,
+            "y": 1.13,
+            "z": 1.13
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.13,
+            "y": 1.13,
+            "z": 1.13
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.15,
+            "z": 1.15
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.15,
+            "z": 1.15
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.76,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*4600*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 50
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.37
+      },
+      {
+        "brakeMass": 11
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.8
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_8d5e4049bc3e573d_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Front Disc Brakes",
+      "value": 1600
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.13,
+            "y": 1.13,
+            "z": 1.13
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.13,
+            "y": 1.13,
+            "z": 1.13
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.15,
+            "z": 1.15
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_6pot_red_rotopad",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.3,
+            "y": 1.15,
+            "z": 1.15
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.76,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*4600*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 50
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.37
+      },
+      {
+        "brakeMass": 11
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 2.25
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_39749c27ce2a5df0_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Rear Disc Brakes",
+      "value": 1500
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.98,
+            "z": 0.98
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.98,
+            "z": 0.98
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1000 or $brakestrength*4600*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 3000
+      },
+      {
+        "brakeSpring": 50
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.31
+      },
+      {
+        "brakeMass": 6.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.18
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_39749c27ce2a5df0_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Rear Disc Brakes",
+      "value": 1500
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_drilled",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.95,
+            "y": 0.95,
+            "z": 0.95
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.98,
+            "z": 0.98
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.98,
+            "z": 0.98
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1000 or $brakestrength*4600*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 3000
+      },
+      {
+        "brakeSpring": 50
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.31
+      },
+      {
+        "brakeMass": 6.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "absSlipRatioTarget": 0.18
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_aed9b5855c2433f1_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rally Front Disc Brakes",
+      "value": 1100
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_semi_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.76,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 100
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.8
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_aed9b5855c2433f1_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rally Front Disc Brakes",
+      "value": 1100
+    },
+    "slotType": "vivace_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.342,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": -1.344,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.76,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3900*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 100
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 2.25
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_ef8a91a140c911f7_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rally Rear Disc Brakes",
+      "value": 1100
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_semi_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1000 or $brakestrength*3900*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 3000
+      },
+      {
+        "brakeSpring": 100
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.44
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_ef8a91a140c911f7_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rally Rear Disc Brakes",
+      "value": 1100
+    },
+    "slotType": "vivace_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_5l",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.79,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 0.9,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 0.92,
+            "z": 0.92
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "vivace_hub_R",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.8,
+            "y": 1.338,
+            "z": 0.32
+          },
+          "scale": {
+            "x": 1.05,
+            "y": 0.93,
+            "z": 0.93
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1000 or $brakestrength*3900*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 3000
+      },
+      {
+        "brakeSpring": 100
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.3
+      },
+      {
+        "brakeMass": 9.25
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.8
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  }
+}

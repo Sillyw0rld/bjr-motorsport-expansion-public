@@ -1,0 +1,2814 @@
+{
+  "rp_native_brake_5361faa5c82aa112_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Front Drum Brakes",
+      "value": 200
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1150)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.23
+      },
+      {
+        "brakeMass": 3.75
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_5361faa5c82aa112_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Front Drum Brakes",
+      "value": 200
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1150)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.23
+      },
+      {
+        "brakeMass": 3.75
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_a3666403cd2fcd03_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rear Drum Brakes",
+      "value": 150
+    },
+    "slotType": "miramar_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*650)*1.15"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.25
+      },
+      {
+        "parkingTorque": 1000
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.2
+      },
+      {
+        "brakeMass": 2.75
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_a3666403cd2fcd03_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rear Drum Brakes",
+      "value": 150
+    },
+    "slotType": "miramar_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*650)*1.3"
+      },
+      {
+        "brakeInputSplit": 0.5
+      },
+      {
+        "brakeSplitCoef": 0.25
+      },
+      {
+        "parkingTorque": 1000
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.2
+      },
+      {
+        "brakeMass": 2.75
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_aaf871c867a3e02b_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Heavy Duty Front Drum Brakes",
+      "value": 230
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1750)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.23
+      },
+      {
+        "brakeMass": 4.25
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.32
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_aaf871c867a3e02b_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Heavy Duty Front Drum Brakes",
+      "value": 230
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1750)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.23
+      },
+      {
+        "brakeMass": 4.25
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.65
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_d4a33aa880ba71cb_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Front Disc Brakes",
+      "value": 650
+    },
+    "slotType": "miramar_brake_F_wide",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.67,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.67,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.78,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2600*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.22
+      },
+      {
+        "brakeMass": 5.0
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.68
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_d4a33aa880ba71cb_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Front Disc Brakes",
+      "value": 650
+    },
+    "slotType": "miramar_brake_F_wide",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.67,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.67,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.2,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.685,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.78,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2600*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.22
+      },
+      {
+        "brakeMass": 5.0
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 2.1
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_06e39bfda328dfa2_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Rear Aluminium Drum Brakes",
+      "value": 600
+    },
+    "slotType": "miramar_brake_R_wide",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [
+          "miramar"
+        ],
+        {
+          "pos": {
+            "x": -0.04,
+            "y": 0,
+            "z": 0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ],
+      [
+        "miramar_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [
+          "miramar"
+        ],
+        {
+          "pos": {
+            "x": 0.04,
+            "y": 0,
+            "z": 0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*600 or $brakestrength*2600*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1400
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.2
+      },
+      {
+        "brakeMass": 2.25
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "aluminium"
+      },
+      {
+        "brakeVentingCoef": 1.44
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_06e39bfda328dfa2_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Rear Aluminium Drum Brakes",
+      "value": 600
+    },
+    "slotType": "miramar_brake_R_wide",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [
+          "miramar"
+        ],
+        {
+          "pos": {
+            "x": -0.04,
+            "y": 0,
+            "z": 0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ],
+      [
+        "miramar_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [
+          "miramar"
+        ],
+        {
+          "pos": {
+            "x": 0.04,
+            "y": 0,
+            "z": 0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*600 or $brakestrength*2600*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1400
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.2
+      },
+      {
+        "brakeMass": 2.25
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "aluminium"
+      },
+      {
+        "brakeVentingCoef": 1.8
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_9e16d1a49c340c52_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Rear Aluminium Drum Brakes",
+      "value": 600
+    },
+    "slotType": "miramar_brake_R_alt",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*600 or $brakestrength*2600*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1300
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.2
+      },
+      {
+        "brakeMass": 2.25
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "aluminium"
+      },
+      {
+        "brakeVentingCoef": 1.44
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_9e16d1a49c340c52_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Rear Aluminium Drum Brakes",
+      "value": 600
+    },
+    "slotType": "miramar_brake_R_alt",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Shoes",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "miramar_brakedrum_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [
+          "miramar"
+        ]
+      ],
+      [
+        "miramar_brakedrum_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [
+          "miramar"
+        ]
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*600 or $brakestrength*2600*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1300
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.2
+      },
+      {
+        "brakeMass": 2.25
+      },
+      {
+        "brakeType": "drum"
+      },
+      {
+        "rotorMaterial": "aluminium"
+      },
+      {
+        "brakeVentingCoef": 1.8
+      },
+      {
+        "absSlipRatioTarget": 0.15
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_105cde9d6440d95f_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Front Disc Brakes",
+      "value": 650
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.77,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2600*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.22
+      },
+      {
+        "brakeMass": 5.0
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.68
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_105cde9d6440d95f_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Front Disc Brakes",
+      "value": 650
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_slotted",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.75,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_4pot_red_rotopad",
+        [
+          "miramar_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.75
+          },
+          "rot": {
+            "x": 180,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.77,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2600*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.22
+      },
+      {
+        "brakeMass": 5.0
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 2.1
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      }
+    ]
+  },
+  "rp_native_brake_0b0d11022b33f37b_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Front Disc Brakes",
+      "value": 250
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.79,
+            "z": 0.79
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.79,
+            "z": 0.79
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "miramar_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.72,
+            "z": 0.72
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "miramar_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.72,
+            "z": 0.72
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1150)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.22
+      },
+      {
+        "brakeMass": 4.4
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_0b0d11022b33f37b_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Front Disc Brakes",
+      "value": 250
+    },
+    "slotType": "miramar_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_hub_4l",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.625,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          }
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.79,
+            "z": 0.79
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_disc_plain",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.79,
+            "z": 0.79
+          },
+          "rot": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "materialOverride": [
+            [
+              "disc_brake",
+              "disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "miramar_hub_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "pos": {
+            "x": -0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.72,
+            "z": 0.72
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      [
+        "brake_caliper_standard_plain",
+        [
+          "miramar_hub_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "pos": {
+            "x": 0.64,
+            "y": -1.26,
+            "z": 0.35
+          },
+          "scale": {
+            "x": 0.8,
+            "y": 0.72,
+            "z": 0.72
+          },
+          "rot": {
+            "x": 0,
+            "y": 180,
+            "z": 0
+          }
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*1150)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 125
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.22
+      },
+      {
+        "brakeMass": 4.4
+      },
+      {
+        "brakeType": "disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "absSlipRatioTarget": 0.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  }
+}

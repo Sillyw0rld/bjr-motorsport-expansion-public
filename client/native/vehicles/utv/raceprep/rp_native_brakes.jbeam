@@ -1,0 +1,1666 @@
+{
+  "rp_native_brake_87402059a0432e8c_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Front Brakes",
+      "value": 450
+    },
+    "slotType": "utv_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_sport",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_FR",
+        [
+          "utv_hub_FR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_FL",
+        [
+          "utv_hub_FL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_FR": {
+        "simpleFunction": {
+          "brakeGlow_FR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_FL": {
+        "simpleFunction": {
+          "brakeGlow_FL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.77,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2700*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.7
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_87402059a0432e8c_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Front Brakes",
+      "value": 450
+    },
+    "slotType": "utv_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_FR",
+        [
+          "utv_hub_FR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_FL",
+        [
+          "utv_hub_FL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_FR": {
+        "simpleFunction": {
+          "brakeGlow_FR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_FL": {
+        "simpleFunction": {
+          "brakeGlow_FL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.77,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*2700*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.7
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_c153c058a62607d9_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Rear Brakes",
+      "value": 450
+    },
+    "slotType": "utv_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_sport",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_RR",
+        [
+          "utv_hub_RR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_RL",
+        [
+          "utv_hub_RL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_RR": {
+        "simpleFunction": {
+          "brakeGlow_RR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_RL": {
+        "simpleFunction": {
+          "brakeGlow_RL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1200 or $brakestrength*2700*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1200
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.4
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 0.96
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_c153c058a62607d9_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Rear Brakes",
+      "value": 450
+    },
+    "slotType": "utv_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_RR",
+        [
+          "utv_hub_RR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_RL",
+        [
+          "utv_hub_RL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_RR": {
+        "simpleFunction": {
+          "brakeGlow_RR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_RL": {
+        "simpleFunction": {
+          "brakeGlow_RL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*1200 or $brakestrength*2700*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1200
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.4
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_239f6e7643edd6b4_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Front Brakes",
+      "value": 800
+    },
+    "slotType": "utv_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_FR",
+        [
+          "utv_hub_FR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_FL",
+        [
+          "utv_hub_FL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_FR": {
+        "simpleFunction": {
+          "brakeGlow_FR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_FL": {
+        "simpleFunction": {
+          "brakeGlow_FL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.77,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3000*$brakebias)*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_239f6e7643edd6b4_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Front Brakes",
+      "value": 800
+    },
+    "slotType": "utv_brake_F",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_F",
+        [
+          "brakepad_F"
+        ],
+        [],
+        "brakepad_F_race",
+        "Front Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_FR",
+        [
+          "wheel_FR",
+          "wheelhub_FR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_FL",
+        [
+          "wheel_FL",
+          "wheelhub_FL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_FL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_FR",
+        [
+          "utv_hub_FR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_FL",
+        [
+          "utv_hub_FL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_FR": {
+        "simpleFunction": {
+          "brakeGlow_FR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_FL": {
+        "simpleFunction": {
+          "brakeGlow_FL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "variables": [
+      [
+        "name",
+        "type",
+        "unit",
+        "category",
+        "default",
+        "min",
+        "max",
+        "title",
+        "description"
+      ],
+      [
+        "$brakebias",
+        "range",
+        "",
+        "Brakes",
+        0.77,
+        0,
+        1,
+        "Front/Rear Bias",
+        "Percent of brake torque to the front wheels",
+        {
+          "minDis": 0,
+          "maxDis": 100
+        }
+      ]
+    ],
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakestrength*3000*$brakebias)*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 0
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "squealCoefNatural": 1.0,
+        "squealCoefLowSpeed": 1.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_4c20ea1a98d4d9d3_sport": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Sport brakes (+15% torque) \u2014 Race Rear Brakes",
+      "value": 800
+    },
+    "slotType": "utv_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_RR",
+        [
+          "utv_hub_RR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_RL",
+        [
+          "utv_hub_RL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_RR": {
+        "simpleFunction": {
+          "brakeGlow_RR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_RL": {
+        "simpleFunction": {
+          "brakeGlow_RL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*2000 or $brakestrength*2800*(1-$brakebias))*1.15"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1800
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.2
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  },
+  "rp_native_brake_4c20ea1a98d4d9d3_race": {
+    "information": {
+      "authors": "BeamNG",
+      "name": "Race brakes (+30% torque) \u2014 Race Rear Brakes",
+      "value": 800
+    },
+    "slotType": "utv_brake_R",
+    "slots2": [
+      [
+        "name",
+        "allowTypes",
+        "denyTypes",
+        "default",
+        "description"
+      ],
+      [
+        "brakepad_R",
+        [
+          "brakepad_R"
+        ],
+        [],
+        "brakepad_R_race",
+        "Rear Brake Pads",
+        {
+          "coreSlot": true
+        }
+      ]
+    ],
+    "flexbodies": [
+      [
+        "mesh",
+        "[group]:",
+        "nonFlexMaterials"
+      ],
+      [
+        "utv_discbrake_RR",
+        [
+          "wheel_RR",
+          "wheelhub_RR"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RR"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_discbrake_RL",
+        [
+          "wheel_RL",
+          "wheelhub_RL"
+        ],
+        [],
+        {
+          "materialOverride": [
+            [
+              "utv_chassis",
+              "utv_disc_brake_RL"
+            ]
+          ]
+        }
+      ],
+      [
+        "utv_brakecaliper_RR",
+        [
+          "utv_hub_RR"
+        ],
+        []
+      ],
+      [
+        "utv_brakecaliper_RL",
+        [
+          "utv_hub_RL"
+        ],
+        []
+      ]
+    ],
+    "glowMap": {
+      "utv_disc_brake_RR": {
+        "simpleFunction": {
+          "brakeGlow_RR": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      },
+      "utv_disc_brake_RL": {
+        "simpleFunction": {
+          "brakeGlow_RL": 1
+        },
+        "off": "utv_chassis",
+        "on": "utv_brake_disc_glow",
+        "materialEmissiveScaling": {
+          "on_max": 1.0
+        }
+      }
+    },
+    "pressureWheels": [
+      [
+        "name",
+        "hubGroup",
+        "group",
+        "node1:",
+        "node2:",
+        "nodeS",
+        "nodeArm:",
+        "wheelDir"
+      ],
+      {
+        "brakeTorque": "$=($brakebias == nil and $brakestrength*2000 or $brakestrength*2800*(1-$brakebias))*1.3"
+      },
+      {
+        "brakeInputSplit": 1
+      },
+      {
+        "brakeSplitCoef": 1
+      },
+      {
+        "parkingTorque": 1800
+      },
+      {
+        "brakeSpring": 90
+      },
+      {
+        "enableBrakeThermals": true
+      },
+      {
+        "brakeDiameter": 0.28
+      },
+      {
+        "brakeMass": 1.5
+      },
+      {
+        "brakeType": "vented-disc"
+      },
+      {
+        "rotorMaterial": "steel"
+      },
+      {
+        "brakeVentingCoef": 1.5
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      },
+      {
+        "hubRadius": 0.15
+      },
+      {
+        "wheelOffset": -0.01
+      },
+      {
+        "hubWidth": 0.03
+      },
+      {
+        "numRays": 4
+      },
+      {
+        "hubTreadBeamSpring": 1128940,
+        "hubTreadBeamDamp": 5.64
+      },
+      {
+        "hubPeripheryBeamSpring": 1128940,
+        "hubPeripheryBeamDamp": 5.64
+      },
+      {
+        "hubSideBeamSpring": 2256940,
+        "hubSideBeamDamp": 5.64
+      },
+      {
+        "hubNodeWeight": 0.7
+      },
+      {
+        "hubNodeMaterial": "|NM_METAL"
+      },
+      {
+        "hubFrictionCoef": 0.1
+      },
+      {
+        "hubBeamDeform": 45500,
+        "hubBeamStrength": 87500
+      },
+      {
+        "squealCoefNatural": 0.0,
+        "squealCoefLowSpeed": 0.0
+      }
+    ]
+  }
+}

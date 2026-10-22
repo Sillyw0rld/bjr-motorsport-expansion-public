@@ -35,7 +35,7 @@ function M.rows(catalog,model,tree)
      local p=(catalog.parts or {})[name]
      if p and p.native==true and p.model==model and p.stockPart==s.part and p.slotType==slot then
       options[#options+1]={name=name,title=p.name,compound=p.compound,offsetMM=p.offsetMM,
-       tooltip=string.format('Nominal width %g mm; physical contact width %g mm. Native factory structure; compound donor %s.',
+       tooltip=string.format('Nominal width %g mm; physical contact width %g mm. Native factory structure; compound donor %s. Beta: PI for BeamNG tyre upgrades is still being tuned and reads about 30 PI high.',
         p.nominalWidthMM,p.physicsWidthMM,p.donorModel)}
      end
     end

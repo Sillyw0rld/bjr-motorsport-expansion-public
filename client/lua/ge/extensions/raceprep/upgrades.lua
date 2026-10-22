@@ -33,7 +33,19 @@ local function indexCatalog(c)
     c.byModel,c._indexedParts=byModel,c.parts
     return c
 end
-local catalog=indexCatalog(jsonReadFile and jsonReadFile('/lua/ge/extensions/raceprep/upgrade-parts.json'))
+-- BeamNG cars' generated parts ship ready-made (native-parts.json); the
+-- server's parts updater only ever rewrites the Automation catalogue
+local function withNative(c,n)
+    c=c or {parts={},stocks={}}
+    if type(n)~='table' then return c end
+    c.parts=c.parts or {}
+    for name,info in pairs(n.parts or {}) do if c.parts[name]==nil then c.parts[name]=info end end
+    for _,key in ipairs({'nativeBodies','nativeTyres'}) do if c[key]==nil then c[key]=n[key] end end
+    return c
+end
+U.withNative=withNative
+local catalog=indexCatalog(withNative(jsonReadFile and jsonReadFile('/lua/ge/extensions/raceprep/upgrade-parts.json'),
+    jsonReadFile and jsonReadFile('/lua/ge/extensions/raceprep/native-parts.json')))
 U.catalog=catalog
 U.indexCatalog=indexCatalog
 function U.modelParts(c,model)

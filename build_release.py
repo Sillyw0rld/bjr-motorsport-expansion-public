@@ -74,6 +74,8 @@ def build(output, verbose=False, generator_dir=None, source_only=False, edition=
         name = p.relative_to(ROOT / 'client').as_posix()
         if name.startswith('lua/ge/extensions/BJI/') or name.startswith('vehicles/'):
             continue  # legacy ImGui windows; generated parts are made per server
+        if name.startswith('native/vehicles/'):
+            name = name[len('native/'):]  # BeamNG cars' parts ship ready-made, both editions
         client[name] = p.read_bytes()
     client['lua/ge/extensions/raceprep/version.json'] = json.dumps({'version': version, 'commit': commit[:7], 'dirty': dirty}).encode()
     client['mod_info.json'] = json.dumps({'name': 'BeamJoy-Revived: Motorsport Expansion', 'version': version, 'author': 'Sillyw0rld',
