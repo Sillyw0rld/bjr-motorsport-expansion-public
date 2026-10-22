@@ -165,7 +165,8 @@ install adds my donors to yours.
    `BJRME-donors` folder. No BeamJoy-Revived file is added or changed.
 3. Start with `start-bjrme-server.cmd` (Windows) or `./start-bjrme-server.sh ./BeamMP-Server`
    (Linux). A preflight generates and checks the upgrade parts for new or changed cars, then starts
-   BeamMP. When nothing changed, the parts are kept as they are.
+   BeamMP. When nothing changed, the parts are kept as they are. If your host starts BeamMP itself,
+   start it normally: BJR:ME builds the parts in the background and asks for `reloadmods`.
 
 **Donors (Play edition):** 18 engines and the FWD / RWD / AWD drivetrain sources, my own Automation
 exports, without meshes, audio or pre-generated parts. In either edition, add your own Automation

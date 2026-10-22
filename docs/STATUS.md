@@ -22,8 +22,9 @@ Built and tested on **BeamNG.drive 0.40**, **BeamMP 3.9** and **BeamJoy-Revived 
 | Updates | Startup and daily update check (notifies only), `bjrme update` stages the new release for the next start | |
 
 ## Good to know
-- After adding or changing cars or donors, stop the server and start it with the launcher; players
-  rejoin to receive the new parts.
+- After adding or changing cars or donors, restart the server. With the launcher, parts are built
+  before it starts; started normally, they're built in the background and delivered with
+  `reloadmods`. Players already on the server rejoin to receive the new parts.
 - Performance figures in the workshop are estimates from car data, not measured laps.
 - The server distributes the parts and applies the rules, but some statistics come from each player's
   game.

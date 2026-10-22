@@ -2,6 +2,12 @@
 
 Versions: v2.<minor>.<patch>.<build> (build = number of commits in this repository).
 
+## 2.16.1 — servers started without the launcher
+- If your host starts BeamMP itself and you can't use `start-bjrme-server`, start it normally:
+  BJR:ME now builds parts for new or changed cars in the background when the server starts, then
+  asks for `reloadmods` (or sends it itself when the server runs in tmux). The launcher stays the
+  recommended way to start.
+
 ## 2.16.0 — BJR:ME upgrades for BeamNG cars
 - **BeamNG's own cars get BJR:ME upgrades**, in both editions: weight-reduction stages (Street
   −4 %, Sport −7 %, Race −15 %) for 33 models and Sport / Race brakes for 31 models.

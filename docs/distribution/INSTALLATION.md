@@ -10,7 +10,7 @@ and BeamJoy-Revived 2.0+; see the validation report for what was actually run.
    use `unzip` (preserves executable permissions), or restore them with
    `chmod +x start-bjrme-server.sh bjrme-generator/bjrme-generator`.
 3. Put your Automation recipient vehicle ZIPs in `Resources/Client/` as usual.
-4. Start using the supplied launcher, rather than starting BeamMP directly:
+4. Start using the supplied launcher (recommended):
 
    Windows: double-click `start-bjrme-server.cmd`, or run
    `start-bjrme-server.cmd BeamMP-Server.exe`.
@@ -20,6 +20,16 @@ and BeamJoy-Revived 2.0+; see the validation report for what was actually run.
    The optional first argument is the server executable (absolute paths work).
    The launcher selects the installation directory independently of your cwd.
    BeamMP still reads its normal `ServerConfig.toml` there.
+
+   **Can't use the launcher** (for example, a hosting panel that starts
+   `BeamMP-Server` itself)? Start BeamMP normally. When the server starts,
+   BJR:ME runs the same bundled generator in the background and builds parts for
+   new or changed cars, then asks for `reloadmods` in the console (or sends it
+   itself when the server runs in tmux). Players who join after that get the new
+   parts; players already on the server rejoin. Staged updates (`bjrme update`)
+   and optional mods (`bjrme get`) still install at the next launcher start, or
+   with the server stopped run `./bjrme-generator/bjrme-generator --beammp .`
+   (Windows: `bjrme-generator\bjrme-generator.exe --beammp .`).
 
 The generator checks the bundled donors, scans installed Automation cars and
 compares input and output hashes. On first run it generates locally: vehicle
@@ -74,8 +84,9 @@ No original BJR file is modified.
   `updater/server-session.lock` while its server process runs. After a crash,
   inspect processes and stop BeamMP before removing stale `generation.lock` or
   `server-session.lock` directories. Never remove a lock held by a live process.
-- Do not run generation against a server started outside the launcher while it
-  is running: the launcher cannot identify arbitrary externally started servers.
+- Don't run the generator by hand against a running server: stop it first. (A
+  server started without the launcher runs it itself, in the background, at
+  start; see step 4.)
 - ZIP and state publication are separate atomic replacements. A crash between
   them causes conservative regeneration next start, not acceptance of an
   unverified ZIP. Fix filesystem permissions if publication cannot complete.

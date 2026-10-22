@@ -11,23 +11,38 @@
 local U = {}
 
 function U.start(o)
-    -- Public installs generate before BeamMP reads/downloads mod archives.
-    -- Never launch a background writer while clients may already be joining.
+    local windows = o.osName == 'Windows'
+    -- Public installs: the launcher (start-bjrme-server) builds parts before
+    -- BeamMP starts and holds the session lock while the server runs. Started
+    -- without it (hosted panels), the bundled compiled generator runs here in
+    -- the background instead, like the developer path below (2026-10-22).
     if o.exists(o.path .. '/updater/preflight-required.json') then
-        o.log('Upgrade parts: public installation uses start-bjrme-server preflight; no runtime asset replacement')
-        return false
+        if o.exists(o.path .. '/updater/server-session.lock') then
+            o.log('Upgrade parts: built by start-bjrme-server before the server started')
+            return false
+        end
+        local exe = windows and 'bjrme-generator\\bjrme-generator.exe' or './bjrme-generator/bjrme-generator'
+        if not o.exists(windows and 'bjrme-generator/bjrme-generator.exe' or exe) then
+            o.logWarn('Upgrade parts: bjrme-generator is missing; start the server with start-bjrme-server to build parts for new cars')
+            return false
+        end
+        local result = o.path .. '/updater/last-run.json'
+        local cmd = string.format('"%s" --beammp . --result "%s" > "%s/updater/last-run.log" 2>&1', exe, result, o.path)
+        o.execute(windows and ('start "" /B ' .. cmd) or (cmd .. ' &'))
+        U.pending = { result = result, started = o.now(), o = o, windows = windows, log = o.path .. '/updater/last-run.log' }
+        o.log('Upgrade parts: server started without start-bjrme-server; checking for new cars in the background')
+        return true
     end
     local dir = o.path .. '/updater/tools'
     if not o.exists(dir .. '/parts_updater.py') then return false end
     -- the previous result stays in place (deleting it makes BeamMP's plugin
     -- file monitor warn); results older than this start are ignored
     local result = dir .. '/last-run.json'
-    local windows = o.osName == 'Windows'
     local cmd = string.format('%s -I "%s/parts_updater.py" --beammp . > "%s/last-run.log" 2>&1',
         windows and 'python' or 'python3', dir, dir)
     cmd = windows and ('start "" /B ' .. cmd) or (cmd .. ' &')
     o.execute(cmd)
-    U.pending = { result = result, started = o.now(), o = o, windows = windows }
+    U.pending = { result = result, started = o.now(), o = o, windows = windows, log = dir .. '/last-run.log' }
     o.log('Upgrade parts: checking for new cars (background)')
     return true
 end
@@ -64,7 +79,7 @@ function U.poll()
             U.delivered = 'manual'
         end
     else
-        o.logWarn('Upgrade parts: updater failed: ' .. tostring(r.error) .. ' (server runs with the previous parts; details in updater/tools/last-run.log)')
+        o.logWarn('Upgrade parts: updater failed: ' .. tostring(r.error) .. ' (server runs with the previous parts; details in ' .. tostring(p.log) .. ')')
     end
     U.last = r
     return true
