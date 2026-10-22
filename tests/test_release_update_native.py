@@ -28,6 +28,11 @@ def main():
     with zipfile.ZipFile(args.archive) as z:
         manifest = json.loads(z.read(U.MANIFEST))
         current, edition = manifest['version'], manifest.get('edition', 'play')
+        # BeamNG cars' ready-made parts ship in the client mod and are validated too
+        import io
+        with zipfile.ZipFile(io.BytesIO(z.read('Resources/Client/BJR_RacePrep.zip'))) as client:
+            names = client.namelist()
+            native_parts = len(json.loads(client.read('lua/ge/extensions/raceprep/native-parts.json'))['parts']) if 'lua/ge/extensions/raceprep/native-parts.json' in names else 0
     with tempfile.TemporaryDirectory(prefix='rp native update é ') as tmp:
         server = Path(tmp).resolve() / 'server install'
         U.unpack(data, server, current)
@@ -53,12 +58,14 @@ def main():
                                     env=env, capture_output=True, text=True, encoding='utf8', timeout=180)
         assert generation.returncode == 0, generation.stdout + generation.stderr
         # Play: the car plus its engine and drivetrain conversions; Custom: no donors, no conversions
+        import re
+        parts = re.search(r'Validated (\d+) parts', generation.stdout)
+        assert parts, generation.stdout
+        generated = int(parts.group(1)) - native_parts
         if edition == 'play':
-            assert 'Validated 571 parts' in generation.stdout, generation.stdout
+            assert generated == 571, generation.stdout
         else:
-            import re
-            parts = re.search(r'Validated (\d+) parts', generation.stdout)
-            assert parts and 0 < int(parts.group(1)) < 571, generation.stdout
+            assert 0 < generated < 571, generation.stdout
         assert custom.read_bytes() == b'keep' and rules.read_bytes() == b'{"keep":true}'
         assert not (server / '.raceprep-update/ready.json').exists()
         assert (server / '.raceprep-update/applied.json').exists()
