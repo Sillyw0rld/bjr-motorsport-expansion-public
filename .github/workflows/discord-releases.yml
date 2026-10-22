@@ -1,0 +1,70 @@
+
+name: Discord Release Announcements
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send release to Discord
+        shell: bash
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [[ -z "$DISCORD_WEBHOOK_URL" ]]; then
+            echo "Missing DISCORD_WEBHOOK_URL secret"
+            exit 1
+          fi
+
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            jq -n '{
+              username: "BJR Motorsport Expansion",
+              allowed_mentions: {parse: []},
+              embeds: [{
+                title: "🧪 Release notification test",
+                description: "Success! Future GitHub releases will be announced automatically.",
+                color: 3066993
+              }]
+            }' > payload.json
+          else
+            jq -n --slurpfile event "$GITHUB_EVENT_PATH" '
+              $event[0].release as $r |
+              {
+                username: "BJR Motorsport Expansion",
+                allowed_mentions: {parse: []},
+                embeds: [{
+                  title: (("🏁 " + ($r.name // $r.tag_name))[:256]),
+                  url: $r.html_url,
+                  description: (
+                    if ($r.body // "") == "" then
+                      "A new version is available!"
+                    else
+                      $r.body[:3500]
+                    end
+                  ),
+                  color: 3066993,
+                  fields: [{
+                    name: "Download",
+                    value: ("[View GitHub Release](" + $r.html_url + ")"),
+                    inline: false
+                  }],
+                  footer: {
+                    text: "BJR Motorsport Expansion • Official Release"
+                  }
+                }]
+              }
+            ' > payload.json
+          fi
+
+          curl --fail-with-body --silent --show-error \
+            -H "Content-Type: application/json" \
+            --data-binary @payload.json \
+            "$DISCORD_WEBHOOK_URL"
