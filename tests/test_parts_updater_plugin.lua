@@ -39,7 +39,24 @@ o=make();o.exists=function() return false end;assert(U.start(o)==false and #o.cm
 o=make();o.t=1000;o.files[R]={status='up-to-date',newCars={},finishedAt=500};U.start(o)
 assert(not o.removed,'result file not deleted');assert(U.poll()==false,'stale result ignored')
 o.files[R]={status='up-to-date',newCars={},finishedAt=1000};assert(U.poll()==true)
--- Public release: launcher owns generation, never spawn Python or reload live assets.
-o=make();o.exists=function(p) return p:find('preflight-required.json',1,true)~=nil end
-assert(U.start(o)==false and #o.cmds==0 and o.logs[1]:find('preflight'))
-print('PASS: parts updater runs in the background at startup; reloadmods via tmux, else the admin is told; failures keep the server running')
+-- Public release (2026-10-22): the launcher builds parts before the start and
+-- holds the session lock; started without it, the compiled generator runs in
+-- the background (never Python), then reloadmods as above
+local function public(lock,exe) return function(p)
+  return p:find('preflight-required.json',1,true)~=nil or (lock and p:find('server-session.lock',1,true)~=nil) or (exe and p:find('bjrme-generator',1,true)~=nil) end end
+o=make();o.exists=public(true,true)
+assert(U.start(o)==false and #o.cmds==0 and o.logs[1]:find('start%-bjrme%-server'),'launcher already built the parts')
+local P='Resources/Server/RacePrep/updater/last-run.json'
+o=make({TMUX='/run/beammp/tmux.sock,123,0',TMUX_PANE='%0'});o.exists=public(false,true)
+assert(U.start(o) and o.cmds[1]:find('^"%./bjrme%-generator/bjrme%-generator" %-%-beammp %. %-%-result') and o.cmds[1]:find('&$') and not o.cmds[1]:find('python'),o.cmds[1])
+assert(o.logs[1]:find('without start%-bjrme%-server'))
+o.files[P]={status='updated',newCars={'car_a'},seconds=12,finishedAt=0}
+assert(U.poll()==true and U.delivered=='auto' and o.cmds[2]:find('reloadmods'),'new cars delivered with reloadmods')
+o=make(nil,'Windows');o.exists=public(false,true)
+assert(U.start(o) and o.cmds[1]:find('^start "" /B "bjrme%-generator\\bjrme%-generator%.exe"'),o.cmds[1])
+o=make();o.exists=public(false,false)
+assert(U.start(o)==false and #o.cmds==0 and o.warns[1]:find('start%-bjrme%-server'),'no generator: told to use the launcher')
+o=make();o.exists=public(false,true);U.start(o)
+o.files[P]={status='failed',error='A release update is pending/running; stop BeamMP and use start-bjrme-server before generating',finishedAt=0}
+assert(U.poll() and o.warns[1]:find('update is pending') and o.warns[1]:find('last%-run%.log'),'a staged update says to use the launcher')
+print('PASS: parts updater runs in the background at startup (Python on developer installs, the compiled generator on public installs started without the launcher); reloadmods via tmux, else the admin is told; failures keep the server running')

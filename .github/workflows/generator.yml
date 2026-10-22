@@ -2,7 +2,7 @@ name: Standalone generators
 on:
   workflow_dispatch:
   push:
-    paths: ['tools/**', 'donors/**', 'packaging/**', 'tests/test_distribution*', 'build_release.py', '.github/workflows/generator.yml']
+    paths: ['tools/**', 'donors/**', 'packaging/**', 'tests/test_distribution*', 'tests/test_release*', 'build_release.py', '.github/workflows/generator.yml']
 jobs:
   native:
     strategy:

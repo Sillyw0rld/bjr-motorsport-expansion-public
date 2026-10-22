@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import time
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -27,6 +28,19 @@ def server_environment():
             if not ctypes.windll.kernel32.SetDllDirectoryW(None):
                 raise OSError('Could not restore Windows DLL search path for BeamMP')
     return env
+
+
+def write_result(path, result, started):
+    """The plugin's result file (same fields as parts_updater.py's last-run.json)."""
+    if not path:
+        return
+    out = {**result, 'finishedAt': int(time.time())}
+    if started is not None:
+        out['seconds'] = round(time.time() - started, 1)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp = path.with_suffix('.tmp')
+    temp.write_text(json.dumps(out) + '\n', encoding='utf8')
+    os.replace(temp, path)
 
 
 def optional_start(root):
@@ -70,6 +84,7 @@ def main(argv=None):
     ap.add_argument('--check', action='store_true', help='report pending generation without replacing assets')
     ap.add_argument('--server', type=Path, help='start this BeamMP executable only after successful preflight')
     ap.add_argument('--server-arg', action='append', default=[])
+    ap.add_argument('--result', type=Path, help='also write the result as JSON here (the plugin reads it when BeamMP was started without the launcher)')
     ap.add_argument('--update-request-id', help=argparse.SUPPRESS)
     updates = ap.add_mutually_exclusive_group()
     updates.add_argument('--update-check', action='store_true', help='check the configured GitHub release')
@@ -109,14 +124,17 @@ def main(argv=None):
             owns_session = True
             optional_start(args.beammp)
         from incremental_generation import update
+        started = time.time()
         result = update(args.beammp, args.verbose, donors, args.check, server_session=owns_session)
         print(json.dumps(result), flush=True)
+        write_result(args.result, result, started)
         if args.server:
             server = args.server if args.server.is_absolute() else args.beammp / args.server
             return subprocess.call([str(server.resolve()), *args.server_arg], cwd=args.beammp, env=server_environment())
         return 0
     except Exception as e:
         print(f'[BJR:ME] Preflight/server startup failed: {e}. Check the named source or install path before retrying.', file=sys.stderr, flush=True)
+        write_result(args.result, {'status': 'failed', 'error': str(e)}, None)
         return 1
     finally:
         if owns_session:
