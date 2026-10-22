@@ -1,0 +1,99 @@
+
+name: Discord Announcements
+
+on:
+  discussion:
+    types: [created]
+
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Announcement title"
+        required: true
+        type: string
+
+      message:
+        description: "Announcement message"
+        required: true
+        type: string
+
+      link:
+        description: "Optional link (https://...)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.discussion.category.slug == 'announcements'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send announcement to Discord
+        shell: bash
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_ANNOUNCEMENTS_WEBHOOK_URL }}
+
+        run: |
+          if [[ -z "$DISCORD_WEBHOOK_URL" ]]; then
+            echo "Discord webhook secret is missing"
+            exit 1
+          fi
+
+          jq -n --slurpfile event "$GITHUB_EVENT_PATH" '
+            (
+              if $ENV.GITHUB_EVENT_NAME == "workflow_dispatch" then
+                {
+                  title: $event[0].inputs.title,
+                  message: $event[0].inputs.message,
+                  url: ($event[0].inputs.link // "")
+                }
+              else
+                {
+                  title: $event[0].discussion.title,
+                  message: $event[0].discussion.body,
+                  url: $event[0].discussion.html_url
+                }
+              end
+            ) as $post |
+
+            {
+              username: "BJR Motorsport Expansion",
+              allowed_mentions: {
+                parse: []
+              },
+              embeds: [
+                (
+                  {
+                    title: (
+                      "📢 " + ($post.title // "Announcement")
+                    )[:256],
+                    description: (
+                      ($post.message // "New announcement!")[:3500]
+                    ),
+                    color: 16753920,
+                    footer: {
+                      text: "BJR Motorsport Expansion • News"
+                    }
+                  }
+                  +
+                  (
+                    if ($post.url // "" | startswith("https://"))
+                    then {url: $post.url}
+                    else {}
+                    end
+                  )
+                )
+              ]
+            }
+          ' > payload.json
+
+          curl --fail-with-body --silent --show-error \
+            -H "Content-Type: application/json" \
+            --data-binary @payload.json \
+            "$DISCORD_WEBHOOK_URL"
