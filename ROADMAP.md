@@ -1,15 +1,17 @@
 # Roadmap
 
-What I'm working on next and what's planned for BJR:ME. It's a pre-release, so priorities can change
-as we race and find what needs fixing. Nothing here has a fixed date.
+What I'm working on next and what's planned for BJR:ME. It's an open beta, so priorities can change
+with what you report and what we find racing. Nothing here has a fixed date.
 
 ## Next up
-- **Race-night check of the new release.** The new window, Motorsport settings, race weekend, race
-  and session HUDs, the upgrade caps and the marbles, raced on my server.
+- **Open beta feedback.** Fixing what players and server owners report, first on other people's
+  servers and setups.
+- **Race nights on my server** with everything in this release: race weekends, the race HUD, upgrade
+  caps, marbles and the rest.
+- **Smaller Linux downloads.** The Linux generator carries debug information it doesn't need;
+  removing it should bring the Linux downloads close to the Windows size.
 - **The last new screenshots:** the race HUD, the vehicle selector with class / PI badges, and the
   before / after engine dyno.
-- **The public repository**, with this README, the release archives and the update checker
-  pointing at it.
 
 ## Planned
 - **Generated upgrades for BeamNG's own cars.** Their factory parts are in the workshop now.
@@ -33,14 +35,11 @@ as we race and find what needs fixing. Nothing here has a fixed date.
 - **BeamNG factory parts and the upgrade caps:** a factory engine swap counts as an engine conversion
   and a factory turbo or supercharger as forced induction; factory gearbox, suspension and tyre parts
   follow their factory-only rules. Factory engine parts have no Street / Sport / Race level.
-- **Engine conversion upgrades were renamed** in this release (each conversion has its own part
-  names). A saved setup with an engine conversion and its upgrades needs those upgrades fitted
-  again once.
 - **X class is meant to be rare.** It's reserved for extreme builds, mostly prototypes; most cars top
   out in P.
 - Built and tested on BeamNG.drive 0.40, BeamMP 3.9 and BeamJoy-Revived 2.0. Other versions may need
   changes.
 
 ## Ideas and requests
-Have an idea or found a problem? Open an issue. Changes to ratings or car performance need
-reproducible evidence, see [CONTRIBUTING.md](CONTRIBUTING.md).
+Have an idea or found a problem? Tell me on the [Discord](https://discord.gg/m6urHk6EAK). Changes to
+ratings or car performance need reproducible evidence, see [CONTRIBUTING.md](CONTRIBUTING.md).
