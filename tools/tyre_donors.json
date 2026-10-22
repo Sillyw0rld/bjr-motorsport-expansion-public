@@ -1,0 +1,3122 @@
+[
+ {
+  "model": "arrow_awd",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Awd 255/45/17 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.589492,
+   "fullLoadCoef": 0.13202,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "bf36a3608c17ad396907a01b4a3d44a8b41deab588f9ed6969579078f9d3f056"
+ },
+ {
+  "model": "arrow_awd",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Awd 285/40/17 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.589492,
+   "fullLoadCoef": 0.13202,
+   "loadSensitivitySlope": 0.0001314,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "780fd3169968fa94b3cbfd7b67301d1e8f6e6eaf5ef28f937c891022c9cd7e70"
+ },
+ {
+  "model": "arrow_awd_2_0",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Awd 2.0 255/45/17 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.589492,
+   "fullLoadCoef": 0.13202,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "0f060df8cf042850a8c2cd812a464bcac87f595028b048029a99bbed1314950e"
+ },
+ {
+  "model": "arrow_awd_2_0",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Awd 2.0 285/40/17 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.589492,
+   "fullLoadCoef": 0.13202,
+   "loadSensitivitySlope": 0.0001314,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "0246b49f42bfa41abffd1cabd8b009dd05a438832c625442405ddb1ea0959dd1"
+ },
+ {
+  "model": "bianka_elita",
+  "axle": "front",
+  "compound": "standard",
+  "title": "Elita 265/40/21 Radial Medium Alloy Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.375,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.415235,
+   "fullLoadCoef": 0.1127,
+   "loadSensitivitySlope": 0.000157,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "a0bb1147d2ea2b8ae47cd12f4e4b1a2de4b92a780ff38df2bb7090ad639ed211"
+ },
+ {
+  "model": "bianka_elita",
+  "axle": "rear",
+  "compound": "standard",
+  "title": "Elita 335/30/21 Radial Medium Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.375,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.414897,
+   "fullLoadCoef": 0.112683,
+   "loadSensitivitySlope": 0.00010350000000000001,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "2dae3bbebdde34994f553fff260661b5ba6699f66a02935e9cd99e0dcf58d02c"
+ },
+ {
+  "model": "cichlid_snapdragon",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Snapdragon 255/50/22 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.4075,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000143,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "bf25c0d765f578bf2d6311f81eb10e46a446b5dc2db3b680058b037ed2905c20"
+ },
+ {
+  "model": "cichlid_snapdragon",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Snapdragon 255/50/22 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.4075,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.00013319999999999999,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "104d527ec00d1c44be754f7e4ebcf45dd7b199bbf46d3a21309a6488718999e0"
+ },
+ {
+  "model": "firestarter_clone_kalalalac",
+  "axle": "front",
+  "compound": "sport",
+  "title": "KalalalaC 275/40/20 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.3575,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000141,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "0073faf8c70e3738aee23493d095f3919e341d8ceec292b99b7f5a5039df9594"
+ },
+ {
+  "model": "firestarter_clone_kalalalac",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "KalalalaC 335/30/20 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.3575,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.600516,
+   "fullLoadCoef": 0.132752,
+   "loadSensitivitySlope": 0.0001008,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "8ea64e56bf4d6ff0c765e98383df0d5a5c32063f2eea37ce61f66965bc14c8d9"
+ },
+ {
+  "model": "giselle__flying_400",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "flying 400 245/40/22 Radial Soft Race Steel Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.38,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.189607,
+   "fullLoadCoef": 0.167475,
+   "loadSensitivitySlope": 0.000166,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "c45d78c64f7559e07a843658df9e0801ced73744edddded71cf67bd440d056d1"
+ },
+ {
+  "model": "giselle__flying_400",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "flying 400 295/35/22 Radial Soft Race Steel Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.38,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.189587,
+   "fullLoadCoef": 0.167474,
+   "loadSensitivitySlope": 0.00012780000000000002,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "0c822c87c9a913af67ccaaf8daca55830100bd960b630cea597b871553b88d94"
+ },
+ {
+  "model": "giselle_clone_flying_400",
+  "axle": "front",
+  "compound": "sport",
+  "title": "flying 400 245/45/21 Radial Sport Steel Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.375,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "c2759bd8bd9c2ff1e1fc9d5670ca35bf6c768b3e331440abfc628bf32f03462b"
+ },
+ {
+  "model": "giselle_clone_flying_400",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "flying 400 295/35/21 Radial Sport Steel Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.375,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.00011790000000000002,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "ace2fcd76ddacce744f8d0b54e16315a1b963e408aac3a356b33aced53600a74"
+ },
+ {
+  "model": "giselle_flying_c",
+  "axle": "front",
+  "compound": "sport",
+  "title": "flying C 225/45/21 Radial Sport Magnesium Front Wheels",
+  "tireWidthMM": 225.0,
+  "radiusM": 0.3625,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000168,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "ab6106901eb76601266121c848a2e7faefec2044d9c161d3b8442ee4702d8fdb"
+ },
+ {
+  "model": "giselle_flying_c",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "flying C 255/40/21 Radial Sport Magnesium Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3625,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.00013680000000000002,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "9a66a644d638dc8685559477d1a84aaf92b92d9167bf6d3e5efd51d4cfe3f229"
+ },
+ {
+  "model": "guiness_copper",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Copper 255/40/19 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.654169,
+   "fullLoadCoef": 0.139125,
+   "loadSensitivitySlope": 0.000161,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "6b9deee4f2686836e7a10f35ccb2e4310afa755c30b4aec1c15b524bed3d85a2"
+ },
+ {
+  "model": "guiness_copper",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Copper 355/30/19 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.650361,
+   "fullLoadCoef": 0.138909,
+   "loadSensitivitySlope": 0.0001098,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "3402303429f7bc4bffef0ce46a51ac0d14223902a02398e310bbf2ebafa56587"
+ },
+ {
+  "model": "guiness_copper_a",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Copper A 255/40/19 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.654169,
+   "fullLoadCoef": 0.139125,
+   "loadSensitivitySlope": 0.000161,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "30bb4141b2196a865b9aa20ac346701f9ec759b2d4eec3b07ba98996e4aa5a54"
+ },
+ {
+  "model": "guiness_copper_a",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Copper A 355/30/19 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.650361,
+   "fullLoadCoef": 0.138909,
+   "loadSensitivitySlope": 0.0001098,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "b02940337506ac3d3181f23ccc1c13078b4fc37b815b216bdd951d63d85a63f4"
+ },
+ {
+  "model": "guiness_copper_b",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Copper b 255/40/19 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.638734,
+   "fullLoadCoef": 0.13825,
+   "loadSensitivitySlope": 0.000161,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "c327ea372871d3ed7852bce3590e3f57e4ebda714d5a930e5774df4568bab865"
+ },
+ {
+  "model": "guiness_copper_b",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Copper b 355/30/19 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.63495,
+   "fullLoadCoef": 0.138036,
+   "loadSensitivitySlope": 0.0001098,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "1338fab1cd66d76a870b8f61381ad4134b05880e0961b70ffd0c974027845181"
+ },
+ {
+  "model": "hartis__gt_rr",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "GT RR 235/45/19 Bias Ply Soft Race Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.18648,
+   "fullLoadCoef": 0.167323,
+   "loadSensitivitySlope": 0.000147,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 1.8,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "fb8fcb28e47e76fbdc64244adf5a0927b79fcb45b2caafba3890c8fe6ef4c4a3"
+ },
+ {
+  "model": "hartis__gt_rr",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "GT RR 305/35/19 Bias Ply Soft Race Alloy Rear Wheels",
+  "tireWidthMM": 305.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.18648,
+   "fullLoadCoef": 0.167323,
+   "loadSensitivitySlope": 0.0001134,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 1.8,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "51af42e122c3ce77ffe8288116be7ce13e38d170296c47ac0124bebacd2aa465"
+ },
+ {
+  "model": "hartis_clone_gt",
+  "axle": "front",
+  "compound": "sport",
+  "title": "GT 245/45/19 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.492444,
+   "fullLoadCoef": 0.12558,
+   "loadSensitivitySlope": 0.000153,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "ab3a540430aa8318fe95f03782f61cd6148b3544177c7fe889d82c42893610e9"
+ },
+ {
+  "model": "hartis_clone_gt",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "GT 325/35/19 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 325.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.492387,
+   "fullLoadCoef": 0.125576,
+   "loadSensitivitySlope": 0.00010800000000000001,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "6d6a50483d3117985d495d89cd4011c3f9d3ee5aecacb6570c8bba867ddb7dc5"
+ },
+ {
+  "model": "hartis_se",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Se 245/45/19 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.492444,
+   "fullLoadCoef": 0.12558,
+   "loadSensitivitySlope": 0.000155,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "2406b784e207ed793fd76ea58827f6599505b86a1557c026abe4b57feb68b69f"
+ },
+ {
+  "model": "hartis_se",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Se 315/35/19 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 315.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.492442,
+   "fullLoadCoef": 0.12558,
+   "loadSensitivitySlope": 0.0001134,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "d50777e53a53b5cde5ab1197a3c1ffc6cf31b7b1bfe53aac2f53be82908b0288"
+ },
+ {
+  "model": "hawk300sx",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Babbler 255/45/18 Radial Sport Magnesium Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000149,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "013188e3642773c8046ee2f94fc973e6f937f60738b990d68f63f99d81a186ba"
+ },
+ {
+  "model": "hawk300sx",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Babbler 295/40/18 Radial Sport Magnesium Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000117,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "ee0b8ed8d5e4ef1cb326f255c7b76bea5d321f2297907772acf167bd4c686658"
+ },
+ {
+  "model": "hawk300sxrr",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Babbler Clone 280/45/18 Radial Medium Race Magnesium Front Wheels",
+  "tireWidthMM": 280.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.000151,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "d34c2cfcb9f9b162230bdeafe819c926f6303c38d843f9c1cb33851a45dc6911"
+ },
+ {
+  "model": "hawk300sxrr",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Babbler Clone 335/35/18 Radial Medium Race Magnesium Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.0001134,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "afdf4c18f125e703211cb0520380f1cff8f2748c2f5f91450173b90416157c80"
+ },
+ {
+  "model": "hawk_3000gt",
+  "axle": "front",
+  "compound": "sport",
+  "title": "3000GT 235/50/18 Radial Sport Magnesium Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.419657,
+   "fullLoadCoef": 0.12075,
+   "loadSensitivitySlope": 0.000168,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "ed8990149f26cdc738985bf633e4be5cf9f3a2bac39cff8190ff530ad24f5b3c"
+ },
+ {
+  "model": "hawk_3000gt",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "3000GT 235/50/18 Radial Sport Magnesium Rear Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.419657,
+   "fullLoadCoef": 0.12075,
+   "loadSensitivitySlope": 0.0001476,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "9e495e4f0855bfc63b60b54ca32ee750aa25607a883675a2a69389822e67a928"
+ },
+ {
+  "model": "hawk_86",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "86 265/45/18 Radial Hard Race Steel Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.549854,
+   "fullLoadCoef": 0.1365,
+   "loadSensitivitySlope": 0.000163,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "226db367006af909f5b3ea048ca6727fb70cbb69d6574d470d224fba96043bd7"
+ },
+ {
+  "model": "hawk_86",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "86 265/45/18 Radial Hard Race Steel Rear Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.549854,
+   "fullLoadCoef": 0.1365,
+   "loadSensitivitySlope": 0.0001395,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "0bb6e6b3632971c79fc61c9d11fd09dd5093a3a19f0329efecb6463f1745cef6"
+ },
+ {
+  "model": "hawk_911_plane_edition",
+  "axle": "front",
+  "compound": "sport",
+  "title": "911 Plane edition 210/40/20 Radial Sport Steel Front Wheels",
+  "tireWidthMM": 210.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000178,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "da5898c3f59dd87aa7501f7914326d84253ce182cff7acd0fe14a97dc90e075d"
+ },
+ {
+  "model": "hawk_911_plane_edition",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "911 Plane edition 255/35/20 Radial Sport Steel Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.0001404,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "3ad1b04e4daac316b5d0ba6523f0f80690336c8860dd69b4a02f023024b7bad2"
+ },
+ {
+  "model": "hawk_911_turbo",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "911 Turbo 240/35/20 Radial Soft Race Carbon Front Wheels",
+  "tireWidthMM": 240.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.189607,
+   "fullLoadCoef": 0.167475,
+   "loadSensitivitySlope": 0.000171,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "82544a0c14a5750bb0b74653a0dbe5ac9ad3d37b453fcdd205bef44c30f72d90"
+ },
+ {
+  "model": "hawk_911_turbo",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "911 Turbo 295/30/20 Radial Soft Race Carbon Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.186168,
+   "fullLoadCoef": 0.167308,
+   "loadSensitivitySlope": 0.00013680000000000002,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "1bc9306cb8c62a0befc934d202610a7135085714fcba85b1c1b0cbb155ad35ac"
+ },
+ {
+  "model": "hawk_911_turbo_plane_edition",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "911 Turbo Plane Edition 245/35/20 Radial Soft Race Carbon Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.189607,
+   "fullLoadCoef": 0.167475,
+   "loadSensitivitySlope": 0.000168,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "c83f4dbfea175f0e328675a1dffcf04961e2c778cfd153a0c0994b8f483b616a"
+ },
+ {
+  "model": "hawk_911_turbo_plane_edition",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "911 Turbo Plane Edition 295/30/20 Radial Soft Race Carbon Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.186168,
+   "fullLoadCoef": 0.167308,
+   "loadSensitivitySlope": 0.0001377,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "78a429792c50d004fb8380015387114fc6dc16f38b42f91a1efedc69b4287985"
+ },
+ {
+  "model": "hawk_911b",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Perch 205/45/20 Radial Sport Steel Front Wheels",
+  "tireWidthMM": 205.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000182,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "86ce5af98012300ab477ac1c907d1b2a34119ebeac26f3102eed6b4d399d06c6"
+ },
+ {
+  "model": "hawk_911b",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Perch 255/35/20 Radial Sport Steel Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.0001404,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "b5f136abe8b063882513b0877e0865117bdd20e5464254f648cb5206c25783cf"
+ },
+ {
+  "model": "hawk_ae86_grand_touring",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "AE86 Grand Touring 275/45/17 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.669604,
+   "fullLoadCoef": 0.14,
+   "loadSensitivitySlope": 0.000158,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "8b256a3d2ea94f0fdda3265748c8a92383a9a4f1beb1693de6d5873f5c645155"
+ },
+ {
+  "model": "hawk_ae86_grand_touring",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "AE86 Grand Touring 335/40/17 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.669604,
+   "fullLoadCoef": 0.14,
+   "loadSensitivitySlope": 0.0001098,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "588c32982c4abc2987199d5ae11ddc814d81bda97e1ae9d72e3777a0b3c8cade"
+ },
+ {
+  "model": "hawk_aime3_competition",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "AIME3 Competition 235/50/20 Radial Semi-Slick Steel Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.3675,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.663194,
+   "fullLoadCoef": 0.139637,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "873dc1d7e5745027a4b2483a876915d254d5d3989af34fcbaa77bff899de9fc0"
+ },
+ {
+  "model": "hawk_aime3_competition",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "AIME3 Competition 285/40/20 Radial Semi-Slick Steel Rear Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.3675,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.663194,
+   "fullLoadCoef": 0.139637,
+   "loadSensitivitySlope": 0.000117,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "8e1934905f606cca7207b736727f48cdc26925b46711683d9bdc05d15d33a939"
+ },
+ {
+  "model": "hawk_carolina_gt",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Carolina GT 310/40/21 Radial Hard Race Magnesium Front Wheels",
+  "tireWidthMM": 310.0,
+  "radiusM": 0.385,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.80784,
+   "fullLoadCoef": 0.15015,
+   "loadSensitivitySlope": 0.00013,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "77b97910f815348f4ef29f5d53b7b5404c28971996e0a35321e6d74e0af014b0"
+ },
+ {
+  "model": "hawk_carolina_gt",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Carolina GT 395/30/21 Radial Hard Race Magnesium Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.385,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.804915,
+   "fullLoadCoef": 0.149995,
+   "loadSensitivitySlope": 9.63e-05,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "ea541b2f6914f0f3077c4f82ff0bb59e567a5e6df1f1344e5810aecf565470ed"
+ },
+ {
+  "model": "hawk_fm5",
+  "axle": "front",
+  "compound": "sport",
+  "title": "FM5 245/40/20 Radial Sport Carbon Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000158,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "d3a4713bfe6f5f906122766096ed32dbee3941fbe6af22bc86841ea598c60a5f"
+ },
+ {
+  "model": "hawk_fm5",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "FM5 300/30/20 Radial Sport Carbon Rear Wheels",
+  "tireWidthMM": 300.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601191,
+   "fullLoadCoef": 0.132797,
+   "loadSensitivitySlope": 0.00011609999999999999,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "5a2603cbaa0a0f5c2ebe65739bace44a6349d8098c000ae733031f68a44c15d5"
+ },
+ {
+  "model": "hawk_fm5_v1_1",
+  "axle": "front",
+  "compound": "sport",
+  "title": "FM5 v1.1 245/40/20 Radial Sport Carbon Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.601623,
+   "fullLoadCoef": 0.132825,
+   "loadSensitivitySlope": 0.000158,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "8e9f9107a9c9701e11d0d3043e05ebf61d7275435decd486de07abd9923839ca"
+ },
+ {
+  "model": "hawk_fm5_v1_1",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "FM5 v1.1 300/30/20 Radial Sport Carbon Rear Wheels",
+  "tireWidthMM": 300.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.601191,
+   "fullLoadCoef": 0.132797,
+   "loadSensitivitySlope": 0.0001152,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "c3786c1f44e6c6e47e7c83d3b9666e052f2b97f0124a1bb50e940d262fb042f4"
+ },
+ {
+  "model": "hawk_focal_rs",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Focal RS 255/35/20 Radial Semi-Slick Steel Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.746779,
+   "fullLoadCoef": 0.144375,
+   "loadSensitivitySlope": 0.000165,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "27f61d9f411f60b593da75e04a79348d622e3d2af205eb32191aa63649d46e90"
+ },
+ {
+  "model": "hawk_focal_rs",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Focal RS 255/35/20 Radial Semi-Slick Steel Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.746779,
+   "fullLoadCoef": 0.144375,
+   "loadSensitivitySlope": 0.0001413,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "a9943e9334334bac3263f527c642522e5f553f40cd68c2830f7f705cdc18fe92"
+ },
+ {
+  "model": "hawk_gr_d",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "GR-D 275/35/20 Radial Hard Race Steel Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.3525,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.721845,
+   "fullLoadCoef": 0.1456,
+   "loadSensitivitySlope": 0.000161,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "dbedfb4357ad7ad78594ac79cf1288fb208817582e34e3114a2a87cb0b06d074"
+ },
+ {
+  "model": "hawk_gr_d",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "GR-D 335/30/20 Radial Hard Race Steel Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.3525,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.717985,
+   "fullLoadCoef": 0.145396,
+   "loadSensitivitySlope": 0.0001224,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "ce4e530cea78ed42444ff2b2abf165e54fc4031dc29ea55e849ce3aef2035ce5"
+ },
+ {
+  "model": "hawk_pony_rs",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Pony RS 265/40/19 Radial Sport Magnesium Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.378576,
+   "fullLoadCoef": 0.118024,
+   "loadSensitivitySlope": 0.000136,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "8bb21f4049458349f38bff40b12c5ed85971e278abd0da0b8464cfa1a6e5d816"
+ },
+ {
+  "model": "hawk_pony_rs",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Pony RS 295/35/19 Radial Sport Magnesium Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.378576,
+   "fullLoadCoef": 0.118024,
+   "loadSensitivitySlope": 0.00010800000000000001,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "50a8e10ea7a9fd6fe6717fd40711ce799fc73f5b20283bd00bec49f5e8519bfd"
+ },
+ {
+  "model": "hawk_satanas_svr",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "Satanas SVR 285/35/21 Radial Soft Race Carbon Front Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.37,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.189607,
+   "fullLoadCoef": 0.167475,
+   "loadSensitivitySlope": 0.000146,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "3ce2f308a39f1414b9d146863b7c2bfee09570726e24fcdf11432815a2de7528"
+ },
+ {
+  "model": "hawk_satanas_svr",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "Satanas SVR 325/30/21 Radial Soft Race Carbon Rear Wheels",
+  "tireWidthMM": 325.0,
+  "radiusM": 0.37,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.188693,
+   "fullLoadCoef": 0.167431,
+   "loadSensitivitySlope": 0.0001242,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "e84f75c5d979297480e62acb141f46f6114123ed59da66c412ff541f46d3a9f9"
+ },
+ {
+  "model": "hawk_trackeater_ssr",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "TrackEater SSR 335/30/20 Radial Soft Race Carbon Front Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.3525,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.184783,
+   "fullLoadCoef": 0.16724,
+   "loadSensitivitySlope": 0.00013,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "bb1f11892d82b955523b509971abddf86cf63d85d366a45d14ffbe6a0a199ac8"
+ },
+ {
+  "model": "hawk_trackeater_ssr",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "TrackEater SSR 395/25/20 Radial Soft Race Carbon Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.174631,
+   "fullLoadCoef": 0.166746,
+   "loadSensitivitySlope": 9.810000000000001e-05,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "23abde9e5d749b8f6bd93ee667739db73f219a348d6f578f863822b67d246343"
+ },
+ {
+  "model": "hawk_trackeater_ssr_1000",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "TrackEater SSR 1000 370/25/20 Radial Soft Race Carbon Front Wheels",
+  "tireWidthMM": 370.0,
+  "radiusM": 0.3525,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.173424,
+   "fullLoadCoef": 0.166687,
+   "loadSensitivitySlope": 0.000114,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "5829def6bc58dd0a8ebfc52496d85b582055ee55e1696551ea2a135140ed4ee2"
+ },
+ {
+  "model": "hawk_trackeater_ssr_1000",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "TrackEater SSR 1000 395/25/20 Radial Soft Race Carbon Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.174631,
+   "fullLoadCoef": 0.166746,
+   "loadSensitivitySlope": 9.54e-05,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "155608501661eb8654880fb91372e0101f9ab39bd047904d298c6d3c7123dea9"
+ },
+ {
+  "model": "hawk_troglodyte_2000r",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "Troglodyte 2000R 205/50/18 Radial Soft Race Alloy Front Wheels",
+  "tireWidthMM": 205.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.876916,
+   "fullLoadCoef": 0.15225,
+   "loadSensitivitySlope": 0.000217,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "8b305126c68cf8d8627bae44138b2aee94c8f9f2d8991b0704206031dc143fe7"
+ },
+ {
+  "model": "hawk_troglodyte_2000r",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "Troglodyte 2000R 225/45/18 Radial Soft Race Alloy Rear Wheels",
+  "tireWidthMM": 225.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.876916,
+   "fullLoadCoef": 0.15225,
+   "loadSensitivitySlope": 0.0001593,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "31dcd1fdf38f80398fc72675fead2234add4aae5abff1bc35fe90d33f46bd0a0"
+ },
+ {
+  "model": "hawk_twenty_two_rs",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RS 285/40/22 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.669604,
+   "fullLoadCoef": 0.14,
+   "loadSensitivitySlope": 0.000143,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "995a218e0710b8b68596fae07488a0fa006ee9649c7bead88d9ab6190254d725"
+ },
+ {
+  "model": "hawk_twenty_two_rs",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RS 315/40/22 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 315.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.669604,
+   "fullLoadCoef": 0.14,
+   "loadSensitivitySlope": 0.00011250000000000001,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "1fd1c7019b9906d45aea2ea0f9a95c1024b3a5aaec55f901cdc04c5a723060e5"
+ },
+ {
+  "model": "hawk_twenty_two_rt",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RT 275/45/22 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.515254,
+   "fullLoadCoef": 0.13125,
+   "loadSensitivitySlope": 0.000151,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "551a0eb1f0817ce56ea4862f79b073b1dcc593e692019b7f701326774a3848cb"
+ },
+ {
+  "model": "hawk_twenty_two_rt",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RT 295/40/22 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.515254,
+   "fullLoadCoef": 0.13125,
+   "loadSensitivitySlope": 0.00011880000000000001,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "ef3d24ee57f1f402bba8089a3bc09ccb26348ea28fc1756637fb2087d4ced5f5"
+ },
+ {
+  "model": "hawk_twenty_two_rt_s",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RT 275/45/22 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.623299,
+   "fullLoadCoef": 0.137375,
+   "loadSensitivitySlope": 0.000149,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "4d50a478399ab4b7dbd70a15835605f31498205b19d66ffb8f47885e1cb5a504"
+ },
+ {
+  "model": "hawk_twenty_two_rt_s",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RT 295/40/22 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.623299,
+   "fullLoadCoef": 0.137375,
+   "loadSensitivitySlope": 0.0001215,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "88be392cfe6be49b1f36ec431cdb70e53ed3502c5af57519284d96324660dc38"
+ },
+ {
+  "model": "hawk_twenty_two_rt_sport",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RT 275/45/22 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.623299,
+   "fullLoadCoef": 0.137375,
+   "loadSensitivitySlope": 0.000149,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "fa1b31e5274643914a46fff057b36f6fa35991f64a49863e6e345c3133c1385e"
+ },
+ {
+  "model": "hawk_twenty_two_rt_sport",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Twenty-Two RT 295/40/22 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.4,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.623299,
+   "fullLoadCoef": 0.137375,
+   "loadSensitivitySlope": 0.0001215,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "7894dddd06ff1d8ba8808d2016cc1dfa98c0b4a8cc9ae66a1af0d0a38a60799c"
+ },
+ {
+  "model": "hawk_velocitta_gt_r",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Velocitta GT-R 285/35/19 Radial Medium Race Carbon Front Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.34,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 1.893097,
+   "fullLoadCoef": 0.14973,
+   "loadSensitivitySlope": 0.000147,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "3e6e144c2b6b80522eede67293c64caf89ce4d813a4fb9d65199cb091fad0eec"
+ },
+ {
+  "model": "hawk_velocitta_gt_r",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Velocitta GT-R 355/35/19 Radial Medium Race Carbon Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 1.893008,
+   "fullLoadCoef": 0.149726,
+   "loadSensitivitySlope": 0.0001098,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "1da62ee77d66da027306ee64d84c859bad7a15b94e23ac423d7f48a33222e694"
+ },
+ {
+  "model": "hawk_vipere_s",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Vipere S 240/55/20 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 240.0,
+  "radiusM": 0.39,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.515254,
+   "fullLoadCoef": 0.13125,
+   "loadSensitivitySlope": 0.000166,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "518aef591506bca12efb4cb836df9963bcaa1ef7fd34d2f54b2f48ec22c4fe27"
+ },
+ {
+  "model": "hawk_vipere_s",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Vipere S 275/50/20 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.39,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.515254,
+   "fullLoadCoef": 0.13125,
+   "loadSensitivitySlope": 0.0001296,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "3483c0298ec40b5fd8b39f1ff43846296645e60e00ed9683368b3d8144705d74"
+ },
+ {
+  "model": "hawk_viviv_si",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Viviv SI 205/55/16 Radial Sport Magnesium Front Wheels",
+  "tireWidthMM": 205.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.540968,
+   "fullLoadCoef": 0.1288,
+   "loadSensitivitySlope": 0.000185,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "fdca57449dec6bd96b0de009eb8ed1eaf34d3fae988bfa2c0197890c47f38523"
+ },
+ {
+  "model": "hawk_viviv_si",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Viviv SI 205/55/16 Radial Sport Magnesium Rear Wheels",
+  "tireWidthMM": 205.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.540968,
+   "fullLoadCoef": 0.1288,
+   "loadSensitivitySlope": 0.0001638,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "8c95f215d2cb9ac3dcf02e71de95928063d2a7726f35a854c2b527e7db5d054f"
+ },
+ {
+  "model": "hawkgascrisiscorvette",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "Caracara 210/45/18 Radial Soft Race Magnesium Front Wheels",
+  "tireWidthMM": 210.0,
+  "radiusM": 0.3225,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.876916,
+   "fullLoadCoef": 0.15225,
+   "loadSensitivitySlope": 0.000191,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "6358ef4fdc9e16abd6ca12f8f92d6874ce75d72ff12aeacd3cfc7d27b7cf98e4"
+ },
+ {
+  "model": "hawkgascrisiscorvette",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "Caracara 235/40/18 Radial Soft Race Magnesium Rear Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.3225,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.876916,
+   "fullLoadCoef": 0.15225,
+   "loadSensitivitySlope": 0.000153,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "0ce992c2bd811169c189e50cc3cf2830042c10600cc7042d4b3e248bbf53bd5c"
+ },
+ {
+  "model": "hawkgrandtouring",
+  "axle": "front",
+  "compound": "standard",
+  "title": "Sunflower 275/40/21 Radial Medium Magnesium Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.37,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.470272,
+   "fullLoadCoef": 0.1155,
+   "loadSensitivitySlope": 0.000147,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "5f5d0907d2772413314911b10b71ac7d26381a62c89ad531955600ea081a0bd0"
+ },
+ {
+  "model": "hawkgrandtouring",
+  "axle": "rear",
+  "compound": "standard",
+  "title": "Sunflower 375/30/21 Radial Medium Magnesium Rear Wheels",
+  "tireWidthMM": 375.0,
+  "radiusM": 0.37,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.462752,
+   "fullLoadCoef": 0.115118,
+   "loadSensitivitySlope": 7.92e-05,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "6c519bc507eaf0af128c2ce34067f6096f763162697986ccd7c341f7ae1e0e69"
+ },
+ {
+  "model": "la_clone_clone_povite_vite_super_duper",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Povite vite Super duper  255/45/19 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.480312,
+   "fullLoadCoef": 0.124775,
+   "loadSensitivitySlope": 0.000158,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "83c5f588d46a60187376c9d0157d0f61af9f6cded4e0642322cbb60ab45f037b"
+ },
+ {
+  "model": "la_clone_clone_povite_vite_super_duper",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Povite vite Super duper  335/30/19 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.480062,
+   "fullLoadCoef": 0.124759,
+   "loadSensitivitySlope": 0.00010619999999999999,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "7b8ba1a3155c78ab879928068c9cf814d2193c580a2de24430bf0736ca7cb765"
+ },
+ {
+  "model": "la_clone_povite_vite",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Povite vite 235/45/19 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.431788,
+   "fullLoadCoef": 0.121555,
+   "loadSensitivitySlope": 0.000167,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "5514bc12b6835c4b200dd44fa3b8690859dc0ccdeab03968d2a0c2426b4aa20d"
+ },
+ {
+  "model": "la_clone_povite_vite",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Povite vite 275/40/19 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.431788,
+   "fullLoadCoef": 0.121555,
+   "loadSensitivitySlope": 0.0001296,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "0800aa3191b5bbfe98dd53b34869e5a718fde8c389fe75c7df94a801d893de22"
+ },
+ {
+  "model": "la_clonita__super_duper",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": " Super duper  255/45/19 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.592429,
+   "fullLoadCoef": 0.135625,
+   "loadSensitivitySlope": 0.000162,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "6d5230dd010395e731cbf85fc05d3c28a9509c3db0355ba7cae06992e05ade96"
+ },
+ {
+  "model": "la_clonita__super_duper",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": " Super duper  335/30/19 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.592111,
+   "fullLoadCoef": 0.135607,
+   "loadSensitivitySlope": 0.0001116,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "7d3f8ae56af6ce196a6f68968f4bf706f7a9ae1f273012dc373dc307224bccd4"
+ },
+ {
+  "model": "la_clonita__super_duper_b",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": " Super duper B 265/40/19 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.561559,
+   "fullLoadCoef": 0.133875,
+   "loadSensitivitySlope": 0.000159,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "86a74b0ebe58bd742411ea1a8c5aac280b0a484d5dfea833cb1ee2ed5d386d13"
+ },
+ {
+  "model": "la_clonita__super_duper_b",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": " Super duper B 335/30/19 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.561245,
+   "fullLoadCoef": 0.133857,
+   "loadSensitivitySlope": 0.0001116,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "ed1e5521822adceed55e33e8e5479212ba555aeafce0236858eb52867e65312a"
+ },
+ {
+  "model": "la_povite",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Povite 235/45/19 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.431788,
+   "fullLoadCoef": 0.121555,
+   "loadSensitivitySlope": 0.000166,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "fcbcb6a5369bd1b25590e5c218e2b6b608372045a91b78af2a25e8a3d1e1b3a3"
+ },
+ {
+  "model": "la_povite",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Povite 275/40/19 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.431788,
+   "fullLoadCoef": 0.121555,
+   "loadSensitivitySlope": 0.0001296,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "05ddeb9c47577fd5aa18ea521203cdd391cbdb793df81ece924e7cf8859adb7e"
+ },
+ {
+  "model": "la_povite_confort",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Povite confort 235/45/19 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.431788,
+   "fullLoadCoef": 0.121555,
+   "loadSensitivitySlope": 0.000166,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "a769379f3d68959432efea3817975cc74fd4d89a351d68c60da038df246b594f"
+ },
+ {
+  "model": "la_povite_confort",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Povite confort 275/40/19 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.35,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.431788,
+   "fullLoadCoef": 0.121555,
+   "loadSensitivitySlope": 0.0001296,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "e43570359c9f1bce8362df73bc38863098df4f6a95cc3fa818df10dc8fbb9aa6"
+ },
+ {
+  "model": "laser__tamera",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "Tamera 275/45/21 Radial Soft Race Magnesium Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.3875,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.189607,
+   "fullLoadCoef": 0.167475,
+   "loadSensitivitySlope": 0.000158,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "6a979f64369c59108efc3a6625397c1661db089d0b74d6a6167b38e6ddd55c94"
+ },
+ {
+  "model": "laser__tamera",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "Tamera 395/30/21 Radial Soft Race Magnesium Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.3875,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.187235,
+   "fullLoadCoef": 0.16736,
+   "loadSensitivitySlope": 9.63e-05,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "c2bf615957e34fe801e80fd68aec31a7fa263ec6bd64025ef7ed8cf53ab8552c"
+ },
+ {
+  "model": "laser__tamere",
+  "axle": "front",
+  "compound": "race_soft",
+  "title": "TaMere 275/45/21 Radial Soft Race Magnesium Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.3875,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 2.189607,
+   "fullLoadCoef": 0.167475,
+   "loadSensitivitySlope": 0.000158,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "db168f66f0ba1e2642182a92c240f4b802384833845bc4e993f00a8065888a21"
+ },
+ {
+  "model": "laser__tamere",
+  "axle": "rear",
+  "compound": "race_soft",
+  "title": "TaMere 395/30/21 Radial Soft Race Magnesium Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.3875,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 2.187235,
+   "fullLoadCoef": 0.16736,
+   "loadSensitivitySlope": 9.72e-05,
+   "softnessCoef": 1.0,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.43,
+   "stribeckVelMult": 2.35
+  },
+  "sourceSha256": "09ac30a83b1788da125ee1439eb5e29e38735a0d5a5ba1123f84376b86057d5f"
+ },
+ {
+  "model": "limace_lory",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Lory 245/45/18 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.335,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.633337,
+   "fullLoadCoef": 0.137944,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "b12193d812b271361a46bf9f2b95878cd080ea594274102be62516d97d5206df"
+ },
+ {
+  "model": "limace_lory",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Lory 305/35/18 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 305.0,
+  "radiusM": 0.335,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.633337,
+   "fullLoadCoef": 0.137944,
+   "loadSensitivitySlope": 0.0001152,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "345e4461a69e6b9e5d7c937c6d46704ba419e95a60920174f1140bd122efb5fd"
+ },
+ {
+  "model": "mascara_gt",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "GT 185/70/17 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 185.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 1.893098,
+   "fullLoadCoef": 0.14973,
+   "loadSensitivitySlope": 0.0002,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "bca87063f07bb2b925407f5f74e0e1e9004a584da26d8cec8d1dc73d09cc5e2c"
+ },
+ {
+  "model": "mascara_gt",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "GT 225/55/17 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 225.0,
+  "radiusM": 0.3425,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 1.893098,
+   "fullLoadCoef": 0.14973,
+   "loadSensitivitySlope": 0.0001575,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "e211c7c4b2eb2d004e709bc27b9173997f9e7bf0c5f6cdbea514cf8f7d6301bb"
+ },
+ {
+  "model": "miota_r",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "R 225/45/17 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 225.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 1.760184,
+   "fullLoadCoef": 0.142968,
+   "loadSensitivitySlope": 0.000177,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "3067890171228aaf2b9a9baede9693f26a757dc333898b4728bf1943898d0b8a"
+ },
+ {
+  "model": "miota_r",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "R 255/40/17 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 1.760184,
+   "fullLoadCoef": 0.142968,
+   "loadSensitivitySlope": 0.0001476,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "1c552abae6e306aad6fa25002db2bf42f444cf9efa23a51fcd7f9c46d5faaddc"
+ },
+ {
+  "model": "miota_r_topspeed",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "R topspeed 215/45/17 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 215.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 1.760184,
+   "fullLoadCoef": 0.142968,
+   "loadSensitivitySlope": 0.000185,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "ecb410630ca9b15893214de30b5468d8736bf8981c419374d5897d2a36a74e73"
+ },
+ {
+  "model": "miota_r_topspeed",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "R topspeed 255/40/17 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 1.760184,
+   "fullLoadCoef": 0.142968,
+   "loadSensitivitySlope": 0.0001476,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "b950df3deb23c9c75c5d821e0a082c45ed3b50ae75c21a15c58d0ffd5f92a1e3"
+ },
+ {
+  "model": "mordore_osti",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Osti 265/30/20 Radial Hard Race Alloy Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.34,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.583907,
+   "fullLoadCoef": 0.138302,
+   "loadSensitivitySlope": 0.000167,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "bf654fa7ff798f654ee595c7a9405676c4623af396d4af3a4e15a5b35a2d9dff"
+ },
+ {
+  "model": "mordore_osti",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Osti 265/30/20 Radial Hard Race Alloy Rear Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.34,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.583907,
+   "fullLoadCoef": 0.138302,
+   "loadSensitivitySlope": 0.000144,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "c092c1032f364de2a0b7957a4a02e0e9cf6562dd3ae3b8a464b9ffe6f5fa2913"
+ },
+ {
+  "model": "mordore_osti_b",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Osti B 265/30/20 Radial Hard Race Alloy Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.34,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.583907,
+   "fullLoadCoef": 0.138302,
+   "loadSensitivitySlope": 0.000167,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "44dea514141729159ac5d2ca6d9e03ceb997ab5b81a0b8abd63101e4be0ee150"
+ },
+ {
+  "model": "mordore_osti_b",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Osti B 265/30/20 Radial Hard Race Alloy Rear Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.34,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.583907,
+   "fullLoadCoef": 0.138302,
+   "loadSensitivitySlope": 0.000144,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "aaf578156c78d951f06f9636a8041cb95764ab76553f4edaf36abb9098c5a733"
+ },
+ {
+  "model": "neonna_gt",
+  "axle": "front",
+  "compound": "sport",
+  "title": "GT 205/55/16 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 205.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.516706,
+   "fullLoadCoef": 0.12719,
+   "loadSensitivitySlope": 0.000188,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "3e6fe3bea51a2f85bbbdaddfc29ac29ef15d04ec05308f4984a92937cc7ad993"
+ },
+ {
+  "model": "neonna_gt",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "GT 205/55/16 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 205.0,
+  "radiusM": 0.3125,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.516706,
+   "fullLoadCoef": 0.12719,
+   "loadSensitivitySlope": 0.000162,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "a8efd789ac09acfa6bae4fdf45bbc23895cebd738ff89b483a2975760809a429"
+ },
+ {
+  "model": "old__mistique",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Mistique 235/55/16 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.31832,
+   "fullLoadCoef": 0.114026,
+   "loadSensitivitySlope": 0.00014,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "899826bb10bcd62a39cdbff09b80c95ab48f4edf4d35fc2668d519e789f3cfca"
+ },
+ {
+  "model": "old__mistique",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Mistique 235/55/16 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.31832,
+   "fullLoadCoef": 0.114026,
+   "loadSensitivitySlope": 0.00010619999999999999,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "a1e80928509b79382d8f244cb92a6ebb458df90b00754637eaaa7df71fc18fd3"
+ },
+ {
+  "model": "old__mistique_b",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Mistique B 235/55/16 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.31832,
+   "fullLoadCoef": 0.114026,
+   "loadSensitivitySlope": 0.00014,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "0903f77aa45bafce638a14f608c9a57f8e6149845642ccc9e2ecea222bee7e3d"
+ },
+ {
+  "model": "old__mistique_b",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Mistique B 235/55/16 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.31832,
+   "fullLoadCoef": 0.114026,
+   "loadSensitivitySlope": 0.00010619999999999999,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "34f421f7c288b1482c4726f018046e3b0c201e9688640e88c956cf4bc9edd8ca"
+ },
+ {
+  "model": "old__mistique_c",
+  "axle": "front",
+  "compound": "sport",
+  "title": "Mistique c 235/55/16 Radial Sport Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.31832,
+   "fullLoadCoef": 0.114026,
+   "loadSensitivitySlope": 0.000139,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "4c836a027d9f055aab2892d510e163f8210478721338091b927f765e2e135c68"
+ },
+ {
+  "model": "old__mistique_c",
+  "axle": "rear",
+  "compound": "sport",
+  "title": "Mistique c 235/55/16 Radial Sport Alloy Rear Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.33,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.31832,
+   "fullLoadCoef": 0.114026,
+   "loadSensitivitySlope": 0.00010619999999999999,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.25
+  },
+  "sourceSha256": "4b3edf5f58a70cea59724721eff1adbc6e4ad32538cc13c014742d7955d00035"
+ },
+ {
+  "model": "olympia_power_wagon",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Power wagon 245/50/19 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.484384,
+   "fullLoadCoef": 0.1295,
+   "loadSensitivitySlope": 0.000167,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "cdab3885048049ca30d6a343f07a898af67c470a516e1074e6a1e21ffdbdaae6"
+ },
+ {
+  "model": "olympia_power_wagon",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Power wagon 315/40/19 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 315.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.484384,
+   "fullLoadCoef": 0.1295,
+   "loadSensitivitySlope": 0.000117,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "a02468abfaf4d10f51ad9652199fde9b961c13ede68c735053941401c82762b4"
+ },
+ {
+  "model": "olympia_power_wagon_b",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Power wagon B 245/50/19 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.484384,
+   "fullLoadCoef": 0.1295,
+   "loadSensitivitySlope": 0.000167,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "46397003c20b41829f9d885293da2244c11fbecaabd9e25f0c5b0ee762d03e0a"
+ },
+ {
+  "model": "olympia_power_wagon_b",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Power wagon B 315/40/19 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 315.0,
+  "radiusM": 0.36,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.484384,
+   "fullLoadCoef": 0.1295,
+   "loadSensitivitySlope": 0.000117,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "49d82fe01bb19b08256fa4c9714609108b564439c4454fd9ecc90c2ace3a407c"
+ },
+ {
+  "model": "pentera__deseria",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Deseria 255/30/20 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3325,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.081097,
+   "fullLoadCoef": 0.159295,
+   "loadSensitivitySlope": 0.000163,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "abb279bc51b07dc8e39139976083600ae57de99611c81f73f8e11de0f9a38888"
+ },
+ {
+  "model": "pentera__deseria",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Deseria 355/20/20 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.3325,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.029329,
+   "fullLoadCoef": 0.156661,
+   "loadSensitivitySlope": 0.0001143,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "6601da0c87bc3c62c9309207a58ab86fcf98da3600ad1b708e91ac33d19edd43"
+ },
+ {
+  "model": "pentera__deseria_b",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Deseria B 255/30/20 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3325,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.081097,
+   "fullLoadCoef": 0.159295,
+   "loadSensitivitySlope": 0.000163,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "ad258def3d0e6ef8831243eaedd19641a192c2629d8654031ea4e1b889b2b7f3"
+ },
+ {
+  "model": "pentera__deseria_b",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Deseria B 355/20/20 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.3325,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.029329,
+   "fullLoadCoef": 0.156661,
+   "loadSensitivitySlope": 0.0001143,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "685d94d81a20c97e6878dc5bee5bf95d9459bfe80c313ee9826602e2a6c6acef"
+ },
+ {
+  "model": "pentera__deseria_c",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Deseria c 255/30/20 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3325,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.081097,
+   "fullLoadCoef": 0.159295,
+   "loadSensitivitySlope": 0.000163,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "ba488fb2bd85971bd72275946cb38d12400cf4bd2b8624a0a77d514ded41b6c0"
+ },
+ {
+  "model": "pentera__deseria_c",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Deseria c 355/20/20 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.3325,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.029329,
+   "fullLoadCoef": 0.156661,
+   "loadSensitivitySlope": 0.0001143,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "704925cff2aad87423ec1ec885b3347fb2e9b37d72c5096baff60c7e25e0e72f"
+ },
+ {
+  "model": "penteratta__deseria",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Deseria  245/40/19 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.00017,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "7093a019ef5e437141391799bdd791ff66308a92d1461276233133515a7714bd"
+ },
+ {
+  "model": "penteratta__deseria",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Deseria  295/35/19 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 295.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.0001386,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "e26a8dea4bf1ef714826e2c72d9da15e05d69a583eda0ed0e00869c8381dce1c"
+ },
+ {
+  "model": "penteratta__deseria_b",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Deseria B 255/45/20 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3725,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.000162,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "d8a1deebce26d0c0a2c3e9f8fde1c9156941ff8d5281b5b7c42c0d2e7bf21bef"
+ },
+ {
+  "model": "penteratta__deseria_b",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Deseria B 335/35/20 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.3725,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.00011970000000000001,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "a7da659df296f3c7a71869dc95e5b75da5d8c35a633366e303217671c9c91656"
+ },
+ {
+  "model": "penteratta__diablo",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Diablo 255/45/20 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.3725,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "d82a4ede41b8a6d3d8fe406a82cf04715a1b555144d7ca85baa9599ccf684113"
+ },
+ {
+  "model": "penteratta__diablo",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Diablo 335/35/20 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 335.0,
+  "radiusM": 0.3725,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.0001143,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "6b7e4b800bcdd9062ec9d6cc03220c54e5bd3336119cd2927f8981d1c10eb459"
+ },
+ {
+  "model": "pressila_ai_b",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "AI B 285/35/19 Radial Hard Race Alloy Front Wheels",
+  "tireWidthMM": 285.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.756243,
+   "fullLoadCoef": 0.14742,
+   "loadSensitivitySlope": 0.00015,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "8f98b1076f8f31371de0367b042ecb2a0ce8d642d91a3907fa952f6e84d8a7d7"
+ },
+ {
+  "model": "pressila_ai_b",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "AI B 395/25/19 Radial Hard Race Alloy Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.345,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.741326,
+   "fullLoadCoef": 0.146631,
+   "loadSensitivitySlope": 0.0001044,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "4a08e9c2cceed115a477b88566fbb734dd6201ae01417c3af5dd2d3edd15b2be"
+ },
+ {
+  "model": "safire_lovebird",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Lovebird 265/45/20 Radial Hard Race Magnesium Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.3775,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.549854,
+   "fullLoadCoef": 0.1365,
+   "loadSensitivitySlope": 0.000159,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "6cb8b02a53b6738738586f512d17af1ed5edd83ee3f56d4fcc735264b5748d2c"
+ },
+ {
+  "model": "safire_lovebird",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Lovebird 265/45/20 Radial Hard Race Magnesium Rear Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.3775,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.549854,
+   "fullLoadCoef": 0.1365,
+   "loadSensitivitySlope": 0.000135,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "26fb6c44adb762de1780640f784ea35857fcf4e32a55c269df65139462d8fa90"
+ },
+ {
+  "model": "scralette_johnson",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Johnson 235/35/19 Radial Hard Race Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.3275,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.635849,
+   "fullLoadCoef": 0.14105,
+   "loadSensitivitySlope": 0.000172,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "fa63e2d1f695c70159cb61150fb747fb6ea841fadb64b3a459c3fe076f401c3e"
+ },
+ {
+  "model": "scralette_johnson",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Johnson 265/35/19 Radial Hard Race Alloy Rear Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.3275,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.635527,
+   "fullLoadCoef": 0.141033,
+   "loadSensitivitySlope": 0.0001512,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "744ef417c5c361ceca79af1bbd9b93d6f5c1b5c2049b105eba9d0f507f53b02b"
+ },
+ {
+  "model": "scralette_johnson_aero",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Johnson Aero 235/35/19 Radial Hard Race Alloy Front Wheels",
+  "tireWidthMM": 235.0,
+  "radiusM": 0.3275,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.635849,
+   "fullLoadCoef": 0.14105,
+   "loadSensitivitySlope": 0.000172,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "4c7aaf006b6094347b36b052d329490b12d68f325274f408dacc373792b6bedc"
+ },
+ {
+  "model": "scralette_johnson_aero",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Johnson Aero 265/35/19 Radial Hard Race Alloy Rear Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.3275,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.635527,
+   "fullLoadCoef": 0.141033,
+   "loadSensitivitySlope": 0.0001512,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "3599069b8ce2b990f9b094a4f86eb4d11db19d7d631b902af6f23f1cd9360707"
+ },
+ {
+  "model": "seriema_mishana",
+  "axle": "front",
+  "compound": "race_hard",
+  "title": "Mishana 325/35/20 Radial Hard Race Magnesium Front Wheels",
+  "tireWidthMM": 325.0,
+  "radiusM": 0.375,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0094,
+   "noLoadCoef": 1.601451,
+   "fullLoadCoef": 0.13923,
+   "loadSensitivitySlope": 0.000138,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "e2bde69691eb2843ccfd3a19f184a0f6e58a98b7397aac7c924590ed31d3b421"
+ },
+ {
+  "model": "seriema_mishana",
+  "axle": "rear",
+  "compound": "race_hard",
+  "title": "Mishana 395/30/20 Radial Hard Race Magnesium Rear Wheels",
+  "tireWidthMM": 395.0,
+  "radiusM": 0.375,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0815000000000001,
+   "noLoadCoef": 1.599698,
+   "fullLoadCoef": 0.139137,
+   "loadSensitivitySlope": 9.45e-05,
+   "softnessCoef": 0.8,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.15
+  },
+  "sourceSha256": "80ed87b397bfad0b176ca9b347c985b619ba8249855167a8f9af376906b247fa"
+ },
+ {
+  "model": "tata__dot_b",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Dot B 245/50/18 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.355,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 1.798159,
+   "fullLoadCoef": 0.1449,
+   "loadSensitivitySlope": 0.000181,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "89983ba7dba99fb16b4e8dae104c4dabd00c3d3f271660726877cb3de0ad912d"
+ },
+ {
+  "model": "tata__dot_b",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Dot B 255/50/18 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.355,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 1.798159,
+   "fullLoadCoef": 0.1449,
+   "loadSensitivitySlope": 0.00014309999999999998,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "c949012d92041bd539f2d3daa972e53588cc501c7ecddd097a5e27a12cb069fd"
+ },
+ {
+  "model": "tata_dot",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Dot 245/50/18 Radial Medium Race Alloy Front Wheels",
+  "tireWidthMM": 245.0,
+  "radiusM": 0.355,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 1.798159,
+   "fullLoadCoef": 0.1449,
+   "loadSensitivitySlope": 0.000184,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "6132b191c9bdd71ff692d6f1390cb796c5f121bc1d0f088c9cb092c3299f5b6f"
+ },
+ {
+  "model": "tata_dot",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Dot 255/50/18 Radial Medium Race Alloy Rear Wheels",
+  "tireWidthMM": 255.0,
+  "radiusM": 0.355,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 1.798159,
+   "fullLoadCoef": 0.1449,
+   "loadSensitivitySlope": 0.0001422,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "5528805167b2fc34b0020d28089d426012d9ecb7f92c2d33e69cf85c2f47f5d7"
+ },
+ {
+  "model": "temerario__super_gt_b",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Super Gt B 265/40/21 Radial Medium Race Carbon Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.3775,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "2b5fcc1d0a8667bc000cbae19bd64ccfc070acb702fda2f8905ecc2f67ddd7c7"
+ },
+ {
+  "model": "temerario__super_gt_b",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Super Gt B 385/30/21 Radial Medium Race Carbon Rear Wheels",
+  "tireWidthMM": 385.0,
+  "radiusM": 0.3775,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.076941,
+   "fullLoadCoef": 0.159083,
+   "loadSensitivitySlope": 9.900000000000001e-05,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "b1860d15735f03d8baaa45fbc550d3c577c9ebafe62f12dd6394473edecf2d2f"
+ },
+ {
+  "model": "temerario_super_gt",
+  "axle": "front",
+  "compound": "race_medium",
+  "title": "Super Gt 265/40/21 Radial Medium Race Carbon Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.3775,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0192,
+   "noLoadCoef": 2.082975,
+   "fullLoadCoef": 0.15939,
+   "loadSensitivitySlope": 0.000156,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "82bbf4bc6111984a5ec9c2941ad9946da2f19e3bda2557435c30c3e07c2e3710"
+ },
+ {
+  "model": "temerario_super_gt",
+  "axle": "rear",
+  "compound": "race_medium",
+  "title": "Super Gt 385/30/21 Radial Medium Race Carbon Rear Wheels",
+  "tireWidthMM": 385.0,
+  "radiusM": 0.3775,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.092,
+   "noLoadCoef": 2.076941,
+   "fullLoadCoef": 0.159083,
+   "loadSensitivitySlope": 9.900000000000001e-05,
+   "softnessCoef": 0.94,
+   "treadCoef": 0.0,
+   "stribeckExponent": 2.295,
+   "stribeckVelMult": 2.3
+  },
+  "sourceSha256": "cfcb588204c0b6a242262904a595343b147d4894b22ee0c52fe458d820afc8d9"
+ }
+]

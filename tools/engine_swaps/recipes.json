@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "recipes": [
+    {
+      "recipient": "hawk_club_2_5",
+      "recipientConfig": "413b3",
+      "recipientArchiveSha256": "3c44ff69e72bb7cd461a7c85560e417d0788e800e169efd22e9f6265d33cfb0e",
+      "donor": "hawk_evolution_viii",
+      "donorConfig": "50f54",
+      "donorArchiveSha256": "badd8e6b07ffb5795ad4a765472060c3eb29f402fcbe83cc7c4f94ba39b87bd6",
+      "status": "physics prototype; stock engine mesh and exhaust; no PI or multiplayer acceptance"
+    }
+  ]
+}

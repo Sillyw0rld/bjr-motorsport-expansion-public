@@ -1,0 +1,1187 @@
+{
+ "ready": true,
+ "serverManaged": true,
+ "canEdit": true,
+ "editable": true,
+ "partsEditable": true,
+ "tuningEditable": true,
+ "car": {
+  "id": 1,
+  "revision": "sample",
+  "model": "Hawk FM5",
+  "rating": {
+   "class": "B",
+   "pi": 562,
+   "pi_speed": 590,
+   "pi_technical": 535,
+   "source": "computed",
+   "method": "formula-v6",
+   "anchored": true,
+   "performancePI": 540,
+   "tuningPotentialPI": 22
+  },
+  "summary": {
+   "hp": 211,
+   "massKG": 1320,
+   "frontShare": 0.54
+  }
+ },
+ "trackTemp": {
+  "track": 31.4,
+  "air": 22
+ },
+ "rules": {
+  "maxPreload": 500
+ },
+ "ruleDefaults": {
+  "tuning": true,
+  "fuel": true,
+  "aero": true,
+  "diff": true,
+  "nitrous": true,
+  "piMin": false,
+  "piMax": false,
+  "practiceMinutes": 10,
+  "qualifyingMinutes": 10,
+  "gridOrder": "qualifying",
+  "gridReverseTop": 6,
+  "trackLimits": "penalty",
+  "cutPenaltyAfter": 3,
+  "cutPenaltySeconds": 5,
+  "tyreWear": "on",
+  "trackTempFixed": true,
+  "trackTemp": 32,
+  "startType": "standing",
+  "startLights": true,
+  "yellowFlags": true,
+  "safetyRating": true,
+  "falseStartPenaltySeconds": 5,
+  "allowedClasses": {
+   "B": true,
+   "A": true
+  },
+  "slickCompounds": {
+   "soft": true,
+   "medium": true
+  },
+  "diffModes": {
+   "open": true,
+   "lsd": true,
+   "locked": false
+  },
+  "parts": {
+   "engine": "any",
+   "drivetrain": "any",
+   "suspension": "any",
+   "tyres": "any"
+  },
+  "centreSplitMin": 0.2,
+  "centreSplitMax": 0.8,
+  "maxPreload": 500,
+  "maxLock": 100,
+  "falseStartTolerance": 0.75,
+  "paceSpeed": 80
+ },
+ "ruleStore": {
+  "races": {
+   "montreal1991:1": {
+    "paceSpeed": 70
+   }
+  }
+ },
+ "rulesStatus": "Rules loaded",
+ "races": [
+  {
+   "id": 1,
+   "name": "Montréal 1991"
+  },
+  {
+   "id": 2,
+   "name": "Imola"
+  }
+ ],
+ "variables": [
+  {
+   "name": "$fuel",
+   "title": "Fuel load",
+   "category": "Engine",
+   "unit": "L",
+   "value": 40,
+   "min": 1,
+   "max": 60,
+   "step": 1,
+   "allowed": true,
+   "fuel": true,
+   "section": "engine"
+  },
+  {
+   "name": "$lock",
+   "title": "Factory spring stiffness",
+   "category": "Suspension",
+   "value": 20000,
+   "min": 10000,
+   "max": 80000,
+   "allowed": false,
+   "reason": "Fit race suspension to unlock",
+   "step": 100,
+   "unit": "N/m",
+   "section": "springs"
+  },
+  {
+   "name": "$boost",
+   "title": "Boost pressure",
+   "category": "Engine",
+   "unit": "%",
+   "value": 30,
+   "min": 0,
+   "max": 35,
+   "step": 1,
+   "allowed": true,
+   "section": "engine"
+  },
+  {
+   "name": "$bias",
+   "title": "Brake bias",
+   "category": "Brakes",
+   "value": 0.5,
+   "min": 0,
+   "max": 1,
+   "minDis": 0,
+   "maxDis": 100,
+   "displayValue": 50,
+   "displayMin": 0,
+   "displayMax": 100,
+   "displayStep": 1,
+   "allowed": true,
+   "unit": "%",
+   "section": "brakes"
+  },
+  {
+   "name": "$rpAeroFront",
+   "title": "Front downforce",
+   "category": "Aero",
+   "aero": true,
+   "unit": "lb at 200 km/h",
+   "min": 0,
+   "max": 1000,
+   "step": 1,
+   "value": 100,
+   "default": 100,
+   "allowed": true,
+   "section": "aero",
+   "side": "front"
+  },
+  {
+   "name": "$brakeCoolingDuct",
+   "title": "Front brake duct",
+   "category": "Cooling",
+   "unit": "%",
+   "min": 0,
+   "max": 100,
+   "step": 1,
+   "value": 40,
+   "default": 50,
+   "allowed": true,
+   "section": "brakes",
+   "side": "front"
+  },
+  {
+   "name": "$RideHeightOffsetFront",
+   "title": "Front Ride Height Offset",
+   "category": "Suspension",
+   "subCategory": "Springs",
+   "unit": "+m",
+   "value": 0.02,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.001,
+   "default": 0,
+   "allowed": true,
+   "section": "springs",
+   "side": "front"
+  },
+  {
+   "name": "$frontPSI",
+   "title": "Front Tyre Pressure",
+   "category": "Tyres",
+   "section": "tyres",
+   "unit": "PSI",
+   "value": 28.6,
+   "min": 5,
+   "max": 100,
+   "step": 0.1,
+   "default": 28.6,
+   "allowed": true,
+   "side": "front"
+  },
+  {
+   "name": "$rearPSI",
+   "title": "Rear Tyre Pressure",
+   "category": "Tyres",
+   "section": "tyres",
+   "unit": "PSI",
+   "value": 27.7,
+   "min": 5,
+   "max": 100,
+   "step": 0.1,
+   "default": 27.7,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$finaldrive_r",
+   "title": "Rear Final Drive",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 3.78,
+   "min": 0.5,
+   "max": 16,
+   "step": 0.01,
+   "default": 3.78,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$gear_1_race",
+   "title": "Gear 1",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 3.65,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 3.65,
+   "allowed": true
+  },
+  {
+   "name": "$gear_2_race",
+   "title": "Gear 2",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 2.37,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 2.37,
+   "allowed": true
+  },
+  {
+   "name": "$gear_3_race",
+   "title": "Gear 3",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 1.67,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 1.67,
+   "allowed": true
+  },
+  {
+   "name": "$gear_4_race",
+   "title": "Gear 4",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 1.28,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 1.28,
+   "allowed": true
+  },
+  {
+   "name": "$gear_5_race",
+   "title": "Gear 5",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 1.02,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 1.02,
+   "allowed": true
+  },
+  {
+   "name": "$gear_6_race",
+   "title": "Gear 6",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 0.82,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 0.82,
+   "allowed": true
+  },
+  {
+   "name": "$gear_R_race",
+   "title": "Gear R",
+   "category": "Gearing",
+   "section": "gearing",
+   "unit": ":1",
+   "value": 2.95,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.01,
+   "default": 2.95,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$CamberFront",
+   "title": "Front Camber",
+   "category": "Suspension",
+   "section": "alignment",
+   "unit": "",
+   "value": 0.996,
+   "min": 0.9,
+   "max": 1.092,
+   "step": 0.0001,
+   "default": 0.996,
+   "allowed": true,
+   "side": "front"
+  },
+  {
+   "name": "$CamberRear",
+   "title": "Rear Camber",
+   "category": "Suspension",
+   "section": "alignment",
+   "unit": "",
+   "value": 0.996,
+   "min": 0.9,
+   "max": 1.092,
+   "step": 0.0001,
+   "default": 0.996,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$trackOffset_F",
+   "title": "Front Wheel Offset",
+   "category": "Suspension",
+   "section": "alignment",
+   "unit": "+m",
+   "value": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.001,
+   "default": 0,
+   "allowed": false,
+   "side": "front",
+   "reason": "Fit race suspension to unlock"
+  },
+  {
+   "name": "$trackOffset_R",
+   "title": "Rear Wheel Offset",
+   "category": "Suspension",
+   "section": "alignment",
+   "unit": "+m",
+   "value": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.001,
+   "default": 0,
+   "allowed": false,
+   "side": "rear",
+   "reason": "Fit race suspension to unlock"
+  },
+  {
+   "name": "$swayBarStiffness_F",
+   "title": "Front Sway Bar Stiffness",
+   "category": "Suspension",
+   "section": "antiroll",
+   "unit": "N/m",
+   "value": 1960.06,
+   "min": 0,
+   "max": 150000,
+   "step": 100,
+   "default": 1960.06,
+   "allowed": true,
+   "side": "front"
+  },
+  {
+   "name": "$swayBarStiffness_R",
+   "title": "Rear Sway Bar Stiffness",
+   "category": "Suspension",
+   "section": "antiroll",
+   "unit": "N/m",
+   "value": 1101.24,
+   "min": 0,
+   "max": 150000,
+   "step": 100,
+   "default": 1101.24,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$springRate_F",
+   "title": "Front Spring Rate",
+   "category": "Suspension",
+   "section": "springs",
+   "unit": "N/m",
+   "value": 34000,
+   "min": 1000,
+   "max": 300000,
+   "step": 100,
+   "default": 34000,
+   "allowed": true,
+   "side": "front"
+  },
+  {
+   "name": "$springRate_R",
+   "title": "Rear Spring Rate",
+   "category": "Suspension",
+   "section": "springs",
+   "unit": "N/m",
+   "value": 40000,
+   "min": 1000,
+   "max": 300000,
+   "step": 100,
+   "default": 40000,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$dampRate_bump_F",
+   "title": "Front Damper Bump Rate",
+   "category": "Suspension",
+   "section": "damping",
+   "unit": "N/m/s",
+   "value": 2340,
+   "min": 500,
+   "max": 60000,
+   "step": 100,
+   "default": 2340,
+   "allowed": true,
+   "side": "front"
+  },
+  {
+   "name": "$dampRate_bump_R",
+   "title": "Rear Damper Bump Rate",
+   "category": "Suspension",
+   "section": "damping",
+   "unit": "N/m/s",
+   "value": 2700,
+   "min": 500,
+   "max": 60000,
+   "step": 100,
+   "default": 2700,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$dampRate_rebound_F",
+   "title": "Front Damper Rebound Rate",
+   "category": "Suspension",
+   "section": "damping",
+   "unit": "N/m/s",
+   "value": 5148,
+   "min": 500,
+   "max": 60000,
+   "step": 100,
+   "default": 5148,
+   "allowed": true,
+   "side": "front"
+  },
+  {
+   "name": "$dampRate_rebound_R",
+   "title": "Rear Damper Rebound Rate",
+   "category": "Suspension",
+   "section": "damping",
+   "unit": "N/m/s",
+   "value": 5940,
+   "min": 500,
+   "max": 60000,
+   "step": 100,
+   "default": 5940,
+   "allowed": true,
+   "side": "rear"
+  },
+  {
+   "name": "$revLimitRPM",
+   "title": "RPM Limit",
+   "category": "Engine",
+   "section": "engine",
+   "unit": "RPM",
+   "value": 7200,
+   "min": 0,
+   "max": 7700,
+   "step": 10,
+   "default": 7200,
+   "allowed": true
+  },
+  {
+   "name": "$lsdpreload_R",
+   "title": "Pre-load Torque",
+   "category": "Differentials",
+   "section": "differential",
+   "unit": "N/m",
+   "value": 100,
+   "min": 0,
+   "max": 500,
+   "step": 1,
+   "default": 100,
+   "allowed": true,
+   "diffKind": "preload"
+  },
+  {
+   "name": "$awdMinLock",
+   "title": "Center Coupling Lock",
+   "category": "Gearing",
+   "section": "differential",
+   "unit": "",
+   "value": 0,
+   "min": 0,
+   "max": 1,
+   "step": 0.001,
+   "default": 0,
+   "allowed": true
+  },
+  {
+   "name": "$dashCamX",
+   "title": "X Offset",
+   "category": "Camera Positions",
+   "section": "advanced",
+   "unit": "+m",
+   "value": 0,
+   "min": -2,
+   "max": 2,
+   "step": 0.001,
+   "default": 0,
+   "allowed": true
+  },
+  {
+   "name": "$ffbTune",
+   "title": "Strength Multiplier",
+   "category": "Force Feedback",
+   "section": "advanced",
+   "unit": "",
+   "value": 1,
+   "min": 0,
+   "max": 2,
+   "step": 0.001,
+   "default": 1,
+   "allowed": true
+  },
+  {
+   "name": "$nodeWeightScale",
+   "title": "Node Weight",
+   "category": "Vehicle Advanced Settings",
+   "section": "hidden",
+   "unit": "",
+   "value": 1,
+   "min": 0.1,
+   "max": 4,
+   "step": 0.001,
+   "default": 1,
+   "allowed": false,
+   "reason": "Not a race setup setting"
+  }
+ ],
+ "parts": [
+  {
+   "group": "engine",
+   "title": "Engine upgrades",
+   "currentTitle": "Stock intake",
+   "current": "stock",
+   "options": [
+    {
+     "name": "stock",
+     "title": "Stock intake"
+    },
+    {
+     "name": "sport",
+     "title": "Sport intake: +8 hp, +6 lb-ft"
+    }
+   ],
+   "path": [
+    "camso_tuning_parameters_engine"
+   ],
+   "slot": "camso_tuning_parameters_engine"
+  },
+  {
+   "group": "engine",
+   "title": "Exhaust",
+   "currentTitle": "None",
+   "current": "",
+   "options": [
+    {
+     "name": "",
+     "title": "None"
+    },
+    {
+     "name": "race_exhaust",
+     "title": "Race exhaust: +12 hp"
+    }
+   ],
+   "path": [
+    "camso_tuning_parameters_engine",
+    "rp_engine_x_exhaust"
+   ],
+   "slot": "rp_engine_x_exhaust"
+  },
+  {
+   "group": "tyres",
+   "title": "Front tyres",
+   "current": "sport",
+   "options": [
+    {
+     "name": "sport",
+     "title": "Sport — 225 mm"
+    },
+    {
+     "name": "slick",
+     "title": "Race slick soft — 265 mm"
+    }
+   ],
+   "path": [
+    "wheel_F",
+    "tire_F"
+   ],
+   "slot": "tire_F"
+  }
+ ],
+ "differentials": [
+  {
+   "name": "diff_R",
+   "uiName": "Rear race LSD",
+   "position": "rear",
+   "mode": "lsd",
+   "applied": true,
+   "preload": 150,
+   "lock": 0.45,
+   "coast": 0.25,
+   "split": 0.5,
+   "canEdit": true,
+   "stockMode": "open"
+  },
+  {
+   "name": "diff_C",
+   "uiName": "Centre differential",
+   "position": "centre",
+   "mode": "lsd",
+   "applied": true,
+   "preload": 50,
+   "lock": 0.3,
+   "coast": 0.2,
+   "frontShare": 0.4,
+   "split": 0.4,
+   "canEdit": true,
+   "canSplit": true,
+   "stockMode": "lsd"
+  }
+ ],
+ "practice": {
+  "label": "Qualifying",
+  "raceName": "Montréal 1991",
+  "rows": [
+   {
+    "name": "Sillyw0rld",
+    "best": 83742,
+    "laps": 4,
+    "bestSectors": [
+     27980,
+     28012,
+     27750
+    ]
+   },
+   {
+    "name": "Alex",
+    "best": 84153,
+    "laps": 5,
+    "bestSectors": [
+     28120,
+     28200,
+     27833
+    ]
+   }
+  ]
+ },
+ "sessionRemaining": 37000,
+ "myLaps": [
+  {
+   "time": 84950,
+   "valid": false,
+   "cuts": 1,
+   "sectors": [
+    28010,
+    28430,
+    28510
+   ]
+  },
+  {
+   "time": 83742,
+   "valid": true,
+   "cuts": 0,
+   "sectors": [
+    27980,
+    28012,
+    27750
+   ]
+  }
+ ],
+ "rubber": "2400 cells, 4 lines — KTS runtime grip active",
+ "marbles": 140,
+ "control": {
+  "track": {
+   "level": "montreal1991",
+   "rubber": {
+    "enabled": true,
+    "lapsToFull": 40,
+    "dryBonus": 3,
+    "wetPenalty": 5
+   },
+   "wind": {
+    "enabled": true,
+    "speedKmh": 15,
+    "direction": 90,
+    "gustKmh": 5,
+    "gustPeriod": 12
+   },
+   "weather": {
+    "enabled": true,
+    "cloudCover": 0.3,
+    "fogDensity": 0.0002,
+    "rainDrops": 0,
+    "tempNoon": 24,
+    "tempDusk": 19,
+    "tempMidnight": 13,
+    "tempDawn": 15
+   }
+  },
+  "driverStats": [
+   {
+    "playerID": 1,
+    "name": "Sillyw0rld",
+    "races": 12,
+    "wins": 3,
+    "safety": 3.8,
+    "laps": 45,
+    "contacts": 2,
+    "kilometres": 87.2,
+    "provisional": true
+   }
+  ],
+  "championship": {
+   "name": "Friday racing",
+   "status": "draft",
+   "rounds": [
+    {
+     "name": "Montréal 1991",
+     "raceID": 1
+    }
+   ],
+   "rows": [
+    {
+     "name": "Sillyw0rld",
+     "points": 25
+    }
+   ]
+  }
+ },
+ "skills": {
+  "1": {
+   "rating": 1520
+  },
+  "2": {
+   "rating": 1311,
+   "races": 12,
+   "delta": 6.3
+  },
+  "3": {
+   "rating": 983,
+   "races": 2
+  }
+ },
+ "results": {
+  "raceName": "Montréal 1991",
+  "rows": [
+   {
+    "position": 1,
+    "name": "Sillyw0rld",
+    "car": "Hawk FM5",
+    "pi": 562,
+    "class": "B",
+    "total": 256800,
+    "best": {
+     "time": 83742,
+     "sectors": [
+      27980,
+      28012,
+      27750
+     ]
+    },
+    "penalty": 0,
+    "lapList": [
+     {
+      "lap": 1,
+      "time": 85010,
+      "sectors": [
+       28010,
+       28430,
+       28570
+      ],
+      "invalid": false,
+      "cuts": 0
+     },
+     {
+      "lap": 2,
+      "time": 83742,
+      "sectors": [
+       27980,
+       28012,
+       27750
+      ],
+      "invalid": false,
+      "cuts": 0
+     }
+    ],
+    "status": "FIN",
+    "laps": 5,
+    "gap": 0,
+    "bestSectors": [
+     27980,
+     28012,
+     27750
+    ],
+    "theoretical": 83742,
+    "fastestLap": true
+   }
+  ],
+  "laps": 5
+ },
+ "level": "montreal1991",
+ "session": {
+  "id": "sample-grid",
+  "raceId": 1,
+  "state": "GRID",
+  "gridTimeoutSecondsLeft": 118
+ },
+ "engineCurves": {
+  "stock": [
+   [
+    1000,
+    130
+   ],
+   [
+    2000,
+    190
+   ],
+   [
+    3000,
+    220
+   ],
+   [
+    4000,
+    245
+   ],
+   [
+    5000,
+    230
+   ],
+   [
+    6000,
+    185
+   ]
+  ],
+  "current": [
+   [
+    1000,
+    155
+   ],
+   [
+    2000,
+    230
+   ],
+   [
+    3000,
+    270
+   ],
+   [
+    4000,
+    295
+   ],
+   [
+    5000,
+    290
+   ],
+   [
+    6000,
+    250
+   ]
+  ]
+ },
+ "enginePackages": [
+  {
+   "number": 0,
+   "title": "Stock engine",
+   "fitted": false
+  },
+  {
+   "number": 1,
+   "title": "Stage 1: +19 hp, +15 lb-ft",
+   "fitted": true
+  },
+  {
+   "number": 2,
+   "title": "Stage 2: +38 hp, +30 lb-ft",
+   "fitted": false
+  },
+  {
+   "number": 3,
+   "title": "Stage 3: +57 hp, +45 lb-ft",
+   "fitted": false
+  }
+ ],
+ "tyreControls": [
+  {
+   "axle": "front",
+   "widthMM": 225,
+   "compound": "sport",
+   "offset": 0,
+   "compounds": [
+    {
+     "value": "stock",
+     "label": "Stock (Sport)",
+     "allowed": true
+    },
+    {
+     "value": "sport",
+     "label": "Sport",
+     "allowed": true
+    },
+    {
+     "value": "semi_slick",
+     "label": "Semi-slick",
+     "allowed": true
+    },
+    {
+     "value": "race_soft",
+     "label": "Race slick — Soft",
+     "allowed": true
+    },
+    {
+     "value": "race_medium",
+     "label": "Race slick — Medium",
+     "allowed": true
+    },
+    {
+     "value": "race_hard",
+     "label": "Race slick — Hard",
+     "allowed": true
+    }
+   ]
+  },
+  {
+   "axle": "rear",
+   "widthMM": 245,
+   "compound": "sport",
+   "offset": 0,
+   "compounds": [
+    {
+     "value": "stock",
+     "label": "Stock (Sport)",
+     "allowed": true
+    },
+    {
+     "value": "sport",
+     "label": "Sport",
+     "allowed": true
+    },
+    {
+     "value": "semi_slick",
+     "label": "Semi-slick",
+     "allowed": true
+    },
+    {
+     "value": "race_soft",
+     "label": "Race slick — Soft",
+     "allowed": true
+    },
+    {
+     "value": "race_medium",
+     "label": "Race slick — Medium",
+     "allowed": true
+    },
+    {
+     "value": "race_hard",
+     "label": "Race slick — Hard",
+     "allowed": true
+    }
+   ]
+  }
+ ],
+ "fuelEditable": true,
+ "fuelTanks": [
+  {
+   "name": "mainTank",
+   "energyType": "gasoline",
+   "energy": 400000,
+   "maxEnergy": 1000000
+  }
+ ],
+ "rubberPeakPercent": 38,
+ "grid": {
+  "active": true,
+  "readyCount": 1,
+  "total": 3,
+  "mode": "manual",
+  "note": "Grid slots are assigned by the BJR host.",
+  "rows": [
+   {
+    "playerID": 2,
+    "name": "Alex",
+    "model": "Neonna GT",
+    "ready": true,
+    "position": 1,
+    "rating": {
+     "class": "C",
+     "pi": 450,
+     "pi_speed": 430,
+     "pi_technical": 470,
+     "source": "measured"
+    }
+   },
+   {
+    "playerID": 1,
+    "name": "Sillyw0rld",
+    "model": "Hawk FM5",
+    "ready": false,
+    "position": 2,
+    "isSelf": true,
+    "rating": {
+     "class": "B",
+     "pi": 562,
+     "pi_speed": 590,
+     "pi_technical": 535,
+     "source": "computed",
+     "method": "formula-v6",
+     "anchored": true,
+     "performancePI": 540,
+     "tuningPotentialPI": 22
+    }
+   },
+   {
+    "playerID": 3,
+    "name": "Sam",
+    "ready": false,
+    "position": 3
+   }
+  ]
+ },
+ "moreEngineSlots": true,
+ "sessionTiming": {
+  "timing": false,
+  "message": "Return to free roam to participate in this session."
+ },
+ "serverBridgeReady": true,
+ "weather": {
+  "cloud": "BeamJoy",
+  "fog": "BeamJoy",
+  "rain": "no rain on this map",
+  "temperature": "Race Prep"
+ },
+ "gearing": {
+  "radius": 0.315,
+  "rpm": 7200,
+  "finalDrive": 3.78,
+  "gears": [
+   3.65,
+   2.37,
+   1.67,
+   1.28,
+   1.02,
+   0.82
+  ],
+  "unit": "km/h",
+  "drive": "RWD"
+ },
+ "bodyStages": [
+  {
+   "key": "stock",
+   "label": "Stock body",
+   "percent": 0,
+   "fitted": true,
+   "kg": 0
+  },
+  {
+   "key": "street",
+   "label": "Street: spare wheel and tools",
+   "percent": 4,
+   "fitted": false,
+   "kg": 53
+  },
+  {
+   "key": "sport",
+   "label": "Sport: all seats removed",
+   "percent": 7,
+   "fitted": false,
+   "kg": 92
+  },
+  {
+   "key": "race",
+   "label": "Race: stripped race car",
+   "percent": 15,
+   "fitted": false,
+   "kg": 198,
+   "bonus": 3
+  }
+ ],
+ "hiddenChanged": 0,
+ "performance": {
+  "now": {
+   "zeroTo60": 3.9,
+   "topSpeed": 73.33333333333333,
+   "sixtyTo100": 4.7,
+   "brake60": 30.6,
+   "brake120": 127.2,
+   "lat60": 1.23,
+   "lat120": 1.19,
+   "measured": true,
+   "estimated": {
+    "topSpeed": true,
+    "lat120": true
+   }
+  },
+  "prev": {
+   "zeroTo60": 4.2,
+   "topSpeed": 70,
+   "sixtyTo100": 5.0,
+   "brake60": 31.0,
+   "brake120": 129.0,
+   "lat60": 1.25,
+   "lat120": 1.19
+  },
+  "imperial": false
+ },
+ "environment": {
+  "windKmh": 8.4,
+  "windTowards": 234,
+  "windBearing": 216,
+  "airC": 24.3,
+  "raceprepWind": true
+ },
+ "vehicleBadges": {
+  "1-3": "B 591"
+ },
+ "driverRatings": {
+  "1": {
+   "class": "B",
+   "pi": 562,
+   "pi_speed": 590,
+   "pi_technical": 535,
+   "source": "computed",
+   "method": "formula-v6",
+   "anchored": true,
+   "performancePI": 540,
+   "tuningPotentialPI": 22
+  }
+ }
+}

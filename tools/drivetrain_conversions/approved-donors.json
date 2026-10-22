@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "date": "2026-10-18",
+  "scope": "Owner-supplied untuned drivetrain donors (FWD, RWD, AWD). Provides drivetrain architecture and differential/driveshaft/transfer-case templates only; never copies donor engine, power, gearing, tyres, suspension, body or aero.",
+  "donors": [
+    {
+      "layout": "FWD",
+      "model": "fwd_donor_elver",
+      "config": "4f683",
+      "archive": "fwd_donor_elver.zip",
+      "archiveSha256": "ddbf017333090da9bee1c7532a73bdfbe414156458c17bf6876a2dea3500ebd2",
+      "carMember": "vehicles/fwd_donor_elver/fwd_donor___elver_clone.car",
+      "carSha256": "8901b5d1ae44cde3a3ae7e43d546c375d9db8277fa38a27c092f4abbb2a60f6f",
+      "membersSha256": {
+        "vehicles/fwd_donor_elver/4f683/camso_differential_f_4f683.jbeam": "152ca785767a630aa1e6826cdd334c0175a15b591c1e9420f6b0b37e249b98bf",
+        "vehicles/fwd_donor_elver/4f683/camso_transfercase_4f683.jbeam": "ec2f1a0b59486add215cb6fe754fdf346857e62ce4359e0d4c582bc431216841",
+        "vehicles/fwd_donor_elver/4f683/camso_transmission_4f683.jbeam": "cccb4d1590945a32315124cd6e5dcfc3fe047ff8cb7c9f0c57039c844f696166",
+        "vehicles/fwd_donor_elver/camso_differential_f.jbeam": "94bdc9cfdd45033a72bbe9f453efc05b57f9709e83e4e0c305923ce1f36b3650",
+        "vehicles/fwd_donor_elver/camso_finaldrive_512_f.jbeam": "c4c46b2597b52a7a2b1832411eb053694ac1f51ca55dbeda3b144e85f99d0982",
+        "vehicles/fwd_donor_elver/camso_finaldrive_f.jbeam": "f886cca3f9694bf1e28938146799a995136555f0c96dafb1a1917567fb196492",
+        "vehicles/fwd_donor_elver/camso_hubbearings_front.jbeam": "4be618927b6e778869bf5bdd320c45d85644526260a87704fba23dde32885ec0",
+        "vehicles/fwd_donor_elver/camso_hubbearings_rear.jbeam": "f5c69d1b82edfe9bc2be3ba343ab5df0c6528b11261c3e522358207600164318",
+        "vehicles/fwd_donor_elver/camso_transmission_sequential.jbeam": "800e28b60d2243588a65eb8b12d238f65989f54d87d20149b3d416b64abe888b"
+      },
+      "ownerSelected": true
+    },
+    {
+      "layout": "RWD",
+      "model": "rwd_donor_elver",
+      "config": "1b3f9",
+      "archive": "rwd_donor_elver.zip",
+      "archiveSha256": "a5cc53b47db42db05283d5b06aa3927d300b69725ee8f9395d7b71407cbe37fe",
+      "carMember": "vehicles/rwd_donor_elver/rwd_donor___elver.car",
+      "carSha256": "d4ac4ebc8b614eb9761ee364c254fa8fa7da672aadfd0fbd3dafeb7b05a2d779",
+      "membersSha256": {
+        "vehicles/rwd_donor_elver/1b3f9/camso_differential_r_1b3f9.jbeam": "090763695578d98a32cf5fbf4a0146ec996a4d53b9876413dee84b7a5b680384",
+        "vehicles/rwd_donor_elver/1b3f9/camso_transfercase_1b3f9.jbeam": "2692d18ab658f35be453120035097e1b485cedfcdb43c61f627ea6d869ccf09a",
+        "vehicles/rwd_donor_elver/1b3f9/camso_transmission_1b3f9.jbeam": "0cea2f20156237ea4fd307e500d17678e9c617223613d3363b8608be95169719",
+        "vehicles/rwd_donor_elver/camso_differential_r.jbeam": "459f05327cd99226453460a0e5389a3fa58a4058c54bbf99c2ea08e6babe77eb",
+        "vehicles/rwd_donor_elver/camso_finaldrive_512_r.jbeam": "23a5c9f252698bbfb4ed1422f440e0a4f5a46301fa083c0e6f1075c90afebf1e",
+        "vehicles/rwd_donor_elver/camso_finaldrive_r.jbeam": "5e1809776dd133d361c2eaa620c703845d011928406441df4af7de7cd1c584fe",
+        "vehicles/rwd_donor_elver/camso_hubbearings_front.jbeam": "4be618927b6e778869bf5bdd320c45d85644526260a87704fba23dde32885ec0",
+        "vehicles/rwd_donor_elver/camso_hubbearings_rear.jbeam": "f5c69d1b82edfe9bc2be3ba343ab5df0c6528b11261c3e522358207600164318",
+        "vehicles/rwd_donor_elver/camso_transmission_sequential.jbeam": "4aaa5793ebcddb16eafc21a4cd1023232e1c17c7c7519682bea6a582aa5e3b75"
+      },
+      "ownerSelected": true
+    },
+    {
+      "layout": "AWD",
+      "model": "awd_donor_elver",
+      "config": "5dfcc",
+      "archive": "awd_donor_elver.zip",
+      "archiveSha256": "85b1def980b0d87e982a00614d38232b9ca1e64050e480e264f095e58db29dae",
+      "carMember": "vehicles/awd_donor_elver/awd_donor___elver.car",
+      "carSha256": "04f89700f6b4d997d3054a3011015825f86f319b4c4960c79f3b3defe2e3c6e3",
+      "membersSha256": {
+        "vehicles/awd_donor_elver/5dfcc/camso_differential_f_5dfcc.jbeam": "c6fa6ad959b7ac09671470ee3acd5f36fd6e4909db708e9015a9cac24e8d4a7d",
+        "vehicles/awd_donor_elver/5dfcc/camso_differential_r_5dfcc.jbeam": "010d2dea23d95f79e2eef7f1ef5f3de9a351e27c1bda182b04a0a977092f67de",
+        "vehicles/awd_donor_elver/5dfcc/camso_transfercase_5dfcc.jbeam": "51005d91815428eb3c9bb0e149cc3973cb796c7ac830f0bb8cb1e7f7f2278112",
+        "vehicles/awd_donor_elver/5dfcc/camso_transmission_5dfcc.jbeam": "ec3501f102c042e8e217f56ad160430384c3b90efac4ea5243dcd0c95682eca5",
+        "vehicles/awd_donor_elver/camso_differential_center.jbeam": "4bf0bdcb752c7e92b57e57c7cc6cad98d359ce078eb02f98ea671817a29515a1",
+        "vehicles/awd_donor_elver/camso_differential_f.jbeam": "94bdc9cfdd45033a72bbe9f453efc05b57f9709e83e4e0c305923ce1f36b3650",
+        "vehicles/awd_donor_elver/camso_differential_r.jbeam": "459f05327cd99226453460a0e5389a3fa58a4058c54bbf99c2ea08e6babe77eb",
+        "vehicles/awd_donor_elver/camso_driveshaft_f.jbeam": "faa564dc5b730c8e8c90747e9c70cbf16fec9e307c4f8e5b6eb2ac69dfe423a0",
+        "vehicles/awd_donor_elver/camso_finaldrive_512_f.jbeam": "c4c46b2597b52a7a2b1832411eb053694ac1f51ca55dbeda3b144e85f99d0982",
+        "vehicles/awd_donor_elver/camso_finaldrive_512_r.jbeam": "23a5c9f252698bbfb4ed1422f440e0a4f5a46301fa083c0e6f1075c90afebf1e",
+        "vehicles/awd_donor_elver/camso_finaldrive_f.jbeam": "f886cca3f9694bf1e28938146799a995136555f0c96dafb1a1917567fb196492",
+        "vehicles/awd_donor_elver/camso_finaldrive_r.jbeam": "5e1809776dd133d361c2eaa620c703845d011928406441df4af7de7cd1c584fe",
+        "vehicles/awd_donor_elver/camso_hubbearings_front.jbeam": "4be618927b6e778869bf5bdd320c45d85644526260a87704fba23dde32885ec0",
+        "vehicles/awd_donor_elver/camso_hubbearings_rear.jbeam": "f5c69d1b82edfe9bc2be3ba343ab5df0c6528b11261c3e522358207600164318",
+        "vehicles/awd_donor_elver/camso_transmission_sequential.jbeam": "1bea1f1383af8e6d046f83dcd16ef96a8518d96a60c3e946d67cdc95f0277365"
+      },
+      "ownerSelected": true
+    }
+  ]
+}

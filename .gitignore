@@ -1,0 +1,18 @@
+dist/
+__pycache__/
+*.pyc
+# client/vehicles (generated parts) is tracked in the development branch for
+# the live server; the public repository export leaves it out
+# private: BeamMP keys, launcher and server data, calibration
+key
+*.key
+Launcher.cfg
+Launcher.log
+Resources/
+ServerConfig.toml
+calibration-statics/
+# administrator-owned donor exports
+/donors/custom/**/*.zip
+/build/
+*.spec
+/.venv-build/

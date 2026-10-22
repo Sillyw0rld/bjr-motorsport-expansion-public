@@ -1,0 +1,51 @@
+BeamJoy-Revived: Motorsport Expansion (BJR:ME)
+Copyright (c) 2026 Sillyw0rld
+
+Licensed under the GNU Affero General Public License, version 3 or (at your
+option) any later version. See LICENSE.
+
+Original work in this project includes, in particular:
+  - the Performance Index (PI) classification and calibration system, and
+  - the Automation vehicle conversion architecture (generated upgrade parts,
+    engine and drivetrain conversions, server-side parts updater).
+See docs/AUTHORSHIP.md. Redistributions and derivative works must keep this
+notice and the copyright notices in the source files (AGPL-3.0, section 7).
+
+Name: forks and modified versions must use a different name than
+"BeamJoy-Revived: Motorsport Expansion" or "BJR:ME".
+
+Third-party projects and provenance:
+  - BeamJoy-Revived, by Captain Nugget, GPL-3.0
+    https://github.com/foodcache3/BeamJoy-Revived
+    based on BeamJoy / BeamJoy-sandbox by my-name-is-samael and contributors
+    https://github.com/my-name-is-samael/BeamJoy
+    BJR:ME runs as an expansion through BeamJoy-Revived's plugin API and reads
+    its saved race files; it adds no file to BeamJoy-Revived's folders and
+    does not modify BeamJoy-Revived.
+  - Kagoni Tyre Simulation (KTS), by Kagoni, AGPL-3.0
+    https://www.beamng.com/resources/39079/
+    Used unmodified, through its public functions and mailbox.
+  - BeamMP, https://github.com/BeamMP/BeamMP
+  - BeamNG.drive, by BeamNG GmbH
+  - Automation car mods: upgrade parts are generated on each server from the
+    car mods its owner installed. No third-party car mod content is included.
+  - Automation, by Camshaft Software
+    https://automationgame.com/
+    Design/export tools used for Automation cars and donor sources.
+  - Vehicle/mod authors retain authorship of their separately installed cars.
+    Generated parts do not transfer ownership or change those mods' licences.
+
+Bundled default donors are compact source exports of Sillyw0rld's own vehicles,
+licensed under this project's licence. They omit meshes and audio. Other car
+mods, BeamJoy-Revived, KTS, BeamMP and BeamNG.drive are installed separately.
+The optional mods Kagoni's Tyre Simulation, Fluid Spill Mod and Dynamic Damage
+Particles are not part of BJR:ME. The server console command `bjrme get` only
+downloads them, unmodified, from their official pages when the server owner asks;
+they keep their own authors, licences and terms.
+Standalone generator packages include a Python runtime. Its applicable licence
+notices must accompany redistribution. PyInstaller packages it under its bootloader
+exception; build dependencies are listed in packaging/requirements.txt in source.
+
+See CREDITS.md for the wider acknowledgements and development tools. Separate
+third-party components retain their own licences; this project's licence does
+not replace them.

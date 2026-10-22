@@ -1,0 +1,34 @@
+{
+  "default": {
+    "centreSplit": true,
+    "centreSplitMax": 0.8,
+    "centreSplitMin": 0.2,
+    "diff": true,
+    "diffModes": {
+      "locked": true,
+      "lsd": true,
+      "open": true
+    },
+    "fuel": true,
+    "maxLock": 100,
+    "maxPreload": 500,
+    "tuning": true,
+    "tyreWear": "on",
+    "startLights": false,
+    "falseStartPenaltySeconds": 0,
+    "falseStartTolerance": 0.75,
+    "yellowFlags": false,
+    "safetyRating": false,
+    "windEnabled": false,
+    "windSpeedKmh": 15,
+    "windDirection": 0,
+    "windGustKmh": 5,
+    "windGustPeriod": 12,
+    "rubberBuildUp": false,
+    "rubberInitial": 20,
+    "rubberBuildKm": 50,
+    "rubberDryBonus": 3,
+    "rubberWetPenalty": 5
+  },
+  "races": {}
+}

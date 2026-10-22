@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "repository": "Sillyw0rld/bjr-motorsport-expansion-public",
+  "checkEveryHours": 24,
+  "releasePage": "https://github.com/Sillyw0rld/bjr-motorsport-expansion-public/releases"
+}

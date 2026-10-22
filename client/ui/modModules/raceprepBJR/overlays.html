@@ -1,0 +1,109 @@
+<style>
+/* 2.14 driving HUD (approved mockup 2026-10-21): small pieces at the top of
+   the screen; the bottom centre stays free for the game's own apps. Race data
+   is BJR's own (BJRaceHud); BJR's race HUD is hidden while this one shows. */
+body.raceprep-native-hud-replaced #beamjoy-race-hud{display:none!important}
+#raceprep-bjr-root .rp-hud{position:absolute;pointer-events:none;z-index:95;font-family:"Noto Sans",sans-serif;color:#f2f4f6;font-size:12px}
+#raceprep-bjr-root .rp-hud-box{background:rgba(18,20,24,.82);border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden}
+#raceprep-bjr-root .rp-hud-num{font-family:"Overpass","Noto Sans",sans-serif;font-variant-numeric:tabular-nums}
+#raceprep-bjr-root .rp-tower{left:16px;top:16px;width:236px}
+#raceprep-bjr-root .rp-tower-head{display:flex;justify-content:space-between;padding:5px 10px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#ff9d3c;border-bottom:1px solid rgba(255,255,255,.06)}
+#raceprep-bjr-root .rp-tower-head span:last-child{color:#9aa3ab}
+#raceprep-bjr-root .rp-tower-row{display:flex;align-items:center;gap:6px;padding:3px 10px;border-bottom:1px solid rgba(255,255,255,.04)}
+#raceprep-bjr-root .rp-tower-row.rp-you{background:rgba(255,138,42,.18)}
+#raceprep-bjr-root .rp-tower-row.rp-out{opacity:.5}
+#raceprep-bjr-root .rp-tower-pos{width:16px;font-weight:700;color:#c4ced6}
+#raceprep-bjr-root .rp-tower-badge{width:40px;flex:none;text-align:center;font-size:11px;font-weight:700;border-radius:3px;color:#fff}
+#raceprep-bjr-root .rp-tower-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#raceprep-bjr-root .rp-tower-pen{font-size:10px;font-weight:700;color:#ff9797}
+#raceprep-bjr-root .rp-tower-gap{width:56px;text-align:right;font-weight:600;color:#e6eaee}
+#raceprep-bjr-root .rp-tower-foot{display:flex;justify-content:space-between;gap:6px;padding:4px 10px;font-size:11px;background:rgba(176,108,255,.12)}
+#raceprep-bjr-root .rp-tower-foot b{color:#d4b5ff}
+#raceprep-bjr-root .rp-timing{right:16px;top:16px;width:252px;display:flex;flex-direction:column;gap:6px}
+#raceprep-bjr-root .rp-timing-main{display:flex;align-items:stretch}
+#raceprep-bjr-root .rp-plate{width:58px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ff8a2a;color:#16181b}
+#raceprep-bjr-root .rp-plate b{font-size:26px;line-height:1}#raceprep-bjr-root .rp-plate small{font-size:10px;font-weight:700}
+#raceprep-bjr-root .rp-timing-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;padding:5px 10px}
+#raceprep-bjr-root .rp-timing-line{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+#raceprep-bjr-root .rp-lap-time{font-size:22px;font-weight:600}
+#raceprep-bjr-root .rp-delta{font-size:14px;font-weight:700;border-radius:4px;padding:0 6px;color:#16181b;background:#8de2ad}
+#raceprep-bjr-root .rp-delta.rp-slower{background:#ff9797}
+#raceprep-bjr-root .rp-timing-sub{display:flex;justify-content:space-between;font-size:11px;color:#c4ced6}
+#raceprep-bjr-root .rp-strip{display:flex;gap:4px;padding:0 8px 6px}
+#raceprep-bjr-root .rp-strip i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}
+#raceprep-bjr-root .rp-strip i.rp-s-best{background:#b06cff}#raceprep-bjr-root .rp-strip i.rp-s-own{background:#8de2ad}#raceprep-bjr-root .rp-strip i.rp-s-done{background:#e6eaee}
+#raceprep-bjr-root .rp-strip i.rp-s-slower{background:#ffcb78}#raceprep-bjr-root .rp-strip i.rp-s-live{background:#ff8a2a}#raceprep-bjr-root .rp-strip i.rp-s-yellow{background:#ffcf3a}
+#raceprep-bjr-root .rp-gaps{padding:4px 10px}
+#raceprep-bjr-root .rp-gaps>div{display:flex;justify-content:space-between;gap:6px}#raceprep-bjr-root .rp-gaps span{color:#9aa3ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#raceprep-bjr-root .rp-gaps b{font-size:14px;font-weight:600}
+#raceprep-bjr-root .rp-sectors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:0 8px 7px}
+#raceprep-bjr-root .rp-sector{display:flex;flex-direction:column;gap:1px;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.2)}
+#raceprep-bjr-root .rp-sector small{font-size:9.5px;font-weight:700;color:#9aa3ab}#raceprep-bjr-root .rp-sector b{font-size:13px}
+#raceprep-bjr-root .rp-sector.rp-s-best{background:rgba(176,108,255,.2);border:1px solid #b06cff}#raceprep-bjr-root .rp-sector.rp-s-best small{color:#d4b5ff}
+#raceprep-bjr-root .rp-sector.rp-s-own{background:rgba(141,226,173,.15);border:1px solid #8de2ad}#raceprep-bjr-root .rp-sector.rp-s-own small{color:#8de2ad}
+#raceprep-bjr-root .rp-sector.rp-s-slower{background:rgba(255,203,120,.12);border:1px solid #ffcb78}#raceprep-bjr-root .rp-sector.rp-s-slower small{color:#ffcb78}
+#raceprep-bjr-root .rp-sector.rp-s-live{border-color:#ff8a2a}
+#raceprep-bjr-root .rp-lap-state{display:flex;align-items:center;gap:6px;margin:0 8px 7px;padding:3px 8px;border-radius:5px;font-size:11px;background:rgba(141,226,173,.12);color:#8de2ad;font-weight:600}
+#raceprep-bjr-root .rp-lap-state.rp-bad{background:rgba(255,151,151,.12);color:#ff9797}
+#raceprep-bjr-root .rp-session-head{display:flex;justify-content:space-between;align-items:baseline;padding:6px 10px 2px}
+#raceprep-bjr-root .rp-session-head small{font-size:11px;font-weight:700;letter-spacing:.06em;color:#39dcca}
+#raceprep-bjr-root .rp-session-head b{font-size:18px}
+/* top centre: pills (race weekend announcement, track limits) and race signals */
+#raceprep-bjr-root .rp-signal-overlay{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:440px;max-width:60vw;z-index:1000;text-align:center;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px}
+#raceprep-bjr-root .rp-pill{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(18,20,24,.88);border:1px solid rgba(255,255,255,.12);font-size:13px;box-shadow:0 2px 10px #0006}
+#raceprep-bjr-root .rp-pill i{width:8px;height:8px;border-radius:50%;background:#ffcf3a;flex:none}
+#raceprep-bjr-root .rp-pill.rp-announce{border-color:rgba(255,138,42,.6)}#raceprep-bjr-root .rp-pill.rp-announce i{background:#ff8a2a}
+#raceprep-bjr-root .rp-pill span{color:#c4ced6}
+#raceprep-bjr-root .rp-signal{display:block;padding:7px 12px;border-radius:5px;box-shadow:0 2px 10px #0009;background:#101921f5;color:#fff;font-size:15px;font-weight:bold;letter-spacing:.5px}
+#raceprep-bjr-root .rp-yellow{background:#ffce26;color:#171300}#raceprep-bjr-root .rp-false{background:#b91e1e;color:#fff}#raceprep-bjr-root .rp-green{background:#126326;color:#fff}
+#raceprep-bjr-root .rp-signal .rp-lamps{justify-content:center;padding:4px}#raceprep-bjr-root .rp-signal .rp-lamps i{width:24px;height:24px}
+#raceprep-bjr-root .rp-overlay-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}
+#raceprep-bjr-root .rp-overlay-controls label{margin:0}#raceprep-bjr-root .rp-overlay-controls .btn{padding:3px 7px;font-size:12px}
+</style>
+<!-- top centre: race weekend announcement, track limits, race signals -->
+<div class="rp-signal-overlay" ng-if="$ctrl.driving.active" role="status" aria-live="polite">
+ <div class="rp-pill rp-announce" ng-if="$ctrl.driving.announcement"><i></i><b>{{$ctrl.driving.announcement.text}}</b><span>{{$ctrl.driving.announcement.sub}}</span></div>
+ <div class="rp-pill" ng-if="$ctrl.driving.signals.limits"><i></i><b>{{$ctrl.limitsText()}}</b><span>{{$ctrl.limitsSub()}}</span></div>
+ <div class="rp-pill" ng-if="$ctrl.driving.signals.marbles"><i></i><b>Marbles on tyres</b><span>−{{$ctrl.driving.signals.marbles.gripPercent}} % grip for a few corners</span></div>
+ <div class="rp-signal" ng-if="$ctrl.driving.signals.lights" aria-label="Race start lights"><div class="rp-lamps"><i ng-repeat="i in [1,2,3,4,5]" ng-class="{lit:$ctrl.driving.signals.lights.phase==='red' &amp;&amp; i<=$ctrl.driving.signals.lights.count}"></i></div><span ng-if="$ctrl.driving.signals.lights.phase==='red'">HOLD POSITION</span><strong class="rp-green" ng-if="$ctrl.driving.signals.lights.phase==='green'">GREEN — GO</strong></div>
+ <strong class="rp-signal rp-yellow" ng-if="$ctrl.driving.signals.yellow">{{$ctrl.driving.signals.yellow}}</strong>
+ <strong class="rp-signal rp-yellow" ng-if="$ctrl.driving.signals.noPassing">{{$ctrl.driving.signals.noPassing}}</strong>
+ <strong class="rp-signal rp-false" ng-if="$ctrl.driving.signals.falseStart">FALSE START — tagged in your result</strong>
+ <strong class="rp-signal rp-yellow" ng-if="$ctrl.driving.signals.formation">FORMATION · {{$ctrl.driving.signals.formation}} km/h · hold position · green at Gate 1</strong>
+</div>
+<!-- race: standings tower (top left), from BJR's BJRaceHud -->
+<div class="rp-hud rp-tower rp-hud-box" ng-if="$ctrl.raceHudShown() &amp;&amp; $ctrl.towerVisible &amp;&amp; $ctrl.hud.standings.length">
+ <div class="rp-tower-head"><span>LAP {{$ctrl.hudLap()}}/{{$ctrl.hud.totalLaps}}</span><span>{{$ctrl.hud.raceName}}</span></div>
+ <div class="rp-tower-row" ng-repeat="r in $ctrl.hud.standings track by $index" ng-class="{'rp-you':r.playerName===$ctrl.hud.self.playerName,'rp-out':r.dnf || r.disqualified}"><span class="rp-tower-pos rp-hud-num">{{r.dnf || r.disqualified?'—':$index+1}}</span><span class="rp-tower-badge" ng-style="{'background-color':$ctrl.classColor($ctrl.badge(r).class)}">{{$ctrl.badge(r).class?$ctrl.badge(r).class+' '+$ctrl.badge(r).pi:'—'}}</span><span class="rp-tower-name">{{r.displayName || r.playerName}}</span><span class="rp-tower-pen" ng-if="r.penaltyMs">+{{r.penaltyMs/1000 | number:0}}s</span><span class="rp-tower-gap rp-hud-num">{{$ctrl.towerGap(r,$index)}}</span></div>
+ <div class="rp-tower-foot" ng-if="$ctrl.hud.fastestLap"><b>Fastest</b><span>{{$ctrl.hud.fastestLap.displayName || $ctrl.hud.fastestLap.playerName}} {{$ctrl.time($ctrl.hud.fastestLap.ms)}}</span></div>
+</div>
+<!-- race: compact timing box + gap strip (top right) -->
+<div class="rp-hud rp-timing" ng-if="$ctrl.raceHudShown() &amp;&amp; $ctrl.hudVisible">
+ <div class="rp-hud-box"><div class="rp-timing-main"><div class="rp-plate" ng-if="$ctrl.hud.position"><b class="rp-hud-num">P{{$ctrl.hud.position}}</b><small>of {{$ctrl.hud.totalRacers}}</small></div>
+  <div class="rp-timing-body"><div class="rp-timing-line"><span class="rp-lap-time rp-hud-num">{{$ctrl.hud.self.finished?'FINISHED':$ctrl.hud.self.dnf?'DNF':$ctrl.time($ctrl.hud.self.currentLapElapsedMs)}}</span><span class="rp-delta rp-hud-num" ng-if="$ctrl.isNum($ctrl.hud.self.liveDeltaMs)" ng-class="{'rp-slower':$ctrl.hud.self.liveDeltaMs>0}">{{$ctrl.signed($ctrl.hud.self.liveDeltaMs)}}</span></div>
+  <div class="rp-timing-sub"><span>Last {{$ctrl.time($ctrl.hud.self.lastLapMs)}}</span><span>Best {{$ctrl.time($ctrl.hud.self.bestLapMs)}}</span></div></div></div>
+  <div class="rp-strip" ng-if="$ctrl.hud.totalSectors>1"><i ng-repeat="s in $ctrl.hudSectors() track by $index" class="rp-s-{{s}}"></i></div></div>
+ <div class="rp-hud-box rp-gaps" ng-if="$ctrl.hud.ahead || $ctrl.hud.behind">
+  <div ng-if="$ctrl.hud.ahead"><span>▲ P{{$ctrl.hud.position-1}} {{$ctrl.hud.ahead.displayName || $ctrl.hud.ahead.playerName}}</span><b class="rp-hud-num">{{$ctrl.gapText($ctrl.hud.ahead,'+')}}</b></div>
+  <div ng-if="$ctrl.hud.behind"><span>▼ P{{$ctrl.hud.position+1}} {{$ctrl.hud.behind.displayName || $ctrl.hud.behind.playerName}}</span><b class="rp-hud-num">{{$ctrl.gapText($ctrl.hud.behind,'−')}}</b></div>
+ </div>
+</div>
+<!-- practice / qualifying: session tower (top left) -->
+<div class="rp-hud rp-tower rp-hud-box" ng-if="$ctrl.sessionHudShown() &amp;&amp; $ctrl.towerVisible">
+ <div class="rp-tower-head"><span>{{$ctrl.driving.practice.label | uppercase}}</span><span>{{$ctrl.driving.practice.raceName}}</span></div>
+ <div class="rp-tower-row" ng-repeat="p in $ctrl.driving.practice.rows track by p.playerID" ng-class="{'rp-you':p.playerID===$ctrl.driving.practice.playerID}"><span class="rp-tower-pos rp-hud-num">{{p.best?p.pos:'—'}}</span><span class="rp-tower-badge" ng-style="{'background-color':$ctrl.classColor(p.class)}">{{p.class?p.class+' '+p.pi:'—'}}</span><span class="rp-tower-name">{{p.name || p.playerName}}</span><span class="rp-tower-gap rp-hud-num" title="Best lap">{{p.best?(p.pos===1?$ctrl.time(p.best):$ctrl.signed(p.gap)):'no lap'}}</span></div>
+ <div class="rp-tower-foot" ng-if="!$ctrl.driving.practice.rows.length"><span>No laps yet</span></div>
+</div>
+<!-- practice / qualifying: timing box with live sectors (top right) -->
+<div class="rp-hud rp-timing" ng-if="$ctrl.sessionHudShown() &amp;&amp; $ctrl.hudVisible">
+ <div class="rp-hud-box">
+  <div class="rp-session-head"><small>{{$ctrl.driving.practice.label | uppercase}}</small><b class="rp-hud-num">{{$ctrl.driving.practice.state==='overtime'?'FINISH YOUR LAP':$ctrl.driving.practice.state==='ended'?'ENDED':$ctrl.clock($ctrl.driving.practice.remaining)}}</b></div>
+  <div ng-if="$ctrl.driving.practice.blocked" class="rp-lap-state rp-bad">{{$ctrl.driving.practice.reason}}</div>
+  <div ng-if="!$ctrl.driving.practice.blocked">
+   <div class="rp-timing-body"><div class="rp-timing-line"><span class="rp-lap-time rp-hud-num">{{$ctrl.isNum($ctrl.driving.practice.currentLap)?$ctrl.time($ctrl.driving.practice.currentLap):'Out lap'}}</span><span class="rp-delta rp-hud-num" ng-if="$ctrl.isNum($ctrl.driving.practice.live.delta)" ng-class="{'rp-slower':$ctrl.driving.practice.live.delta>0}">{{$ctrl.signed($ctrl.driving.practice.live.delta)}}</span></div>
+   <div class="rp-timing-sub"><span>Last {{$ctrl.time($ctrl.driving.practice.lastLap.time)}}</span><span>Best {{$ctrl.time($ctrl.myBest())}}</span></div></div>
+   <div class="rp-sectors" ng-if="$ctrl.driving.practice.live.sectors.length"><div class="rp-sector rp-s-{{s.state}}" ng-repeat="s in $ctrl.driving.practice.live.sectors track by s.n"><small>S{{s.n}} {{$ctrl.sectorWord(s.state)}}</small><b class="rp-hud-num">{{$ctrl.isNum(s.ms)?$ctrl.time(s.ms):'—'}}</b></div></div>
+   <div class="rp-lap-state" ng-class="{'rp-bad':$ctrl.driving.practice.cuts}" ng-if="$ctrl.isNum($ctrl.driving.practice.currentLap)">{{$ctrl.driving.practice.cuts?'Lap invalid · '+$ctrl.driving.practice.cuts+' cut'+($ctrl.driving.practice.cuts>1?'s':''):'Lap valid'}}</div>
+   <div class="rp-lap-state" ng-if="!$ctrl.isNum($ctrl.driving.practice.currentLap)" style="background:rgba(255,255,255,.05);color:#c4ced6">Cross the start line to start timing</div>
+  </div>
+ </div>
+</div>
