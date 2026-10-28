@@ -20,8 +20,9 @@ class RubberTexture(unittest.TestCase):
         self.assertEqual(image.size, (256, 512), 'same texture footprint')
         rgba = np.asarray(image)
         a = rgba[:, :, 3]
-        self.assertTrue(set(np.unique(a)).issubset(set(range(0, 241, 40))),
-                        'retain engine-compatible stepped alpha')
+        # smooth alpha draws on 0.40 (checked in game 2026-10-23); the strip
+        # still has texture, not a flat band
+        self.assertGreater(len(np.unique(a)), 100, 'smooth, detailed alpha')
         self.assertFalse(a[0].any() or a[-1].any() or a[:, 0].any() or a[:, -1].any())
         self.assertTrue(np.array_equal(rgba[:, :, 0], rgba[:, :, 1]))
         self.assertTrue(np.array_equal(rgba[:, :, 0], rgba[:, :, 2]))

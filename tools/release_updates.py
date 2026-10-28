@@ -88,7 +88,8 @@ def allowed(name):
     if name.startswith('Resources/Server/RacePrep/updater/'):
         return name == 'Resources/Server/RacePrep/updater/preflight-required.json' or name.startswith(('Resources/Server/RacePrep/updater/tools/', 'Resources/Server/RacePrep/updater/client/'))
     if p.parent.as_posix() == 'Resources/Server/RacePrep':
-        return p.suffix == '.lua' or p.name in ('host.json', 'ratings-seed.json', 'rules.example.json', 'updates.example.json')
+        return p.suffix == '.lua' or p.name in ('host.json', 'ratings-seed.json', 'rules.example.json', 'updates.example.json',
+                                                'awards-discord.example.json', 'series-native-cars.json', 'native-identity.json')
     if name.startswith('Resources/Server/BeamJoyServer/'):
         return name == 'Resources/Server/BeamJoyServer/RacePrepBJRHost.lua' or name.startswith('Resources/Server/BeamJoyServer/RacePrepBJR/')
     return name in (MANIFEST, 'Resources/Client/BJR_RacePrep.zip', 'start-bjrme-server.sh',

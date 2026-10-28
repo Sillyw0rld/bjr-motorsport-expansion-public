@@ -165,7 +165,7 @@ S.gridOrder = function(mode, quali, cars, reverseTop)
         for pid, pi in pairs(cars or {}) do
             pi = tonumber(pi)
             if pi and pi == pi and pi > 0 and pi < math.huge then
-                table.insert(list, { playerID = tonumber(pid) or pid, pi = pi })
+                table.insert(list, { playerID = tonumber(pid) or pid, racerKey = tostring(pid), pi = pi })
             end
         end
         if #list == 0 then return nil end
@@ -178,7 +178,7 @@ S.gridOrder = function(mode, quali, cars, reverseTop)
     if (mode == "qualifying" or mode == "reverse") and quali and type(quali.rows) == "table" then
         local list = {}
         for _, r in ipairs(quali.rows) do
-            table.insert(list, { playerID = r.playerID, name = r.name, valid = r.best ~= nil })
+            table.insert(list, { playerID = r.playerID, racerKey = r.racerKey, name = r.name, valid = r.best ~= nil })
         end
         if mode == "reverse" then
             local n = 0

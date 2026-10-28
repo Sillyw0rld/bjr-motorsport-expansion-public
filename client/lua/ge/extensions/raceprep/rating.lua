@@ -387,6 +387,8 @@ function M.performance(st,constants,drive)
     return nil,tostring(result)
 end
 function M.violation(rules,entry,status)
+    if entry and rules.specModel and rules.specModel~='' and entry.model~=rules.specModel then return 'Series car: '..rules.specModel end
+    if entry and rules.specConfig and rules.specConfig~='' and entry.config~=rules.specConfig then return 'Series configuration: '..rules.specConfig end
     local classes=rules.allowedClasses or {}
     local restricted=rules.piMin or rules.piMax
     for _,c in ipairs(M.classes) do if classes[c]==false then restricted=true end end

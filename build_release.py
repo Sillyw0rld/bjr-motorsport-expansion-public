@@ -36,7 +36,7 @@ VERSION = (ROOT / 'VERSION').read_text().strip()  # one version for the live bui
 EDITIONS = ('play', 'custom')
 SERVER_FILES = {'RacePrep.lua', 'BJRHost.lua', 'BJRApi.lua', 'RatingStore.lua', 'RatingIdentity.lua', 'Skill.lua', 'Sessions.lua',
                 'RaceControl.lua', 'RubberMap.lua', 'MarbleMap.lua',  'DriverStats.lua', 'Championship.lua',
-                'ResultHistory.lua', 'PartsUpdater.lua', 'ReleaseUpdates.lua', 'MotorsportSettings.lua', 'Weekend.lua', 'updates.example.json', 'ratings-seed.json', 'rules.example.json'}
+                'ResultHistory.lua', 'Persistence.lua', 'Rivals.lua','RivalsSessions.lua','RivalsVerification.lua','RivalsBeamMP.lua','RivalsModeration.lua','NativeIdentity.lua','native-identity.json','SharedTunes.lua','DriverRating.lua','Licences.lua','Progression.lua','ProgressionRewards.lua','ProgressionBackfill.lua','Crews.lua','Seasons.lua','League.lua','RaceAwards.lua','WeeklyRivals.lua','SeriesCatalogue.lua','DiscordAwards.lua','RivalNotices.lua','EventPresets.lua','Challenges.lua','ChallengeCatalogue.lua','AutoRating.lua','ClassBuild.lua','AnchorSelection.lua','series-native-cars.json','awards-discord.example.json', 'PartsUpdater.lua', 'ReleaseUpdates.lua', 'MotorsportSettings.lua', 'Weekend.lua', 'updates.example.json', 'ratings-seed.json', 'rules.example.json'}
 
 
 def git(*args):

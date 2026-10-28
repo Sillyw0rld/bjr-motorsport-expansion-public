@@ -13,21 +13,17 @@ C.new=function(api)
  local profiles=api.read(api.path .. '/drivers.json')
  if type(profiles)~='table' or type(profiles.drivers)~='table' then profiles=Stats.new() end
  profiles.seen=profiles.seen or {}
- local function saveSeries()
-  local file=io.open(api.path .. '/championships.json.tmp','w');if not file then return false end
-  file:write(Util.JsonPrettify(Util.JsonEncode(series)));file:close()
-  return os.rename(api.path .. '/championships.json.tmp',api.path .. '/championships.json')~=nil
- end
- local function saveProfiles()
-  local file=io.open(api.path .. '/drivers.json.tmp','w')
-  if not file then return false end
-  file:write(Util.JsonPrettify(Util.JsonEncode(profiles)));file:close()
-  return os.rename(api.path .. '/drivers.json.tmp',api.path .. '/drivers.json')~=nil
- end
+ local Persist=api.persistence or dofile(api.path..'/Persistence.lua')
+ local pendingFile=api.path..'/records-pending.json'
+ local pending=api.read(pendingFile) or {}
+ local function saveSeries() return Persist.write(api.path..'/championships.json',series) end
+ local function saveProfiles() return Persist.write(api.path..'/drivers.json',profiles) end
  local native=api.host and api.host.enabled
  local runs,runTelemetry={},{}
  local neutral={phase="none",participants={},falseStarts={},hazards={}}
  local self={state={phase='none',participants={},falseStarts={}},last={},lastOrder={}}
+ self.pendingRecords=function() return next(pending)~=nil end
+ self.driverProfile=function(key) return key and profiles.drivers[key] end
  local function atomicWrite(path,value)
   if api.write then return api.write(path,value) end
   local f=io.open(path..'.tmp','w');if not f then return false end
@@ -127,7 +123,7 @@ C.new=function(api)
  end
  local function publish(target)
   if api.identity and MP.GetPlayers then self.state.driverStats=Stats.view(profiles,api.identity,(native and api.host.names) or MP.GetPlayers()) end
-  self.state.rules=api.rules(self.state.raceID)
+  self.state.rules=api.rules(self.state.raceID,self.state.runID)
   self.state.track=trackView()
   self.state.rubber=rubberView()
   self.state.rubberLevel=nil
@@ -201,6 +197,10 @@ C.new=function(api)
  self.snapshot=function(p)
   if type(p)~='table' then return end
   if native then selectRun(p.runID) end
+  if native and self.state.phaseIndex and p.phaseIndex and self.state.phaseIndex~=p.phaseIndex then
+   self.state.falseStarts={};self.state.hazards={};self.state.incidents={}
+   runTelemetry[p.runID]={};telemetry=runTelemetry[p.runID]
+  end
   local oldMap,newMap=mapKey(self.state.level),mapKey(p.level)
   if native and p.runID then oldMap=mapKey(neutral.level) end
   if oldMap and oldMap~=newMap then rubber.save();marbles.save(true) end
@@ -212,7 +212,7 @@ C.new=function(api)
    self.state={falseStarts={},hazards={}}
    telemetry={}
   end
-  for _,k in ipairs({'raceID','runID','phase','remaining','participants','level','elapsed','raceName','tournament'}) do self.state[k]=p[k] end
+  for _,k in ipairs({'raceID','runID','phase','phaseName','phaseIndex','phaseCount','remaining','participants','racerKeys','racerKeyByPlayer','level','elapsed','raceName','tournament'}) do self.state[k]=p[k] end
   if oldMap~=newMap and newMap then rubberReports={};marbleReports={};sendRubber(-1) end
   self.state.falseStarts=self.state.falseStarts or {}
   self.state.hazards=self.state.hazards or {}
@@ -228,7 +228,7 @@ C.new=function(api)
   if type(p)~='table' or not s.runID or p.runID~=s.runID or s.phase~='race' then return end
   local member=false;for _,id in ipairs(s.participants or {}) do if tonumber(id)==tonumber(pid) then member=true end end
   if not member then return end
-  local rules=api.rules(s.raceID)
+  local rules=api.rules(s.raceID,s.runID)
   if p.kind=='telemetry' then
    local speed=finite(p.speed,0,150)
    local q=p.position
@@ -240,7 +240,8 @@ C.new=function(api)
     if now-prev.stoppedAt>=3 then s.hazards[id]={position=q,lastSeen=now,playerID=pid} end
    else prev.stoppedAt=nil;s.hazards[id]=nil end
    s.incidents=s.incidents or {}
-   local inc=s.incidents[id] or {contacts=0,distance=0};s.incidents[id]=inc
+   local incidentKey=tostring((s.racerKeyByPlayer or {})[id] or id)
+   local inc=s.incidents[incidentKey] or {contacts=0,distance=0};s.incidents[incidentKey]=inc
    if prev.position and prev.lastSeen then
     local dx,dy,dz=q.x-prev.position.x,q.y-prev.position.y,q.z-prev.position.z
     local dist=math.sqrt(dx*dx+dy*dy+dz*dz)
@@ -248,6 +249,8 @@ C.new=function(api)
      inc.distance=inc.distance+dist
     end
    end
+   inc.samples=(inc.samples or 0)+1;inc.firstAt=inc.firstAt or now;inc.lastAt=now
+   if prev.lastSeen then inc.maxGap=math.max(inc.maxGap or 0,now-prev.lastSeen) end
    prev.lastSeen=now;prev.position={x=q.x,y=q.y,z=q.z};prev.speed=speed
    telemetry[id]=prev
    return
@@ -270,10 +273,12 @@ C.new=function(api)
    if s.contactPairs[pair] and now-s.contactPairs[pair]<4 then return end -- the other car's copy
    s.contactPairs[pair]=now
    local function add(key,weight)
+    key=tostring((s.racerKeyByPlayer or {})[key] or key)
     local inc=s.incidents[key] or {contacts=0,distance=0};s.incidents[key]=inc
     inc.contacts=inc.contacts+weight
    end
    local function hit(key)
+    key=tostring((s.racerKeyByPlayer or {})[key] or key)
     local inc=s.incidents[key] or {contacts=0,distance=0};s.incidents[key]=inc
     inc.hitBy=(inc.hitBy or 0)+1
    end
@@ -284,8 +289,12 @@ C.new=function(api)
    return
   end
   if p.kind=='falseStart'  and rules.startLights and rules.startType~='rolling' and
-    finite(s.remaining,-1000,10000) and not s.falseStarts[tostring(pid)] then
-   s.falseStarts[tostring(pid)]=math.max(0,tonumber(rules.falseStartPenaltySeconds) or 5)*1000
+    finite(s.remaining,-1000,10000) then
+   local racerKey=(s.racerKeyByPlayer or {})[tostring(pid)] or tostring(pid)
+   if s.falseStarts[racerKey] then return end
+   local penalty=math.max(0,tonumber(rules.falseStartPenaltySeconds) or 5)*1000
+   s.falseStarts[racerKey]=penalty
+   if native and penalty>0 and api.penalize and not (api.localPenalties and api.localPenalties()) then api.penalize(s.runID,racerKey,penalty,'False start') end
    publish()
   end
  end
@@ -293,17 +302,28 @@ C.new=function(api)
   local s=res.runID and (self.state.runID==res.runID and self.state or (native and runs[res.runID] or self.last[res.runID]))
   if not s or tostring(s.raceID)~=tostring(res.raceID) then return end
   res.level=s.level or res.level
+  -- BJR without race.penalize: its times lack the penalties, BJR:ME adds them (as 2.16 did)
+  local inBJR=native and not (api.localPenalties and api.localPenalties())
   for _,row in ipairs(res.rows or {}) do
-   row.incidents=(s.incidents or {})[tostring(row.playerID)]
-   local penalty=(s.falseStarts or {})[tostring(row.playerID)]
+   row.incidents=(s.incidents or {})[tostring(row.racerKey or row.playerID)]
+   local penalty=(s.falseStarts or {})[tostring(row.racerKey or row.playerID)]
    if penalty then
-    -- Client totals may already include it: normalize before adding authority.
-    if row.total then row.total=row.total-(tonumber(row.falseStartPenalty) or 0)+penalty end
-    row.penalty=(tonumber(row.penalty) or 0)-(tonumber(row.falseStartPenalty) or 0)+penalty
+    -- BJR already included race.penalize in totalMs. Keep the tag for stats/UI.
+    if not inBJR then
+     if row.total then row.total=row.total-(tonumber(row.falseStartPenalty) or 0)+penalty end
+     row.penalty=(tonumber(row.penalty) or 0)-(tonumber(row.falseStartPenalty) or 0)+penalty
+    end
     row.falseStart=true;row.falseStartPenalty=penalty
    end
   end
+  -- BJR also orders lapped and disqualified finishers. Sorting only by time
+  -- here could move a lapped or disqualified car ahead of its rightful place.
+  if inBJR then return end
+  -- re-sorted by penalised time; lapped and disqualified cars keep BJR's order
+  -- among themselves (no total, sorted by position)
   table.sort(res.rows,function(a,b)
+   if native and (a.disqualified or b.disqualified) and a.disqualified~=b.disqualified then return not a.disqualified end
+   if native and (a.laps or 0)~=(b.laps or 0) then return (a.laps or 0)>(b.laps or 0) end
    if a.total and b.total then
     if a.total~=b.total then return a.total<b.total end
     return (a.position or 999)<(b.position or 999)
@@ -317,14 +337,39 @@ C.new=function(api)
   local s=res.runID and (self.state.runID==res.runID and self.state or (native and runs[res.runID] or self.last[res.runID]))
   return s and tostring(s.raceID)==tostring(res.raceID) or false
  end
+ local function flushRecords()
+  for key,job in pairs(pending) do
+   local beforeSeries,beforeProfiles=Persist.copy(series),Persist.copy(profiles)
+   local identity=function(_,row) return row and job.identities[tostring(row.racerKey or row.playerID)] end
+   local seriesOK=true
+   local active=series.active;series.active=job.seriesID
+   local changed=Championship.record(series,job.result,identity,job.tournament);series.active=active
+   if changed then
+    seriesOK=saveSeries();if not seriesOK then series=beforeSeries end
+   end
+   local profilesOK=true
+   if Stats.record(profiles,job.result,identity,job.safety) then
+    profilesOK=saveProfiles();if not profilesOK then profiles=beforeProfiles end
+   end
+   if seriesOK and profilesOK then
+    if api.progression then api.progression(job,profiles) end
+    pending[key]=nil;lastSignatures={};publish() end
+  end
+  if not Persist.write(pendingFile,pending) then print('[BJR:ME] Could not save record retry queue; check disk space/permissions.') end
+ end
  self.recordResult=function(res)
   local s=res.runID and (self.state.runID==res.runID and self.state or (native and runs[res.runID] or self.last[res.runID]))
-  if api.identity and Championship.record(series,res,api.identity,s and s.tournament) then saveSeries() end
-  if not api.identity then return end
-  if Stats.record(profiles,res,api.identity,api.rules(res.raceID).safetyRating==true) then
-   saveProfiles();lastSignatures={};publish()
-  end
+  local identity=api.resultIdentity and function(pid,row) return api.resultIdentity(res.runID,tonumber(pid),row) end or api.identity
+  if not identity then return end
+  local ids={}
+  for _,row in ipairs(res.rows or {}) do ids[tostring(row.racerKey or row.playerID)]=identity(tonumber(row.playerID),row) end
+  local key=tostring(res.runID or res.key)
+  pending[key]={progressionSnapshot=api.progressionSnapshot and api.progressionSnapshot(res),result=Persist.copy(res),identities=ids,seriesID=series.active,tournament=s and s.tournament,safety=api.rules(res.raceID,res.runID).safetyRating==true}
+  if not Persist.write(pendingFile,pending) then print('[BJR:ME] Record retry queue is in memory only; keep server running until storage is available.') end
+  flushRecords()
  end
+ local nextRecordRetry=0
+
  function RacePrepControlSnapshot(data)
   if native then return end
   local ok,p=pcall(Util.JsonDecode,data or '')
@@ -437,6 +482,7 @@ C.new=function(api)
  MP.RegisterEvent('RacePrepRubberAdd','RacePrepRubberAdd')
  MP.RegisterEvent('RacePrepRubberGet','RacePrepRubberGet')
  function RacePrepControlTick()
+  if next(pending) and os.time()>=nextRecordRetry then nextRecordRetry=os.time()+5;flushRecords() end
   if native then selectRun(nil) end
   MP.TriggerGlobalEvent('RacePrepControlSnapshotPing','')
   stepRubberQueues()

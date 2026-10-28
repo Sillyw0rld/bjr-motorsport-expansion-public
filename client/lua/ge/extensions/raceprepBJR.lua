@@ -3,20 +3,41 @@
 -- Race Prep's HTML entry point for BeamJoy-Revived. BJR owns grid/ready,
 -- vehicle restrictions, timing and race lifecycle. Race Prep adds rules,
 -- upgrades, environment and sessions through its own services/events.
+local autoWorker
 local M={visible=false,tab='setup'}
 local H=require('ge/extensions/raceprep/bjr/host')
+local ClassBuild=require('common/raceprep/classBuild')
 local U=require('ge/extensions/raceprep/upgrades')
 local Weight=require('ge/extensions/raceprep/weight')
 local NativeWeight=require('ge/extensions/raceprep/nativeWeight')
 local function bodyAdapter(d) return NativeWeight.native(d,U.catalog) and NativeWeight or Weight end
 local P=require('ge/extensions/raceprep/tuningPolicy')
 local Setup=require('ge/extensions/raceprep/bjr/setup')
+local AutoRatingWorker=require('ge/extensions/raceprep/autoRatingWorker')
+local RivalsSession=require('ge/extensions/raceprep/bjr/rivalsSession')
+local Strategy=require('ge/extensions/raceprep/bjr/strategy')
+local radarEnabled=false
+local Library=require('ge/extensions/raceprep/bjr/setupLibrary')
+local setupLibrary
+local sharedTunesView={items={}}
+local function library()
+ if not setupLibrary then
+  local function path(slot) return '/settings/raceprep/setup-library-'..slot..'.json' end
+  setupLibrary=Library.new{read=function(slot) return jsonReadFile and jsonReadFile(path(slot)) end,
+   write=function(slot,value) return jsonWriteFile and jsonWriteFile(path(slot),value,true) end,now=os.time}
+ end
+ return setupLibrary
+end
+
 local Grid=require('ge/extensions/raceprep/bjr/grid')
 local Sidebar=require('ge/extensions/raceprep/bjr/sidebar')
 local UR=require('ge/extensions/raceprep/upgradeRules')
 -- v2.<minor>.<patch>.<build>, written by build_bjr.py ("dev" when run from source)
 local versionInfo=jsonReadFile and jsonReadFile('/lua/ge/extensions/raceprep/version.json') or {}
 local pending={tune=false,diff=false,upgrades=false}
+local checkedDraft,previewSearch,extraOptionEstimates
+local draftChoices,previewRow={},nil
+local draftPreviewChanges={}
 local draftRevision
 local fuelRows,fuelTargets={},{}
 local fuelRequest,fuelSerial,fuelOp,fuelRestore,fuelOwner,fuelSeen
@@ -43,7 +64,10 @@ local lastVehicle
 local function runtime() return rawget(_G,'bjiRacePrep') end
 local function own() return H.vehicle() end
 local function rules()
- local r=runtime();local s=H.session();return r and r.getRules(s and s.raceId) or {}
+ if RivalsSession.active() then return RivalsSession.rules() or {} end
+ if not H.session() and M.preparedRules then return M.preparedRules end
+ local r=runtime();local s=H.session();local selected=s and M.presetLibrary and M.presetLibrary.sessions and M.presetLibrary.sessions[tostring(s.id)]
+ return selected and selected.rules or r and r.getRules(s and s.raceId) or {}
 end
 local function data()
  local v=own();return v and core_vehicle_manager.getVehicleData(v:getID()),v
@@ -69,7 +93,9 @@ end
 --- the race rules the upgrade caps come from: the BJR race being joined
 --- (lobby) or the running race weekend's race; nil in plain free roam
 local function ruleScope()
+ if RivalsSession.active() then return RivalsSession.rules() end
  if H.session() then return rules() end
+ if M.preparedRules then return M.preparedRules end
  local w=M.weekendRules and M.weekendRules()
  return w
 end
@@ -117,6 +143,11 @@ end
 M.onFuel=function(id,token,rows)
  local v=own();if not v or v:getID()~=id or token~=fuelRequest or type(rows)~='table' then return end
  fuelRows=rows;fuelSeen=clock
+ local session=H.session();local racer=H.participant and H.participant();local rival=RivalsSession.view()
+ local key=tostring(id)..':'..tostring(data().vdata)..':'..tostring(session and session.id or rival.id or 'free')
+ local lap=session and session.state=='RACE' and racer and #(racer.lapTimes or {}) or rival.active and rival.completedLaps or nil
+ local remaining=session and session.settings and tonumber(session.settings.laps) and racer and math.max(0,session.settings.laps-(racer.currentLap or 1)+1) or nil
+ Strategy.sample(rows,key,lap,remaining,clock)
  local op=fuelOp
  if not op or op.token~=token then return end
  fuelOp=nil
@@ -152,13 +183,15 @@ local function fuelTick()
   -- percent of each tank's own capacity, so no fresh tank reading is needed
   v:queueLuaCommand('extensions.load("raceprepFuel") raceprepFuel.applyPercent('..serialize(fuelTargets)..')');nextFuel=clock+.5
  end
- if not fuelOp and not fuelRestore and clock>=nextFuel and (M.visible or not fuelSeen) then nextFuel=clock+1;requestFuel(v) end
+ if not fuelOp and not fuelRestore and clock>=nextFuel and (M.visible or not fuelSeen or (H.session() and H.session().state=='RACE') or RivalsSession.active()) then nextFuel=clock+1;requestFuel(v) end
 end
 -- BJR's race-start teleport (setPosRot/safeTeleport) resets the car, and a
 -- reset refills every tank. Re-apply the chosen fuel levels after a reset on
 -- the grid or in the countdown only; a reset during the race keeps the game's
 -- (and BJR's) own rule.
 M.onVehicleResetted=function(id)
+ RivalsSession.resetLap(id);Strategy.reset()
+ local gaps=package.loaded['ge/extensions/raceprep/bjr/raceGaps'];if gaps then gaps.reset() end
  local v=own();if not v or v:getID()~=id or not next(fuelTargets) then return end
  local s=H.session and H.session()
  if type(s)=='table' and (s.state=='GRID' or s.state=='COUNTDOWN') then fuelReapplyAt=clock+.3 end
@@ -170,15 +203,18 @@ M.readyProblem=function()
  if clock-hostSeen>5 then return "Waiting for the BeamJoy-Revived plugin API (BJR 2.0 or newer, started with the server)." end
  if not v then return 'Choose your own car first.' end
  local d=data();if not d then return 'Waiting for car data.' end
- if draftRevision and draftRevision~=tostring(d.vdata) then pending={tune=false,diff=false,upgrades=false};draftRevision=nil end
+ if draftRevision and draftRevision~=tostring(d.vdata) then pending={tune=false,diff=false,upgrades=false};draftPreviewChanges={};draftChoices={};previewSearch=nil;draftRevision=nil end
  if pending.tune or pending.diff then return 'Apply or discard your setup/differential changes.' end
  if pending.upgrades then return 'Apply or discard your upgrade changes.' end
  if fuelOp or fuelRestore then return 'Applying setup and restoring fuel.' end
- local setupProblem=Setup.aeroProblem(d,rules()) or Setup.diffProblem(d,rules(),runtime().diffSettings[v:getID()],devices(v)) or
+ local setupProblem=Setup.specProblem(d,rules()) or Setup.aeroProblem(d,rules()) or Setup.diffProblem(d,rules(),runtime().diffSettings[v:getID()],devices(v)) or
   bodyAdapter(d).problem(d,U.catalog) or Setup.hiddenProblem(d)
  if setupProblem then return setupProblem end
  local r=rules();local e,why=rating(v)
  if not e then return why or 'Waiting for the car rating.' end
+ if r.specModel and r.specModel~='' and v:getJBeamFilename()~=r.specModel then return 'This series requires '..r.specModel..'.' end
+ if r.specConfig and r.specConfig~='' and e.config~=r.specConfig then return 'This series requires configuration '..r.specConfig..'.' end
+ local classWhy=ClassBuild.refusal(r,e,raceprepRatings and raceprepRatings.factoryRating and raceprepRatings.factoryRating(v:getID()),require('ge/extensions/raceprep/rating').classOf);if classWhy then return classWhy end
  if r.allowedClasses and r.allowedClasses[e.class]==false then return 'Class '..e.class..' is not allowed.' end
  if tonumber(r.piMin) and e.pi<r.piMin then return 'PI is below the race minimum.' end
  if tonumber(r.piMax) and e.pi>r.piMax then return 'PI is above the race maximum.' end
@@ -232,7 +268,7 @@ M.snapshot=function()
  local d,v=data();local r=runtime()
  local level=getCurrentLevelIdentifier and getCurrentLevelIdentifier()
  if not M.visible then
-  local out={level=level,ruleStore=r and r.rules,ruleDefaults=r and r.DEFAULT_RULES,rulesStatus=r and r.rulesStatus,
+  local out={autoRating=autoWorker and autoWorker.view() or {},level=level,ruleStore=r and r.rules,ruleDefaults=r and r.DEFAULT_RULES,rulesStatus=r and r.rulesStatus,
    ready=H.ready(),visible=false,railPage=M.railPage==true,openRequest=M.openRequest,openFull=M.openFull==true,resultNotice=resultNotice,
    draftReset=M.draftReset or 0,version=versionInfo.version or 'dev',tab=M.tab,vehicleBadges=vehicleBadges()}
   if v and d then
@@ -247,8 +283,8 @@ M.snapshot=function()
  local line=require('ge/extensions/raceprep/rubberLine')
  local raceList={};for _,race in pairs(beamjoy_races and beamjoy_races.data or {}) do raceList[#raceList+1]={id=race.id,name=race.name} end
  table.sort(raceList,function(a,b) return a.name<b.name end)
- local out={level=level,ruleStore=r and r.rules,ruleDefaults=r and r.DEFAULT_RULES,results=M.results,message=M.message,ready=H.ready(),visible=M.visible,railPage=M.railPage==true,openRequest=M.openRequest,openFull=M.openFull==true,vehicleBadges=vehicleBadges(),environment=(function() local ok,e=pcall(require('ge/extensions/raceprep/raceEnvironment').live);return ok and e or nil end)(),version=versionInfo.version or 'dev',tab=M.tab,canEdit=can('rules'),rules=rules(),
-  abilities={weekend=can('weekend'),rules=can('rules'),raceControl=can('raceControl')},motorsport=r and r.motorsport,
+ local out={autoRating=autoWorker and autoWorker.view() or {},level=level,ruleStore=r and r.rules,ruleDefaults=r and r.DEFAULT_RULES,results=M.results,message=M.message,ready=H.ready(),visible=M.visible,railPage=M.railPage==true,openRequest=M.openRequest,openFull=M.openFull==true,vehicleBadges=vehicleBadges(),environment=(function() local ok,e=pcall(require('ge/extensions/raceprep/raceEnvironment').live);return ok and e or nil end)(),version=versionInfo.version or 'dev',tab=M.tab,canEdit=can('rules'),rules=rules(),
+  abilities={weekend=can('weekend'),rules=can('rules'),raceControl=can('raceControl'),manageCrews=can('manageCrews')},motorsport=r and r.motorsport,
   weekend=practice.weekend(),announcement=practice.currentAnnouncement(),playerID=H.playerID(),
   -- the race whose rules lock upgrades now (lobby, or the running weekend)
   ruleScopeName=(function()
@@ -257,7 +293,7 @@ M.snapshot=function()
    local w=practice.weekend();return w and w.raceName or nil
   end)(),
   serverManaged=r and r.isServerManaged(),serverBridgeReady=clock-hostSeen<=5,rulesStatus=r and r.rulesStatus,error=lastError,
-  session=s,grid=Grid.snapshot(s,H.playerID(),raceprepRatings),diffApplied=M.diffApplied or 0,draftReset=M.draftReset or 0,resultNotice=resultNotice,pending=pending,applying=fuelOp~=nil or fuelRestore~=nil,practice=practice.data,myLaps=practice.laps,lastLap=practice.lastLap,
+  autoRating=autoWorker and autoWorker.view() or {},strategy=Strategy.view(),rivals=RivalsSession.view(),session=s,grid=Grid.snapshot(s,H.playerID(),raceprepRatings),diffApplied=M.diffApplied or 0,draftReset=M.draftReset or 0,resultNotice=resultNotice,pending=pending,applying=fuelOp~=nil or fuelRestore~=nil,practice=practice.data,myLaps=practice.laps,lastLap=practice.lastLap,
   sessionTiming=practice.status(),currentLapTime=practice.currentLapTime(),sessionRemaining=practice.remaining(),races=raceList,
   control=director.data,adminStatus=director.adminStatus,lights=director.lights,yellow=director.yellow(),falseStart=director.falseStart,
   driverRatings=(function()
@@ -281,6 +317,8 @@ M.snapshot=function()
  if v and d then
   local e,why=rating(v);out.car={id=v:getID(),model=v:getJBeamFilename(),rating=e,ratingStatus=why,summary=U.summary(v:getID()),revision=tostring(d.vdata)}
   if M.visible then
+   out.sharedTunes=sharedTunesView.model==v:getJBeamFilename() and sharedTunesView or {items={}}
+   out.setupLibrary=library().list(v:getJBeamFilename(),Library.signature(d.vdata.activeParts or d.config.partsTree),Setup.mergeVars(d,{}))
    local curves=U.engineCurves and U.engineCurves(v:getID())
    local cacheKey=tostring(d.vdata)..':'..tostring(curves~=nil)
    if cachedData~=cacheKey then cachedData=cacheKey;cachedRows=U.list(v:getID()) end
@@ -299,6 +337,26 @@ M.snapshot=function()
     end
     out.parts=rows
    end
+   out.piPreviewGate=raceprepRatings and raceprepRatings.previewGate and raceprepRatings.previewGate()or{};out.targetClass=rules().targetClass;out.piPreviewEnabled=M.piPreviewEnabled==true
+   out.classSearch=previewSearch and {checked=previewSearch.engine.checked}or nil
+   if out.targetClass and out.targetClass~=''and e then
+    local _,cap=ClassBuild.band(out.targetClass,require('ge/extensions/raceprep/rating').classOf);out.classOver=math.max(0,e.pi-cap)
+   end
+   if M.piPreviewEnabled and raceprepRatings and raceprepRatings.previewRating then
+    local tree,treeWhy=U.previewTree(v:getID(),draftPreviewChanges)
+    if tree then local pe,err,waiting=raceprepRatings.previewRating(v:getID(),tree);out.piEstimate={entry=pe,error=err,pending=waiting,before=e} else out.piEstimate={error=treeWhy}end
+    out.optionEstimates={}
+    if previewRow and previewRow.path then
+     for _,row in ipairs(out.parts or {})do if table.concat(row.path or {},'/')==previewRow.path then
+      for _,o in ipairs(row.options or {})do if not o.unsafe and not o.ruleBlock then
+       local changes={};for _,c in ipairs(draftPreviewChanges)do if table.concat(c[1].path or {},'/')~=previewRow.path then changes[#changes+1]=c end end;changes[#changes+1]={row,o.name}
+       local candidate=U.previewTree(v:getID(),changes)
+       if candidate then local ce,err,waiting=raceprepRatings.previewRating(v:getID(),candidate);out.optionEstimates[o.name]={pi=ce and ce.pi,delta=ce and e and ce.pi-e.pi,error=err,pending=waiting}end
+      end end
+     end end
+    end
+   end
+
    out.conversionAvailability=require('ge/extensions/raceprep/engineConversions').view(v:getJBeamFilename())
    out.drivetrainAvailability=require('ge/extensions/raceprep/drivetrainConversions').view(v:getJBeamFilename())
    out.moreEngineSlots=false
@@ -354,6 +412,7 @@ M.snapshot=function()
      out.tyreControls[#out.tyreControls+1]={axle=axle,widthMM=stock.widthMM,compound=fitted and fitted.compound or 'stock',offset=fitted and fitted.offsetMM or 0,compounds=compounds,widthBlocked=widthBlocked}
     end
    end
+   if M.piPreviewEnabled and extraOptionEstimates then extraOptionEstimates(v,out)end
    out.differentials={}
    for _,dev in ipairs(devices(v)) do
     local row={};for k,val in pairs(dev) do row[k]=val end
@@ -408,8 +467,9 @@ actions.draft=function(p)
  if type(p.tune)=='boolean' then pending.tune=p.tune end
  if type(p.diff)=='boolean' then pending.diff=p.diff end
  if type(p.upgrades)=='boolean' then pending.upgrades=p.upgrades end
+ if checkedDraft and p.parts then local changes=checkedDraft(p);if type(changes)=='table'then draftPreviewChanges=changes;draftChoices=p end end
 end
-actions.discard=function() pending={tune=false,diff=false,upgrades=false};M.draftReset=(M.draftReset or 0)+1 end
+actions.discard=function() draftPreviewChanges={};draftChoices={};previewSearch=nil;pending={tune=false,diff=false,upgrades=false};M.draftReset=(M.draftReset or 0)+1 end
 local historyAsked=-1e9
 local historyCache
 actions.history=function()
@@ -418,7 +478,22 @@ actions.history=function()
  if H.ready() and clock-historyAsked>=5 then historyAsked=clock;H.send('RacePrepGetHistory',{}) end
  return true
 end
-actions.show=function(p) M.visible=p.value~=false;uiReady=true;nextPush=0 end
+autoWorker=AutoRatingWorker.new{
+ current=function() local v=H.vehicle();if not v then return end;if not v.getVelocity then return end;local velocity=v:getVelocity();return{id=v:getID(),speed=velocity:length()}end,
+ free=function() return H.ready() and not H.session() and not RivalsSession.active() end,
+ spawn=function(model,config)
+  local current=H.vehicle();local pos=current and current:getPosition() or vec3(0,0,1)
+  local v=core_vehicles.spawnNewVehicle(model,{config=config and ('vehicles/'..model..'/'..config:gsub('%.pc$','')..'.pc'),autoEnterVehicle=false,pos=pos+vec3(80,80,2),vehicleName='bjrme-rating-worker'})
+  return v and v:getID()
+ end,
+ delete=function(id) local v=be:getObjectByID(id);if v then v:delete()end end,
+ enter=function(id) local v=be:getObjectByID(id);if v then be:enterVehicle(0,v)end end,
+ freeCamera=function() if commands and commands.setFreeCamera then commands.setFreeCamera()end end,
+ rated=function(id) return raceprepRatings and raceprepRatings.getVehicle(id)~=nil end,
+ send=function(p) if H.ready() then H.send('RacePrepAutoRating',p)end end,
+}
+actions.rateNow=function() H.send('RacePrepAutoRating',{action='rate'})end
+actions.show=function(p) M.visible=p.value~=false;uiReady=true;nextPush=0;if M.visible then H.send('RacePrepGetChallenges',{});H.send('RacePrepGetPresets',{});H.send('RacePrepGetProgress',{}) end end
 actions.refresh=function() uiReady=true;cachedData=nil;drivingIdleSent=nil;diffVdata={};nextPush=0 end
 actions.tab=function(p) if type(p.name)=='string' then M.tab=p.name:sub(1,30) end end
 actions.chooseCar=function()
@@ -444,6 +519,83 @@ actions.undo=function() local v=own();if v and H.partsEditable() then return reb
 actions.saveSetup=function(p)
  if type(p.name)~='string' or not p.name:match('^[%w _%-]+$') or #p.name>80 then return reject('Use a setup name with letters, numbers, spaces or dashes.') end
  local ok,msg=U.save(p.name);if not ok then return reject(msg) end;M.message=msg;return true
+end
+actions.rivalsStart=function(p)
+ if not H.ready() or clock-hostSeen>5 then return reject('Waiting for the Motorsport Expansion server bridge.') end
+ if H.session() or require('ge/extensions/raceprep/session').active() then return reject('Return to free roam and end the current practice activity first.') end
+ local v=own();if not v then return reject('Choose your own rated car.') end
+ local mp=MPVehicleGE and MPVehicleGE.getVehicleByGameID and MPVehicleGE.getVehicleByGameID(v:getID())
+ local sid=mp and (mp.serverVehicleID or mp.serverVehicleString)
+ if not sid then return reject('Waiting for the network car identity.') end
+ H.send('RacePrepRivals',{action='start',rotation=p.rotation,weekly=p.weekly==true,practice=p.practice==true,challenge=p.challenge,runID=p.runID,competitor=p.competitor,model=p.model,vehicle=sid})
+end
+actions.challenges=function(p) H.send('RacePrepGetChallenges',p or {}) end
+actions.rivalsModerate=function(p) H.send('RacePrepRivalsModerate',p) end
+actions.rivalsStop=function() RivalsSession.stop() end
+actions.rivalsGhosts=function(p) RivalsSession.setGhosts(p) end
+actions.rivalsGoToStart=function() local ok,why=RivalsSession.goToStart();if not ok then return reject(why) end;return true end
+actions.radar=function(p)
+ radarEnabled=p.enabled==true
+ if radarEnabled and extensions and extensions.load and not ui_vehicleRadarApp then extensions.load('ui_vehicleRadarApp') end
+end
+actions.sharedTunes=function(p)
+ local d,v=data();if not d or not v then return reject('Choose your own car.') end
+ local mp=MPVehicleGE and MPVehicleGE.getVehicleByGameID and MPVehicleGE.getVehicleByGameID(v:getID())
+ local sid=mp and (mp.serverVehicleID or mp.serverVehicleString)
+ local payload={action=p.action,id=p.id,vehicle=sid,model=v:getJBeamFilename(),hardware=Library.signature(d.vdata.activeParts or d.config.partsTree)}
+ if p.action=='publish' then
+  local e=library().get(p.id)
+  if not e or e.model~=payload.model or e.hardware~=payload.hardware then return reject('Fit the same car and hardware before publishing this tune.') end
+  payload.entry=e;payload.notes=p.notes
+ end
+ H.send('RacePrepSharedTunes',payload)
+end
+actions.librarySave=function(p)
+ local d,v=data();if not v or not d then return reject('Choose your own car.') end
+ if pending.tune or pending.diff or pending.upgrades or fuelOp or fuelRestore then return reject('Apply or discard pending edits before saving the applied setup.') end
+ local e=rating(v) or {};local rt=runtime()
+ local ok,msg=library().save(p.name,{model=v:getJBeamFilename(),hardware=Library.signature(d.vdata.activeParts or d.config.partsTree),
+  vars=Setup.mergeVars(d,{}),diffs=rt and rt.diffSettings and rt.diffSettings[v:getID()] or {},pi=e.pi,class=e.class})
+ if not ok then return reject(msg) end;M.message=msg;return true
+end
+actions.libraryChange=function(p)
+ if fuelOp or fuelRestore then return reject('Wait for the current setup change.') end
+ local ok,msg=library().change(p.action,p.id,p.name)
+ if not ok then return reject(msg) end;M.message=msg;return true
+end
+actions.libraryLoad=function(p)
+ local d,v=data();local rt=runtime();local entry=library().get(p.id)
+ if not v or not d or not rt or not H.tuningEditable() then return reject('Setup loading is locked; unready or return to free roam.') end
+ if pending.tune or pending.diff or pending.upgrades then return reject('Apply or discard pending edits before loading a setup.') end
+ if not entry or entry.model~=v:getJBeamFilename() or entry.hardware~=Library.signature(d.vdata.activeParts or d.config.partsTree) then return reject('This setup requires the same car and fitted parts.') end
+ local checkedRules=Library.signature(rules())
+ local meta={};for _,m in ipairs(tuning(d)) do meta[m.name]=m end
+ local current=Setup.mergeVars(d,{});local target={}
+ for key,value in pairs(entry.vars or {}) do
+  if current[key]~=value then
+   local m=meta[key];local n=Setup.finite(value)
+   if not m or not m.allowed or not n or n<m.min or n>m.max then return reject('Saved setting is unavailable, out of range or locked: '..tostring(key)) end
+   target[key]=n
+  end
+ end
+ local invalidDiff=Setup.diffProblem({vdata=d.vdata,config={vars=Setup.mergeVars(d,target)}},rules(),entry.diffs or {},devices(v))
+ if invalidDiff then return reject(invalidDiff) end
+ local diffs,diffVars,why=Setup.diffApply(d,rules(),devices(v),entry.diffs or {})
+ if not diffs then return reject(why) end
+ for key,value in pairs(diffVars) do target[key]=value end
+ local prospective={vdata=d.vdata,config={vars=Setup.mergeVars(d,target)}}
+ why=Setup.diffProblem(prospective,rules(),diffs,devices(v)) or Setup.aeroProblem(prospective,rules()) or
+  require('ge/extensions/raceprep/partsRules').violation(v:getID(),rules()) or U.compoundViolation(v:getID(),rules())
+ if why then return reject(why) end
+ return rebuild(function()
+  if not H.tuningEditable() or Library.signature(rules())~=checkedRules or own()~=v or Library.signature(data().vdata.activeParts or data().config.partsTree)~=entry.hardware then return false,'Car or session changed; setup was not loaded.' end
+  -- Undo and fuel restoration use the same path as workshop changes.
+  U.history[#U.history+1]={vehID=v:getID(),tree=deepcopy(d.config.partsTree),vars=deepcopy(d.config.vars or {}),diffs=deepcopy(rt.diffSettings[v:getID()] or {}),label='Load setup: '..entry.name}
+  while #U.history>20 do table.remove(U.history,1) end
+  rt.applyDiff(v:getID(),diffs)
+  core_vehicle_partmgmt.setConfigVars(Setup.mergeVars(d,target),true)
+  M.diffApplied=(M.diffApplied or 0)+1;M.draftReset=(M.draftReset or 0)+1;M.message='Loaded '..entry.name..'.';return true
+ end)
 end
 actions.enginePackage=function(p)
  local v=own();local n=tonumber(p.number)
@@ -547,7 +699,7 @@ actions.tyre=function(p)
 end
 -- Upgrades > Apply upgrades: every pending part and tyre in one reload.
 -- parts={{index,name}}, tyres={{axle,compound,offset}}
-actions.upgrades=function(p)
+checkedDraft=function(p)
  local d,v=data();if not v or not H.partsEditable() then return reject('Parts are locked by this session or its BJR vehicle restriction.') end
  local changes,labels={},{}
  local list=U.list(v:getID())
@@ -573,12 +725,124 @@ actions.upgrades=function(p)
   for _,c in ipairs(more) do changes[#changes+1]=c end
   labels[#labels+1]='tyres'
  end
+ if p.body then
+  local W=bodyAdapter(d);local stage=W.find(p.body);if not stage then return reject('Unknown weight stage.')end
+  local allowed,why=U.allowed('body',rules(),not H.session(),H.onGrid());if not allowed then return reject(why)end
+  local blocked=ruleBlock({kind='body',stage=p.body},W.stage(d,U.catalog).key,p.body);if blocked then return reject(blocked)end
+  changes[#changes+1]={{title='Weight reduction',group='body',bodyStage=true,path={'@body'}},p.body};labels[#labels+1]='Weight reduction'
+ end
+ return changes,labels,d,v
+end
+actions.upgrades=function(p)
+ local changes,labels,d,v=checkedDraft(p);if type(changes)~='table'then return false end
  if #changes==0 then return reject('No upgrade changes to apply.') end
  for _,c in ipairs(changes) do
   if c[1].group=='conversion' and #changes~=1 then return reject('Apply the engine conversion separately, then choose its upgrades.') end
  end
- pending.upgrades=false
+ pending.upgrades=false;draftPreviewChanges={};draftChoices={};previewSearch=nil
  return rebuild(function() return U.applyMany(v:getID(),changes,'Upgrades: '..table.concat(labels,', '),rating(v)) end)
+end
+actions.classPreset=function(p)
+ M.preparedPreset=nil;M.preparedRules=nil
+ for _,item in ipairs(M.presetLibrary and M.presetLibrary.items or {})do if item.id==p.id and item.offered and item.patch and item.patch.targetClass and item.patch.targetClass~=''then
+  local base=deepcopy(runtime()and runtime().DEFAULT_RULES or {});local function merge(a,b)for k,v in pairs(b)do if type(v)=='table'then a[k]=type(a[k])=='table'and a[k]or{};merge(a[k],v)else a[k]=v end end end
+  merge(base,item.patch);M.preparedRules=base;M.preparedPreset=item.id
+ end end
+ nextPush=0
+end
+actions.piPreview=function(p) M.piPreviewEnabled=p.enabled==true;if not M.piPreviewEnabled then previewRow=nil end end
+actions.previewOptions=function(p) previewRow=p end
+local function previewChanges(v,changes)
+ local tree,why=U.previewTree(v:getID(),changes);if not tree then return nil,why end
+ return raceprepRatings.previewRating(v:getID(),tree)
+end
+extraOptionEstimates=function(v,out)
+ if not previewRow or previewRow.kind=='part'then return end
+ out.optionEstimates=out.optionEstimates or {}
+ local candidates={}
+ if previewRow.kind=='packages'then
+  for _,pack in ipairs(out.enginePackages or {})do if not pack.blocked then
+   local tree=U.packageTree(v:getID(),pack.number)
+   if tree then local ce,err,waiting=raceprepRatings.previewRating(v:getID(),tree);local e=rating(v);out.optionEstimates[tostring(pack.number)]={pi=ce and ce.pi,delta=ce and e and ce.pi-e.pi,error=err,pending=waiting}end
+  end end
+ elseif previewRow.kind=='body'then for _,stage in ipairs(out.bodyStages or {})do if not stage.blocked then candidates[#candidates+1]={value=stage.key,body=stage.key}end end
+ elseif previewRow.kind=='compound'or previewRow.kind=='width'then
+  for _,tyre in ipairs(out.tyreControls or {})do if tyre.axle==previewRow.axle then
+   local values=previewRow.kind=='compound'and tyre.compounds or{{value=-20},{value=0},{value=20},{value=40}}
+   for _,o in ipairs(values)do if not o.blocked and not(tyre.widthBlocked or {})[tostring(o.value)]then
+    local changed={axle=tyre.axle,compound=previewRow.kind=='compound'and o.value or tyre.compound,offset=previewRow.kind=='width'and o.value or tyre.offset}
+    candidates[#candidates+1]={value=o.value,tyre=changed}
+   end end
+  end end
+ end
+ for _,candidate in ipairs(candidates)do
+  local p=deepcopy(draftChoices);p.parts=p.parts or{};p.tyres=p.tyres or{}
+  if candidate.body then p.body=candidate.body end
+  if candidate.tyre then
+   local list={};for _,tyre in ipairs(p.tyres)do if tyre.axle~=candidate.tyre.axle then list[#list+1]=tyre end end
+   list[#list+1]=candidate.tyre;p.tyres=list
+  end
+  local changes=checkedDraft(p)
+  if type(changes)=='table'then
+   local ce,err,waiting=previewChanges(v,changes);local e=rating(v)
+   out.optionEstimates[tostring(candidate.value)]={pi=ce and ce.pi,delta=ce and e and ce.pi-e.pi,error=err,pending=waiting}
+  end
+ end
+end
+local function quickOptions(v,d)
+ local options,rows={},{};local compare=require('ge/extensions/raceprep/partsRules').compare
+ for _,row in ipairs(U.list(v:getID()))do
+  if row.group~='conversion'and row.slot~='Camso_TransferCase'and row.group~='nitrous'then
+   local key=table.concat(row.path or {},'/');rows[key]=row
+   local stock=require('ge/extensions/raceprep/partsRules').factoryPart(v:getID(),row.slot)
+   for _,o in ipairs(row.options or {})do if o.name~=(row.current or '')and not o.unsafe then
+    local category=row.group=='tyres'and'grip'or row.group=='engine'and'power'or tostring(row.title):lower():find('brake')and'brakes'or row.group=='body'and'weight'or'other'
+    options[#options+1]={row=key,name=o.name,category=category,remove=o.name==stock or o.name=='',entry=row,option=o}
+   end end
+  end
+ end
+ local W=bodyAdapter(d)
+ for _,stage in ipairs(W.rows(d,U.catalog))do if not stage.fitted then
+  local row={path={'@body'},title='Weight reduction',group='body',bodyStage=true};rows['@body']=row
+  options[#options+1]={row='@body',name=stage.key,category='weight',remove=stage.key=='stock',entry=row,option={name=stage.key,rule={kind='body',stage=stage.key}}}
+ end end
+ return options,rows
+end
+actions.quickClass=function(p)
+ local d,v=data();if not v or not H.partsEditable()then return reject('Parts are locked.')end
+ local target=rules().targetClass;if not target or target==''then return reject('Select a build-to-class race or preset first.')end
+ local _,classCap=ClassBuild.band(target,require('ge/extensions/raceprep/rating').classOf);local cap=math.min(classCap,tonumber(rules().piMax)or classCap)
+ local factory=raceprepRatings.factoryRating(v:getID());if not factory then return reject('Waiting for factory PI.')end
+ if factory.pi>classCap then return reject("This car's factory PI is already above "..target)end
+ local options,rows=quickOptions(v,d);local revision=tostring(d.vdata);local ruleSignature=Library.signature(rules())
+ local selected={};for _,c in ipairs(draftPreviewChanges)do selected[table.concat(c[1].path,'/')]=c[2]end
+ local api={cap=cap,draft=p.fit and {}or selected,options=options,limit=240,
+  allowed=function(o)local ok=U.allowed(o.entry.group,rules(),not H.session(),H.onGrid());return ok and not ruleBlock(o.option.rule,o.entry.current or '',o.name)end,
+  predict=function(build)
+   local changes={};for key,name in pairs(build)do if rows[key]then changes[#changes+1]={rows[key],name}end end
+   return previewChanges(v,changes)
+  end}
+ previewSearch={engine=ClassBuild.search(api,p.fit and'fit'or'quick'),revision=revision,ruleSignature=ruleSignature,rows=rows,id=v:getID()};M.message='Estimating permitted builds…'
+end
+local function searchTick()
+ if not previewSearch then return end
+ local q=previewSearch;local d,v=data()
+ if not v or v:getID()~=q.id or tostring(d.vdata)~=q.revision or Library.signature(rules())~=q.ruleSignature then previewSearch=nil;return reject('Car or rules changed; draft search stopped.')end
+ for _=1,8 do q.engine.step();if q.engine.done then break end end
+ if q.engine.done then
+  previewSearch=nil;M.message=q.engine.message
+  local lo=ClassBuild.band(rules().targetClass,require('ge/extensions/raceprep/rating').classOf);if q.engine.predictedPI and q.engine.predictedPI<lo then M.message=M.message..' This draft remains below '..rules().targetClass..'; adjust parts or choose another car.'end
+  if q.engine.result then
+   local payload={parts={},tyres={}}
+   for key,name in pairs(q.engine.result)do
+    local part=(U.catalog.parts or{})[name]
+    if key=='@body'then payload.body=name
+    elseif part and part.kind=='tyre'and part.axle and part.compound then payload.tyres[#payload.tyres+1]={axle=part.axle,compound=part.compound,offset=part.offsetMM or 0}
+    else payload.parts[#payload.parts+1]={path=key,name=name}end
+   end
+   local changes=checkedDraft(payload);if type(changes)=='table'then draftPreviewChanges=changes;draftChoices=payload;pending.upgrades=#changes>0;guihooks.trigger('RacePrepBJRBuildDraft',payload)end
+  end
+ end
 end
 actions.fuel=function(p)
  local v=own();if not v or not H.editable() or rules().fuel==false or fuelOp or fuelRestore then return reject('Fuel is locked.') end
@@ -658,15 +922,19 @@ actions.weekendStart=function(p)
  if not can('weekend') then return reject('Your BeamJoy group cannot start a race weekend.') end
  local found=false;for _,r in pairs(beamjoy_races and beamjoy_races.data or {}) do if tostring(r.id)==tostring(p.raceID) then found=true end end
  if not found then return reject('Choose a race on the current map.') end
- require('ge/extensions/raceprep/session').weekendStart(p.raceID,tonumber(p.practiceMinutes),tonumber(p.qualifyingMinutes),p.gridOrder)
+ require('ge/extensions/raceprep/session').weekendStart(p.raceID,tonumber(p.practiceMinutes),tonumber(p.qualifyingMinutes),p.gridOrder,tonumber(p.raceLaps))
 end
 actions.weekendNext=function() if can('weekend') then require('ge/extensions/raceprep/session').weekendNext() end end
 actions.weekendEnd=function() if can('weekend') then require('ge/extensions/raceprep/session').weekendEnd() end end
 -- Motorsport settings: {permissions, weekend}; the server checks the permission
+actions.rivalNotice=function(p) H.send('RacePrepRivalNotices',p) end
+actions.eventPresets=function(p) H.send('RacePrepPresetAction',p) end
+actions.progression=function(p) H.send('RacePrepProgressAction',p) end
+actions.progressCache=function() if M.challenges then guihooks.trigger('RacePrepBJRChallenges',M.challenges) end; H.send('RacePrepGetPresets',{});if M.presetLibrary then guihooks.trigger('RacePrepBJRPresets',M.presetLibrary) end;H.send('RacePrepGetProgress',{});if M.progress then guihooks.trigger('RacePrepBJRProgress',M.progress) end;if M.progressHistory then guihooks.trigger('RacePrepBJRLeague',M.progressHistory) end end
 actions.motorsport=function(p)
- if not can('rules') then return reject('Your BeamJoy group cannot change Motorsport settings.') end
+ if not can('rules') and not (p.scope=='crews' and can('manageCrews')) then return reject('Your BeamJoy group cannot change Motorsport settings.') end
  if type(p.permissions)~='table' or type(p.weekend)~='table' then return reject('Invalid settings.') end
- H.send('RacePrepSetMotorsport',{permissions=p.permissions,weekend=p.weekend})
+ H.send('RacePrepSetMotorsport',p)
 end
 -- Motorsport settings > Optional mods: stop reminders for one mod
 actions.optionalIgnore=function(p)
@@ -693,7 +961,36 @@ M.onUpdate=function(dt)
  end
  wasReady=true
  if not handlerRegistered and AddEventHandler then
+  AddEventHandler('RacePrepRivalNotice',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then guihooks.trigger('RacePrepBJRRivalNotice',p) end end,'raceprepBJR')
+  AddEventHandler('RacePrepRivalGhost',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then actions.rivalsStart(p) end end,'raceprepBJR')
+  AddEventHandler('RacePrepAutoRatingJob',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table'then autoWorker.receive(p)end end,'raceprepBJR')
+  AddEventHandler('RacePrepAutoRatingState',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table'then M.autoRatings=p;if raceprepRatings and raceprepRatings.autoRatings then raceprepRatings.autoRatings(p)end;guihooks.trigger('RacePrepBJRAutoRatings',p)end end,'raceprepBJR')
+  AddEventHandler('RacePrepChallenges',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then M.challenges=p;guihooks.trigger('RacePrepBJRChallenges',p) end end,'raceprepBJR')
+  AddEventHandler('RacePrepPresets',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then M.presetLibrary=p;if M.preparedPreset then actions.classPreset({id=M.preparedPreset})end;local rt=runtime();if rt then rt.presetSessions=p.sessions or {} end;guihooks.trigger('RacePrepBJRPresets',p);nextPush=0 end end,'raceprepBJR')
+  AddEventHandler('RacePrepReward',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then guihooks.trigger('RacePrepBJRReward',p) end end,'raceprepBJR')
+  AddEventHandler('RacePrepDriverCard',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then M.driverCard=p;guihooks.trigger('RacePrepBJRDriverCard',p) end end,'raceprepBJR')
+  AddEventHandler('RacePrepLeague',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then M.progressHistory=p;guihooks.trigger('RacePrepBJRLeague',p) end end,'raceprepBJR')
+  AddEventHandler('RacePrepProgress',function(wire) local ok,p=pcall(jsonDecode,wire);if ok and type(p)=='table' then M.progress=p;guihooks.trigger('RacePrepBJRProgress',p) end end,'raceprepBJR')
   AddEventHandler('RacePrepBJRResults',M.onResults,'raceprepBJR')
+  AddEventHandler('RacePrepSharedTunes',function(wire)
+   local ok,p=pcall(jsonDecode,wire or '');if not ok or type(p)~='table' then return end
+   if p.items then sharedTunesView=p end
+   if p.error then reject(p.error) end
+   if p.message then M.message=p.message end
+   if p.entry then
+    local e=p.entry;e.sharedSource=e.id;e.id=nil
+    local base=(e.name..' ('..tostring(e.author or 'shared')..')'):sub(1,72)
+    local success,msg=library().save(base,e)
+    if not success then reject(msg) else M.message='Copied to your local library: '..base end
+   end
+  end)
+  AddEventHandler('RacePrepRivalsSession',function(wire)
+   local ok,p=pcall(jsonDecode,wire or '');if not ok or type(p)~='table' then return end
+   RivalsSession.receive(p)
+   if p.track and RivalsSession.active() then
+    local why=M.readyProblem();if why then RivalsSession.stop();reject('Rivals build does not meet the selected rules: '..why) end
+   end
+  end)
   AddEventHandler('RacePrepHistory',function(wire)
    local ok,p=pcall(jsonDecode,wire)
    if ok and type(p)=='table' then historyCache=p;guihooks.trigger('RacePrepBJRHistory',p) end
@@ -707,19 +1004,25 @@ M.onUpdate=function(dt)
    -- 'full': BJR's full window opened our tab, so open full screen on the current tab
    M.openFull=section=='full'
    if not M.openFull then M.tab=section:sub(1,30) end
-   M.visible=true;M.openRequest=(M.openRequest or 0)+1;nextPush=0
+   M.visible=true;M.openRequest=(M.openRequest or 0)+1;nextPush=0;H.send('RacePrepGetChallenges',{});H.send('RacePrepGetPresets',{});H.send('RacePrepGetProgress',{})
   end,'raceprepBJR')
   if TriggerServerEvent then pcall(TriggerServerEvent,'RacePrepRailAsk','') end
   handlerRegistered=true
+  H.send('RacePrepGetChallenges',{});H.send('RacePrepGetPresets',{});H.send('RacePrepGetProgress',{})
  end
  hookReady()
+ local nowMs=GetCurrentTimeMillis and GetCurrentTimeMillis() or clock*1000
+ searchTick()
+ autoWorker.update(dt or 0)
+ RivalsSession.update(nowMs)
+ RivalsSession.draw(nowMs)
  fuelTick()
  refreshSelector()
  if uiReady and clock>=nextDriving then
   local ok,packet=pcall(require('ge/extensions/raceprep/bjr/driving').packet,GetCurrentTimeMillis and GetCurrentTimeMillis() or clock*1000,clock)
   if ok then
    -- race timing itself is BJR's (BJRaceHud, read by the HUD in the UI)
-   local activeOverlay=(packet.race~=nil) or (packet.practice~=nil) or (packet.announcement~=nil) or (next(packet.signals or {})~=nil)
+   local activeOverlay=(packet.rivals and packet.rivals.active) or (packet.race~=nil) or (packet.practice~=nil) or (packet.announcement~=nil) or (next(packet.signals or {})~=nil)
    nextDriving=clock+(activeOverlay and .05 or .25)
    if activeOverlay or drivingIdleSent~=packet.active then
     drivingIdleSent=not activeOverlay and packet.active or nil
@@ -732,6 +1035,7 @@ M.onUpdate=function(dt)
  end
  if clock>=nextKTS then
   nextKTS=clock+1
+  if radarEnabled and not ui_vehicleRadarApp and extensions and extensions.load then extensions.load('ui_vehicleRadarApp') end
   local d,v=data();lastVehicle=v or lastVehicle;local rt=runtime()
   for _,name in ipairs({'roadTemperature','luukstyrethermalsandwear','createbrakeductsliders'}) do
    if not rawget(_G,name) then
@@ -772,9 +1076,10 @@ M.onExtensionLoaded=function()
  if not raceprepRatings then extensions.load('raceprepRatings') end
 end
 M.onServerLeave=function()
+ RivalsSession.stop();Strategy.reset();sharedTunesView={items={}}
  historyAsked=-1e9
  historyCache=nil
- guihooks.trigger('RacePrepBJRHistory',{items={},records={}})
+ guihooks.trigger('RacePrepBJRRivalNotice',{kind='clear'});guihooks.trigger('RacePrepBJRReward',{clear=true});autoWorker.disconnect();M.autoRatings=nil;guihooks.trigger('RacePrepBJRAutoRatings',{});M.challenges=nil;guihooks.trigger('RacePrepBJRChallenges',{});M.preparedRules=nil;M.preparedPreset=nil;M.presetLibrary=nil;local rt=runtime();if rt then rt.presetSessions=nil end;guihooks.trigger('RacePrepBJRPresets',{});M.driverCard=nil;M.progress=nil;M.progressHistory=nil;guihooks.trigger('RacePrepBJRProgress',{});guihooks.trigger('RacePrepBJRLeague',{});guihooks.trigger('RacePrepBJRHistory',{items={},records={}})
  Sidebar.reset()
  Selector.restore(selectorBinding);selectorBinding=nil;selectorStamp=nil
  require('ge/extensions/raceprep/bjr/driving').reset()
@@ -796,6 +1101,7 @@ M.onServerLeave=function()
  M.visible=false
 end
 M.onExtensionUnloaded=function()
+ RivalsSession.stop()
  Sidebar.stop()
  Selector.restore(selectorBinding);selectorBinding=nil
  if guihooks then guihooks.trigger('RacePrepBJRDriving',{active=false,signals={}}) end

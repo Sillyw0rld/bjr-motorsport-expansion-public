@@ -160,6 +160,86 @@
   "sourceSha256": "104d527ec00d1c44be754f7e4ebcf45dd7b199bbf46d3a21309a6488718999e0"
  },
  {
+  "model": "estrogene__desse_le_man",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Desse LE MAN 265/35/21 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.365,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.638734,
+   "fullLoadCoef": 0.13825,
+   "loadSensitivitySlope": 0.000157,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "58f59af0053ba051ec8a393d6d6f3dd573e91bcaf10deae060c2e70f79a3c60e"
+ },
+ {
+  "model": "estrogene__desse_le_man",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Desse LE MAN 345/30/21 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 345.0,
+  "radiusM": 0.365,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.633358,
+   "fullLoadCoef": 0.137945,
+   "loadSensitivitySlope": 0.00010619999999999999,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "650fb0d64f5223394dfa2b3033c814f69ede3f38bc7a9b9ca2d7749783227422"
+ },
+ {
+  "model": "estrogene_desse_ss",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Desse SS 265/35/21 Radial Semi-Slick Alloy Front Wheels",
+  "tireWidthMM": 265.0,
+  "radiusM": 0.365,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.638734,
+   "fullLoadCoef": 0.13825,
+   "loadSensitivitySlope": 0.000157,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "1592ba8b69747a44c5efe4c19f589733e8681fb2ec7e571d75b62535e4ef462b"
+ },
+ {
+  "model": "estrogene_desse_ss",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Desse SS 345/30/21 Radial Semi-Slick Alloy Rear Wheels",
+  "tireWidthMM": 345.0,
+  "radiusM": 0.365,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.633358,
+   "fullLoadCoef": 0.137945,
+   "loadSensitivitySlope": 0.00010619999999999999,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "e837566097ef61726b7d356c45bae9e0edee606ecf27a3dec84cdbd82f6e3ad3"
+ },
+ {
   "model": "firestarter_clone_kalalalac",
   "axle": "front",
   "compound": "sport",
@@ -958,6 +1038,46 @@
    "stribeckVelMult": 2.2
   },
   "sourceSha256": "8e1934905f606cca7207b736727f48cdc26925b46711683d9bdc05d15d33a939"
+ },
+ {
+  "model": "hawk_bavaria_h3",
+  "axle": "front",
+  "compound": "semi_slick",
+  "title": "Bavaria h3 275/40/20 Radial Semi-Slick Magnesium Front Wheels",
+  "tireWidthMM": 275.0,
+  "radiusM": 0.37,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.746779,
+   "fullLoadCoef": 0.144375,
+   "loadSensitivitySlope": 0.000152,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "811c7c74989f44991f6d6e9e073509257dd9821dda6f1b4273579aa7f2d03e34"
+ },
+ {
+  "model": "hawk_bavaria_h3",
+  "axle": "rear",
+  "compound": "semi_slick",
+  "title": "Bavaria h3 355/35/20 Radial Semi-Slick Magnesium Rear Wheels",
+  "tireWidthMM": 355.0,
+  "radiusM": 0.37,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.746523,
+   "fullLoadCoef": 0.144361,
+   "loadSensitivitySlope": 9.45e-05,
+   "softnessCoef": 0.9,
+   "treadCoef": 0.1,
+   "stribeckExponent": 2.3625,
+   "stribeckVelMult": 2.2
+  },
+  "sourceSha256": "e14e8b980d8edbd90e1148dc88e7862dc7c7d307517816f0ade9a8fe299453dd"
  },
  {
   "model": "hawk_carolina_gt",

@@ -10,32 +10,37 @@ MP={GetPlayers=function() return {[1]='One',[2]='Two',[3]='Three'} end,GetPlayer
  TriggerClientEvent=function(pid,event,wire) sent[#sent+1]={pid=pid,event=event,data=wires[wire],raw=wire} end}
 local h=dofile('server/RacePrep/BJRHost.lua')
 h.enabled=true;h.setLevel('test')
-local a={runID='a',raceID=1,level='test',phase='race',remaining=2000,participants={1,2},laps={['1']=1,['2']=1}}
-local b={runID='b',raceID=1,level='test',phase='race',remaining=3000,participants={3},laps={['3']=1}}
+local a={runID='a',raceID=1,level='test',phase='race',remaining=2000,participants={1,2},racerKeyByPlayer={['1']='rk1',['2']='rk2'},laps={['1']=1,['2']=1}}
+local b={runID='b',raceID=1,level='test',phase='race',remaining=3000,participants={3},racerKeyByPlayer={['3']='rk3'},laps={['3']=1}}
 -- BJR state from its API (2.14.2): players.online staff, races.sessions runs
 h.setPlayers({{id=1,staff=true},{id=2,staff=false},{id=3}});h.setRuns({a=a,b=b})
 assert(h.canEdit(1) and not h.canEdit(2) and h.runFor(3)=='b')
-assert(not h.cut(1,{raceID=2,lap=1}));assert(h.cut(1,{raceID=1,lap=1}));assert(not h.cut(1,{raceID=1,lap=9}))
+assert(not h.cut(1,{raceID=2,lap=1}));assert(h.cut(1,{raceID=1,lap=1},{trackLimits='penalty',cutPenaltyAfter=0,cutPenaltySeconds=3}).racerKey=='rk1');assert(not h.cut(1,{raceID=1,lap=9}))
 local rules={startLights=true,startType='standing',falseStartPenaltySeconds=5,trackLimits='penalty',cutPenaltyAfter=0,cutPenaltySeconds=3}
-local c=dofile('server/RacePrep/RaceControl.lua').new{path='server/RacePrep',host=h,rules=function() return rules end,read=function() return nil end}
+local penalties={}
+local c=dofile('server/RacePrep/RaceControl.lua').new{path='server/RacePrep',host=h,rules=function() return rules end,read=function() return nil end,
+ penalize=function(run,key,ms) penalties[#penalties+1]={run,key,ms} end}
 c.snapshot({level='test',phase='none',participants={}});c.snapshot(a);c.snapshot(b)
 c.event(1,{runID='b',kind='falseStart'});c.event(1,{runID='a',kind='falseStart'})
-local res={runID='a',raceID=1,rows={{playerID=1,total=60000,position=1,lapList={{lap=1,time=60000,sectors={20000,20000,20000}}}}}}
-h.results(res,rules);assert(res.rows[1].total==63000 and res.rows[1].best==nil)
-c.applyPenalties(res);assert(res.rows[1].total==68000,'only this run receives its false start and cut')
+local res={runID='a',raceID=1,rows={{playerID=1,racerKey='rk1',total=68000,position=1,bjrPenaltyMs=8000,lapList={{lap=1,time=60000,sectors={20000,20000,20000}}}}}}
+h.results(res,rules);assert(res.rows[1].total==68000 and res.rows[1].best==nil and res.rows[1].penalty==8000)
+c.applyPenalties(res);assert(res.rows[1].total==68000 and res.rows[1].falseStart and penalties[1][2]=='rk1','BJR total once; false start sent by racer key')
 local other={runID='b',raceID=1,rows={{playerID=3,total=60000,position=1}}};c.applyPenalties(other);assert(other.rows[1].total==60000)
+local authoritative={runID='a',raceID=1,rows={{playerID=2,racerKey='rk2',total=120000,position=1,laps=2},{playerID=1,racerKey='rk1',total=68000,position=2,laps=1}}}
+c.applyPenalties(authoritative)
+assert(authoritative.rows[1].playerID==2 and authoritative.rows[2].total==68000,'lapped finisher keeps BJR position even with a shorter total')
 RacePrepGetControl(1);local latest=sent[#sent];assert(latest.pid==1 and latest.data.runID=='a','get control routes by session')
 now=106;assert(not h.canEdit(1) and not h.runFor(1),'stale host metadata fails closed')
 RacePrepTrackSet(1,'{}');assert(sent[#sent].raw:find("waiting for the BeamJoy-Revived plugin API",1,true),'stale BJR state is not misreported as missing admin permission')
 print('PASS: native server authority, current-lap cuts, concurrent same-layout results and private control views')
 local detail={runID='detail',rows={
- {playerID=1,laps=2,lapList={
+ {playerID=1,racerKey='rk1',laps=2,lapList={
   {lap=1,time=61000,sectors={21000,20000,20000}},
   {lap=2,time=60000,sectors={20000,21000,19000}}
  }},
  {playerID=2,laps=1,lapList={{lap=1,time=62000,sectors={22000,20000,20000}}}}
 }}
-h.cuts.detail={['1']={['2']=1}}
+h.cuts.detail={['rk1']={['2']=1}}
 h.results(detail,{trackLimits='invalid'})
 assert(detail.rows[1].best.time==61000 and detail.rows[1].bestAny.time==60000 and detail.rows[1].bestAny.invalid)
 assert(detail.rows[1].theoretical==61000 and detail.rows[1].fastestLap and detail.rows[2].lapsDown==1)

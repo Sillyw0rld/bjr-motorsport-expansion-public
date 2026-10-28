@@ -193,9 +193,10 @@ P.progress = function(self, lap, wp, p)
         local d2, off2 = along(self, key2, p)
         if off2 < off then
             best = (lap2 - 1) * lapLen + inLap(self, key2, d2)
+            off = off2
         end
     end
-    return best
+    return best, off
 end
 
 P.lapLength = function(self)

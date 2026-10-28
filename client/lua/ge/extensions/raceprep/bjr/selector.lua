@@ -10,8 +10,10 @@ function S.configKey(config)
  return config:match('([^/\\]+)%.pc$') or config
 end
 function S.check(model,config,rules,ratings)
- if not ratings or not ratings.getConfig then return true end
+ if rules.specModel and rules.specModel~='' and model~=rules.specModel then return false end
  local key=S.configKey(config)
+ if key and rules.specConfig and rules.specConfig~='' and key~=rules.specConfig then return false end
+ if not ratings or not ratings.getConfig then return true end
  if not key then return true end -- raw parts/captured configs are checked at Ready
  local e=ratings.getConfig(model,key)
  -- Same policy as main: unknown ratings stay visible while collecting;
@@ -22,7 +24,8 @@ function S.authorize(req,model,config,rules,ratings)
  if req and req.state~=false and not S.check(model,config,rules,ratings) then req.state=false end
 end
 function S.header(model,rules,ratings,getModel)
- local stamp={model,tostring(rules.piMin),tostring(rules.piMax)}
+ if rules.specModel and rules.specModel~='' and model~=rules.specModel then return false end
+ local stamp={model,tostring(rules.piMin),tostring(rules.piMax),tostring(rules.specModel),tostring(rules.specConfig)}
  for _,c in ipairs(Rating.classes) do stamp[#stamp+1]=tostring((rules.allowedClasses or {})[c]) end
  local key=table.concat(stamp,':');if headerCache[key]~=nil then return headerCache[key] end
  local data=getModel and getModel(model);local configs=data and data.configs

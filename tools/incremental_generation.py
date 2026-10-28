@@ -11,6 +11,7 @@ import zipfile
 
 import donor_registry
 import fleet
+import server_car_catalogue
 from parts_updater import CATALOGUES, ZIP_NAME, write_zip
 
 from runtime_paths import ROOT
@@ -204,6 +205,11 @@ def update(beammp, verbose=False, donors=None, check=False, server_session=False
         raise RuntimeError(f'Another generator is running, or a previous run was interrupted. Check processes before removing {lock}')
     try:
         plan = inspect(beammp, donors)
+        if not check:
+            try:
+                server_car_catalogue.write_index(Path(beammp).resolve() / 'Resources/Client', state_dir / 'server-car-catalogue.json')
+            except (OSError, ValueError) as error:
+                print(f'[BJR:ME] Server car list could not be refreshed; previous catalogue retained: {error}', flush=True)
         changed, removed = plan['changed'], plan['removed']
         print(f"[BJR:ME] {len(plan['cars'])} Automation vehicles; donors {plan['registry']['counts']}; {len(changed)} require generation", flush=True)
         result = {'status': 'check' if check else 'up-to-date', 'newCars': changed, 'removedCars': removed}

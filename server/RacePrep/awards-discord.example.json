@@ -1,0 +1,4 @@
+{
+  "enabled": false,
+  "webhook": "https://discord.com/api/webhooks/REPLACE_ID/REPLACE_TOKEN"
+}

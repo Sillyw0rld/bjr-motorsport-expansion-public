@@ -88,7 +88,7 @@ end
 --- the session is running (or in overtime) here: same map, free roam
 S.active = function()
     local d = S.data
-    return d and (d.state == "running" or d.state == "overtime") and d.track and
+    return d and not d.native and (d.state == "running" or d.state == "overtime") and d.track and
         d.track.level == level() and scenarioState() == "freeroam" or false
 end
 
@@ -96,6 +96,7 @@ end
 S.status = function()
     local d=S.data
     if not d then return {timing=false,code='none',message='No session is running.'} end
+    if d.native then return {timing=false,code='native',message='BeamJoy is timing this phase. Join the weekend lobby and use the race HUD.'} end
     if d.state=='ended' then return {timing=false,code='ended',message='Session ended.'} end
     if not d.track or not d.track.level then return {timing=false,code='checkpoints',message='Session track/checkpoint data is missing.'} end
     if d.track.level~=level() then return {timing=false,code='map',message='This session is on another map ('..tostring(d.track.level)..').'} end
@@ -344,7 +345,8 @@ end
 
 local function updateLimits(veh)
     local state, race = scenarioState()
-    local want = (state == "freeroam" and S.active() and S.data.trackLimits ~= "off") or (state == "race" and racing(race) and raceTrackLimits(race) ~= "off")
+    local rivals=package.loaded['ge/extensions/raceprep/bjr/rivalsSession']
+    local want = (rivals and rivals.active() and (rivals.rules() or {}).trackLimits~='off') or (state == "freeroam" and S.active() and S.data.trackLimits ~= "off") or (state == "race" and racing(race) and raceTrackLimits(race) ~= "off")
     local id = veh and veh:getID()
     if not want then
         if limitsOnVeh then
@@ -426,9 +428,9 @@ S.currentAnnouncement = function()
 end
 
 --- race weekend controls (sent to the server; it checks the permission)
-S.weekendStart = function(raceID, practiceMinutes, qualifyingMinutes, gridOrder)
+S.weekendStart = function(raceID, practiceMinutes, qualifyingMinutes, gridOrder, raceLaps)
     send("RacePrepWeekendStart", { raceID = raceID, level = level(), practiceMinutes = practiceMinutes,
-        qualifyingMinutes = qualifyingMinutes, gridOrder = gridOrder })
+        qualifyingMinutes = qualifyingMinutes, raceLaps = raceLaps, gridOrder = gridOrder })
 end
 S.weekendNext = function() send("RacePrepWeekendNext", {}) end
 S.weekendEnd = function() send("RacePrepWeekendEnd", {}) end

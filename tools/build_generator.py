@@ -27,6 +27,10 @@ def main():
                '--workpath', str(ROOT / 'build/pyinstaller'), '--specpath', str(ROOT / 'build'),
                '--paths', str(ROOT / 'tools'), '--collect-submodules', 'engine_swaps',
                '--collect-submodules', 'drivetrain_conversions']
+    # Linux Python ships its libraries with debug info (about 12 MB zipped);
+    # Windows keeps it in separate .pdb files, and PyInstaller advises against strip there.
+    if sys.platform == 'linux':
+        command.append('--strip')
     with tempfile.TemporaryDirectory(prefix='rp-freeze-data-') as tmp:
         staged = Path(tmp)
         for folder in ('tools', 'client/lua'):

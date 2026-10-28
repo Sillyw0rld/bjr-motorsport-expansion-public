@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "source": "BeamNG native model and default factory configuration names; base game required on clients",
+  "models": [
+    {
+      "model": "atv",
+      "name": "FPU vehiclesData.atv.Name",
+      "config": "base"
+    },
+    {
+      "model": "autobello",
+      "name": "Autobello vehiclesData.autobello.Name",
+      "config": "110_m"
+    },
+    {
+      "model": "barstow",
+      "name": "Gavril vehiclesData.barstow.Name",
+      "config": "291m_sport"
+    },
+    {
+      "model": "bastion",
+      "name": "Bruckell vehiclesData.bastion.Name",
+      "config": "base_v6_A"
+    },
+    {
+      "model": "bluebuck",
+      "name": "Gavril vehiclesData.bluebuck.Name",
+      "config": "423a_2door_hardtop"
+    },
+    {
+      "model": "bolide",
+      "name": "Civetta vehiclesData.bolide.Name",
+      "config": "350"
+    },
+    {
+      "model": "burnside",
+      "name": "Burnside vehiclesData.burnside.Name",
+      "config": "4door_late_v8_3A_luxe"
+    },
+    {
+      "model": "bx",
+      "name": "Ibishu vehiclesData.bx.Name",
+      "config": "200bx_type_l_M"
+    },
+    {
+      "model": "covet",
+      "name": "Ibishu vehiclesData.covet.Name",
+      "config": "DXi_M"
+    },
+    {
+      "model": "etk800",
+      "name": "ETK vehiclesData.etk800.Name",
+      "config": "854_190d_A"
+    },
+    {
+      "model": "etkc",
+      "name": "ETK vehiclesData.etkc.Name",
+      "config": "kc6x_360_A"
+    },
+    {
+      "model": "etki",
+      "name": "ETK vehiclesData.etki.Name",
+      "config": "2400i_M"
+    },
+    {
+      "model": "fullsize",
+      "name": "Gavril vehiclesData.fullsize.Name",
+      "config": "stock"
+    },
+    {
+      "model": "hopper",
+      "name": "Ibishu vehiclesData.hopper.Name",
+      "config": "lxt6_M"
+    },
+    {
+      "model": "lansdale",
+      "name": "Soliad vehiclesData.lansdale.Name",
+      "config": "25_base_A"
+    },
+    {
+      "model": "legran",
+      "name": "Bruckell vehiclesData.legran.Name",
+      "config": "s_v6_A"
+    },
+    {
+      "model": "midsize",
+      "name": "Ibishu vehiclesData.midsize.Name",
+      "config": "LX_V6_A"
+    },
+    {
+      "model": "miramar",
+      "name": "Ibishu vehiclesData.miramar.Name",
+      "config": "base_M"
+    },
+    {
+      "model": "moonhawk",
+      "name": "Bruckell vehiclesData.moonhawk.Name",
+      "config": "v8a_luxe_alt"
+    },
+    {
+      "model": "nine",
+      "name": "Bruckell vehiclesData.nine.Name",
+      "config": "nine_coupe_luxe"
+    },
+    {
+      "model": "pessima",
+      "name": "Ibishu vehiclesData.midsize.Name",
+      "config": "LX_M"
+    },
+    {
+      "model": "pickup",
+      "name": "Gavril vehiclesData.pickup.Name",
+      "config": "d15_4wd_A"
+    },
+    {
+      "model": "pigeon",
+      "name": "Ibishu vehiclesData.pigeon.Name",
+      "config": "base"
+    },
+    {
+      "model": "roamer",
+      "name": "Gavril vehiclesData.roamer.Name",
+      "config": "v8_4wd_xt"
+    },
+    {
+      "model": "rockbouncer",
+      "name": "SP vehiclesData.rockbouncer.Name",
+      "config": "rock_racer"
+    },
+    {
+      "model": "sbr",
+      "name": "Hirochi vehiclesData.sbr.Name",
+      "config": "TT_AWD_S2_DCT"
+    },
+    {
+      "model": "scintilla",
+      "name": "Civetta vehiclesData.scintilla.Name",
+      "config": "gts"
+    },
+    {
+      "model": "sunburst2",
+      "name": "Hirochi vehiclesData.sunburst2.Name",
+      "config": "sport_RS_wagon_DCT"
+    },
+    {
+      "model": "utv",
+      "name": "Hirochi vehiclesData.utv.Name",
+      "config": "turbo"
+    },
+    {
+      "model": "van",
+      "name": "Gavril vehiclesData.van.Name",
+      "config": "h15_vanster"
+    },
+    {
+      "model": "vivace",
+      "name": "Cherrier vehiclesData.vivace.Name",
+      "config": "vivace_S_410q_DCT"
+    },
+    {
+      "model": "wendover",
+      "name": "Soliad vehiclesData.wendover.Name",
+      "config": "s_v6_A"
+    },
+    {
+      "model": "wigeon",
+      "name": "Ibishu vehiclesData.wigeon.Name",
+      "config": "base"
+    }
+  ]
+}

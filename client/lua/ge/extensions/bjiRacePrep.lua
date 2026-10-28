@@ -39,6 +39,7 @@ local HANDLER_SOURCE = "bjiRacePrep"
 
 -- used when the server has no RacePrep plugin: everything allowed
 M.DEFAULT_RULES = {
+    targetClass = "",
     tuning = true,
     fuel = true,
     aero = true,
@@ -58,6 +59,7 @@ M.DEFAULT_RULES = {
     rubberBuildUp = false, rubberInitial = 20, rubberBuildKm = 50, rubberDryBonus = 3, rubberWetPenalty = 5,
     windEnabled = false, windSpeedKmh = 15, windDirection = 0, windGustKmh = 5, windGustPeriod = 12,
     safetyRating = false,
+    minSkill = 0, minSafety = "", minLicence = "", seriesName = "", specModel = "", specConfig = "",
     yellowFlags = false,
     startLights = false, falseStartPenaltySeconds = 0, falseStartTolerance = .75,
     paceSpeed = 80,
@@ -303,6 +305,9 @@ end
 --- effective rules for a race: built-in defaults < server default < race override
 ---@param raceID any?
 M.getRules = function(raceID)
+    local active=Platform.isBJR() and beamjoy_raceRunner and beamjoy_raceRunner.session
+    local selected=active and (raceID==nil or tostring(raceID)==tostring(active.raceId)) and M.presetSessions and M.presetSessions[tostring(active.id)]
+    if selected then return copyInto({},selected.rules) end
     local out = copyInto({}, M.DEFAULT_RULES)
     if M.rules then
         copyInto(out, M.rules.default)
@@ -701,6 +706,7 @@ end
 M.onRaceTelemetry = function(id,data) require("ge/extensions/raceprep/director").onTelemetry(id,data) end
 
 M.onCut = function(gameVehID)
+ local rivals=package.loaded['ge/extensions/raceprep/bjr/rivalsSession'];if rivals then rivals.cut(gameVehID) end
     local ok, session = pcall(require, "ge/extensions/raceprep/session")
     if ok then session.onCut(gameVehID) end
 end

@@ -36,7 +36,7 @@ C.record=function(store,res,identity,tournament)
  s.seen[key]=true
  local roundRows,seen={},{}
  for _,row in ipairs(res.rows or {}) do
-  local id=identity(row.playerID)
+  local id=identity(row.playerID,row)
   if id and not seen[id] then
    seen[id]=true
    local d=s.drivers[id] or {name=row.name,points=0,races=0,finishes={}}

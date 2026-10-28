@@ -62,36 +62,64 @@ if len(sys.argv) > 2 and sys.argv[2] == '--line':
 
 def strip_texture(path):
     """Racing-line patch for dynamic decals placed along the line (decal +Y =
-    along the line). Alpha is stepped (the decal renderer drops smooth fades);
-    patches overlap 2x lengthwise. Complementary optical-depth windows keep
-    that overlap even, rather than printing a dark oval every two metres.
-    This is the editable source of rubberstrip.png; no renderer work is added.
+    along the line); patches overlap 2x lengthwise. Complementary optical-depth
+    windows keep that overlap even, rather than printing a dark oval every two
+    metres. The look follows the game's own track rubber (2026-10-23, compared
+    in game on Hirochi): mottled at several scales, fine tyre streaks drifting
+    along the line, ragged edges and a few worn specks. Original work.
+    Alpha is smooth: BeamNG 0.40's dynamic decals draw smooth fades (the
+    stepped-alpha rule of 2026-10-14 no longer holds). This is the editable
+    source of rubberstrip.png; no renderer work is added.
     """
     W, L = 256, 512
-    rs = np.random.default_rng(20261018)
+    rs = np.random.default_rng(20261023)
+
+    def noise(cells, blur):
+        """value noise on a (rows, cols) grid, upscaled smoothly to L x W"""
+        small = Image.fromarray((rs.random(cells) * 255).astype(np.uint8))
+        big = small.resize((W, L), Image.BICUBIC).filter(ImageFilter.GaussianBlur(blur))
+        return np.asarray(big, dtype=np.float32) / 255
+
     u = np.linspace(-1, 1, W)[None, :]
     # Endpoint-excluded sampling means adjacent half-length patches have
     # exactly complementary Hann windows. Alpha compositing multiplies
     # transmission, so complement *optical depth*, not straight alpha.
     phase = np.arange(L)[:, None] / L
     along = .5 - .5 * np.cos(2 * np.pi * phase)
-    across = np.maximum(0, np.cos(u * np.pi / 2)) ** 1.6
-    # Fine longitudinal scuffing, without a broad cloudy variation that
-    # repeats across the whole line. Same profile at both ends of the patch.
-    strands = np.asarray(Image.fromarray((rs.random((1, W)) * 255).astype(np.uint8)).filter(
-        ImageFilter.GaussianBlur(.65)), dtype=np.float32) / 255
-    fine = rs.random((L, W))
-    depth = 1.35 * across * (.55 + .9 * strands)
-    # 0.85 is the existing fully-rubbered decal tint, kept in rubberLine.lua.
-    alpha = (1 - np.exp(-depth * along)) / .85
-    # Keep the engine-compatible 40/255 alpha levels. Stochastic rounding
-    # distributes the thresholds as fine grain instead of visible contour
-    # bands; it adds no texture samples or runtime randomness.
-    alpha = np.clip(np.floor(alpha * 255 / 40 + fine) * 40, 0, 240)
+    # mottling at three scales, stretched along the line
+    m = .45 * noise((6, 24), 2) + .35 * noise((16, 64), 1.2) + .2 * noise((64, 128), .6)
+    m = np.clip((m - .5) * 1.8 + .5, 0, 1)
+    # fine tyre streaks, drifting slowly sideways along the patch
+    base = np.asarray(Image.fromarray((rs.random((1, W)) * 255).astype(np.uint8)).filter(
+        ImageFilter.GaussianBlur(.5)), dtype=np.float32)[0] / 255
+    drift = (np.asarray(Image.fromarray((rs.random((4, 1)) * 255).astype(np.uint8)).resize(
+        (1, L), Image.BICUBIC), dtype=np.float32)[:, 0] / 255 - .5) * 6
+    strands = np.stack([np.interp(np.arange(W) + d, np.arange(W), base) for d in drift])
+    strands = np.clip((strands - .5) * 2.2 + .5, 0, 1)
+    # ragged edges: the band's edge wanders at two scales
+    wander = (noise((40, 12), 1.5) - .5) * .16 + (noise((120, 40), .6) - .5) * .08
+    across = np.clip(1 - (np.abs(u) / (.88 + wander)) ** 2.6, 0, 1)
+    grain = rs.random((L, W)).astype(np.float32)
+    specks = np.asarray(Image.fromarray(((rs.random((L, W)) > .985) * 255).astype(np.uint8)).filter(
+        ImageFilter.GaussianBlur(.7)), dtype=np.float32) / 255
+    depth = np.clip(1.7 * across * (.3 + .8 * m + .55 * strands + .2 * (grain - .5) - 1.2 * specks), 0, None)
+    # every patch is the same bitmap, so a darker row would repeat every 2 m:
+    # level each row's mean depth, keeping the detail within it
+    rowmean = depth[:, 64:192].mean(axis=1, keepdims=True)
+    depth = depth * (rowmean.mean() / np.maximum(rowmean, 1e-6))
+    alpha = 1 - np.exp(-depth * along)
+    # then even out what two overlapping patches show at full level (the
+    # renderer's 0.85 tint): a few fixed-point passes on each row pair
+    for _ in range(6):
+        rows = alpha[:, 64:192]
+        shown = 1 - (1 - .85 * rows[:L // 2]) * (1 - .85 * rows[L // 2:])
+        fix = (shown.mean() / np.maximum(shown.mean(axis=1), 1e-6))[:, None]
+        depth = depth * np.vstack([fix, fix])
+        alpha = 1 - np.exp(-depth * along)
     alpha[0, :] = alpha[-1, :] = 0
     alpha[:, 0] = alpha[:, -1] = 0
-    shade = np.broadcast_to(19 + 5 * strands, (L, W))
-    rgba = np.dstack([shade, shade, shade, alpha]).clip(0, 255).astype(np.uint8)
+    shade = 16 + 10 * m + 4 * strands
+    rgba = np.dstack([shade, shade, shade, alpha * 255]).clip(0, 255).astype(np.uint8)
     Image.fromarray(rgba, 'RGBA').save(path)
     print('wrote', path)
 

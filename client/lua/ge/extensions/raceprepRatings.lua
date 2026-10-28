@@ -9,6 +9,13 @@ local upgradeCatalog=require("ge/extensions/raceprep/upgrades").catalog
 local M={vehicles={},statuses={},remoteVehicles={},carStatics={}}
 local seed=jsonReadFile('/lua/ge/extensions/raceprep/ratings-seed.json') or {entries={}}
 local entries,constants=deepcopy(seed.entries or {}),seed.constants
+local previewGateData=jsonReadFile('/lua/ge/extensions/raceprep/pi-preview-gate.json')or{}
+local formulaFingerprint,gateConstants,constantsFingerprint
+function M.previewGate()
+ if not formulaFingerprint then formulaFingerprint=identity.hash({source=readFile and readFile('/lua/ge/extensions/raceprep/rating.lua')or''})end
+ if gateConstants~=constants or not constantsFingerprint then gateConstants=constants;constantsFingerprint=identity.hash({source=require('ge/extensions/raceprep/bjr/setupLibrary').signature(constants or {})})end
+ return {passed=previewGateData.passed==true and previewGateData.formulaHash==formulaFingerprint and previewGateData.constantsHash==constantsFingerprint,formulaHash=formulaFingerprint,constantsHash=constantsFingerprint,builds=previewGateData.builds,cars=previewGateData.cars,mean=previewGateData.mean,worst=previewGateData.worst}
+end
 local candidates={}
 -- Ratings of setups the player saved (Save setup): "model/config" -> entry.
 -- Shown on the saved setup's selector tile before it is ever spawned.
@@ -51,6 +58,8 @@ local originalSortFunction
 local grouping
 local originalClassGrouping
 local selectorDirty=true
+local autoStatuses={}
+function M.autoRatings(p) autoStatuses={};for _,r in ipairs(p.items or {})do autoStatuses[r.model]=r.status end;selectorDirty=true end
 local nonce=0
 local liveRequests,liveSnapshots,liveAsked={},{},{}
 local identities={}
@@ -270,6 +279,13 @@ local function anchor(e,model,config,parts)
     return e
 end
 M.anchor=anchor
+function M.factoryRating(id)
+ local i=currentIdentity(id);if not i then return end
+ local base=anchorBase(i.model,i.config,i.parts)
+ if base then return withPotential(base,i.model)end
+ return M.getConfig(i.model,i.config)
+end
+
 -- a blind computed entry that can now be anchored is recomputed
 local function stale(e,model,config,parts)
     if not e or e.source~='computed' then return false end
@@ -362,6 +378,12 @@ local function decorate(model)
         m.Name=(decoratedModels[m].Name or m.key)..'  ['..badge(shown)..']'
         m['Performance Class']=shown.class
     end
+    if model and model.model and not shown then
+        local m=model.model
+        if not decoratedModels[m]then decoratedModels[m]={Name=m.Name,performance=m['Performance Class']}end
+        local status=autoStatuses[m.key]=='rating'and 'Rating…'or'Not rated yet'
+        m.Name=(decoratedModels[m].Name or m.key)..'  [— '..status..']';m.RacePrepRatingStatus=status
+    end
     return model
 end
 local function decorateBJI(catalogue)
@@ -398,9 +420,17 @@ function M.decorateSelector()
     end
     local models={}
     for _,e in pairs(entries) do models[e.model]=true end
-    -- only mounted cars: at join, Automation mods mount after the ratings arrive, and
-    -- looking those up early logs "Vehicle not available" for every one of them
-    local exists=FS and FS.directoryExists and function(m) return FS:directoryExists('/vehicles/'..m) end or function() return true end
+    -- Retained upgrade parts create /vehicles/<model> even when the original
+    -- car ZIP is absent. Directory existence therefore isn't an installed-car
+    -- check. Use the same cached registry that BeamNG's getModel validates.
+    -- Read it each refresh so later mod mounts are not negatively cached.
+    local installed=core_vehicles.getModelsData and core_vehicles.getModelsData()
+    local function exists(model)
+        if installed then return installed[model]~=nil end
+        if FS and FS.fileExists then return FS:fileExists('/vehicles/'..model..'/info.json') end
+        if FS and FS.directoryExists then return FS:directoryExists('/vehicles/'..model) end
+        return true
+    end
     for model in pairs(models) do if exists(model) then core_vehicles.getModel(model) end end
     -- BeamJoy has its own copied labels, often populated before this add-on
     -- mounts. Refresh those too; changing native metadata alone is insufficient.
@@ -513,7 +543,58 @@ function M.rememberSavedSetup(id,name)
     selectorDirty=true
     return true,copy
 end
+-- Preview uses the real canonical collector and evaluator, not a second PI
+-- formula. Queue one shadow compilation at a time; never respawn the live car.
+local shadowData
+local previews,previewQueue,previewActive,previewSerial={},{},nil,0
+function M.previewRating(id,tree)
+ local i=currentIdentity(id);if not i then return nil,'Car unavailable'end
+ local h=identity.hash(identity.flatten(tree));local key=tostring(id)..':'..tostring(i.vdata)..':'..h
+ if previews[key]then return previews[key].entry,previews[key].error,previews[key].pending end
+ local size=0;for _ in pairs(previews)do size=size+1 end
+ if size>=512 then return nil,'Preview candidate limit reached; change car or refresh.'end
+ if #previewQueue>=32 then return nil,nil,true end
+ previews[key]={pending=true};previewQueue[#previewQueue+1]={id=id,key=key,tree=deepcopy(tree),revision=i.vdata,identity=i};return nil,nil,true
+end
+function M.clearPreviews()previews={};previewQueue={};previewActive=nil end
+local function evaluate(st,i)
+ if constants and constants.v7 and not st.nativeAero then st.nativeAero=require('ge/extensions/raceprep/nativeAero').lookup(i.model,i.config,i.parts)end
+ local e,err=rating.compute(st,constants,st.drive)
+ if not e then return nil,err end
+ e.model,e.config,e.parts,e.partsHash=i.model,i.config,i.parts,identity.hash(i.parts)
+ e=anchor(e,i.model,i.config,i.parts)
+ return e
+end
+M.evaluate=evaluate
+local function previewTick()
+ if previewActive then
+  if clock-previewActive.at>10 then previews[previewActive.key]={error='Preview collection timed out'};previewActive=nil end
+  return
+ end
+ local q=table.remove(previewQueue,1);if not q then return end
+ local i=currentIdentity(q.id)
+ if not i or i.vdata~=q.revision then previews[q.key]={error='Car changed'};return end
+ local cfg=deepcopy(i.bundle.config);cfg.partsTree=q.tree;cfg.parts=nil
+ cfg.vars=require('ge/extensions/raceprep/factoryEngine').vars(i.model,i.config)
+ local ok,bundle=pcall(require('jbeam/loader').loadJbeam,q.id,nil,i.vdata.directoriesLoaded,cfg)
+ if not ok or not bundle or not bundle.vdata then previews[q.key]={error='Draft compilation failed'};return end
+ local parts=bundle.vdata.activeParts or identity.flatten(bundle.config.partsTree)
+ q.parts=parts;q.vd=bundle.vdata;q.identity={model=i.model,config=i.config,parts=parts}
+ local built,data=pcall(shadowData,q.identity,bundle.vdata,false,{});if not built then previews[q.key]={error=tostring(data)};return end
+ data.preview=true;data.previewDrive=require('ge/extensions/raceprep/drivetrainConversions').currentLayout(i.model,cfg.partsTree,parts)
+ previewSerial=previewSerial+1;q.token='preview-'..previewSerial;q.at=clock;previewActive=q
+ local v=vehicle(q.id);if not v then previews[q.key]={error='Car removed'};previewActive=nil;return end
+ v:queueLuaCommand(string.format('extensions.load("raceprepRating") raceprepRating.collect(%s,%q)',serialize(data),q.token))
+end
 function M.onStatic(id,requestID,st)
+ if previewActive and previewActive.id==id and previewActive.token==requestID then
+  local q=previewActive;previewActive=nil;local i=currentIdentity(id)
+  if not i or i.vdata~=q.revision then previews[q.key]={error='Car changed'};return end
+  if st.error then previews[q.key]={error=st.error};return end
+  local e,err=evaluate(st,q.identity)
+  if e then local full=withPotential(e,i.model,q.vd);e={pi=full.pi,class=full.class,pi_speed=full.pi_speed,pi_technical=full.pi_technical,raw=full.raw,estimate=true,method=full.method} end
+  previews[q.key]={entry=e,error=err};return
+ end
     local sr=statsRequests[id]
     if sr and sr.token==requestID then return onStats(id,sr,st) end
     local request=requests[id]
@@ -522,23 +603,11 @@ function M.onStatic(id,requestID,st)
     local i=currentIdentity(id)
     if not i or i.key~=request.identity.key then pending[id]=clock+0.5;return end
     if st.error then M.statuses[id]='Car rating unavailable';log('W','raceprepRatings',st.error);return end
-    -- formula v7: native cars' probed aero (only with the v7 constants, whose
-    -- native factors were fitted together with it)
-    if constants and constants.v7 and not st.nativeAero then
-        st.nativeAero=require('ge/extensions/raceprep/nativeAero').lookup(i.model,i.config,i.parts)
-    end
-    local e,err=rating.compute(st,constants,st.drive or request.drive)
+    local e,err=evaluate(st,i)
     if not e then M.statuses[id]='Car rating unavailable';log('W','raceprepRatings',tostring(err));return end
-    st._rev=tostring(i.vdata)
-    M.carStatics[id]=st
-    -- st was collected at the rated point (default vars, max-rated parts):
-    -- it must not seed stats[], the tuning-aware performance cache. getStats
-    -- issues its own collection for the car's current settings.
-    e.model,e.config,e.parts,e.partsHash=i.model,i.config,i.parts,identity.hash(i.parts)
+    st._rev=tostring(i.vdata);M.carStatics[id]=st
     if i.model=='firestarter_clone_kalalalac' then e.flag='Suspected gearbox fault: hunts / 134 km/h' end
-    -- seed notes for configs rated by the formula on purpose (e.g. spun in the rig test)
     e.flag=e.flag or (seed.flags and seed.flags[i.model..'/'..tostring(i.config)])
-    e=anchor(e,i.model)
     -- Seed/server entries (especially measured/sibling values) take precedence.
     if not entries[i.key] or stale(entries[i.key],i.model) then
         entries[i.key]=e;indexEntries();selectorDirty=true
@@ -551,7 +620,7 @@ end
 -- car compiled with no tuning vars (tuning never changes PI). Stats (live):
 -- vd is the car as loaded, tuning included; race brakes at their actual Brake
 -- Power and aero kits at their slider settings instead of rated maximum.
-local function shadowData(i,vd,live,vars)
+shadowData=function(i,vd,live,vars)
     return require('ge/extensions/raceprep/ratingShadow').build(i,vd,live,vars,upgradeCatalog)
 end
 
@@ -643,7 +712,7 @@ local function collect(id)
     requests[id]={token=token,identity=i,drive=info and info.Drivetrain,at=clock}
     veh:queueLuaCommand(string.format('extensions.load("raceprepRating") raceprepRating.collect(%s,%q)',serialize(data),token))
 end
-function M.onVehicleSpawned(id) liveRequests[id],liveSnapshots[id],liveAsked[id]=nil,nil,nil;M.carStatics[id]=nil;pending[id]=clock+1;requests[id]=nil;M.vehicles[id]=nil;identities[id]=nil end
+function M.onVehicleSpawned(id) M.clearPreviews();liveRequests[id],liveSnapshots[id],liveAsked[id]=nil,nil,nil;M.carStatics[id]=nil;pending[id]=clock+1;requests[id]=nil;M.vehicles[id]=nil;identities[id]=nil end
 function M.onVehicleDestroyed(id) liveRequests[id],liveSnapshots[id],liveAsked[id]=nil,nil,nil;M.carStatics[id]=nil;pending[id]=nil;requests[id]=nil;M.vehicles[id]=nil;M.statuses[id]=nil;identities[id]=nil end
 function M.onVehicleSelectorOpen() selectorDirty=true end
 function M.onExtensionLoaded()
@@ -652,6 +721,7 @@ end
 function M.onUpdate(dt)
     local BJI,BJI_Windows=Platform.get("BJI"),Platform.get("BJI_Windows")
     clock=clock+(dt or 0)
+    previewTick()
     local instance=Platform.isBJR() and rawget(_G,"beamjoy_cache") or BJI_Windows and BJI_Windows.windows
     if instance and instance~=beamJoyInstance then
         beamJoyInstance=instance;serverReady=false;nextRequest=0;handlers=false

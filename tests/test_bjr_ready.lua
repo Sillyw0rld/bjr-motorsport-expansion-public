@@ -2,7 +2,7 @@
 -- Copyright (c) 2026 Sillyw0rld
 package.path='client/lua/?.lua;'..package.path
 local ready=true
-local h={ready=function() return ready end,vehicle=function() end,notice=function() end,session=function() end}
+local h={send=function() end,ready=function() return ready end,vehicle=function() end,notice=function() end,session=function() end}
 package.loaded['ge/extensions/raceprep/bjr/host']=h
 package.loaded['ge/extensions/raceprep/upgrades']={}
 package.loaded['ge/extensions/raceprep/tuningPolicy']={}

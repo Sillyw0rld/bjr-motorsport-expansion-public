@@ -1,6 +1,7 @@
 # Documentation
 
 ## Play and run a server
+- [2.26.1 beta release notes](distribution/RELEASE-NOTES.md): highlights, upgrade steps and beta limits.
 - [Everyday use](distribution/USAGE.md): join, upgrade, tune, race and manage updates.
 - [Installation](distribution/INSTALLATION.md): package layout, launchers and preflight.
 - [Custom donors](distribution/CUSTOM-DONORS.md): add your own engines and drivetrains.

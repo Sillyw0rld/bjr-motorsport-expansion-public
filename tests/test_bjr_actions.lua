@@ -2,6 +2,7 @@
 -- Copyright (c) 2026 Sillyw0rld
 package.path='client/lua/?.lua;'..package.path
 local commands,handlers={},{}
+local requests={}
 local car={getID=function() return 7 end,getJBeamFilename=function() return 'car' end,queueLuaCommand=function(_,s) commands[#commands+1]=s end}
 local d={config={vars={}},vdata={activeParts={},variables={['$fuel']={min=0,max=1,val=.5,default=1,title='Fuel'}}}}
 local rules={aero=false,tuning=true,fuel=true,diff=true,trackLimits='off'}
@@ -10,7 +11,7 @@ bjiRacePrep=rt
 core_vehicle_manager={getVehicleData=function() return d end}
 local writes=0
 core_vehicle_partmgmt={setConfigVars=function(values) writes=writes+1;local v={};for k,val in pairs(d.vdata) do v[k]=val end;d.vdata=v;d.config.vars=values end}
-package.loaded['ge/extensions/raceprep/bjr/host']={ready=function() return true end,vehicle=function() return car end,editable=function() return true end,tuningEditable=function() return false end,partsEditable=function() return true end,session=function() end,onGrid=function() return false end,notice=function() end,playerID=function() return 1 end}
+package.loaded['ge/extensions/raceprep/bjr/host']={send=function(event,p) requests[#requests+1]={event=event,payload=p} end,ready=function() return true end,vehicle=function() return car end,editable=function() return true end,tuningEditable=function() return false end,partsEditable=function() return true end,session=function() end,onGrid=function() return false end,notice=function() end,playerID=function() return 1 end}
 local engine,tyre=0,0
 local U={list=function() return {} end,compoundViolation=function() end,
  allowed=function() return true end,applyPackage=function() engine=engine+1;core_vehicle_partmgmt.setConfigVars({});return true end}
@@ -20,7 +21,7 @@ package.loaded['ge/extensions/raceprep/partsRules']={violation=function() end}
 FS={fileExists=function() return false end};AddEventHandler=function(key,fn) handlers[key]=fn end
 serialize=function() return '{}' end;guihooks={trigger=function() end};log=function() end
 local readyCount=0;beamjoy_raceRunner={ready=function() readyCount=readyCount+1 end}
-local m=dofile('client/lua/ge/extensions/raceprepBJR.lua');m.onUpdate(.1);handlers.RacePrepBJRHostStatus()
+local m=dofile('client/lua/ge/extensions/raceprepBJR.lua');m.onUpdate(.1);handlers.RacePrepBJRHostStatus();assert(requests[1].event=='RacePrepGetChallenges' and requests[2].event=='RacePrepGetPresets' and requests[3].event=='RacePrepGetProgress','join requests initial server library and profile')
 package.loaded['ge/extensions/raceprep/bjr/host'].send=function() end
 assert(not m.readyProblem())
 -- The actual Ready path enforces the same class/PI limits edited in HTML.

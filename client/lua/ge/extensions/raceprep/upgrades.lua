@@ -75,7 +75,10 @@ U.engineCurves=function(vehID)
         if not engine then return nil end
         return {current=engine.torque,limit=engine.maxRPM}
     end
-    local base=live.stageBaseEngines and live.stageBaseEngines[1] and live.stageBaseEngines[1].torque
+    local reference=live.stageBaseEngines and live.stageBaseEngines[1]
+    spec.pressurePoints=reference and reference.pressurePoints
+    if spec.induction=='stock_upgrade' and not spec.pressurePoints then return nil end
+    local base=reference and reference.torque
     if not base then
         for _,key in ipairs({'intake','exhaust','ecu','cam','forged','displacement','flywheel','induction','intercooler','oilcooler'}) do if spec[key] then return nil end end
         base=canonical.engines and canonical.engines[1] and canonical.engines[1].torque
@@ -99,6 +102,9 @@ U.partEffect=function(vehID,name)
     if option then
         local curves=U.engineCurves(vehID)
         if not curves then return option.title..': reading dyno...', 'Reading the loaded engine curve.' end
+        if option.effect.induction=='stock_upgrade' and not curves.spec.pressurePoints then
+            return option.title..': reading dyno...', 'Reading the engine boost-pressure curve.'
+        end
         local before=copySpec(curves.spec)
         for kind,slot in pairs(engine.slots) do
             if slot==option.slot then
@@ -597,16 +603,16 @@ local function slotDefault(vdata,slotId)
     end
 end
 U.slotDefault=slotDefault
-U.applyPackage=function(vehID,number,before)
+U.packageTree=function(vehID,number)
     local d=vehData(vehID)
     local spec,curves=U.packageSpec(vehID,number)
-    if not spec then return false,curves end
+    if not spec then return nil,curves end
     local okSpec,why=EngineEffects.shopRequired(spec)
-    if not okSpec then return false,why end
+    if not okSpec then return nil,why end
     local info=curves.info
     local tree=copyTree(d.config.partsTree)
     local hub=findSlot(tree,info.hubSlot or 'camso_tuning_parameters_engine')
-    if not hub then return false,'No compatible engine upgrade slot.' end
+    if not hub then return nil,'No compatible engine upgrade slot.' end
     if hub.chosenPartName~=info.hub then hub.chosenPartName=info.hub;hub.children={} end
     for _,kind in ipairs({'intake','exhaust','ecu','cam','forged','displacement'}) do
         local slot=info.slots[kind]
@@ -621,14 +627,19 @@ U.applyPackage=function(vehID,number,before)
             for name,p in pairs(info.parts) do if p.effect[kind]==spec[kind] then candidates[#candidates+1]=name end end
             table.sort(candidates)
             target=candidates[#candidates]
-            if not target then return false,'Missing '..kind..' part for this package.' end
+            if not target then return nil,'Missing '..kind..' part for this package.' end
         end
         local node=findSlot(tree,slot)
         if not node then
-            if kind=='intake' or kind=='ecu' or kind=='forged' then return false,'Missing native '..kind..' slot.' end
+            if kind=='intake' or kind=='ecu' or kind=='forged' then return nil,'Missing native '..kind..' slot.' end
             hub.children[slot]={chosenPartName=target,children={}}
         else node.chosenPartName=target;node.children={} end
     end
+    return tree
+end
+U.applyPackage=function(vehID,number,before)
+    local d=vehData(vehID);local tree,why=U.packageTree(vehID,number)
+    if not tree then return false,why end
     local pm=extensions.core_vehicle_partmgmt
     local label=number==0 and 'Stock engine parts' or 'Stage '..number..' engine package'
     table.insert(U.history,{vehID=vehID,tree=copyTree(d.config.partsTree),vars=copyTree(d.config.vars or {}),label=label})
@@ -761,6 +772,25 @@ U.compoundViolation = function(vehID, rules)
     end
 end
 
+--- Build the same tree for a preview without fitting parts or changing history.
+U.previewTree=function(vehID,changes)
+ local d=vehData(vehID);if not d then return nil,'Car unavailable.'end
+ local tree=d.config.partsTree;local model=d.config.model or d.vdata.model
+ for _,c in ipairs(changes or {})do
+  if c[1].bodyStage then tree=bodyAdapter(d).applyTree(tree,catalog,model,c[2])
+  elseif c[1].group=='conversion'then
+   if #changes~=1 then return nil,'Preview engine conversions separately.'end
+   tree=Conversions.change(tree,c[1].path,c[2],model,d.config.vars)
+  elseif c[1].slot=='Camso_TransferCase'and DrivetrainConversions.info(model)then
+   if #changes~=1 then return nil,'Preview drivetrain conversions separately.'end
+   tree=DrivetrainConversions.change(tree,c[1].path,c[2],model,d.config.vars)
+  else tree=U.changedTree(tree,c[1].path,c[2])end
+  if not tree then return nil,'Incompatible draft tree.'end
+  if c[1].slot=='camso_tuning_parameters'then tree=require('ge/extensions/raceprep/weight').carry(d.config.partsTree,tree,catalog,model)end
+ end
+ return tree
+end
+
 --- several slots at once, one rebuild: changes = {{entry, partName}, ...}
 U.applyMany = function(vehID, changes, label, before)
     local d = vehData(vehID)
@@ -776,7 +806,9 @@ U.applyMany = function(vehID, changes, label, before)
         end
     end
     for _, c in ipairs(changes) do
-        if c[1].group=='conversion' then
+        if c[1].bodyStage then
+            local W=bodyAdapter(d);tree=W.applyTree(tree,catalog,model,c[2]);local stage=W.find(c[2]);if W.VAR then vars=vars or copyTree(d.config.vars or {});vars[W.VAR]=stage.scale end
+        elseif c[1].group=='conversion' then
             local why
             tree,why,vars,restoreVars=Conversions.change(tree,c[1].path,c[2],model,d.config.vars)
             if not tree then return false,why end

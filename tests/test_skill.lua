@@ -108,6 +108,34 @@ RacePrepControlSnapshot({raceID=7,runID='run-b',phase='race',participants={1,2,3
 result.runID='run-b';result.key='7:2010';RacePrepRaceResult(1,result)
 counted=0;for _,p in pairs(lastEncoded.players) do counted=counted+p.races end
 check('next same-layout run inside 90s counts separately',counted==9)
+-- A failed history open must not consume the run or advance skill.
+local savedOpen=io.open
+io.open=function(path,mode)
+ if path:find('/history/',1,true) and path:match('%.json%.tmp$') then return nil,'disk full' end
+ return savedOpen(path,mode)
+end
+RacePrepControlSnapshot({raceID=7,runID='run-failed-history',phase='race',participants={1,2,3}})
+result.runID='run-failed-history';result.key='7:2020';RacePrepRaceResult(1,result)
+io.open=savedOpen
+local beforeRetry=0;for _,p in pairs(lastEncoded.players or {}) do beforeRetry=beforeRetry+p.races end
+check('failed history write does not advance skills',beforeRetry==9)
+RacePrepRaceResult(1,result)
+local afterRetry=0;for _,p in pairs(lastEncoded.players or {}) do afterRetry=afterRetry+p.races end
+check('failed history result remains eligible for retry',afterRetry==12)
+-- Failed skills publication queues a captured identity and retries once.
+io.open=function(path,mode)
+ if path:match('/skills%.json%.tmp$') then return nil,'disk full' end
+ return savedOpen(path,mode)
+end
+RacePrepControlSnapshot({raceID=7,runID='run-failed-skills',phase='race',participants={1,2,3}})
+result.runID='run-failed-skills';result.key='7:2030';RacePrepRaceResult(1,result)
+io.open=savedOpen
+RacePrepRetrySkills()
+local recovered=0;for _,p in pairs(lastEncoded.players or {}) do recovered=recovered+p.races end
+check('failed skill save retries without dropping result',recovered==15)
+RacePrepRetrySkills()
+local unchanged=0;for _,p in pairs(lastEncoded.players or {}) do unchanged=unchanged+p.races end
+check('skill retry is idempotent',unchanged==15)
 -- Real server handlers with actual readJson fixture files, isolated from live data.
 local function latestSession()
     for i=#sent,1,-1 do if sent[i].ev=='RacePrepSession' then return encoded[sent[i].data] end end

@@ -9,7 +9,7 @@
 --            BeamJoyData/db/activities/<map>_races.json (gates, start
 --            positions, sectors), reloaded on BJR's RacesChanged event
 --   players  players.online (every 10 s): staff flag and display names
-local H={enabled=false,at=0,permissions={},races={},runs={},cuts={},gridRatings={},spectators={}}
+local H={enabled=false,at=0,permissions={},races={},runs={},cuts={},phaseCutsByRun={},gridRatings={},racerIdentities={},spectators={}}
 function H.fresh() return H.enabled and os.time()-H.at<5 end
 
 -- y/x angle in every quadrant (BeamMP's Lua 5.3 has math.atan(y,x); kept explicit)
@@ -35,7 +35,7 @@ function H.normalize(r)
   local d=p.dir or {x=0,y=-1,z=0};local yaw=atan2(d.x,-d.y)/2
   starts[#starts+1]={pos=p.pos,dir=p.dir,rot=p.rot or {x=0,y=0,z=math.sin(yaw),w=math.cos(yaw)}}
  end
- return {id=r.id,name=r.name,steps=steps,startPositions=starts,loopable=r.loopable,branchingEnabled=r.branchingEnabled,nativeRace={gates=r.gates,loopable=r.loopable,branchingEnabled=r.branchingEnabled,manualSectors=r.manualSectors,sectorCount=r.sectorCount}}
+ return {id=r.id,name=r.name,mode=r.mode,steps=steps,startPositions=starts,gates=r.gates,manualSectors=r.manualSectors,sectorCount=r.sectorCount,loopable=r.loopable,branchingEnabled=r.branchingEnabled,nativeRace={gates=r.gates,loopable=r.loopable,branchingEnabled=r.branchingEnabled,manualSectors=r.manualSectors,sectorCount=r.sectorCount}}
 end
 --- the map's saved races (BJR's activities file, a list) -> layouts
 function H.setRaces(level,list)
@@ -47,26 +47,43 @@ function H.setLevel(level)
  H.level=level
 end
 --- races.sessions -> runs (keyed by session ID). nowMs: unix ms
-local PHASE={GRID='grid',COUNTDOWN='race',RACE='race',FINISHED='finished'}
+local PHASE={GRID='grid',COUNTDOWN='race',RACE='race',BREAK='break',FINISHED='finished'}
 function H.fromSessions(sessions,nowMs)
  local runs={}
  for _,s in ipairs(type(sessions)=='table' and sessions or {}) do
   if type(s)=='table' and s.sessionId~=nil then
-   local id=tostring(s.sessionId);local ids,laps={},{}
-   for _,r in ipairs(s.racers or {}) do if r.id then ids[#ids+1]=tonumber(r.id);laps[tostring(r.id)]=tonumber(r.lap) end end
+   local id=tostring(s.sessionId);local ids,laps,keys,keyByPlayer={}, {}, {}, {}
+   for _,r in ipairs(s.racers or {}) do
+    if r.racerKey then keys[#keys+1]=tostring(r.racerKey) end
+    if r.id then ids[#ids+1]=tonumber(r.id);laps[tostring(r.id)]=tonumber(r.lap);keyByPlayer[tostring(r.id)]=r.racerKey and tostring(r.racerKey) or nil end
+   end
    local green=type(s.greenAt)=='table' and tonumber(s.greenAt.unixMs) or nil
-   runs[id]={runID=id,raceID=s.raceId,raceName=s.raceName,phase=PHASE[s.state] or 'grid',level=s.map or H.level,participants=ids,laps=laps,
+   local phase=PHASE[s.state] or 'grid';local phaseName=s.phase and s.phase.name
+   if phase=='race' and phaseName then phase=phaseName:lower() end
+   runs[id]={runID=id,raceID=s.raceId,raceName=s.raceName,phase=phase,phaseName=phaseName,phaseIndex=s.phaseIndex,phaseCount=s.phaseCount,
+    format=s.format,level=s.map or H.level,participants=ids,racerKeys=keys,racerKeyByPlayer=keyByPlayer,laps=laps,penalties={},
     remaining=s.state=='COUNTDOWN' and green and math.max(0,green-nowMs) or 0,
     elapsed=s.state=='RACE' and green and math.max(0,(nowMs-green)/1000) or 0}
+   for _,r in ipairs(s.racers or {}) do if r.racerKey then runs[id].penalties[tostring(r.racerKey)]=tonumber(r.penaltyMs) or 0 end end
   end
  end
  return runs
 end
 --- a fresh races.sessions answer
 function H.setRuns(runs)
+ for id,run in pairs(runs) do
+  local old=H.runs[id]
+  if old and old.phaseIndex~=run.phaseIndex then
+   -- keep the finished phase's cuts: qualifying's set which laps count for the grid
+   if old.phaseIndex and H.cuts[id] then H.phaseCutsByRun[id]=H.phaseCutsByRun[id] or {};H.phaseCutsByRun[id][tonumber(old.phaseIndex)]=H.cuts[id] end
+   H.cuts[id]=nil
+  end
+ end
  H.runs=runs;H.at=os.time()
  for id in pairs(H.cuts) do if not H.runs[id] then H.cuts[id]=nil end end
+ for id in pairs(H.phaseCutsByRun) do if not H.runs[id] then H.phaseCutsByRun[id]=nil end end
  for id in pairs(H.gridRatings) do if not H.runs[id] then H.gridRatings[id]=nil end end
+ for id in pairs(H.racerIdentities) do if not H.runs[id] then H.racerIdentities[id]=nil end end
 end
 --- players.online -> staff flags and display names
 function H.setPlayers(players)
@@ -82,6 +99,12 @@ function H.runFor(pid)
  for _,s in pairs(H.runs) do for _,id in ipairs(s.participants or {}) do if tonumber(id)==tonumber(pid) then return s.runID end end end
  return H.spectators[tostring(pid)]
 end
+function H.racerKeyFor(pid,runID)
+ local s=runID and H.runs[tostring(runID)] or nil
+ if s and s.racerKeyByPlayer then return s.racerKeyByPlayer[tostring(pid)] end
+ local id=H.runFor(pid);s=id and H.runs[id]
+ return s and s.racerKeyByPlayer and s.racerKeyByPlayer[tostring(pid)] or nil
+end
 function H.targets(runID)
  local out={};if not H.fresh() then return out end
  for pid in pairs(MP.GetPlayers()) do if H.runFor(pid)==runID then out[#out+1]=tonumber(pid) end end
@@ -92,22 +115,38 @@ function H.race(level,id)
  if H.racesLevel~=H.level and H.loadRaces then H.setRaces(H.level,H.loadRaces(H.level)) end
  for _,r in pairs(H.races) do if tostring(r.id)==tostring(id) then return r end end
 end
-function H.cut(pid,p)
+--- a phase's recorded cuts {[racerKey]={[lap]=n}}: the running phase's, or an earlier one's
+function H.phaseCuts(runID,phaseIndex)
+ local id=tostring(runID);local s=H.runs[id]
+ if s and tonumber(s.phaseIndex)==tonumber(phaseIndex) then return H.cuts[id] end
+ return (H.phaseCutsByRun[id] or {})[tonumber(phaseIndex)]
+end
+-- cuts count in every timed phase (an invalid qualifying lap sets no grid
+-- place); only the race phase turns them into time penalties
+local CUT_PHASES={race=true,practice=true,qualifying=true}
+function H.cut(pid,p,rules)
  local id=H.runFor(pid);local s=id and H.runs[id]
- if not s or s.phase~='race' or tostring(s.raceID)~=tostring(p.raceID) then return false end
+ if not s or not CUT_PHASES[s.phase] or tostring(s.raceID)~=tostring(p.raceID) then return false end
  local lap=tonumber(p.lap);local current=(s.laps or {})[tostring(pid)]
  if not lap or lap%1~=0 or (not current or math.abs(lap-current)>1) then return false end
+ local racerKey=H.racerKeyFor(pid,id);if not racerKey then return false end
  H.cuts[id]=H.cuts[id] or {};local cuts=H.cuts[id]
- cuts[tostring(pid)]=cuts[tostring(pid)] or {};local laps=cuts[tostring(pid)]
- laps[tostring(lap)]=(laps[tostring(lap)] or 0)+1;return true
+ cuts[racerKey]=cuts[racerKey] or {};local laps=cuts[racerKey]
+ laps[tostring(lap)]=(laps[tostring(lap)] or 0)+1
+ local total=0;for _,n in pairs(laps) do total=total+n end
+ local delta=0
+ if s.phase=='race' and rules and rules.trackLimits=='penalty' and total>math.max(0,tonumber(rules.cutPenaltyAfter) or 0) then delta=math.max(0,tonumber(rules.cutPenaltySeconds) or 0)*1000 end
+ return {runID=id,racerKey=racerKey,lap=lap,cuts=total,penaltyMs=delta}
 end
-function H.results(res,rules)
- local cuts=H.cuts[res.runID] or {};local fastest
+--- localPenalties: BJR has no race.penalize, so track-limit penalties are added
+--- here (as 2.16 did) instead of being inside BJR's own totals
+function H.results(res,rules,localPenalties)
+ local cuts=H.cuts[tostring(res.runID)] or H.cuts[res.runID] or {};local fastest
  for _,row in ipairs(res.rows or {}) do
   row.cuts=0;row.best=nil;row.bestAny=nil;row.bestSectors={};row.fastestLap=nil;row.theoretical=nil
-  local byLap=cuts[tostring(row.playerID)] or {}
+  local byLap=cuts[tostring(row.racerKey)] or {}
   for _,lap in ipairs(row.lapList or {}) do
-   lap.cuts=byLap[tostring(lap.lap)] or 0;lap.invalid=rules.trackLimits~='off' and lap.cuts>0
+   lap.cuts=byLap[tostring(lap.lap)] or 0;lap.invalid=lap.invalid==true or (rules.trackLimits~='off' and lap.cuts>0)
    row.cuts=row.cuts+lap.cuts
    if not row.bestAny or lap.time<row.bestAny.time then row.bestAny=lap end
    if not lap.invalid then
@@ -120,9 +159,10 @@ function H.results(res,rules)
   local complete,total=expected>0,0
   for i=1,expected do if row.bestSectors[i] then total=total+row.bestSectors[i] else complete=false end end
   if complete then row.theoretical=total end
-  if rules.trackLimits=='penalty' then
-   row.penalty=math.max(0,row.cuts-rules.cutPenaltyAfter)*rules.cutPenaltySeconds*1000
-   if row.total then row.total=row.total+row.penalty end
+  row.penalty=tonumber(row.bjrPenaltyMs) or tonumber(row.penalty) or 0
+  if localPenalties and rules and rules.trackLimits=='penalty' then
+   local extra=math.max(0,row.cuts-(tonumber(rules.cutPenaltyAfter) or 0))*(tonumber(rules.cutPenaltySeconds) or 0)*1000
+   row.penalty=row.penalty+extra;if row.total then row.total=row.total+extra end
   end
   if row.best and (not fastest or row.best.time<fastest.best.time) then fastest=row end
  end

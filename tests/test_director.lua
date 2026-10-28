@@ -74,7 +74,7 @@ os.time=realTime
 print('PASS: contact fault (victim clean), shared/self incidents, off-road yellow, change-only broadcasts')
 
 -- track settings per map: rubber level stays, admin set/clean/full, wind
-local tmp=os.tmpname();os.remove(tmp);os.execute('mkdir -p '..tmp..' && cp server/RacePrep/Championship.lua server/RacePrep/DriverStats.lua server/RacePrep/RubberMap.lua server/RacePrep/MarbleMap.lua '..tmp..'/')
+local tmp=os.tmpname();os.remove(tmp);os.execute('mkdir -p '..tmp..' && cp server/RacePrep/Persistence.lua server/RacePrep/Championship.lua server/RacePrep/DriverStats.lua server/RacePrep/DriverRating.lua server/RacePrep/RubberMap.lua server/RacePrep/MarbleMap.lua '..tmp..'/')
 Util.JsonPrettify=function(s) return s end
 local files={}
 Util.JsonEncode=function(p) return 'x' end

@@ -6,7 +6,7 @@ function M.snapshot(token)
  local out={}
  for name,s in pairs(energyStorage.getStorages()) do
   if type(s.energyCapacity)=='number' and s.energyCapacity>0 and s.energyType~='air' then
-   out[#out+1]={name=name,energyType=s.energyType,energy=s.storedEnergy,maxEnergy=s.energyCapacity}
+   out[#out+1]={name=name,energyType=s.energyType,energy=s.storedEnergy,maxEnergy=s.energyCapacity,storageType=s.type,volume=s.type=='fuelTank' and s.remainingVolume or nil,capacity=s.type=='fuelTank' and s.capacity or nil}
   end
  end
  table.sort(out,function(a,b) return a.name<b.name end)

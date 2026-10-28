@@ -1,11 +1,30 @@
 -- SPDX-License-Identifier: AGPL-3.0-or-later
 -- Copyright (c) 2026 Sillyw0rld
 -- BJR plugin API bridge (2026-10-17): grid order through BJR's gridOrder hook,
--- results from BJR's RaceFinished event; our penalties layered on BJR's times
+-- results from BJR's event-level RaceFinished; BJR penalties stay authoritative
 local A=dofile('server/RacePrep/BJRApi.lua')
+-- BeamMP names loaded chunks without Lua's optional @ prefix. Exercise the
+-- actual loader with those names rather than mocking debug.getinfo itself.
+do
+ local file=assert(io.open('server/RacePrep/BJRApi.lua'));local source=file:read('*a');file:close()
+ for _,case in ipairs({
+  {'Resources/Server/RacePrep/BJRApi.lua','Resources/Server/RacePrep/Weekend.lua'},
+  {'@Resources/Server/RacePrep/BJRApi.lua','Resources/Server/RacePrep/Weekend.lua'},
+  {'@/srv/beammp/Resources/Server/RacePrep/BJRApi.lua','/srv/beammp/Resources/Server/RacePrep/Weekend.lua'},
+  {'C:\\BeamMP\\Resources\\Server\\RacePrep\\BJRApi.lua','C:/BeamMP/Resources/Server/RacePrep/Weekend.lua'},
+ }) do
+  local loaded
+  local env=setmetatable({dofile=function(path)
+   assert(path==case[2],'incorrect module path: '..path);loaded=true
+   return dofile('server/RacePrep/Weekend.lua')
+  end},{__index=_G})
+  local chunk=assert(loadstring(source,case[1]));setfenv(chunk,env)
+  assert(type(chunk().start)=='function' and loaded,'module loads for '..case[1])
+ end
+end
 -- RaceFinished as BJR 1.11's services/api.lua builds it
 local d={sessionId=7,raceId=3,raceName='Imola',map='imola',laps=2,results={
- {position=1,id=1,name='Ana',vehicle='etk800',finished=true,disqualified=false,totalMs=125000,bestLapMs=61000,penaltyMs=5000,
+ {position=1,id=1,racerKey='rk-ana',name='Ana',vehicle='etk800',finished=true,disqualified=false,totalMs=125000,bestLapMs=61000,penaltyMs=5000,
   laps={{lap=1,timeMs=61000,sectorsMs={20000,21000,20000}},{lap=2,timeMs=59000,sectorsMs={19000,20000,20000}}}},
  {id=2,name='Ben',vehicle='sbr',finished=false,disqualified=true,laps={{lap=1,timeMs=63000,sectorsMs={21000,21000,21000}}}},
 }}
@@ -19,23 +38,23 @@ d.results[1].fields={{plugin='Other',key='class_pi',value='X 999'},{plugin='Race
 local tagged=A.result(d).rows[1];assert(tagged.car=='Hawk Vipere S' and tagged.pi==595 and tagged.class=='B','recover only our frozen tags if host metadata has already expired')
 -- our automatic penalties go on top of BJR's time (owner: layer, don't replace)
 local H=dofile('server/RacePrep/BJRHost.lua')
-H.cuts[7]={['1']={['1']=2}}
+H.cuts[7]={['rk-ana']={['1']=2}}
 H.results(res,{trackLimits='penalty',cutPenaltyAfter=1,cutPenaltySeconds=3})
-assert(a.total==128000 and a.penalty==3000,'one counted cut, +3 s on top of BJR total 125 s')
+assert(a.total==125000 and a.penalty==5000,'BJR total and penalty remain authoritative; no double addition')
 -- grid order answer: only racers in this lobby, BJR's order for the rest
-local ans=A.gridAnswer({{playerID=3},{playerID=1},{playerID=9},{playerID=3}},{{id=1},{id=3},{id=4}})
-assert(#ans.order==2 and ans.order[1]==3 and ans.order[2]==1,'listed racers present, deduplicated')
-assert(next(A.gridAnswer(nil,{{id=1}}))==nil and next(A.gridAnswer({},{{id=1}}))==nil,'no order: BJR keeps its own')
+local ans=A.gridAnswer({{racerKey='rk3'},{racerKey='rk1'},{racerKey='rk9'},{racerKey='rk3'}},{{id=1,racerKey='rk1'},{id=3,racerKey='rk3'},{id=4,racerKey='rk4'}})
+assert(ans.by=='racerKey' and #ans.order==2 and ans.order[1]=='rk3' and ans.order[2]=='rk1','stable racer keys, present and deduplicated')
+assert(next(A.gridAnswer(nil,{{id=1,racerKey='rk1'}}))==nil and next(A.gridAnswer({},{{id=1,racerKey='rk1'}}))==nil,'no order: BJR keeps its own')
 -- start(): loads BJR's helper from BeamJoyServer/api; nil without it
 local tmp=os.tmpname();os.remove(tmp);os.execute('mkdir -p '..tmp..'/BeamJoyServer/api '..tmp..'/RacePrep')
 assert(A.start({path=tmp..'/Nope/RacePrep',log=print})==nil,'no API: old path')
 local f=io.open(tmp..'/BeamJoyServer/api/BeamJoyAPI.lua','w')
-f:write("local BJ={hooks={},events={},updates={}} function BJ.init(n) BJ.name=n end function BJ.onReady(fn) BJ.readyFn=fn end function BJ.hook(n,fn) BJ.hooks[n]=fn end function BJ.on(e,fn) BJ.events[e]=fn end "..
+f:write("local BJ={hooks={},events={},updates={}} function BJ.init(n) BJ.name=n end function BJ.onReady(fn) BJ.readyFn=fn end function BJ.hook(n,fn) BJ.hooks[n]=fn end function BJ.on(e,fn) BJ.events[e]=fn end function BJ.formats(x) BJ.formatDefs=x end "..
  "function BJ.page(p) BJ.pages=BJ.pages or {} BJ.pages[p.id]=p BJ.pageDef=BJ.pageDef or p end function BJ.updatePage(id,blocks,players) BJ.updates[#BJ.updates+1]={id=id,blocks=blocks,players=players} end "..
  "function BJ.onPageOpened(fn) BJ.opened=fn end function BJ.onPageAction(fn) BJ.action=fn end function BJ.call(m,p,cb) BJ.calls=BJ.calls or {};BJ.calls[#BJ.calls+1]={method=m,params=p};if cb then cb(true,{}) end end return BJ")
 f:close()
 local got,ready,opened
-local BJ=A.start({path=tmp..'/RacePrep',log=function() end,gridOrder=function(raceID) assert(raceID==3) return {{playerID=2},{playerID=1}} end,
+local BJ=A.start({path=tmp..'/RacePrep',log=function() end,gridOrder=function(raceID) assert(raceID==3) return {{racerKey='rk2'},{racerKey='rk1'}} end,
  result=function(r) got=r end,ready=function() ready=true end,
  cars=function(pid) return pid==5 and {{name='etk800 · 844_track_M',class='A',pi=612}} or {} end,staff=function(pid) return pid==5 end,
  open=function(pid,section) opened={pid=pid,section=section} end})
@@ -55,9 +74,47 @@ assert(t2:find('Spawn a car') and not t2:find('%[track%]'),'no cars, no staff bu
 BJ.action('motorsport','upgrades',{},{id=6});assert(opened.pid==6 and opened.section=='upgrades')
 opened=nil;BJ.action('motorsport','evil',{},{id=6});BJ.action('other','setup',{},{id=6});assert(opened==nil,'only our page, only known sections')
 assert(BJ and BJ.name=='RacePrep' and BJ.hooks.gridOrder and BJ.events.RaceFinished)
-BJ.readyFn({beamjoy={version='1.11.0'}});assert(ready)
-local o=BJ.hooks.gridOrder({session={raceId=3},racers={{id=1},{id=2}}})
-assert(o.order[1]==2 and o.order[2]==1,'hook answers with our order')
+-- 2.32.0: the weekend format registers only on a BJR with phases (real API lists)
+local bjrInfo=assert(loadstring(io.popen('python3 -I tests/json2lua.py tests/fixtures/bjr-api-info.json'):read('*a')))()
+local releasedInfo=bjrInfo.released_2_0_1;releasedInfo.beamjoy={version='2.0.1'}
+BJ.readyFn(releasedInfo);assert(ready and BJ.formatDefs==nil and BJ.caps and not BJ.caps.phases,'released 2.0.1: classic weekends, no format')
+local devInfo=bjrInfo.development_2488;devInfo.beamjoy={version='2.0.1'}
+BJ.readyFn(devInfo);assert(BJ.caps.phases)
+assert(BJ.formatDefs and BJ.formatDefs[1].id=='weekend' and BJ.formatDefs[1].result=='last','formats.register payload')
+BJ.openWeekend({raceID=3,practiceMinutes=0,qualifyingMinutes=6,raceLaps=9,name='Test weekend'})
+local openedCall=table.remove(BJ.calls)
+assert(openedCall.method=='race.open' and openedCall.params.raceId==3 and openedCall.params.options.result=='last')
+assert(#openedCall.params.options.phases==2 and openedCall.params.options.phases[1].name=='Qualifying' and openedCall.params.options.phases[2].laps==9,'race.open exact optional-phase payload')
+local o=BJ.hooks.gridOrder({session={raceId=3,phase={name='Race',ranking='position'}},racers={{id=1,racerKey='rk1'},{id=2,racerKey='rk2'}}})
+assert(o.by=='racerKey' and o.order[1]=='rk2' and o.order[2]=='rk1','hook answers by racer key')
+assert(next(BJ.hooks.gridOrder({session={raceId=3,phaseCount=3,phase={name='Qualifying',ranking='best',countsToEvent=false}},racers={{racerKey='rk1'}}}))==nil,'grid hook is race phase only')
+local q=A.qualifyingView({{phase={name='Practice',ranking='best'},results={{racerKey='practice'}}},{phase={name='Qualifying',ranking='best'},results={{id=8,racerKey='stable-8',name='Rejoined',bestLapMs=61000}}}})
+assert(q.rows[1].racerKey=='stable-8' and q.rows[1].best==61000,'qualifying comes from previous by stable racer key')
+local Sessions=dofile('server/RacePrep/Sessions.lua')
+local previous={{phase={name='Qualifying',ranking='best',countsToEvent=false},results={{id=1,racerKey='rk1',bestLapMs=60000},{id=2,racerKey='rk2',bestLapMs=62000},{id=3,racerKey='rk3'}}}}
+local racers={{id=8,racerKey='rk1'},{id=2,racerKey='rk2'},{id=3,racerKey='rk3'}}
+local quali=A.qualifyingView(previous)
+local qualifyingOrder=A.gridAnswer(Sessions.gridOrder('qualifying',quali,{},2),racers)
+assert(qualifyingOrder.order[1]=='rk1' and qualifyingOrder.order[2]=='rk2','reconnected player 8 retains player 1 qualifying position')
+local reversed=A.gridAnswer(Sessions.gridOrder('reverse',quali,{},2),racers)
+assert(reversed.order[1]=='rk2' and reversed.order[2]=='rk1' and reversed.order[3]=='rk3','reverse top two leaves untimed racer behind')
+local handicap=A.gridAnswer(Sessions.gridOrder('handicap',nil,{rk1=700,rk2=500,rk3=600},2),racers)
+assert(handicap.order[1]=='rk2' and handicap.order[2]=='rk3' and handicap.order[3]=='rk1','handicap answers by stable racer key')
+-- track limits: a qualifying lap with a cut sets no grid place (BJR's best lap still counts it)
+local cutPrevious={{phase={name='Practice'},results={}},{phase={name='Qualifying',ranking='best',countsToEvent=false},results={
+ {id=1,racerKey='rk1',bestLapMs=60000,laps={{lap=1,timeMs=60000},{lap=2,timeMs=62500}}},
+ {id=2,racerKey='rk2',bestLapMs=61000,laps={{lap=1,timeMs=61000}}},
+ {id=3,racerKey='rk3',bestLapMs=59000,laps={{lap=1,timeMs=59000}}}}}}
+local askedPhase
+local cutQuali=A.qualifyingView(cutPrevious,function(i) askedPhase=i;return {rk1={['1']=1},rk3={['1']=2}} end)
+assert(askedPhase==2,'cuts read for the qualifying phase index')
+assert(cutQuali.rows[1].racerKey=='rk2' and cutQuali.rows[2].racerKey=='rk1' and cutQuali.rows[2].best==62500,'cut lap ignored, next valid lap counts')
+assert(cutQuali.rows[3].racerKey=='rk3' and cutQuali.rows[3].best==nil,'only cut laps: no valid time, starts behind')
+local cutGrid=A.gridAnswer(Sessions.gridOrder('qualifying',cutQuali,{},0),racers)
+assert(cutGrid.order[1]=='rk2' and cutGrid.order[2]=='rk1' and cutGrid.order[3]=='rk3','grid follows valid laps')
+assert(A.qualifyingView(cutPrevious,function() return nil end).rows[1].racerKey=='rk3','no cut record: BJR best laps as before')
+BJ.events.RacePhaseFinished({sessionId=7,raceId=3,phaseIndex=2,phase={name='Qualifying'},results={}})
+assert(got==nil,'practice and qualifying do not enter event history/stats')
 BJ.events.RaceFinished(d);assert(got and got.runID==7,'RaceFinished feeds our results')
 local before=#BJ.updates;BJ.refreshCars(5);assert(#BJ.updates==before+1,'open rail page refreshes after upgrade')
 BJ.refreshCars(99);assert(#BJ.updates==before+1,'no updates to players who never opened the page')
@@ -69,6 +126,19 @@ BJ.setCarFields('run',5,{model='car',carName='Hawk Vipere S',class='A',pi=604});
 BJ.events.RaceCountdown({sessionId='run'});assert(BJ.gridLocked('run'))
 BJ.setCarFields('run',5,{model='car',carName='Other car',class='A',pi=650});assert(#BJ.calls==2,'countdown freezes labels independently of metadata polling')
 BJ.events.RaceClosed({sessionId='run'});assert(not BJ.gridLocked('run'),'release per-race caches on close')
+local callsBefore=#BJ.calls
+BJ.events.RaceCountdown({sessionId='penalty-test'})
+BJ.penalize('penalty-test','rk1',5000,'False start')
+assert(#BJ.calls==callsBefore,'BJR refuses countdown penalties: defer until green')
+BJ.events.RaceGreenLight({sessionId='penalty-test'})
+assert(#BJ.calls==callsBefore+1 and BJ.calls[#BJ.calls].method=='race.penalize' and BJ.calls[#BJ.calls].params.racerKey=='rk1')
+BJ.events.RaceGreenLight({sessionId='penalty-test'})
+assert(#BJ.calls==callsBefore+1,'duplicate green never repeats the penalty')
+BJ.events.RaceCountdown({sessionId='cancelled'})
+BJ.penalize('cancelled','rk1',5000,'False start')
+BJ.events.RaceClosed({sessionId='cancelled'})
+BJ.events.RaceGreenLight({sessionId='cancelled'})
+assert(#BJ.calls==callsBefore+1,'closed countdown discards pending penalties')
 assert(not BJ.calls[1].params.name,'never rewrites an unrelated historic leaderboard entry')
 -- weather changed in BJR's own panel, read back (two-way, 2.14.3)
 local back=A.weatherFromBJR({cloudCover=.8,fogDensity=.5,windSpeed=3,temperatureCurveOverrideC={{0,30},{.25,24},{.5,16},{.75,18},{1,30}}})
@@ -101,4 +171,4 @@ answer(false,{message='busy'})
 assert(BJ.syncWeather({enabled=true,cloudCover=.9}) and #BJ.calls==n+2,'refused: sent again next time')
 BJ.call=realCall
 os.execute('rm -rf '..tmp)
-print('PASS: BJR API bridge: results from RaceFinished (penalties layered), gridOrder hook, menu rail page, helper loading')
+print('PASS: BJR API bridge: one event result, phase payload, racer-key grid, BJR penalties, menu rail and helper loading')

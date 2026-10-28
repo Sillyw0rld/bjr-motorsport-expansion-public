@@ -20,6 +20,36 @@ function S.mergeVars(d,changes)
  for name,value in pairs(changes or {}) do vars[name]=value end
  return vars
 end
+-- Fixed-setup spec rules check the actual factory values, not merely whether
+-- the slider is disabled. A previously saved custom tune cannot enter as stock.
+local specCache={}
+function S.specProblem(d,r)
+ if not r.specModel or r.specModel=='' or r.tuning~=false then return end
+ local model=d.config.model
+ if model~=r.specModel then return 'This series requires '..r.specModel..'.' end
+ local config=r.specConfig
+ if not config or config=='' then config=d.config.partConfigFilename and d.config.partConfigFilename:match('([^/]+)%.pc$') end
+ local registry=core_vehicles and core_vehicles.getModel and core_vehicles.getModel(model)
+ local info=registry and registry.configs and registry.configs[config]
+ if not info or info['Config Type']=='Custom' then return 'Load a factory configuration for this fixed-setup series.' end
+ local cacheKey=model..'/'..config
+ local cached=specCache[cacheKey]
+ if not cached or cached.revision~=d.vdata then
+  local pc=jsonReadFile and jsonReadFile('vehicles/'..model..'/'..config..'.pc')
+  if type(pc)~='table' then return 'The series factory configuration is unavailable.' end
+  cached={revision=d.vdata,vars=type(pc.vars)=='table' and pc.vars or {}};specCache={[cacheKey]=cached}
+ end
+ local vars=S.mergeVars(d,{})
+ for name,m in pairs(d.vdata.variables or {}) do
+  if type(m)=='table' and not (r.fuel~=false and tostring(name):lower():find('fuel',1,true)) then
+   local expected=S.finite(cached.vars[name]) or S.finite(m.default)
+   local current=S.finite(vars[name])
+   if current and expected and math.abs(current-expected)>1e-4*math.max(1,math.abs(expected)) then
+    return 'Fixed-setup series: restore factory '..tostring(m.title or name)..' by loading '..config..'.'
+   end
+  end
+ end
+end
 local function different(a,b) return S.finite(a) and S.finite(b) and math.abs(a-b)>1e-4*math.max(1,math.abs(b)) end
 function S.aero(name,m)
  if type(m)~='table' then return false end

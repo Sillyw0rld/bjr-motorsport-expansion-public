@@ -120,6 +120,22 @@ class Updates(unittest.TestCase):
         self.assertEqual(old.read_bytes(), b'old')
         self.assertTrue((self.root / '.raceprep-update/ready.json').exists())
 
+    def test_every_packaged_file_is_updatable(self):
+        # a file the release packs but the updater refuses blocks every update (2.18-2.24 CI)
+        sys.path.insert(0, str(ROOT))
+        import build_release
+        generator = self.root / 'generator'
+        generator.mkdir()
+        (generator / ('bjrme-generator.exe' if sys.platform == 'win32' else 'bjrme-generator')).write_bytes(b'native fixture')
+        for edition in ('play', 'custom'):
+            output = self.root / f'{edition}.zip'
+            with patch('builtins.print'):
+                build_release.build(output, generator_dir=generator, edition=edition)
+            with zipfile.ZipFile(output) as z:
+                members = json.loads(z.read(U.MANIFEST))['files']
+            refused = [name for name in members if not U.allowed(name)]
+            self.assertEqual(refused, [], edition)
+
 
 if __name__ == '__main__':
     unittest.main()

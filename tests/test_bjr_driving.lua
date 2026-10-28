@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: AGPL-3.0-or-later
 -- Copyright (c) 2026 Sillyw0rld
 package.path='client/lua/?.lua;'..package.path
-local h={ready=function() return true end,playerID=function() return 1 end,vehicle=function() end,canEdit=function() return true end,session=function() return beamjoy_raceRunner.session end}
+local h={send=function() end,ready=function() return true end,playerID=function() return 1 end,vehicle=function() end,canEdit=function() return true end,session=function() return beamjoy_raceRunner.session end}
 package.loaded['ge/extensions/raceprep/bjr/host']=h
 local director={lights={phase='red',count=5},falseStart=false,data={runID='run',falseStarts={['1']=0}},yellow=function() return 'YELLOW' end}
 local session={remaining=function() return 12345 end,currentLapTime=function() return 9000 end,currentLapCuts=function() return 0 end,active=function() return true end}

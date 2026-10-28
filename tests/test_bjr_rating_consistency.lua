@@ -7,7 +7,15 @@ os.execute('mkdir -p '..tmp..'/RacePrep/history && cp server/RacePrep/*.lua '..t
 local function write(name,s) local f=assert(io.open(tmp..'/RacePrep/'..name,'w'));f:write(s);f:close() end
 write('host.json','host-fixture');write('ratings-seed.json','seed-fixture')
 local wires,serial={},0
-local function encode(p) serial=serial+1;local k='wire-'..serial;wires[k]=p;return k end
+local function encode(p)
+ local active={}
+ local function check(v)
+  if type(v)~='table' then return end
+  assert(not active[v],'JSON payload must not contain a reference cycle')
+  active[v]=true;for _,child in pairs(v) do check(child) end;active[v]=nil
+ end
+ check(p);serial=serial+1;local k='wire-'..serial;wires[k]=p;return k
+end
 local seed={entries={},constants={}}
 Util={JsonEncode=encode,JsonPrettify=function(s) return s end,JsonDecode=function(s)
  if s=='host-fixture' then return {host='beamjoy-revived',version='test'} end
@@ -22,8 +30,9 @@ MP={RegisterEvent=function() end,CreateEventTimer=function() end,TriggerGlobalEv
  GetPlayerIdentifiers=function(id) assert(type(id)=='number');return {beammp='test'} end,
  TriggerClientEvent=function(pid,event,wire) sent[#sent+1]={event=event,data=wires[wire] or wire} end}
 -- Private fake host plugin API, solely in the temporary test folder.
-write('BJRApi.lua',[[return {start=function(o)
- testAPI={result=o.result,cars=o.cars,refreshes=0,fields={}}
+testQualifyingView=dofile('server/RacePrep/BJRApi.lua').qualifyingView
+write('BJRApi.lua',[[return {qualifyingView=testQualifyingView,start=function(o)
+ testAPI={result=o.result,cars=o.cars,phaseChanged=o.phaseChanged,phaseFinished=o.phaseFinished,closed=o.closed,gridOrder=o.gridOrder,refreshes=0,fields={}}
  -- BJR state comes from the API (2.14.2: no bridge file): the map, race sessions
  testAPI.call=function(method,params,cb) if method=='races.sessions' then cb(true,{sessions=testSessions}) end end
  o.ready({map={name='imola'}})
@@ -33,7 +42,7 @@ write('BJRApi.lua',[[return {start=function(o)
 end}]])
 local src=assert(io.open('server/RacePrep/RacePrep.lua')):read('*a'):gsub('debug%.getinfo%(1%)%.source','("'..tmp..'/RacePrep/RacePrep.lua")')
 local printBefore=print;print=function() end;assert(loadstring(src))();print=printBefore
-local run={sessionId='r1',raceId=1,map='imola',state='GRID',racers={{id=0,lap=1}}}
+local run={sessionId='r1',raceId=1,map='imola',state='GRID',racers={{id=0,racerKey='driver',lap=1}}}
 testSessions={run}
 local function metadata() RacePrepHostPoll() end
 metadata()
@@ -50,7 +59,7 @@ run.state='RACE';metadata()
 p.parts={a='part3'};p.pi=720;RacePrepComputedRating(0,encode(p))
 assert(testAPI.cars(0)[1].pi==731,'current car reflects a later setup')
 testAPI.result{key='bjr:r1',runID='r1',raceID=1,raceName='Imola',level='imola',laps=1,
- rows={{playerID=0,name='Driver',status='FIN',position=1,laps=1,total=60000,lapList={{lap=1,time=60000,sectors={30000,30000}}}}}}
+ rows={{playerID=0,racerKey='driver',name='Driver',status='FIN',position=1,laps=1,total=60000,lapList={{lap=1,time=60000,sectors={30000,30000}}}}}}
 local result
 for _,s in ipairs(sent) do if s.event=='RacePrepBJRResults' then result=s.data end end
 assert(result and result.rows[1].pi==609 and result.rows[1].car=='Hawk Vipere S','race results keep the start setup, never current PI')
@@ -66,5 +75,34 @@ RacePrepComputedRating(0,encode{model='car',key='car/Race setup/unknown',serverV
 assert(sent[#sent].event=='RacePrepRatingMissing' and sent[#sent].data=='0-3','unknown key asks the client for the full report')
 RacePrepComputedRating(0,encode{model='car',key='other/x/1',serverVehicleID='0-3'})
 assert(sent[#sent].event=='RacePrepRatingMissing','a key for another model is refused')
+
+-- The same full server VM follows a weekend opened by BJR's format menu.
+local phases={{name='Practice',timeLimitMin=5,ranking='best',countsToEvent=false},{name='Qualifying',timeLimitMin=4,ranking='best',countsToEvent=false},{name='Race',laps=3,ranking='position'}}
+local weekendRun={sessionId='weekend',raceId=1,raceName='Imola',map='imola',format='RacePrep:weekend',state='GRID',phaseIndex=1,phaseCount=3,phases=phases,phase=phases[1],racers={{id=0,racerKey=1,name='Driver',lap=1}}}
+testSessions={weekendRun};metadata();testAPI.phaseChanged(weekendRun,'grid')
+RacePrepGetSession(0)
+assert(sent[#sent].event=='RacePrepSession' and sent[#sent].data.weekend.sessionId=='weekend','menu weekend is visible in the Motorsport tab')
+weekendRun.state='RACE';weekendRun.racers[1].bestLapMs=61000;weekendRun.racers[1].lap=2
+metadata();RacePrepGetSession(0)
+assert(sent[#sent].data.native and sent[#sent].data.rows[1].best==61000,'live Practice view uses BJR timing')
+local resultsBefore=0;for _,m in ipairs(sent) do if m.event=='RacePrepBJRResults' then resultsBefore=resultsBefore+1 end end
+for index=1,2 do
+ testAPI.phaseFinished{sessionId='weekend',raceId=1,raceName='Imola',map='imola',phaseIndex=index,phase=phases[index],nextPhase=phases[index+1],results={{id=0,racerKey=1,name='Driver',bestLapMs=61000,laps={{lap=1,timeMs=61000,sectorsMs={30000,31000}}}}}}
+end
+local resultsAfter=0;for _,m in ipairs(sent) do if m.event=='RacePrepBJRResults' then resultsAfter=resultsAfter+1 end end
+assert(resultsAfter==resultsBefore,'timed phases never publish a final Race result')
+-- The racer reconnects as player 5; BJR's racer key and the server's private
+-- identity cache keep attribution even if they disconnect again at the finish.
+weekendRun.phaseIndex=3;weekendRun.phase=phases[3];weekendRun.racers={{id=5,racerKey=1,name='Driver',lap=2}}
+MP.GetPlayerIdentifiers=function(id) assert(type(id)=='number');return {beammp=id==5 and 'different-if-looked-up' or 'test'} end
+metadata()
+local weekendResult={key='bjr:weekend',runID='weekend',raceID=1,raceName='Imola',level='imola',laps=3,
+ rows={{racerKey=1,name='Driver',status='FIN',position=1,laps=3,total=180000,lapList={{lap=1,time=60000,sectors={30000,30000}}}}}}
+testAPI.result(weekendResult);testAPI.result(weekendResult)
+local profileFile=assert(io.open(tmp..'/RacePrep/drivers.json'));local profiles=Util.JsonDecode(profileFile:read('*a'));profileFile:close()
+local races,drivers=0,0;for _,d in pairs(profiles.drivers) do races=races+d.races;drivers=drivers+1 end
+assert(races==2 and drivers==1,'one prior race plus one weekend: stable original identity, missing current ID and duplicate final event still record once')
+testAPI.closed{sessionId='weekend'};RacePrepGetSession(0)
+assert(sent[#sent].data.weekend==nil,'closed event releases the weekend view')
 os.execute('rm -rf '..tmp)
 print('PASS: report -> rail -> grid -> native labels agree, setup refresh, short key reports, historic PI freezes at race start')

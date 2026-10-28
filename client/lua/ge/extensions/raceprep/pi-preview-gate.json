@@ -1,0 +1,12 @@
+{
+  "formulaHash": "99df993b",
+  "passed": true,
+  "constantsHash": "5c54c6b7",
+  "schema": 1,
+  "builds": 35,
+  "cars": 12,
+  "mean": 0,
+  "worst": 0,
+  "date": "2026-10-27",
+  "game": "0.40.3.0.290897"
+}

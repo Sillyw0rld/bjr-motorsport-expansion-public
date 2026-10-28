@@ -202,6 +202,25 @@ function M.collect(data,requestID)
         local drive=driven.F and driven.R and 'AWD' or driven.F and 'FWD' or driven.R and 'RWD' or nil
         local kind=require('common/raceprep/engineKind').detect(powertrain.getDevicesByCategory('engine'),data)
         local engines=engineData(data)
+        if data.preview then
+            if data.previewDrive then
+                drive=data.previewDrive;drivenWheels={}
+                for _,w in ipairs(ws) do local front=w.name:sub(1,1):upper()=='F';if drive=='AWD'or drive=='4WD'or (drive=='FWD')==front then drivenWheels[w.name]=true end end
+            elseif kind.kind~='automation' then
+                -- A draft may connect an axle that is not driven on the live
+                -- car. Resolve the future graph instead of its live wheel flags.
+                local names={};for _,e in ipairs(engines)do names[e.name]=true end
+                drivenWheels={};local front,rear=false,false
+                for _,row in pairs(data.powertrain or {})do
+                    local wheel=(data[row.name]or{}).connectedWheel or row.connectedWheel
+                    if wheel then
+                        local path=require('common/raceprep/driveline').resolve(data.powertrain,data,{[wheel]=true},names)
+                        if path then drivenWheels[wheel]=true;if wheel:sub(1,1):upper()=='F'then front=true else rear=true end end
+                    end
+                end
+                drive=front and rear and'AWD'or front and'FWD'or rear and'RWD'or nil
+            end
+        end
         local driveline
         if kind.kind~='automation' then
             local names={}
@@ -267,7 +286,17 @@ function M.snapshot(token)
             end
             -- Stage gains describe engine power, not an extra nitrous shot.
             shadow.nitrousOxideInjection={isExisting=false}
-            base[#base+1]=sample(shadow)
+            local reference=sample(shadow)
+            if engine.type=='camsoEngine' then
+                local pressure=engine._raceprepPowerBase and engine._raceprepPowerBase.pressure or engine.peakPressureCurve
+                if pressure then
+                    reference.pressurePoints={}
+                    for rpm=0,math.floor(shadow.maxRPM or 0),100 do
+                        reference.pressurePoints[#reference.pressurePoints+1]={rpm,pressure[rpm] or 1}
+                    end
+                end
+            end
+            base[#base+1]=reference
         end
         return {mass=mass,comY=sumY/mass,wheels=ws,engines=live,stageBaseEngines=base}
     end)

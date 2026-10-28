@@ -7,11 +7,12 @@ H.enabled=true
 -- races.sessions -> runs (BJR 2.0 session shape)
 local now=1000000
 local runs=H.fromSessions({
- {sessionId=7,raceId=3,raceName='Imola',map='imola',state='COUNTDOWN',greenAt={unixMs=now+4000},racers={{id=1,lap=1},{id=2,lap=1}}},
+ {sessionId=7,raceId=3,raceName='Imola',map='imola',state='COUNTDOWN',phaseIndex=3,phaseCount=3,phase={name='Race'},greenAt={unixMs=now+4000},racers={{id=1,racerKey='a',lap=1},{id=2,racerKey='b',lap=1}}},
  {sessionId=8,raceId=4,raceName='Ring',map='imola',state='RACE',greenAt={unixMs=now-30000},racers={{id=3,lap=2}}},
  {sessionId=9,raceId=5,state='GRID',racers={}},
 },now)
 assert(runs['7'].phase=='race' and runs['7'].remaining==4000 and runs['7'].participants[2]==2 and runs['7'].laps['1']==1,'countdown: remaining to green')
+assert(runs['7'].racerKeyByPlayer['1']=='a' and runs['7'].phaseIndex==3,'stable racer identity and phase metadata')
 assert(runs['8'].phase=='race' and runs['8'].elapsed==30 and runs['8'].laps['3']==2,'race: time since green')
 assert(runs['9'].phase=='grid' and #runs['9'].participants==0)
 assert(next(H.fromSessions(nil,now))==nil)
@@ -37,9 +38,22 @@ H.racesLevel=nil;H.race('imola',3);assert(reads==2,'RacesChanged: read again')
 H.setLevel('mosport');assert(#H.races==0,'map change drops layouts')
 -- start report: every API feature BJR:ME uses, available or missing
 local A=dofile('server/RacePrep/BJRApi.lua')
-local rep=A.report({methods={'races.sessions','players.online','environment.set','results.setFields','pages.register','hooks.register'},
- events={'RaceFinished','RaceCountdown','RaceClosed','MapChanged','RacesChanged','PlayerLeft','EnvironmentChanged'}})
+local rep=A.report({methods={'races.sessions','players.online','environment.set','results.setFields','pages.register','hooks.register','formats.register','race.open','race.endPhase','race.close','race.penalize'},
+ events={'RacePositionsChanged','RacerReset','RaceControl','RaceFinished','RacePhaseFinished','RaceGridOpened','RaceGreenLight','RaceCountdown','RaceClosed','MapChanged','RacesChanged','PlayerLeft','EnvironmentChanged'}})
 assert(#rep.ok==#A.USES and #rep.missing==0,'all present on BJR 2.0')
 rep=A.report({methods={'races.sessions'},events={}})
 assert(#rep.ok==1 and #rep.missing==#A.USES-1 and rep.missing[1]:find('gridOrder',1,true),'missing ones named')
+-- track limits per phase: a qualifying cut is recorded without a penalty and kept
+-- when the race phase starts (it decides which qualifying laps set the grid)
+local qrules={trackLimits='penalty',cutPenaltyAfter=0,cutPenaltySeconds=5}
+H.setRuns(H.fromSessions({{sessionId=20,raceId=6,state='RACE',phaseIndex=2,phaseCount=3,phase={name='Qualifying'},greenAt={unixMs=now-1000},racers={{id=1,racerKey='q1',lap=2}}}},now))
+local qcut=H.cut(1,{raceID=6,lap=2},qrules)
+assert(qcut and qcut.penaltyMs==0 and qcut.racerKey=='q1','qualifying cut recorded, no time penalty')
+assert(H.phaseCuts(20,2).q1['2']==1,'running phase cuts readable')
+H.setRuns(H.fromSessions({{sessionId=20,raceId=6,state='RACE',phaseIndex=3,phaseCount=3,phase={name='Race'},greenAt={unixMs=now-1000},racers={{id=1,racerKey='q1',lap=1}}}},now))
+assert(H.phaseCuts(20,2).q1['2']==1 and H.phaseCuts(20,3)==nil,'qualifying cuts kept, race starts clean')
+local rcut=H.cut(1,{raceID=6,lap=1},qrules)
+assert(rcut and rcut.penaltyMs==5000,'race cut is penalised')
+H.setRuns({})
+assert(H.phaseCuts(20,2)==nil,'cleared when the event ends')
 print('PASS: BJR state from its API and race files (sessions, players, layouts), no bridge; start report of every API feature used')

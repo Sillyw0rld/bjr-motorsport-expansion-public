@@ -6,11 +6,12 @@
 -- BJR:ME's HUD reads directly in the UI. This packet adds what BJR does not
 -- have: race signals (start lights, flags, false start, formation), the
 -- track-limits pill, the race weekend announcement, each driver's class / PI
--- badge, and the practice / qualifying session HUD.
+-- badge, local estimated live gaps / route distances, and the practice / qualifying HUD.
 local H=require('ge/extensions/raceprep/bjr/host')
+local Gaps=require('ge/extensions/raceprep/bjr/raceGaps')
 local D={}
 local nextBadges,badges=0,{}
-local lastRun
+local lastRun,lastGapError
 D.LIMITS_SHOW_S=5
 local function vehicles()
  local out,choices={},{}
@@ -21,17 +22,25 @@ local function vehicles()
    local player
    for _,p in pairs(beamjoy_players and beamjoy_players.players or {}) do if tonumber(p.playerID)==pid then player=p;break end end
    local current=player and player.currentVehicle
-   local data={pos=object:getPosition(),dir=object.getDirectionVector and object:getDirectionVector()}
-   if current and (current==id or current==v.remoteVehID or current==v.remoteVID) then out[pid]=data end
+   local data={id=id,pos=object:getPosition(),dir=object.getDirectionVector and object:getDirectionVector()}
+   if current and ((v.isLocal and current==id) or current==v.remoteVehID or current==v.remoteVID) then out[pid]=data end
    local c=choices[pid] or {};choices[pid]=c;c[#c+1]=data
   end
  end
  for pid,c in pairs(choices) do if not out[pid] and #c==1 then out[pid]=c[1] end end
- local own=H.vehicle();if own then out[H.playerID()]={pos=own:getPosition(),dir=own.getDirectionVector and own:getDirectionVector()} end
+ -- Prefer BJR's normalized remoteVID mapping. A game-local id can collide
+ -- with another car's remote id, especially when a player owns several cars.
+ for _,v in pairs(beamjoy_vehicles and beamjoy_vehicles.vehicles or {}) do
+  local player=beamjoy_players and beamjoy_players.players and beamjoy_players.players[v.ownerName]
+  if tonumber(v.ownerID) and player and player.currentVehicle==v.remoteVID and v.isVehicle and v.veh then
+   out[tonumber(v.ownerID)]={id=v.vid,pos=v.veh:getPosition(),dir=v.veh:getDirectionVector()}
+  end
+ end
+ local own=H.vehicle();if own then out[H.playerID()]={id=own:getID(),localDriver=true,pos=own:getPosition(),dir=own.getDirectionVector and own:getDirectionVector()} end
  return out
 end
 D.positions=vehicles
-function D.reset() lastRun=nil;badges={};nextBadges=0 end
+function D.reset() lastRun=nil;lastGapError=nil;badges={};nextBadges=0;Gaps.reset() end
 --- class / PI per racer, keyed by BJR's playerName (BJRaceHud rows carry it)
 local function raceBadges(s,now)
  if now<nextBadges then return badges end
@@ -53,11 +62,13 @@ function D.packet(now,clock)
  if live then
   signals.lights=director.lights;local ok,yellow=pcall(director.yellow);if ok then signals.yellow=yellow end
   local flags=director.data and director.data.runID==s.id and director.data.falseStarts
-  signals.falseStart=director.falseStart==true or (flags and flags[tostring(H.playerID())]~=nil) or false
+  local racerKey=director.data and (director.data.racerKeyByPlayer or {})[tostring(H.playerID())] or tostring(H.playerID())
+  signals.falseStart=director.falseStart==true or (flags and flags[tostring(racerKey)]~=nil) or false
   if rt and rt.rolling and rt.rolling.phase=='formation' then signals.formation=rt.rolling.pace or 80;signals.noPassing=rt.rolling.warning end
  end
  -- a new BJR race run: my track-limit cut count starts again
- if s and s.id~=lastRun then lastRun=s.id;session.raceCut=nil elseif not s then lastRun=nil end
+ local phaseRun=s and (tostring(s.id)..':'..tostring(s.phaseIndex or 1))
+ if phaseRun and phaseRun~=lastRun then lastRun=phaseRun;session.raceCut=nil elseif not s then lastRun=nil end
  local cut=session.raceCut
  if live and cut and clock and clock-(cut.at or -1e9)<=D.LIMITS_SHOW_S then
   local rules=rt and rt.getRules and rt.getRules(s.raceId) or {}
@@ -68,9 +79,19 @@ function D.packet(now,clock)
  local marbles=package.loaded['ge/extensions/raceprep/rubberMarbles']
  local picked=okV and vid and vid>=0 and marbles and marbles.pickup(vid) or 0
  if picked>=(marbles and marbles.PICKUP_SHOW or 1) then signals.marbles={gripPercent=math.floor(picked*marbles.PICKUP_LOSS*1000+.5)/10} end
- local out={active=H.ready()==true,signals=signals,trackTemp=rt and rt.trackTemp}
- if s then out.race={runID=s.id,state=s.state,raceName=(function() for _,r in pairs(beamjoy_races and beamjoy_races.data or {}) do if r.id==s.raceId then return r.name end end end)(),
-  badges=raceBadges(s,now)} end
+ local out={active=H.ready()==true,signals=signals,trackTemp=rt and rt.trackTemp,rivals=require('ge/extensions/raceprep/bjr/rivalsSession').view(),strategy=require('ge/extensions/raceprep/bjr/strategy').view()}
+ local race
+ for _,r in pairs(beamjoy_races and beamjoy_races.data or {}) do if s and tostring(r.id)==tostring(s.raceId) then race=r;break end end
+ if s then out.race={runID=s.id,state=s.state,raceName=race and race.name,badges=raceBadges(s,now)} end
+ local viewName=runner and runner.spectatingPlayerName
+ if not viewName then for _,p in pairs(s and s.participants or {}) do if tonumber(p.playerID)==H.playerID() then viewName=p.playerName;break end end end
+ local okG,gaps=pcall(Gaps.update,now,s,race,vehicles,viewName,session.raceCut and session.raceCut.count or 0)
+ if okG then
+  lastGapError=nil;if out.race then out.race.gaps=gaps end
+ elseif tostring(gaps)~=lastGapError then
+  lastGapError=tostring(gaps)
+  if log then log('W','raceprepBJR','Local gap estimates unavailable: '..lastGapError) end
+ end
  local okA,announcement=pcall(function() return session.currentAnnouncement and session.currentAnnouncement() end)
  if okA and announcement then out.announcement=announcement end
  local p=session.data
