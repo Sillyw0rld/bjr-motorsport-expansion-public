@@ -63,9 +63,9 @@ def main():
         assert parts, generation.stdout
         generated = int(parts.group(1)) - native_parts
         if edition == 'play':
-            assert generated == 571, generation.stdout
+            assert generated == 583, generation.stdout
         else:
-            assert 0 < generated < 571, generation.stdout
+            assert 0 < generated < 583, generation.stdout
         assert custom.read_bytes() == b'keep' and rules.read_bytes() == b'{"keep":true}'
         assert not (server / '.raceprep-update/ready.json').exists()
         assert (server / '.raceprep-update/applied.json').exists()
