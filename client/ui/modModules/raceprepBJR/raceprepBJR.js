@@ -183,7 +183,9 @@ const RacePrepRadarFrame=data=>{
   if(id===String(data.playerVehicleId)||!o||!['vehicle','traffic','parked'].includes(o.type))continue;
   if(![o.centerX,o.centerY,o.centerZ,player.centerX,player.centerY,player.centerZ].every(Number.isFinite))continue;
   if(Math.abs(o.centerZ-player.centerZ)>Math.max(3,((o.sizeZ||1)+(player.sizeZ||1))/2))continue;
-  const dx=o.centerX-player.centerX,dy=o.centerY-player.centerY,x=dx*c-dy*sn,y=dx*sn+dy*c;
+  // vehicleRadar's OOBB axis 0 points to the car's left, so invert its
+  // horizontal coordinate to keep sectors and radar dots in driver space.
+  const dx=o.centerX-player.centerX,dy=o.centerY-player.centerY,x=-(dx*c-dy*sn),y=dx*sn+dy*c;
   const distance=Math.hypot(x,y),edge=Math.max(0,distance-Math.hypot(o.sizeX||0,o.sizeY||0)/2-Math.hypot(player.sizeX||0,player.sizeY||0)/2);
   if(edge>13)continue;
   const sector=Math.round((Math.atan2(x,-y)*180/Math.PI+360)/45)%8;
@@ -203,7 +205,11 @@ mod.component('bjRacePrep', {
     vm.tabGroups = [{label:'Race',tabs:['grid','results','challenges','sessions']},{label:'My car',tabs:['upgrades','setup']},{label:'Server',tabs:['drivers','crews','seasons','championship']}];
     vm.tabs = [...vm.tabGroups.flatMap(g=>g.tabs),'settings'];
     vm.tabNames={challenges:'Challenges',sessions:'Race weekend',settings:'Motorsport settings'};
-    vm.tabTitle=tab=>vm.tabNames[tab]||vm.title(tab);
+    // career wording follows the garage computer: Upgrade (singular) and the
+    // stock Tuning screen, never BJR's "Upgrades"/"Setup" racing terms.
+    vm.tabTitle=tab=>vm.state&&vm.state.frontend==='ascension'
+      ?(tab==='setup'?'Tuning':tab==='upgrades'?'Upgrade':vm.tabNames[tab]||vm.title(tab))
+      :(vm.tabNames[tab]||vm.title(tab));
     // what this player may do (server: Motorsport settings > Permissions)
     vm.can=action=>!!vm.state.abilities?.[action];
     // Motorsport settings sections; Race rules has its own sub-sections
@@ -308,15 +314,15 @@ mod.component('bjRacePrep', {
     vm.raceNotice=n=>{if(n.enabled){vm.send('rivalNotice',{action:'ghost',id:n.id});vm.rivalJoinList=[];vm.rewardNotice=null;}};
     const offRivalNotice=$rootScope.$on('RacePrepBJRRivalNotice',(_,p)=>$rootScope.$evalAsync(()=>{
       if(p.kind==='clear'){vm.rivalJoinList=[];noticesRequested=false;for(let i=noticeQueue.length-1;i>=0;i--)if(noticeQueue[i].kind==='rival')noticeQueue.splice(i,1);if(vm.rewardNotice?.kind==='rival')vm.rewardNotice=null;return;}
-      if(p.kind==='state'){vm.rivalInbox=p.items||[];
-        const valid=new Map((p.items||[]).map(n=>[n.id,n]));
+      if(p.kind==='state'){vm.rivalInbox=list(p.items);
+        const valid=new Map(list(p.items).map(n=>[n.id,n]));
         vm.rivalJoinList=vm.rivalJoinList.filter(n=>valid.has(n.id)).map(n=>valid.get(n.id));
         for(let i=noticeQueue.length-1;i>=0;i--)if(noticeQueue[i].kind==='rival'){const n=valid.get(noticeQueue[i].id);if(n)noticeQueue[i]={...n,kind:'rival',duration:8000};else noticeQueue.splice(i,1);}
         if(vm.rewardNotice?.kind==='rival'){const n=valid.get(vm.rewardNotice.id);vm.rewardNotice=n?{...n,kind:'rival',duration:8000}:null;}return;
       }
       if(!vm.rivalNotices)return;
-      if(p.kind==='join')vm.rivalJoinList=p.items||[];
-      else for(const n of p.items||[])noticeQueue.push({...n,kind:'rival',duration:8000});
+      if(p.kind==='join')vm.rivalJoinList=list(p.items);
+      else for(const n of list(p.items))noticeQueue.push({...n,kind:'rival',duration:8000});
     }));
     vm.rewardPercent=()=>{const r=vm.rewardCard;if(!r)return 0;return 100*((vm.rewardFill?r.after.xp:r.before.xp)-r.before.start)/Math.max(1,r.after.next-r.before.start);};
     vm.rivalsGhosts={target:true,best:true};
@@ -369,8 +375,13 @@ mod.component('bjRacePrep', {
     // packet for a different watched driver/phase must never leak into the HUD.
     vm.liveGaps=()=>{
       const r=vm.driving.race,g=r?.gaps,h=vm.hud;
-      return g && r.state==='RACE' && g.selfName===h?.self?.playerName &&
-        r.raceName===h?.raceName && g.phaseIndex===(h?.phaseIndex||1)?g:null;
+      if(!r || r.state!=='RACE')return {reason:'Race data not ready'};
+      if(!g)return {reason:'Gap packet missing'};
+      if(g.reason)return g;
+      if(g.selfName!==h?.self?.playerName)return {reason:'Driver name mismatch'};
+      if(g.raceName!==h?.raceName || r.raceName!==h?.raceName)return {reason:'Race name mismatch'};
+      if(g.phaseIndex!==(h?.phaseIndex||1) || (r.phaseIndex!==undefined && r.phaseIndex!==(h?.phaseIndex||1)))return {reason:'Race phase mismatch'};
+      return g;
     };
     vm.hudOpponent=side=>{
       const h=vm.hud;if(!h?.self)return null;
@@ -381,8 +392,11 @@ mod.component('bjRacePrep', {
       return i<0?null:rows[i+(side==='ahead'?-1:1)]||null;
     };
     vm.localGap=side=>{
-      const official=vm.hudOpponent(side),g=vm.liveGaps()?.[side];
-      return official && g?.playerName===official.playerName?g:null;
+      const official=vm.hudOpponent(side),g=vm.liveGaps();
+      if(!official)return {reason:'No opponent on this side'};
+      if(g.reason)return {reason:g.reason};
+      if(!g[side])return {reason:g.reason||'Opponent position unavailable'};
+      return g[side].playerName===official.playerName?g[side]:{reason:'Opponent name mismatch'};
     };
     vm.liveGapText=side=>{
       const p=vm.hudOpponent(side),g=vm.localGap(side),sign=side==='ahead'?'+':'−';
@@ -390,11 +404,11 @@ mod.component('bjRacePrep', {
       if(p.disqualified)return 'DSQ';if(p.dnf)return 'DNF';
       if(p.disconnected)return 'Disconnected';if(p.finished)return 'Finished';
       if(p.lapsDiff)return vm.gapText(p,sign);
-      return Number.isFinite(g?.liveMs)?'~'+sign+(g.liveMs/1000).toFixed(2)+' s':'Live —';
+      return Number.isFinite(g?.liveMs)?'~'+sign+(g.liveMs/1000).toFixed(2)+' s':'Live: '+(g?.liveReason||g?.reason||'Not crossed yet');
     };
     vm.gapDistance=side=>{
       const g=vm.localGap(side);
-      return Number.isFinite(g?.distanceM)?'~'+Math.round(g.distanceM)+' m':'Distance —';
+      return Number.isFinite(g?.distanceM)?'~'+Math.round(g.distanceM)+' m':'Distance: '+(g?.distanceReason||g?.reason||'Position unavailable');
     };
     vm.opponentPosition=side=>{
       const rows=list(vm.hud?.standings),p=vm.hudOpponent(side);
@@ -421,7 +435,12 @@ mod.component('bjRacePrep', {
     // Drop focus after a click: BeamNG styles focused buttons, which left the
     // previous tab looking selected next to the active one.
     vm.blur = event => event?.currentTarget?.blur?.();
-    vm.selectTab = (tab,event) => { vm.tab = tab; vm.blur(event); vm.send('tab',{name:tab});if(['results','challenges','settings'].includes(tab))vm.loadHistory();if(tab==='challenges')vm.loadChallenges(); };
+    vm.selectTab = (tab,event) => {
+      // career "Tuning" is a launch button, not a pane: it opens stock's own
+      // career.computer.tuning screen and the workshop closes behind it.
+      if(tab==='setup'&&vm.state&&vm.state.frontend==='ascension'){vm.blur(event);vm.send('openTuning',{});return;}
+      vm.tab = tab; vm.blur(event); vm.send('tab',{name:tab});if(['results','challenges','settings'].includes(tab))vm.loadHistory();if(tab==='challenges')vm.loadChallenges();
+    };
     vm.selfReady = () => !!(vm.state.grid?.rows || []).find(r=>r.isSelf)?.ready;
     vm.tankName = t => ({mainTank:'Fuel tank',mainBattery:'Battery',n2oTank:'Nitrous bottle'})[t.name] || vm.title(t.name);
     vm.energyName = e => ({gasoline:'Gasoline',diesel:'Diesel',electricEnergy:'Electric',n2o:'Nitrous',kerosine:'Kerosene',lpg:'LPG',cng:'CNG'})[e] || vm.title(e);
@@ -466,6 +485,16 @@ mod.component('bjRacePrep', {
       const form=action==='create'?vm.crewForm:vm.staffCrewForm;
       vm.send('progression',{action,crew:c?.id,driver,area:'crew',...(['create','rename','retag','recolour'].includes(action)?form:{})});
     };
+    vm.createCrew=()=>{
+      const f=vm.crewForm||{},name=String(f.name||'').trim(),tag=String(f.tag||'').trim();
+      if(name.length<2||name.length>40){vm.localMessage='Use a crew name from 2 to 40 characters.';return;}
+      if(!/^[a-z0-9]{2,4}$/i.test(tag)){vm.localMessage='Use a crew tag with 2–4 letters or numbers.';return;}
+      if(!vm.crewColours.some(c=>c[1]===f.colour)){vm.localMessage='Choose one of the nine crew colours.';return;}
+      vm.localMessage='';vm.crewAction('create');
+    };
+    // One Save for the staff crew form: only the changed fields go to the server.
+    vm.staffCrewChanges=()=>{const c=vm.staffCrew,f=vm.staffCrewForm;if(!c)return [];return [['rename',f.name!==c.name],['retag',f.tag!==c.tag],['recolour',f.colour!==c.colour]].filter(x=>x[1]).map(x=>x[0]);};
+    vm.saveStaffCrew=()=>{for(const action of vm.staffCrewChanges())vm.crewAction(action,vm.staffCrew);};
     vm.saveCrewSettings=()=>{if(vm.can('manageCrews'))vm.send('motorsport',{...angular.copy(vm.msDraft),scope:'crews'});};
     vm.crewStep=(key,amount)=>{const obj=key==='maxMembers'?vm.msDraft.crews:vm.msDraft.seasons;obj[key]=Math.max(key==='maxMembers'?2:1,Math.min(12,(Number(obj[key])||1)+amount));};
     vm.myCrew=()=>vm.league().crews?.items?.find(c=>c.id===vm.league().crews.own)||{};
@@ -478,7 +507,7 @@ mod.component('bjRacePrep', {
     vm.crewRank=id=>vm.league().current?.tables?.crews?.find(r=>r.id===id)?.position||'Unranked';
     vm.seasonDays=()=>Math.max(0,Math.ceil(((vm.league().current?.ends||0)*1000-Date.now())/86400000));
     vm.seasonAction=action=>{if((action==='end'||action==='start')&&!window.confirm(action==='end'?'End this season and publish its standings?':'Start a new season?'))return;vm.send('progression',{action,area:'season',name:vm.seasonName,date:vm.seasonEnd});};
-    vm.league=()=>({...vm.progress?.league,history:vm.progressHistory?.history,hallOfFame:vm.progressHistory?.hallOfFame,page:vm.progressHistory?.page,pages:vm.progressHistory?.pages||vm.progress?.league?.pages});
+    vm.league=()=>{const l=vm.progress?.league||{};return {...l,crews:l.crews||{own:null,items:[]},current:l.current||{},history:vm.progressHistory?.history,hallOfFame:vm.progressHistory?.hallOfFame,page:vm.progressHistory?.page,pages:vm.progressHistory?.pages||l.pages};};
     vm.showSeason=page=>{vm.seasonPage=page;if(page!=='current')vm.send('progression',{action:'history',page:1});};
     vm.seasonRows=()=>vm.league().current?.tables?.[vm.seasonView]||[];
     vm.pointsText='25,18,15,12,10,8,6,4,2,1';
@@ -543,9 +572,11 @@ mod.component('bjRacePrep', {
     vm.shown=v=>v.displayValue ?? v.value;
     vm.native=(v,n)=>Number.isFinite(v.minDis)&&Number.isFinite(v.maxDis)&&v.maxDis!==v.minDis?v.min+(n-v.minDis)*(v.max-v.min)/(v.maxDis-v.minDis):n;
     vm.buildPayload=()=>{const parts=[],tyres=[];list(vm.state.parts).forEach((row,i)=>{if(vm.partChanged(i))parts.push({index:i+1,path:vm.rowKey(row),name:vm.partChoices[vm.rowKey(row)]});});for(const t of list(vm.state.tyreControls))if(vm.tyreChanged(t))tyres.push({axle:t.axle,compound:vm.tyres[t.axle].compound,offset:Number(vm.tyres[t.axle].offset)});return {parts,tyres,body:vm.bodyDraft};};
-    let previewUserSet=false,previewGateSeen;vm.piPreview=false;try{previewUserSet=localStorage.getItem('raceprep.piPreview')!==null;vm.piPreview=localStorage.getItem('raceprep.piPreview')==='true';}catch(_){}
-    vm.piPreviewSetting=()=>{previewUserSet=true;try{localStorage.setItem('raceprep.piPreview',String(vm.piPreview));localStorage.setItem('raceprep.piPreviewFingerprint',(vm.state.piPreviewGate?.formulaHash||'')+':'+(vm.state.piPreviewGate?.constantsHash||''));}catch(_){}vm.send('piPreview',{enabled:vm.piPreview});vm.previewOptions();};
-    vm.previewOptions=()=>{const t=vm.shopType();if(vm.piPreview&&t)vm.send('previewOptions',{kind:t.kind,path:t.row&&vm.rowKey(t.row),axle:t.tyre?.axle});};
+    vm.piPreview=false;try{vm.piPreview=localStorage.getItem('raceprep.piPreview')==='true';}catch(_){}
+    vm.piPreviewSetting=()=>{try{localStorage.setItem('raceprep.piPreview',String(vm.piPreview));}catch(_){}vm.send('piPreview',{enabled:vm.piPreview});};
+    // Option PI is read from the stored delta table; changing shop categories
+    // must not schedule a JBeam compile.
+    vm.previewOptions=()=>{};
     const offBuildDraft=$rootScope.$on('RacePrepBJRBuildDraft',(_,p)=>$rootScope.$evalAsync(()=>{vm.discardUpgrades();for(const c of p.parts||[])vm.partChoices[c.path]=c.name;vm.bodyDraft=p.body;for(const t of p.tyres||[])vm.tyres[t.axle]={compound:t.compound,offset:t.offset};vm.markDraft();}));
     vm.markDraft=()=>{
       vm.tuneDirty=list(vm.state.variables).some(v=>v.allowed && (!Number.isFinite(vm.vars[v.name]) || Math.abs(vm.vars[v.name]-vm.shown(v))>1e-7));
@@ -655,24 +686,29 @@ mod.component('bjRacePrep', {
     vm.loadHistory=()=>{if(vm.state.serverBridgeReady!==true){historyRequested=undefined;return;}historyRequested=vm.state.level;vm.send('history');};
     vm.raceKey=r=>String(r?.runID||r?.key||'');
     vm.latest=()=>vm.state.results && (!vm.state.results.level || vm.state.results.level===vm.state.level)?vm.state.results:vm.history.items?.[0];
-    vm.result=()=> (vm.full && vm.historySelection && (vm.history.items||[]).find(r=>vm.raceKey(r)===vm.historySelection)) || vm.latest();
+    vm.result=()=> (vm.full && vm.historySelection && list(vm.history.items).find(r=>vm.raceKey(r)===vm.historySelection)) || vm.latest();
     vm.challengeView='all';vm.challengeData={items:[],featured:[]};vm.challengeFilter={class:'B',preset:'',type:'',page:1};vm.rivalInbox=[];vm.compareDriver='';vm.rivalChallenge=null;vm.rivalCar='';vm.rivalClass='';vm.rivalTarget=null;
     vm.loadChallenges=()=>vm.send('challenges',vm.challengeFilter);
     vm.selectChallenge=g=>{vm.rivalChallenge=g.id;vm.rivalTarget=null;vm.rivalCar='';};
     vm.challengeScore=r=>{if(!r)return '—';const m=r.metric;if(!m)return vm.time(r.time);return m.unit==='laps'?m.value+' laps':m.unit==='m/s'?(m.value*3.6).toFixed(1)+' km/h':m.type==='consistency'?(m.value/1000).toFixed(3)+' s spread':vm.time(m.value);};
     vm.challengeGap=(g,a,b)=>{const x=a.metric?.value??a.time,y=b.metric?.value??b.time;const gap=Math.abs(x-y),unit=a.metric?.unit||'ms';return unit==='laps'?gap+' laps':unit==='m/s'?(gap*3.6).toFixed(1)+' km/h':(gap/1000).toFixed(2)+' s';};
-    vm.startFeatured=p=>{if(p.available&&!vm.challengeBlock()&&vm.state.car.rating.class===p.board.class)vm.send('rivalsStart',{rotation:p.id});};
+    vm.challengeStartLabel=p=>p?.kind==='daily'?'Start daily challenge':p?.kind==='weekly'?'Start weekly challenge':'Start challenge';
+    vm.startFeatured=p=>{
+      if(!p||!p.available||vm.challengeBlock()||vm.state.car?.rating?.class!==p.board?.class)return;
+      vm.send('rivalsStart',{rotation:p.id});
+    };
     vm.chase=(g,r)=>{vm.selectChallenge(g);vm.rivalTarget=r;vm.startRivals();};
     let closestSource,closestRows,compareSource,compareRows,comparisonSource,comparisonDriver,comparisonRows;
     vm.closestRivals=()=>{if(closestSource===vm.history.rivals&&closestRows)return closestRows;closestSource=vm.history.rivals;const out=[];for(const g of vm.history.rivals||[]){const rows=g.rows||[],i=rows.findIndex(r=>r.personal);if(i>0){const mine=rows[i],ahead=rows.slice(0,i).reverse().find(r=>!r.personal);if(ahead)out.push({g,r:ahead,gap:vm.challengeGap(g,mine,ahead)});}}return closestRows=out;};
     vm.compareDrivers=()=>{if(compareSource===vm.history.rivals&&compareRows)return compareRows;compareSource=vm.history.rivals;const m=new Map();for(const g of vm.history.rivals||[])for(const r of g.rows||[])if(!r.personal)m.set(r.competitor,r.name);return compareRows=[...m].map(([id,name])=>({id,name})).sort((a,b)=>a.name.localeCompare(b.name));};
     vm.comparison=()=>{if(comparisonSource===vm.history.rivals&&comparisonDriver===vm.compareDriver&&comparisonRows)return comparisonRows;comparisonSource=vm.history.rivals;comparisonDriver=vm.compareDriver;const rows=[];let lead=0;for(const g of vm.history.rivals||[]){const mine=g.rows?.find(r=>r.personal),other=g.rows?.find(r=>r.competitor===vm.compareDriver);if(mine&&other){if(mine.time<other.time)lead++;rows.push({g,r:other,gap:vm.challengeGap(g,mine,other),lead:mine.time<other.time});}}rows.sort((a,b)=>{const x=a.g.rows.find(r=>r.personal),y=b.g.rows.find(r=>r.personal);return Math.abs(x.time-a.r.time)/Math.max(1,a.r.time)-Math.abs(y.time-b.r.time)/Math.max(1,b.r.time);});return comparisonRows={rows,lead,closest:rows[0]};};
     vm.rivalClasses=()=>['E','D','C','B','A','S','R','P','X'].filter(c=>(vm.history.rivals||[]).some(g=>g.class===c));
-    vm.rivalGroups=()=>{const groups=new Map((vm.history.rivals||[]).map(g=>[g.id,g]));for(const g of vm.challengeData.items||[])groups.set(g.id,g);return [...groups.values()].filter(g=>!vm.rivalClass||g.class===vm.rivalClass);};
+    vm.rivalGroups=()=>{const groups=new Map((vm.history.rivals||[]).map(g=>[g.id,g]));for(const g of list(vm.challengeData.items))groups.set(g.id,g);return [...groups.values()].filter(g=>!vm.rivalClass||g.class===vm.rivalClass);};
     vm.challengeBlock=()=>{
       if(vm.state.serverBridgeReady!==true)return 'Waiting for the server connection.';
       if(vm.state.session)return 'Leave the current BJR race before starting a challenge.';
-      if(vm.state.practice?.state && vm.state.practice.state!=='ended')return 'End the current practice activity first.';
+      // Same test as the Lua start check: a session running here, not one waiting or on another map.
+      if(vm.state.practiceActive)return 'Finish or leave the practice session running on this map first.';
       if(vm.state.applying)return 'Wait for the current car changes to finish.';
       if(vm.state.rivals?.active)return 'End your current run before starting another.';
       if(!vm.state.car?.rating?.class)return 'Choose a car and wait for its rating.';
@@ -790,6 +826,51 @@ mod.component('bjRacePrep', {
     vm.offeredPresets=()=>vm.eventPresets.filter(p=>p.offered);
     vm.filteredPresets=()=>vm.offeredPresets().filter(p=>(vm.presetCategory==='All'||p.category===vm.presetCategory)&&(p.name+' '+p.description).toLowerCase().includes(vm.presetSearch.toLowerCase()));
     vm.staffPicks=()=>vm.offeredPresets().filter(p=>p.staffPick).slice(0,4);
+    // Staff picks show as cards; the list holds the other presets.
+    vm.listedPresets=()=>{const picks=vm.staffPicks().map(p=>p.id);return vm.filteredPresets().filter(p=>!picks.includes(p.id));};
+    vm.rulesSummary=r=>{
+      if(!r)return 'Rules are not available yet.';
+      const out=[],classes=['E','D','C','B','A','S','R','P','X'].filter(c=>r.allowedClasses?.[c]!==false);
+      if(classes.length<9)out.push('Classes: '+(classes.join(', ')||'none'));
+      if(r.targetClass)out.push('Build to '+r.targetClass);
+      const lo=Number.isFinite(r.piMin)?r.piMin:null,hi=Number.isFinite(r.piMax)?r.piMax:null;
+      if(lo!==null||hi!==null)out.push('PI: '+(lo??'no minimum')+'–'+(hi??'no maximum'));
+      if(r.specModel)out.push('Vehicle: '+r.specModel+(r.specConfig?' / '+r.specConfig:''));
+      if(r.minLicence)out.push('Minimum licence: '+r.minLicence);
+      if(r.minSafety)out.push('Minimum safety: '+r.minSafety);
+      if(Number(r.minSkill)>0)out.push('Minimum skill: '+r.minSkill);
+      if(r.safetyRating===true)out.push('Safety rating required');
+      const stock=Object.entries(r.parts||{}).filter(([,v])=>v==='stock').map(([k])=>k);
+      if(stock.length)out.push('Factory parts only: '+stock.join(', '));
+      const u=r.upgrades||{},limits=[];
+      for(const [key,label] of [['engine','engine'],['weight','weight reduction'],['brakes','brakes'],['compound','tyres'],['drivetrainConversion','drivetrain swaps']])if(u[key]&&u[key]!=='race'&&u[key]!=='any'&&u[key]!=='slick')limits.push(label+' '+u[key]);
+      if(u.induction&&u.induction!=='allow')limits.push('induction '+u.induction);
+      if(u.engineConversion===false)limits.push('no engine swaps');
+      if(Number.isFinite(u.width)&&u.width<40)limits.push('tyre width up to '+u.width);
+      if(u.radiators===false)limits.push('no radiator upgrades');
+      if(limits.length)out.push('Upgrade limits: '+limits.join(', '));
+      for(const [key,label] of [['tuning','tuning'],['aero','aero'],['diff','differentials'],['nitrous','nitrous']])if(r[key]===false)out.push(label+': not allowed');
+      if(r.fuel===false)out.push('Fuel changes: not allowed');
+      if(r.diffModes){const modes=['open','lsd','locked'].filter(k=>r.diffModes[k]!==false);if(modes.length<3)out.push('Differentials: '+(modes.join(', ')||'factory only'));}
+      if(r.centreSplit===false)out.push('Centre split: locked');
+      else if(Number.isFinite(r.centreSplitMin)||Number.isFinite(r.centreSplitMax))out.push('Centre split: '+(r.centreSplitMin??0)+'–'+(r.centreSplitMax??1));
+      if(Number.isFinite(r.maxPreload)&&r.maxPreload<500)out.push('Differential preload up to '+r.maxPreload+' Nm');
+      if(Number.isFinite(r.maxLock)&&r.maxLock<100)out.push('Differential lock up to '+r.maxLock+'%');
+      if(r.slickCompounds){const slicks=['supersoft','soft','medium','hard'].filter(k=>r.slickCompounds[k]!==false);if(slicks.length<4)out.push('Slicks: '+(slicks.join(', ')||'none'));}
+      for(const [key,label] of [['abs','ABS'],['tc','traction control'],['esc','stability control']])if(r[key]&&r[key]!=='driver')out.push(label+': forced '+r[key]);
+      if(r.tyreWear&&r.tyreWear!=='driver')out.push('Tyre wear: '+r.tyreWear);
+      if(r.startType)out.push('Start: '+r.startType);
+      if(Number.isFinite(r.paceSpeed)&&r.startType==='rolling')out.push('Pace speed: '+r.paceSpeed+' km/h');
+      if(r.trackLimits)out.push('Track limits: '+r.trackLimits);
+      if(Number(r.cutPenaltyAfter)>0&&Number(r.cutPenaltySeconds)>0)out.push('Cut penalty: after '+r.cutPenaltyAfter+' cuts, +'+r.cutPenaltySeconds+' s');
+      if(r.trackTempFixed===true)out.push('Track temperature: fixed at '+r.trackTemp+' °C');
+      if(!out.length)out.push('No additional class, PI, vehicle or upgrade restrictions.');
+      return out.join(' · ');
+    };
+    vm.selectedPresetRules=()=>vm.rulesSummary(vm.racePreset()?.patch);
+    vm.enforcedRules=()=>vm.rulesSummary(vm.state?.rules);
+    vm.startBlocked=()=>!(vm.state.races||[]).length?'This map has no BJR race layouts.':!vm.raceStart.raceID?'Choose a layout first.':!vm.racePreset()?'Choose a preset first.':!(vm.raceStart.laps>=1)?'Set the number of laps.':'';
+    vm.sessionLabel=()=>vm.state.frontend==='ascension'?'Workshop · '+(vm.state.career?.place||'garage'):(vm.state.session?.state || (vm.weekendRunning()?vm.state.weekend.label+' · '+vm.state.weekend.raceName:'Free roam'));
     vm.pickRacePreset=p=>{vm.raceStart.preset=p.id;vm.raceStart.laps=p.defaultLaps;vm.send('classPreset',{id:p.id});};
     vm.racePreset=()=>vm.eventPresets.find(p=>p.id===vm.raceStart.preset);
     vm.openPresetRace=()=>vm.send('eventPresets',{action:'open',...angular.copy(vm.raceStart),preset:vm.raceStart.preset});
@@ -841,15 +922,17 @@ mod.component('bjRacePrep', {
     const offHistory=$rootScope.$on('RacePrepBJRHistory',(_,data)=>{
       $rootScope.$evalAsync(()=>{
         if(data.level && vm.state.level && data.level!==vm.state.level)return;
-        vm.history={...data,items:Array.isArray(data.items)?data.items:[],records:data.records||{}};
+        // Lua encodes an empty list as {}: normalise every list the window iterates.
+        vm.history={...data,items:list(data.items),records:data.records||{},rivalsBlocked:list(data.rivalsBlocked),
+          rivals:list(data.rivals).map(g=>({...g,rows:list(g&&g.rows)}))};
         if(vm.historySelection && !vm.history.items.some(r=>vm.raceKey(r)===vm.historySelection))vm.historySelection=null;
       });
     });
     vm.autoRatings={items:[]};
     const offAutoRatings=$rootScope.$on('RacePrepBJRAutoRatings',(_,p)=>$rootScope.$evalAsync(()=>{vm.autoRatings=p;}));
-    const offChallenges=$rootScope.$on('RacePrepBJRChallenges',(_,data)=>$rootScope.$evalAsync(()=>{vm.challengeData=data||{items:[]};if(!vm.rivalChallenge&&data.items?.length)vm.rivalChallenge=data.items[0].id;}));
-    const offPresets=$rootScope.$on('RacePrepBJRPresets',(_,data)=>{$rootScope.$evalAsync(()=>{vm.eventPresets=data.items||[];vm.presetCategories=data.categories||vm.presetCategories;vm.presetError=data.error;});});
-    const offProgress=$rootScope.$on('RacePrepBJRProgress',(_,data)=>{$rootScope.$evalAsync(()=>{vm.progress=data;});});
+    const offChallenges=$rootScope.$on('RacePrepBJRChallenges',(_,data)=>$rootScope.$evalAsync(()=>{vm.challengeData={...(data||{}),items:Array.isArray(data&&data.items)?data.items:[]};if(!vm.rivalChallenge&&vm.challengeData.items.length)vm.rivalChallenge=vm.challengeData.items[0].id;}));
+    const offPresets=$rootScope.$on('RacePrepBJRPresets',(_,data)=>{$rootScope.$evalAsync(()=>{vm.eventPresets=list(data.items);vm.presetCategories=data.categories||vm.presetCategories;vm.presetError=data.error;});});
+      const offProgress=$rootScope.$on('RacePrepBJRProgress',(_,data)=>{$rootScope.$evalAsync(()=>{vm.progress=data;vm.localMessage='';});});
     const offCard=$rootScope.$on('RacePrepBJRDriverCard',(_,data)=>{$rootScope.$evalAsync(()=>{if(data.id===vm.cardID)vm.card=data;});});
     const offLeague=$rootScope.$on('RacePrepBJRLeague',(_,data)=>{$rootScope.$evalAsync(()=>{vm.progressHistory=data;});});
     const off=$rootScope.$on('RacePrepBJRState',(_,state)=>{
@@ -889,13 +972,14 @@ mod.component('bjRacePrep', {
           vm.trackDraft=angular.copy(track);lastTrackData=trackData;
         }
         if(!vm.selectedRace && state.races?.length) vm.selectedRace=String(state.session?.raceId || state.races[0].id);
+        if(state.races?.length && !state.races.some(r=>String(r.id)===vm.raceStart.raceID)) vm.raceStart.raceID=String(state.races[0].id);
         // Motorsport settings draft and the weekend start form follow the server
 
         // Only arrival/leave events own these caches; a transient bridge timeout
         // must not erase data that the server will correctly deduplicate.
         if(state.serverBridgeReady===false){vm.cardOpen=false;}
-        const gateSignature=state.piPreviewGate?.formulaHash+':'+state.piPreviewGate?.constantsHash;if(state.piPreviewGate&&previewGateSeen!==gateSignature){previewGateSeen=gateSignature;let opted;try{opted=localStorage.getItem('raceprep.piPreviewFingerprint');}catch(_){}if(!state.piPreviewGate.passed&&opted!==gateSignature&&vm.piPreview){vm.piPreview=false;vm.send('piPreview',{enabled:false});}}
-        if(!previewUserSet&&state.piPreviewGate?.passed&&!vm.piPreview){vm.piPreview=true;vm.send('piPreview',{enabled:true});vm.previewOptions();}
+        // PI estimates are opt-in. A passing formula gate must never start a
+        // set of per-option shadow compiles as a side effect of opening the UI.
         const msData=JSON.stringify(state.motorsport?.settings||null);
         if(msData!==lastMotorsport){lastMotorsport=msData;vm.msDraft=angular.copy(state.motorsport?.settings||null);vm.pointsText=(vm.msDraft?.seasons?.points||[25,18,15,12,10,8,6,4,2,1]).join(',');
           const w=state.motorsport?.settings?.weekend||{};
@@ -905,7 +989,11 @@ mod.component('bjRacePrep', {
         const sections=vm.visibleSections();if(sections.length && !sections.some(([id])=>id===vm.setupSection))vm.setupSection=sections[0][0];
       });
     });
-    vm.$onInit=()=>{vm.send('piPreview',{enabled:vm.piPreview});vm.send('progressCache');vm.send('refresh');openRaceRules();if(typeof StreamsManager!=='undefined')StreamsManager.add(tyreStreams);vm.radarSetting();vm.ghostSetting();}; vm.$onDestroy=()=>{offStreams();$interval.cancel(expireStreams);if(typeof StreamsManager!=='undefined'){StreamsManager.remove(tyreStreams);if(radarSubscribed)StreamsManager.remove(['vehicleRadar']);}off();offRivalNotice();offReward();$interval.cancel(rewardTimer);offProgress();offPresets();offChallenges();offAutoRatings();offBuildDraft();offCard();offLeague();offHistory();offDriving();offHud();offOpenRules();document.body.classList.remove('raceprep-native-hud-replaced');};
+    // Ascension career window: ESC is ours while the career session is open —
+    // capture phase beats the stock parts screen's own ESC-to-close handling.
+    const onEsc=e=>{if(e.key==='Escape'&&vm.open&&vm.state&&vm.state.frontend==='ascension'){e.stopImmediatePropagation();e.preventDefault();$rootScope.$evalAsync(()=>{vm.send('show',{value:false});vm.open=false;});}};
+    document.addEventListener('keydown',onEsc,true);
+    vm.$onInit=()=>{vm.send('piPreview',{enabled:vm.piPreview});vm.send('progressCache');vm.send('refresh');openRaceRules();if(typeof StreamsManager!=='undefined')StreamsManager.add(tyreStreams);vm.radarSetting();vm.ghostSetting();}; vm.$onDestroy=()=>{offStreams();$interval.cancel(expireStreams);if(typeof StreamsManager!=='undefined'){StreamsManager.remove(tyreStreams);if(radarSubscribed)StreamsManager.remove(['vehicleRadar']);}off();offRivalNotice();offReward();$interval.cancel(rewardTimer);offProgress();offPresets();offChallenges();offAutoRatings();offBuildDraft();offCard();offLeague();offHistory();offDriving();offHud();offOpenRules();document.removeEventListener('keydown',onEsc,true);document.body.classList.remove('raceprep-native-hud-replaced');};
   }
 });
 

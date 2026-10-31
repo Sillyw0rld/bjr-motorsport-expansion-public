@@ -25,7 +25,7 @@ MPVehicleGE={getVehicleByGameID=function() return {isLocal=true,serverVehicleStr
 local R=dofile('client/lua/ge/extensions/raceprepRatings.lua')
 local K=require('ge/extensions/raceprep/ratingIdentity').key('m','x',parts)
 R.vehicles[11]=K
-decoded={full={entries={[K]={model='m',config='x',pi=600,pi_speed=610,pi_technical=590,class='B',source='computed',parts=parts}},constants={v=1},vehicles={}},
+decoded={full={entries={[K]={model='m',config='x',pi=600,pi_speed=610,pi_technical=590,class='B',source='computed',enginePotential=require('ge/extensions/raceprep/ratingIdentity').hash({enginePotential='2.33.0:'..require('ge/extensions/raceprep/bjr/setupLibrary').signature(require('common/raceprep/engineSelection').settings())}),parts=parts}},constants={v=1},vehicles={}},
  again={delta=true,entries={},vehicles={}}}
 R.onRatings('full')
 local r=reports[#reports]

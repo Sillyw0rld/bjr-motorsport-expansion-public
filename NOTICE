@@ -2,7 +2,11 @@ BeamJoy-Revived: Motorsport Expansion (BJR:ME)
 Copyright (c) 2026 Sillyw0rld
 
 Licensed under the GNU Affero General Public License, version 3 or (at your
-option) any later version. See LICENSE.
+option) any later version, with an additional permission for BeamNG.drive
+(AGPL-3.0, section 7). See LICENSE and LICENSING.md.
+
+This repository also builds Motorsport: Ascension, the single-player career;
+the same licence, permission and notices apply to it.
 
 Original work in this project includes, in particular:
   - the Performance Index (PI) classification and calibration system, and

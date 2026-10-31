@@ -4,7 +4,7 @@
 -- bjMain already sends BJMainPadRequest when it mounts. Listen through BJR's
 -- handler API and replay its current window state; do not patch its files or
 -- replace its functions. No timers, polling messages or forced window opening.
-local H=require('ge/extensions/raceprep/bjr/host')
+local H=require('ge/extensions/raceprep/frontend').host()
 local S={replays=0}
 local bound,token,callback
 local enabled,wasReady=true,false

@@ -38,6 +38,7 @@ body.raceprep-native-hud-replaced #beamjoy-race-hud{display:none!important}
 #raceprep-bjr-root .rp-gaps>div{display:flex;justify-content:space-between;gap:6px}#raceprep-bjr-root .rp-gaps span{color:#9aa3ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#raceprep-bjr-root .rp-gaps b{font-size:14px;font-weight:600;white-space:nowrap}
 #raceprep-bjr-root .rp-gaps section>div:first-child{display:flex;min-width:0}
 #raceprep-bjr-root .rp-gaps .rp-gap-values{display:flex;justify-content:space-between;gap:8px;padding:1px 0 5px;font-size:11px}
+#raceprep-bjr-root .rp-gaps .rp-gap-values b{max-width:50%;white-space:normal;overflow-wrap:anywhere;line-height:1.2;text-align:right}
 #raceprep-bjr-root .rp-gaps .rp-gap-official{display:block;padding-bottom:4px;font-size:10px;color:#9aa3ab}
 #raceprep-bjr-root .rp-gaps .rp-gap-note{display:block;padding-top:3px;border-top:1px solid #ffffff12;font-size:9px;color:#9aa3ab}
 #raceprep-bjr-root .rp-sectors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:0 8px 7px}
@@ -111,7 +112,7 @@ body.raceprep-native-hud-replaced #beamjoy-race-hud{display:none!important}
    <div class="rp-gap-values"><b class="rp-hud-num">{{$ctrl.liveGapText(side)}}</b><b class="rp-hud-num" title="Estimated distance along the checkpoint route; improves as your driven line is recorded.">{{$ctrl.gapDistance(side)}}</b></div>
    <small class="rp-gap-official">BJR interval {{$ctrl.gapText($ctrl.hudOpponent(side),side==='ahead'?'+':'−')}}</small>
   </section>
-  <small class="rp-gap-note" title="{{$ctrl.liveGaps().reason || 'Estimates need synced positions and route history. Branching layouts and repeated point-to-point runs use BJR intervals only.'}}">~ local estimate · metres along route</small>
+  <small class="rp-gap-note" title="{{$ctrl.liveGaps().reason || 'Local estimates use checkpoint positions and the recorded line where available. The BJR interval remains official.'}}">~ local time and distance estimates · BJR interval official</small>
  </div>
 </div>
 <!-- Dedicated personal Rivals has its own clock, not a fake BJR race packet. -->

@@ -585,6 +585,9 @@ log("Loaded rules from " .. rulesFile)
 -- mapping, deleted car and disconnect re-sent the whole store (every entry
 -- with its parts list) to all players. Measured seed entries ship with the
 -- client mod, so their parts lists stay out of the payload (client restores).
+local enginePotentialSettings=dofile(pluginPath..'/EnginePotentialSettings.lua').load{
+    read=function(name)return readJson(pluginPath..'/'..name)end,
+    exists=function(name)return FS.Exists(pluginPath..'/'..name)end,log=log}
 local function wireEntry(e,key)
     -- measured entries and native estimates ship in every client's seed:
     -- their parts lists come from there (keeps the join payload small)
@@ -601,6 +604,7 @@ local function encodeRatings()
     local entries={}
     for k,e in pairs(ratings.entries) do entries[k]=wireEntry(e,k) end
     return Util.JsonEncode({ schemaVersion=1, entries=entries, constants=ratings.constants,
+        enginePotential=enginePotentialSettings,
         vehicles=ratingVehicles }):gsub('"vehicles":%[%]', '"vehicles":{}')
 end
 -- entries: {[key]=entry}; vehicles: {[pid]={[sid]=key|false}} or {[pid]=false}
@@ -934,7 +938,7 @@ function RacePrepPresetAction(pid,wire)
  if p.action=='open' then
   saved,why=features.presets.open(pid,p,function(selected)
    if not (bjrApi and bjrApi.call) then MP.TriggerClientEvent(pid,'RacePrepRulesStatus','BJR race API unavailable.');return end
-   bjrApi.call('race.open',{raceId=tonumber(selected.raceID),name=selected.preset.name,
+   bjrApi.call('race.open',{raceId=tonumber(selected.raceID),name=presetLobbyLabel(selected),
     options={laps=selected.laps,allowTuning=selected.rules.tuning}},function(opened,result)
     if not opened then MP.TriggerClientEvent(pid,'RacePrepRulesStatus',type(result)=='table' and (result.message or result.code) or tostring(result));return end
     if not features.presets.assign(result.sessionId,selected) then
@@ -952,6 +956,26 @@ function RacePrepPresetAction(pid,wire)
 end
 MP.RegisterEvent('RacePrepGetPresets','RacePrepGetPresets')
 MP.RegisterEvent('RacePrepPresetAction','RacePrepPresetAction')
+
+-- BJR's public race.open API exposes a 48-character lobby host label. Put the
+-- main admission limits there; the full rule list is also shown in BJR:ME's
+-- lobby Grid tab before Ready.
+local function presetLobbyLabel(selected)
+ local r=selected and selected.rules or {};local terms={}
+ local classes={};for _,c in ipairs({'E','D','C','B','A','S','R','P','X'}) do if r.allowedClasses and r.allowedClasses[c]~=false then classes[#classes+1]=c end end
+ if #classes>0 and #classes<9 then terms[#terms+1]=table.concat(classes) end
+ local lo,hi=tonumber(r.piMin),tonumber(r.piMax)
+ if lo or hi then terms[#terms+1]='PI '..(lo and tostring(lo) or '*')..'-'..(hi and tostring(hi) or '*') end
+ if type(r.specModel)=='string' and r.specModel~='' then terms[#terms+1]='Car '..r.specModel:gsub('_',' ')..(r.specConfig and r.specConfig~='' and ('/'..r.specConfig) or '') end
+ if r.tuning==false then terms[#terms+1]='no tune' end
+ if r.aero==false then terms[#terms+1]='no aero' end
+ if r.diff==false then terms[#terms+1]='no diff' end
+ if r.nitrous==false then terms[#terms+1]='no N2O' end
+ local name=tostring(selected and selected.preset and selected.preset.name or 'Race preset')
+ local suffix=#terms>0 and (' | '..table.concat(terms,' ')) or ' | Open rules'
+ local room=math.max(1,48-#suffix)
+ return (name:sub(1,room)..suffix):sub(1,48)
+end
 
 local function readRace(level, raceID)
     if host.enabled then return host.race(level,raceID) end

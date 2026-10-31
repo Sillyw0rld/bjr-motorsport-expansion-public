@@ -87,6 +87,9 @@ def generate(resources, output, approved=APPROVED):
     engine_path = output / 'lua/common/raceprep/engine-parts.json'
     engine_catalog = json.loads(engine_path.read_text()) if engine_path.exists() else {'models': {}}
     engine_catalog['swaps'] = {}
+    native_metadata = {d['model']: generate_upgrade_engines.engine_metadata(d['archive'], d['model'])
+                       for d in donors if d['engineDevice'] == 'combustionEngine'}
+    native_fallbacks = set()
     count = 0
     with tempfile.TemporaryDirectory() as temp:
         temp = Path(temp)
@@ -178,6 +181,12 @@ def generate(resources, output, approved=APPROVED):
                 native_additions = native_intakes.generate(d, ident, proof['partRenames'], defaults(d).get('$revLimitRPM'))
                 if native_additions:
                     (folder / (ident+'_native_intakes.jbeam')).write_text(json.dumps(native_additions,indent=2)+'\n')
+                if not info:
+                    info={'native':True,'stockEngine':proof['part'],'parts':{},
+                          **native_metadata[d['model']]}
+                    if (not info.get('layout') or not info.get('litres')) and d['model'] not in native_fallbacks:
+                        print('engine potential fallback: '+d['model']+' (layout/displacement unavailable)')
+                        native_fallbacks.add(d['model'])
                 engine_catalog['swaps'][proof['part']] = {'recipient': model, 'donor': d['model'],
                     'runtime': d['engineDevice'], 'engineInfo': info}
                 item.update({'part': proof['part'], 'structure': proof['structure'], 'title': label,

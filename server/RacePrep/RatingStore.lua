@@ -4,19 +4,25 @@
 -- AGPL-3.0-or-later (see LICENSE). Client reports are estimates, never trusted as measured calibration.
 local M={}
 local function finite(n) return type(n)=='number' and n==n and math.abs(n)<math.huge end
-M.CURVE = { knee = 300, cap = 999, a = 0.495, b = 0.58, c = 0.29 }
+M.CURVE = { knee = 300, cap = 999, a = 0.495, b = 0.58, c = 0.29, lowRaw = -1950 }
 function M.curve(raw, c)
     assert(finite(raw), "Invalid rating")
     local p = c == nil and M.CURVE or (type(c) == "table" and (tonumber(c.knee) and c or type(c.curve) == "table" and c.curve)) or nil
     if not p then return math.max(100, math.min(999, math.floor(raw + 0.5))) end
     local knee, cap = tonumber(p.knee) or 300, tonumber(p.cap) or 999
-    if raw <= knee then return math.max(100, math.min(cap, math.floor(raw + 0.5))) end
+    if raw <= knee then
+        -- Fit only below the knee. Legacy curve tables remain unchanged.
+        local lower=tonumber(p.lowRaw)
+        local value=lower and 100+(knee-100)*(raw-lower)/(knee-lower) or raw
+        return math.max(100, math.min(cap, math.floor(value + 0.5)))
+    end
     local h = cap - knee
     local u = (raw - knee) / h
     local a, b, d = tonumber(p.a) or 0.495, tonumber(p.b) or 0.58, tonumber(p.c) or 0.29
     local z = u + (a * u * u + b * u ^ 4) / (1 + d * u ^ 3)
     return math.max(100, math.min(cap, math.floor(knee + h * (1 - math.exp(-z)) + 0.5)))
 end
+function M.bonusRaw(raw,share)return raw*(raw<0 and 1-share or 1+share) end
 local function rawOf(e,field)
     local r=type(e)=='table' and type(e.raw)=='table' and tonumber(e.raw[field])
     return r or (type(e)=='table' and tonumber(e[field])) or nil
@@ -33,11 +39,12 @@ function M.validate(p,identity,constants)
         local pattern=field=='config' and '^[%w_ %-]+$' or '^[%w_-]+$'
         if type(p[field])~='string' or #p[field]>128 or not p[field]:match(pattern) then return nil,'Invalid '..field end
     end
+    if p.ratingRevision~=nil and constants and constants.rawRevision and p.ratingRevision~=constants.rawRevision then return nil,'Outdated rating formula' end
     local raw={}
     local src=type(p.raw)=='table' and p.raw or p
     for _,field in ipairs({'pi','pi_speed','pi_technical'}) do
         local r=src[field]
-        if not finite(r) or r%1~=0 or r<100 or r>2500 then return nil,'Invalid '..field end
+        if not finite(r) or r%1~=0 or r<(src~=p and -10000 or 100) or r>2500 then return nil,'Invalid '..field end
         if src~=p and p[field]~=nil and (not finite(p[field]) or p[field]%1~=0 or p[field]<100 or p[field]>999) then
             return nil,'Invalid '..field
         end
@@ -57,14 +64,23 @@ function M.validate(p,identity,constants)
     local pi=M.curve(raw.pi,constants)
     local entry={model=p.model,config=p.config,parts=parts,partsHash=h,raw=raw,pi=pi,
         pi_speed=M.curve(raw.pi_speed,constants),pi_technical=M.curve(raw.pi_technical,constants),class=M.classOf(pi),
-        source='computed',assumptions='Sport / 40 kg fuel / warm KTS tyres',anchored=p.anchored==true or nil}
+        ratingRevision=p.ratingRevision,source='computed',assumptions='Sport / 40 kg fuel / warm KTS tyres',anchored=p.anchored==true or nil}
+    if type(p.enginePotential)=='string' and #p.enginePotential<=64 then entry.enginePotential=p.enginePotential end
+    if type(p.nativeEngineScales)=='table' then
+        entry.nativeEngineScales={};local count=0
+        for name,scale in pairs(p.nativeEngineScales) do
+            count=count+1
+            if count>16 or type(name)~='string' or #name>80 or type(scale)~='number' or scale~=scale or scale<=0 or scale>=1000 then return nil,'Invalid native engine scale' end
+            entry.nativeEngineScales[name]=scale
+        end
+    end
     if p.model=='firestarter_clone_kalalalac' then entry.flag='Suspected gearbox fault: hunts / 134 km/h' end
     return entry,p.model..'/'..p.config..'/'..h
 end
 function M.accept(entries,p,identity,constants)
     local e,key=M.validate(p,identity,constants)
     if not e then return nil,key end
-    if entries[key] then return key,false,entries[key] end
+    if entries[key] and (entries[key].source~='computed' or entries[key].enginePotential==e.enginePotential and entries[key].ratingRevision==e.ratingRevision) then return key,false,entries[key] end
     entries[key]=e
     return key,true,e
 end
@@ -75,6 +91,7 @@ end
 -- drop them so each is recomputed against the new base when spawned.
 function M.mergeSeed(store,seed)
     local merged,dropped,changed=0,0,{}
+    local revised=(store.constants or {}).rawRevision~=(seed and seed.constants or {}).rawRevision
     if type(seed)~='table' or type(seed.entries)~='table' then return 0,0 end
     for k,e in pairs(seed.entries) do
         local old=store.entries[k]
@@ -84,7 +101,7 @@ function M.mergeSeed(store,seed)
         end
     end
     for k,e in pairs(store.entries) do
-        if e.source=='computed' and not seed.entries[k] and (changed[e.model] or (seed.constants and seed.constants.curve and not e.raw)) then
+        if e.source=='computed' and not seed.entries[k] and (revised or changed[e.model] or (seed.constants and seed.constants.curve and not e.raw)) then
             store.entries[k]=nil;dropped=dropped+1
         end
     end
@@ -123,14 +140,14 @@ function M.present(e,m,constants)
     local rpi=rawOf(e,'pi')
     local basePI=rpi and M.curve(rpi,constants) or e.pi
     out.performancePI=basePI;out.carName=m.carName
-    out.tuningPotentialPI=rpi and (M.curve(rpi*(1+m.tuningShare),constants)-basePI) or math.floor(e.pi*m.tuningShare+.5)
-    out.weightBonusPI=rpi and (M.curve(rpi*(1+m.weightShare),constants)-basePI) or math.floor(e.pi*m.weightShare+.5)
+    out.tuningPotentialPI=rpi and (M.curve(M.bonusRaw(rpi,m.tuningShare),constants)-basePI) or math.floor(e.pi*m.tuningShare+.5)
+    out.weightBonusPI=rpi and (M.curve(M.bonusRaw(rpi,m.weightShare),constants)-basePI) or math.floor(e.pi*m.weightShare+.5)
     local raw={}
     for _,f in ipairs({'pi','pi_speed','pi_technical'}) do
         local rf=rawOf(e,f)
         if rf then
-            raw[f]=math.max(100,math.floor(rf*(1+m.tuningShare+m.weightShare)+.5))
-            out[f]=M.curve(rf*(1+m.tuningShare+m.weightShare),constants)
+            raw[f]=math.floor(M.bonusRaw(rf,m.tuningShare+m.weightShare)+.5)
+            out[f]=M.curve(M.bonusRaw(rf,m.tuningShare+m.weightShare),constants)
         end
     end
     if next(raw) then out.raw=raw end

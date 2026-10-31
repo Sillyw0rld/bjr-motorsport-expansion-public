@@ -54,8 +54,11 @@ def clean(output):
 def run(resources, statics, output, update_donors=False, add_donors=(), donors=None, tyre_resources=None):
     """Shared Python/frozen entry point; caller stages output before publishing."""
     resources, statics, output = Path(resources), Path(statics), Path(output)
-    cars = fleet.discover(resources)
+    nonauto = []
+    cars = fleet.discover(resources, report=nonauto)
     print(f'{len(cars)} Automation cars in {resources}', flush=True)
+    for entry in nonauto:
+        print(f"skipped: {entry['model']} — {entry['reason']}", flush=True)
     removed = clean(output)
     print(f'removed {removed} previously generated files', flush=True)
     seed = json.loads((ROOT / 'client/lua/ge/extensions/raceprep/ratings-seed.json').read_text())

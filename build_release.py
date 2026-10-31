@@ -36,7 +36,7 @@ VERSION = (ROOT / 'VERSION').read_text().strip()  # one version for the live bui
 EDITIONS = ('play', 'custom')
 SERVER_FILES = {'RacePrep.lua', 'BJRHost.lua', 'BJRApi.lua', 'RatingStore.lua', 'RatingIdentity.lua', 'Skill.lua', 'Sessions.lua',
                 'RaceControl.lua', 'RubberMap.lua', 'MarbleMap.lua',  'DriverStats.lua', 'Championship.lua',
-                'ResultHistory.lua', 'Persistence.lua', 'Rivals.lua','RivalsSessions.lua','RivalsVerification.lua','RivalsBeamMP.lua','RivalsModeration.lua','NativeIdentity.lua','native-identity.json','SharedTunes.lua','DriverRating.lua','Licences.lua','Progression.lua','ProgressionRewards.lua','ProgressionBackfill.lua','Crews.lua','Seasons.lua','League.lua','RaceAwards.lua','WeeklyRivals.lua','SeriesCatalogue.lua','DiscordAwards.lua','RivalNotices.lua','EventPresets.lua','Challenges.lua','ChallengeCatalogue.lua','AutoRating.lua','ClassBuild.lua','AnchorSelection.lua','series-native-cars.json','awards-discord.example.json', 'PartsUpdater.lua', 'ReleaseUpdates.lua', 'MotorsportSettings.lua', 'Weekend.lua', 'updates.example.json', 'ratings-seed.json', 'rules.example.json'}
+                'ResultHistory.lua', 'Persistence.lua', 'Rivals.lua','RivalsSessions.lua','RivalsVerification.lua','RivalsBeamMP.lua','RivalsModeration.lua','NativeIdentity.lua','native-identity.json','SharedTunes.lua','DriverRating.lua','Licences.lua','Progression.lua','ProgressionRewards.lua','ProgressionBackfill.lua','Crews.lua','Seasons.lua','League.lua','RaceAwards.lua','WeeklyRivals.lua','SeriesCatalogue.lua','DiscordAwards.lua','RivalNotices.lua','EventPresets.lua','Challenges.lua','ChallengeCatalogue.lua','AutoRating.lua','ClassBuild.lua','AnchorSelection.lua','engine-potential.example.json','EnginePotentialSettings.lua','EnginePotentialDefaults.lua','series-native-cars.json','awards-discord.example.json', 'PartsUpdater.lua', 'ReleaseUpdates.lua', 'MotorsportSettings.lua', 'Weekend.lua', 'updates.example.json', 'ratings-seed.json', 'rules.example.json'}
 
 
 def git(*args):
@@ -76,11 +76,13 @@ def build(output, verbose=False, generator_dir=None, source_only=False, edition=
             continue  # legacy ImGui windows; generated parts are made per server
         if name.startswith('native/vehicles/'):
             name = name[len('native/'):]  # BeamNG cars' parts ship ready-made, both editions
+        if name.startswith('lua/ge/extensions/raceprep/career/'):
+            continue
         client[name] = p.read_bytes()
     client['lua/ge/extensions/raceprep/version.json'] = json.dumps({'version': version, 'commit': commit[:7], 'dirty': dirty}).encode()
     client['mod_info.json'] = json.dumps({'name': 'BeamJoy-Revived: Motorsport Expansion', 'version': version, 'author': 'Sillyw0rld',
                                           'license': 'AGPL-3.0-or-later'}, indent=2).encode()
-    for name in ('LICENSE', 'NOTICE', 'CREDITS.md'):
+    for name in ('LICENSE', 'LICENSING.md', 'NOTICE', 'CREDITS.md'):
         client[name] = (ROOT / name).read_bytes()
     client['docs/AUTHORSHIP.md'] = (ROOT / 'docs/AUTHORSHIP.md').read_bytes()
     payload = {'Resources/Client/BJR_RacePrep.zip': archive(client)}
@@ -125,7 +127,7 @@ def build(output, verbose=False, generator_dir=None, source_only=False, edition=
     for name in ('README.md', 'STATUS.md', 'AUTHORSHIP.md'):
         payload['docs/' + name] = (ROOT / 'docs' / name).read_bytes()
     payload['Resources/Server/RacePrep/host.json'] = (json.dumps({'host': 'beamjoy-revived', 'protocol': 1, 'version': version}) + '\n').encode()
-    for name in ('LICENSE', 'NOTICE', 'README.md', 'CHANGELOG.md', 'CREDITS.md',
+    for name in ('LICENSE', 'LICENSING.md', 'NOTICE', 'README.md', 'CHANGELOG.md', 'CREDITS.md',
                  'ROADMAP.md', 'CONTRIBUTING.md', 'GOVERNANCE.md'):
         payload[name] = (ROOT / name).read_bytes()
     manifest = {'format': 1, 'version': version, 'edition': edition, 'commit': commit, 'files': {name: hashlib.sha256(data).hexdigest() for name, data in sorted(payload.items()) if not name.startswith('BJRME-donors/custom/')}}

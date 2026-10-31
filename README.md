@@ -9,8 +9,10 @@ living track: rubbered racing line, marbles and track temperature.
 
 Created by Sillyw0rld.
 
-**2.32 beta:** race weekends on every BJR 2.0.1+ (classic mode without race phases), plus build-to-class presets, PI estimates, automatic car rating and seven challenge types.
-See [everyday use](docs/distribution/USAGE.md#drivers-crews-and-seasons-227).
+**What's new (2.35 beta):** engines now have a realistic power limit, so upgrades can't turn a car
+that's already powerful into a rocket. You can add twin-charged and sequential twin-turbo setups,
+and hear the turbos and superchargers you fit. The boost gauge works too. The window got a
+cleaner look, with your own settings behind a gear icon. Full list: [CHANGELOG.md](CHANGELOG.md).
 
 ## How it started
 BJR:ME started as something I built for myself and my friends. We race Automation cars on our own
@@ -22,198 +24,143 @@ can race the same way.
 
    -Sillyw0rld
 
-## What it does
+## What you get
 
-### Car classes and Performance Index (PI)
+Open it from BeamJoy-Revived's menu (**Motorsport**). Everything below happens in that one window.
+
+### Fair classes for every car
 ![Vehicle selector with class and PI badges](docs/screenshots/vehicle-selector-pi.webp)
-*Every Automation and BeamNG car gets a class and Performance Index in the vehicle list (PI values
-in this screenshot come from an earlier build, before the class curve).*
 
-- **Classes E, D, C, B, A, S, R, P and X with a 100–999 PI,** on Forza Motorsport's class bands. Each
-  class is progressively harder to reach: road cars climb easily, super and hypercars climb slowly
-  through R and P, and X is reserved for extreme builds.
-- **Calibrated ratings:** PI comes from a lap-time model of the car's physics (acceleration, braking
-  and cornering). Stock ratings are calibrated against cars measured in game; upgrades are rated by
-  how much they change the car.
-- **Parts change PI, tuning never does** (as in Forza). Race parts that unlock tuning carry a small,
-  visible "tuning potential" bonus.
-- Ratings show in the vehicle selector, on the grid, in the race HUD and in results.
+Every car gets a **class letter** (E, D, C, B, A, S, R, P, X) and a **PI number** (100–999), just
+like Forza. PI stands for Performance Index: the higher the number, the faster the car. Races can
+be limited to one class, so you race cars of a similar speed.
 
-### Upgrade workshop
-![Upgrade workshop: drivetrain conversion with performance figures](docs/screenshots/upgrades-workshop.webp)
-![Engine dyno in the upgrade workshop](docs/screenshots/upgrades-dyno.webp)
+- You see the class and PI in the car list, on the grid, on the race HUD and in the results.
+- PI comes from how the car actually accelerates, brakes and corners, checked against real laps
+  in the game.
+- **Parts change PI, tuning doesn't** (the Forza rule). Adjusting your setup never moves you into
+  another class.
 
-**Automation cars** get a full Forza-style upgrade path, generated on the server for the cars it has:
-- **Tyres:** compounds from road to race slicks (KTS-aware), width −20 to +40 mm on a matching rim.
-- **Aero kits, weight reduction (Street / Sport / Race), brakes** (Sport / Race).
-- **Engine:** intake, exhaust, ECU, camshaft, forged internals, displacement, turbochargers and
-  superchargers, intercooler, oil cooler and **radiators** (sized so a turbo-converted car stops
-  overheating on a hot grid), with a live **dyno**.
-- **Engine conversions** from a curated donor-engine lineup, screened against each car's engine bay,
-  and **drivetrain conversions** (FWD / RWD / AWD). The donors are included.
+### Upgrade your car
+![Upgrade workshop with performance figures](docs/screenshots/upgrades-workshop.webp)
+![Engine dyno](docs/screenshots/upgrades-dyno.webp)
 
-**BeamNG's own cars** can fit their compatible factory parts (engines, gearboxes, suspension,
-brakes, wheels and tyres, wings), found through BeamNG's own part-slot compatibility. They also get
-BJR:ME's own upgrades: **weight-reduction stages** (33 models), **Sport and Race brakes** (31 models)
-and, in beta, **tyre compounds and widths** (Covet, ETK 800, D-Series and SBR; their tyre PI is still being refined). These are separate add-on parts built from the cars' factory parts; the factory
-files themselves are never modified.
+**Automation cars** get a full upgrade shop: tyres (road to race slicks, wider tyres), aero, weight
+reduction, brakes, and the engine: intake, exhaust, ECU, camshaft, forged internals, bigger
+displacement, turbos, superchargers, twin-charging and sequential twin turbos, coolers and
+radiators. A live **dyno** shows what each part does before you buy it. You can also swap in a
+different engine or change the drive (front, rear or all-wheel drive).
 
-Every section of the workshop and of **Setup** has a short guide with a picture: what the part or
-setting does and how to use it.
+**Every engine has a limit,** based on its layout and size. A small engine has lots of room to
+grow; an engine that's already making huge power only gets a small tune-up. Fitting a turbo or a
+bigger displacement raises that limit. Want to go much faster? Swap the engine.
 
-### Setup
+**BeamNG's own cars** can fit their own factory parts, plus BJR:ME's weight-reduction stages and
+Sport and Race brakes on many models, and race tyres on a few.
+
+Each part and each setup section has a short guide with a picture, explaining what it does.
+
+### Set up your car
 ![Setup with gearing graph](docs/screenshots/setup-gearing.webp)
 
-- Suspension, aero, brakes, differential, fuel and gearing, with permissions that follow the fitted
-  parts (Race parts unlock their sliders; final-drive and gear-ratio permissions are separate).
-- A gearing graph next to the sliders, performance figures, and saved setups.
+Suspension, aero, brakes, differential, fuel and gearing, with a gearing graph next to the
+sliders. Race parts unlock more sliders. Save your setups and load them later.
 
-### Motorsport settings
-![Race rules: upgrade caps](docs/screenshots/race-rules-upgrades.webp)
+### Start a race in two clicks
+![Start a race with a server preset](docs/screenshots/start-race-presets.webp)
 
-The last tab of the window. Everyone can read it; changing it needs permission.
-- **Permissions by BeamJoy group:** who may start race weekends, edit rules and track settings, and
-  use race control.
-- **Race rules** per race or as server defaults: eligibility (classes, PI min / max), start and grid,
-  track limits and flags, driving aids, tuning limits, and **upgrade caps**: engine parts level,
-  forced induction, engine and drivetrain conversions, tyre compound and width, weight reduction,
-  brakes, radiators, aero, nitrous, and factory-only rows. Parts a race does not allow are locked in
-  the workshop with the reason, and Ready is refused while a fitted part breaks a cap.
-- **Track settings:** the rubbered racing line and marble sizes (close and far), wind and gusts, and the weather (clouds, fog, rain,
-  air temperature by time of day).
+Pick a track layout and one of the server's **presets** (for example "Stock Cup" or "B-class road
+cars"). The preset sets the rules, and the race lobby opens. Join it in BeamJoy-Revived, press
+Ready, and go.
+
+### Race weekends
+![Race weekend](docs/screenshots/race-weekend.webp)
+
+Practice, then qualifying, then the race. Qualifying sets the starting grid. Any driver with
+permission can start a weekend.
+
+### Challenges and Rivals
+![Challenges](docs/screenshots/challenges.webp)
+
+Daily and weekly challenges, plus leaderboards for every track and class: best lap, sector
+attack, speed trap, tyre saver, race distance, clean streak and consistency. Chase another
+driver's lap against their **ghost car**. The server checks every lap, so the boards stay honest.
+You get a notice when someone beats your time.
+
+### Licences, levels and crews
+![Driver card](docs/screenshots/driver-card.webp)
+![Seasons](docs/screenshots/seasons-crews.webp)
+
+Earn XP, levels, medals, achievements and **licences** by racing. Click any driver's name to see
+their card. Start a **crew** with your friends and race for the monthly season table, for drivers
+and for crews.
 
 ### A living track
 ![Track settings: rubber, wind and weather](docs/screenshots/track-settings.webp)
 
-- **Rubbered racing line** that builds up lap by lap and adds grip, plus **marbles** off the line:
-  rubber pieces you can see coming from 80 m (close and far size set in Track settings).
-  Driving through them costs a little grip, and your tyres pick some up for a few corners (a
-  "Marbles on tyres" pill shows it). Every pass thins them out a little for everyone.
-- **Track temperature** from air temperature, sun, clouds and rain, with heat soak; fixed by race
-  rules when needed.
-- **Weather** through BeamJoy-Revived's weather sync, in both directions: set it in Track settings or
-  in BeamJoy-Revived's weather panel and both show the same. Gusting wind is worked out the same on
-  every game.
-- Oil, coolant and fuel spills come from the [Fluid Spill Mod](https://www.beamng.com/resources/fluid-spill-mod.38681/) by Dirt 2, a separate mod with its
-  own BeamMP server plugin. It works alongside BJR:ME and is not included.
-
-### Tyre simulation
-Works with an **unmodified** [Kagoni Tyre Simulation (KTS)](https://www.beamng.com/resources/39079/) through its
-public functions: the true tyre type of Automation cars, track temperature, and per-wheel grip from
-the rubbered line. KTS is optional and installed separately.
-
-### Built on BeamJoy-Revived's plugin API
-BJR:ME adds nothing to BeamJoy-Revived's folders and changes none of its files. Everything goes
-through BeamJoy-Revived's official plugin API and its saved race files (read only), so a BeamJoy-Revived
-update never removes anything of BJR:ME's. At start, the server log lists every API feature BJR:ME
-uses, by feature, with ✓ or ✗.
-
-### Race weekends
-![Race weekend tab](docs/screenshots/race-weekend.webp)
-<!-- screenshot: docs/screenshots/race-weekend.webp -->
-<!-- Retake the current weekend image with the phase-enabled BJR build. -->
-
-Practice, qualifying and race share one BJR event and lobby. BJR owns the clocks,
-grids and penalties; only the final race counts toward statistics and progression.
-Choose optional timed phases and qualifying/reverse/handicap grids in Race weekend.
-With released BJR 2.0.1 (no race phases) weekends run in **classic mode**: BJR:ME
-times practice and qualifying, and the race is a normal BJR lobby with the
-qualifying grid. A BJR build with phases switches to full weekends automatically.
-BJR's upcoming pit system is not part of BJR:ME yet.
-
-### Rivals: time attack against server-verified laps
-Choose Challenges for class boards and the weekly target, then chase a verified
-lap with a see-through ghost. The server checks timing, gates and the car it received.
-Medals start provisional until another eligible driver sets a verified time; they
-are judged again before paying XP. Notices tell you when a rival beats your time,
-with a button to chase their current ghost. Factory BeamNG cars are supported too.
-<!-- screenshot: docs/screenshots/challenges.webp -->
-<!-- screenshot: docs/screenshots/rivals-ghost.webp -->
-<!-- screenshot: docs/screenshots/rival-notice.webp -->
-
-### Driver progression
-Earn automatic licences, XP and levels through counted races and verified Rivals.
-Drivers shows requirements, achievements with their rarity and earned titles.
-A post-race card explains the XP you gained, new achievements and licence changes;
-it closes without taking driving focus. Personal pop-up switches are in Grid.
-<!-- screenshot: docs/screenshots/reward-card.webp -->
-
-### Crews and seasons
-Create a crew, invite friends and race for driver and crew standings. Seasons offers
-Drivers | Crews tables, Hall of Fame and history, separate from Championships.
-Owners can choose the season length and scoring; monthly repeating seasons work
-without setup. Click a driver's name for their progress, medals and racing record.
-<!-- screenshot: docs/screenshots/seasons-crews.webp -->
-<!-- screenshot: docs/screenshots/driver-card.webp -->
+- A **rubbered racing line** builds up lap by lap and gives more grip, with **marbles** (rubber
+  bits) off the line that cost grip if you drive through them.
+- **Track temperature** follows the sun, clouds and rain.
+- **Weather and wind** are shared with BeamJoy-Revived's weather panel.
 
 ### Race HUD
-A small standings tower and timing panel show BJR's positions, sectors, penalties
-and phase clock, with official intervals plus local ahead/behind time and distance
-estimates where available. Grid has personal HUD, fuel display and transparent
-proximity-radar controls. These displays do not change BJR's race results.
-<!-- screenshot: docs/screenshots/race-hud.webp -->
+![Race HUD](docs/screenshots/race-hud.webp)
 
-## Requirements
-- **BeamNG.drive 0.40** and a BeamMP server. For **server-verified Rivals**, use
-  **BeamMP Server 3.9.4 or newer** providing server time, raw vehicle positions and
-  received vehicle configurations (`MP.GetServerTimeMS`, `MP.GetPositionRaw`,
-  `MP.GetPlayerVehicles`). Without these functions verified runs cannot start.
-- **BeamJoy-Revived installed separately.** The BJR:ME bridge reports **2.0.1+**
-  and checks available API features. Released BJR 2.0.1 runs **classic weekends**
-  (BJR:ME-timed practice/qualifying, penalties added by BJR:ME); a BJR build with
-  race phases gives full single-event weekends. The startup log says which.
-- **Windows x64 or Linux x64** for the standalone parts generator; no Python
-  installation is needed for normal server use.
+Position, gaps, sectors, penalties and the session clock while you race, plus a timing tower and an
+optional proximity radar. Switch each one on or off with the **gear icon** at the top of the window.
+
+## Hosting a server
+
+### What you need
+- **BeamNG.drive 0.40** and a **BeamMP server** (version 3.9.4 or newer for the checked
+  Challenges laps).
+- **BeamJoy-Revived 2.0.1 or newer**, installed first.
+- Windows or Linux (64-bit). You don't need to install Python or anything else.
+
+With the normal BeamJoy-Revived release, race weekends run in **classic mode**: practice and
+qualifying are timed by BJR:ME, and the race is a normal BeamJoy race with the qualifying grid. If
+you run a BeamJoy-Revived version with race phases, full weekends switch on by themselves. The
+server console tells you which mode you're in when it starts. BeamJoy-Revived's upcoming pit system
+isn't part of BJR:ME yet.
 
 ### Optional mods
-Other people's mods that BJR:ME works with when they're installed on the server. They're not
-included: download them from their pages, or type `bjrme get kts` (or `fluidspill`, `ddp`) in the
-server console and the next start installs it. The server reminds you at startup about any that
-are missing; `bjrme optional ignore <mod>` stops the reminder for one you don't want.
+These work with BJR:ME when they're on your server. They aren't included. Download them from their
+pages, or type `bjrme get kts` (or `fluidspill`, `ddp`) in the server console and they install on
+the next start.
 - [Kagoni's Tyre Simulation](https://www.beamng.com/resources/kagoni%E2%80%99s-tyre-simulation.39079/)
-  by Kagoni: tyre heat and wear. BJR:ME's tyre compounds, rubbered-line grip and track temperature
-  work through it.
+  by Kagoni: tyre heat and wear. BJR:ME's tyre compounds and track grip work through it.
 - [Fluid Spill Mod](https://www.beamng.com/resources/fluid-spill-mod.38681/) by Dirt 2: oil, coolant
-  and fuel spills. Install its client zip and its own BeamMP server plugin.
+  and fuel spills (it has its own server plugin).
 - [Dynamic Damage Particles](https://www.beamng.com/resources/dynamic-damage-particles.38670/) by
   samllea1: debris from crashes.
 - Automation car mods: the cars BJR:ME builds upgrades for.
 
-## Two editions
-Both editions are the same expansion with the same conversion tool. They differ only in the donor
-cars that engine and drivetrain conversions are built from:
-- **Play** (`bjrme-play-windows-x64.zip` or `bjrme-play-linux-x64.zip`): for servers that just want
-  to race. My 18 engine donors and the FWD / RWD / AWD drivetrain donors are included, so engine and
-  drivetrain conversions work out of the box.
-- **Custom** (`bjrme-custom-windows-x64.zip` or `bjrme-custom-linux-x64.zip`): for servers that want
-  their own lineup. No donors are included; you add your own Automation exports to
-  `BJRME-donors/custom/engines/` and `custom/drivetrains/`.
-  Drivetrain conversions need one FWD, one RWD and one AWD donor.
+### Which download?
+There are two editions. They're the same, except for the cars used for engine swaps:
+- **Play** (`bjrme-play-windows-x64.zip` or `bjrme-play-linux-x64.zip`): **pick this one if you're
+  not sure.** It includes my 18 swap engines and the front, rear and all-wheel-drive conversions, so
+  everything works straight away.
+- **Custom** (`bjrme-custom-…zip`): no swap engines included. For servers that want to add their
+  own Automation engines in `BJRME-donors/custom/`.
 
-You can switch later: copying the Play edition's `BJRME-donors/default` folder into a Custom
-install adds my donors to yours.
-
-## Installation
+### Install in three steps
 1. Install BeamJoy-Revived on your BeamMP server.
-2. Download the edition you want and extract it into your **BeamMP server folder**. It adds
-   `Resources/Client/BJR_RacePrep.zip`, `Resources/Server/RacePrep/`, the start scripts and the
-   `BJRME-donors` folder. No BeamJoy-Revived file is added or changed.
-3. Start with `start-bjrme-server.cmd` (Windows) or `./start-bjrme-server.sh ./BeamMP-Server`
-   (Linux). A preflight generates and checks the upgrade parts for new or changed cars, then starts
-   BeamMP. When nothing changed, the parts are kept as they are. If your host starts BeamMP itself,
-   start it normally: BJR:ME builds the parts in the background and asks for `reloadmods`.
+2. Unzip the BJR:ME download into your **BeamMP server folder**. It doesn't touch any
+   BeamJoy-Revived file.
+3. Start the server with `start-bjrme-server.cmd` (Windows) or `./start-bjrme-server.sh ./BeamMP-Server`
+   (Linux). The first start builds the upgrade parts for your cars, which takes a few minutes; later
+   starts only build parts for new cars. If your host starts BeamMP for you, start it as usual:
+   BJR:ME builds the parts in the background and tells you when to type `reloadmods`.
 
-**Donors (Play edition):** 18 engines and the FWD / RWD / AWD drivetrain sources, my own Automation
-exports, without meshes, audio or pre-generated parts. In either edition, add your own Automation
-exports in `BJRME-donors/custom/engines/` or `custom/drivetrains/`, then restart with the start
-script.
+Everything else (who can change rules, race presets, seasons, engine limits) is set in the window
+under **Motorsport settings**, or explained in the guides below.
 
-See [all documentation](docs/README.md), the [current status](docs/STATUS.md), the
-[installation guide](docs/distribution/INSTALLATION.md), the
-[usage guide](docs/distribution/USAGE.md) (everyday start, donors, console update commands) and the
-[custom donor guide](docs/distribution/CUSTOM-DONORS.md).
+**Guides:** [installation](docs/distribution/INSTALLATION.md) ·
+[everyday use and console commands](docs/distribution/USAGE.md) ·
+[adding your own swap engines](docs/distribution/CUSTOM-DONORS.md) · [all documentation](docs/README.md)
+· [current status](docs/STATUS.md)
 
-How it was built and tested: [PI and classes](docs/methodology/PI-AND-CLASSES.md),
+For the curious, how it was built and tested: [PI and classes](docs/methodology/PI-AND-CLASSES.md),
 [upgrades and conversions](docs/methodology/CONVERSIONS.md), [testing](docs/methodology/TESTING.md) and
 [how it came together](docs/AUTHORSHIP.md).
 

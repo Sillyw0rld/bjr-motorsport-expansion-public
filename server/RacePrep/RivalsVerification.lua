@@ -138,8 +138,10 @@ function V.config(raw,decode,canonical,parts,model)
   rated[path]=part
   local clean=path:gsub('/+$','');local tail=clean:match('([^/]+)$')
   alias(byPath,clean,part,path);alias(byPath,tail,part,path)
-  if tail==part then
-   local parent=clean:match('^(.*)/[^/]+$')
+  -- Some factory truck tyre names contain a slash (275/70R22_5).
+  -- Strip the complete part suffix, not merely its last path segment.
+  if clean:sub(-#part-1)=='/'..part then
+   local parent=clean:sub(1,-#part-2)
    alias(bySlot,parent,part,path);alias(bySlot,parent and parent:match('([^/]+)$'),part,path)
   end
  end

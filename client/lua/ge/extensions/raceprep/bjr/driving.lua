@@ -7,12 +7,18 @@
 -- have: race signals (start lights, flags, false start, formation), the
 -- track-limits pill, the race weekend announcement, each driver's class / PI
 -- badge, local estimated live gaps / route distances, and the practice / qualifying HUD.
-local H=require('ge/extensions/raceprep/bjr/host')
+local H=require('ge/extensions/raceprep/frontend').host()
 local Gaps=require('ge/extensions/raceprep/bjr/raceGaps')
 local D={}
 local nextBadges,badges=0,{}
 local lastRun,lastGapError
 D.LIMITS_SHOW_S=5
+local function sameVehicleID(a,b)
+ if a==nil or b==nil then return false end
+ local an,bn=tonumber(a),tonumber(b)
+ if an and bn then return an==bn end
+ return tostring(a)==tostring(b)
+end
 local function vehicles()
  local out,choices={},{}
  for _,v in pairs(MPVehicleGE and MPVehicleGE.getVehicles and MPVehicleGE.getVehicles() or {}) do
@@ -23,7 +29,7 @@ local function vehicles()
    for _,p in pairs(beamjoy_players and beamjoy_players.players or {}) do if tonumber(p.playerID)==pid then player=p;break end end
    local current=player and player.currentVehicle
    local data={id=id,pos=object:getPosition(),dir=object.getDirectionVector and object:getDirectionVector()}
-   if current and ((v.isLocal and current==id) or current==v.remoteVehID or current==v.remoteVID) then out[pid]=data end
+   if current~=nil and ((v.isLocal and sameVehicleID(current,id)) or sameVehicleID(current,v.remoteVehID) or sameVehicleID(current,v.remoteVID)) then out[pid]=data end
    local c=choices[pid] or {};choices[pid]=c;c[#c+1]=data
   end
  end
@@ -32,7 +38,7 @@ local function vehicles()
  -- with another car's remote id, especially when a player owns several cars.
  for _,v in pairs(beamjoy_vehicles and beamjoy_vehicles.vehicles or {}) do
   local player=beamjoy_players and beamjoy_players.players and beamjoy_players.players[v.ownerName]
-  if tonumber(v.ownerID) and player and player.currentVehicle==v.remoteVID and v.isVehicle and v.veh then
+  if tonumber(v.ownerID) and player and sameVehicleID(player.currentVehicle,v.remoteVID) and v.isVehicle and v.veh then
    out[tonumber(v.ownerID)]={id=v.vid,pos=v.veh:getPosition(),dir=v.veh:getDirectionVector()}
   end
  end
@@ -82,15 +88,18 @@ function D.packet(now,clock)
  local out={active=H.ready()==true,signals=signals,trackTemp=rt and rt.trackTemp,rivals=require('ge/extensions/raceprep/bjr/rivalsSession').view(),strategy=require('ge/extensions/raceprep/bjr/strategy').view()}
  local race
  for _,r in pairs(beamjoy_races and beamjoy_races.data or {}) do if s and tostring(r.id)==tostring(s.raceId) then race=r;break end end
- if s then out.race={runID=s.id,state=s.state,raceName=race and race.name,badges=raceBadges(s,now)} end
+ if s then out.race={runID=s.id,state=s.state,phaseIndex=s.phaseIndex or 1,raceName=race and race.name,badges=raceBadges(s,now)} end
  local viewName=runner and runner.spectatingPlayerName
  if not viewName then for _,p in pairs(s and s.participants or {}) do if tonumber(p.playerID)==H.playerID() then viewName=p.playerName;break end end end
  local okG,gaps=pcall(Gaps.update,now,s,race,vehicles,viewName,session.raceCut and session.raceCut.count or 0)
  if okG then
   lastGapError=nil;if out.race then out.race.gaps=gaps end
- elseif tostring(gaps)~=lastGapError then
-  lastGapError=tostring(gaps)
-  if log then log('W','raceprepBJR','Local gap estimates unavailable: '..lastGapError) end
+ else
+  if tostring(gaps)~=lastGapError then
+   lastGapError=tostring(gaps)
+   if log then log('W','raceprepBJR','Local gap estimates unavailable: '..lastGapError) end
+  end
+  if out.race then out.race.gaps={runID=s and s.id,phaseIndex=s and (s.phaseIndex or 1),selfName=viewName,raceName=race and race.name,reason='Gap calculation failed'} end
  end
  local okA,announcement=pcall(function() return session.currentAnnouncement and session.currentAnnouncement() end)
  if okA and announcement then out.announcement=announcement end

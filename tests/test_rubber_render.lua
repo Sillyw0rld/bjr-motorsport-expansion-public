@@ -43,7 +43,7 @@ do
   assert(d.width>=1.6 and d.width<=2.4 and d.width~=node.width,'width softened within source bounds')
   assert(math.abs(d.alpha-V.ALPHA*.7)<1e-9,'opacity linear in rubber level (builds up lap by lap)')
   assert(d.scale.y==V.STEP*2 and d.scale.z==2 and d.texture==V.TEXTURE,'same decal method and size')
-  assert(d.fadeStart==170 and d.fadeEnd==200,'same 30 m fade at longer range')
+  assert(d.fadeStart==140 and d.fadeEnd==200,'gentler native distance fade, unchanged draw radius')
   if d.x>175 then distant=true end
  end
  assert(distant,'rubber beyond the old 150 m radius is submitted')
@@ -51,4 +51,37 @@ do
  V.MAX_DECALS=2;assert(V.draw()==2 and number==2,'hard decal cap still enforced')
  V.clear();assert(V.draw()==0)
  print('PASS: bounded visual-only smoothing, 200 m range, unchanged cached submission and cap')
+end
+
+-- 0.40 compatibility remaps only cached visual alpha. Accumulation values,
+-- geometry, render batching and object reuse retain the existing contracts.
+do
+ local previous=rawget(_G,'beamng_version')
+ beamng_version='0.39.4.0'
+ local old=dofile('client/lua/ge/extensions/raceprep/rubberLine.lua')
+ assert(old.visualAlpha(.3)==.3 and old.visualAlpha(0)==0)
+ assert(old.VISUAL_TINT==1,'older versions retain their original tint')
+ assert(old.VISUAL_WIDTH_SCALE==1,'older versions retain their original displayed width')
+ beamng_version='0.40.0.0'
+ local new=dofile('client/lua/ge/extensions/raceprep/rubberLine.lua')
+ assert(new.visualAlpha(0)==0 and new.visualAlpha(new.ALPHA)==1)
+ assert(new.visualAlpha(.1)>.9 and new.visualAlpha(.1)<new.visualAlpha(.4))
+ assert(new.visualAlpha(.4)<new.visualAlpha(new.ALPHA))
+ new.configure({enabled=true,perLap=2,lapsToFull=40},0)
+ new.lines=function() return {{{x=0,y=0,z=0,width=2,level=.2},{x=2,y=0,z=0,width=2,level=.8}}} end
+ new.build()
+ local data,count
+ Engine.Render.DynamicDecalMgr.addDecals=function(t,n) data,count=t,n end
+ assert(new.draw()==2 and count==2)
+ assert(data[1].color.a==new.visualAlpha(data[1].alpha))
+ assert(data[2].color.a==new.visualAlpha(data[2].alpha))
+ assert(data[1].color.r==new.VISUAL_TINT and data[1].color.g==new.VISUAL_TINT and data[1].color.b==new.VISUAL_TINT)
+ assert(new.VISUAL_TINT>0 and new.VISUAL_TINT<1,'charcoal modulation retains texture detail')
+ assert(data[1].scale.x==data[1].width*1.35,'wider visual footprint retains measured width variation')
+ assert(data[1].width==2 and data[2].width==2,'recorded and extracted widths are unchanged')
+ assert(data[1].color.a<data[2].color.a and data[2].color.a<=1)
+ assert(data[1].texture==new.TEXTURE and data[2].texture==new.TEXTURE)
+ local n=created;new.draw();assert(created==n,'0.40 correction creates no objects per frame')
+ beamng_version=previous
+ print('PASS: 0.40 visual alpha remap, monotonic buildup, unchanged older versions and cache')
 end

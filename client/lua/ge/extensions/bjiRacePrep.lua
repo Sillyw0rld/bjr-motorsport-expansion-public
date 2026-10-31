@@ -228,11 +228,11 @@ local function onRules(data)
 end
 
 local function registerHandlers()
-    if type(rawget(_G, "AddEventHandler")) ~= "function" then
+    if type(rawget(_G, 'AddEventHandler'))~='function' and not require('ge/extensions/raceprep/frontend').isCareer() then
         return false
     end
-    AddEventHandler("RacePrepRules", onRules, HANDLER_SOURCE)
-    AddEventHandler("RacePrepSkills", function(data)
+    require('ge/extensions/raceprep/net').on("RacePrepRules", onRules, HANDLER_SOURCE)
+    require('ge/extensions/raceprep/net').on("RacePrepSkills", function(data)
         local ok, decoded = pcall(jsonDecode, data)
         if ok and type(decoded) == "table" then
             M.skills = decoded
@@ -240,27 +240,27 @@ local function registerHandlers()
     end, HANDLER_SOURCE)
     -- Motorsport settings: permissions by BeamJoy group, race weekend defaults,
     -- and what this player may do ({settings, groups, abilities, group})
-    AddEventHandler("RacePrepMotorsport", function(data)
+    require('ge/extensions/raceprep/net').on("RacePrepMotorsport", function(data)
         local ok, decoded = pcall(jsonDecode, data)
         if ok and type(decoded) == "table" then M.motorsport = decoded end
     end, HANDLER_SOURCE)
-    AddEventHandler("RacePrepRulesStatus", function(data)
+    require('ge/extensions/raceprep/net').on("RacePrepRulesStatus", function(data)
         M.rulesStatus = tostring(data or "")
     end, HANDLER_SOURCE)
-    AddEventHandler("RacePrepControl", function(data) require("ge/extensions/raceprep/director").onState(data) end, HANDLER_SOURCE)
-    AddEventHandler('RacePrepMarbleReset',function(level) require('ge/extensions/raceprep/rubberMarbles').onReset(level) end,HANDLER_SOURCE)
-    AddEventHandler('RacePrepMarbleDelta',function(wire) require('ge/extensions/raceprep/rubberMarbles').onDelta(wire) end,HANDLER_SOURCE)
-    AddEventHandler('RacePrepRubberReset',function(level) require('ge/extensions/raceprep/rubberLine').onReset(level) end,HANDLER_SOURCE)
-    AddEventHandler('RacePrepRubberDelta',function(wire) require('ge/extensions/raceprep/rubberLine').onDelta(wire) end,HANDLER_SOURCE)
-    AddEventHandler("RacePrepAdminStatus", function(data)
+    require('ge/extensions/raceprep/net').on("RacePrepControl", function(data) require("ge/extensions/raceprep/director").onState(data) end, HANDLER_SOURCE)
+    require('ge/extensions/raceprep/net').on('RacePrepMarbleReset',function(level) require('ge/extensions/raceprep/rubberMarbles').onReset(level) end,HANDLER_SOURCE)
+    require('ge/extensions/raceprep/net').on('RacePrepMarbleDelta',function(wire) require('ge/extensions/raceprep/rubberMarbles').onDelta(wire) end,HANDLER_SOURCE)
+    require('ge/extensions/raceprep/net').on('RacePrepRubberReset',function(level) require('ge/extensions/raceprep/rubberLine').onReset(level) end,HANDLER_SOURCE)
+    require('ge/extensions/raceprep/net').on('RacePrepRubberDelta',function(wire) require('ge/extensions/raceprep/rubberLine').onDelta(wire) end,HANDLER_SOURCE)
+    require('ge/extensions/raceprep/net').on("RacePrepAdminStatus", function(data)
         local director = require("ge/extensions/raceprep/director")
         director.adminStatus, director.adminStatusSeq = tostring(data), (director.adminStatusSeq or 0) + 1
     end, HANDLER_SOURCE)
-    AddEventHandler("RacePrepSession", function(data)
+    require('ge/extensions/raceprep/net').on("RacePrepSession", function(data)
         local ok, session = pcall(require, "ge/extensions/raceprep/session")
         if ok then session.onSession(data) end
     end, HANDLER_SOURCE)
-    AddEventHandler("RacePrepCut", function(data)
+    require('ge/extensions/raceprep/net').on("RacePrepCut", function(data)
         local ok, p = pcall(jsonDecode, data)
         local rok, results = pcall(require, "ge/extensions/raceprep/results")
         if ok and type(p) == "table" and rok then results.onCut(p.playerID, p.raceID, p.lap) end
@@ -281,12 +281,12 @@ local function requestRulesWhenConnected()
     local network = rawget(_G, "MPGameNetwork")
     local connected = bji and bji.CLIENT_READY and
         (not network or not network.launcherConnected or network.launcherConnected())
-    if connected and type(rawget(_G, "TriggerServerEvent")) == "function" then
+    if connected and (require("ge/extensions/raceprep/frontend").isCareer() or type(rawget(_G, "TriggerServerEvent")) == "function") then
         nextRulesRequest = clock + RULES_RETRY_S
-        TriggerServerEvent("RacePrepGetRules", "")
-        TriggerServerEvent("RacePrepGetSkills", "")
-        TriggerServerEvent("RacePrepGetSession", "")
-        TriggerServerEvent("RacePrepGetMotorsport", "")
+        require('ge/extensions/raceprep/net').send("RacePrepGetRules", "")
+        require('ge/extensions/raceprep/net').send("RacePrepGetSkills", "")
+        require('ge/extensions/raceprep/net').send("RacePrepGetSession", "")
+        require('ge/extensions/raceprep/net').send("RacePrepGetMotorsport", "")
     end
 end
 
@@ -331,7 +331,7 @@ end
 
 --- scope: "default" or a race id; rules: table, or nil to clear a race override
 M.sendRules = function(scope, rules)
-    if type(rawget(_G, "TriggerServerEvent")) ~= "function" then
+    if (not require("ge/extensions/raceprep/frontend").isCareer() and type(rawget(_G, "TriggerServerEvent")) ~= "function") then
         M.rulesStatus = "Not connected to a BeamMP server."
         return
     end
@@ -685,7 +685,7 @@ local function updateRollingStart()
         local myIndex
         for i, pid in ipairs(grid) do if pid == selfID then myIndex = i end end
         if nativeRolling then
-            local nativeRace=require('ge/extensions/raceprep/bjr/host').race()
+            local nativeRace=require('ge/extensions/raceprep/frontend').host().race()
             local pass=nativeRolling.check(nativeSession,nativeRace,selfID,require('ge/extensions/raceprep/bjr/driving').positions())
             r.warning=pass and ('Do not pass before green — drop back behind '..pass.name..string.format(' (%.1f m ahead)',pass.metres)) or nil
             if r.warning then flash('RacePrepRollingJump',r.warning,2) end

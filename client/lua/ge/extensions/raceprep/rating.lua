@@ -22,19 +22,28 @@ end
 local function axle(name) return name and name:sub(1, 1):upper() == "F" and "F" or "R" end
 local function finite(x) return type(x) == "number" and x == x and math.abs(x) < math.huge end
 M.finite = finite
-M.CURVE = { knee = 300, cap = 999, a = 0.495, b = 0.58, c = 0.29 }
+M.CURVE = { knee = 300, cap = 999, a = 0.495, b = 0.58, c = 0.29, lowRaw = -1950 }
 function M.curve(raw, c)
     assert(finite(raw), "Invalid rating")
     local p = c == nil and M.CURVE or (type(c) == "table" and (tonumber(c.knee) and c or type(c.curve) == "table" and c.curve)) or nil
     if not p then return math.max(100, math.min(999, math.floor(raw + 0.5))) end
     local knee, cap = tonumber(p.knee) or 300, tonumber(p.cap) or 999
-    if raw <= knee then return math.max(100, math.min(cap, math.floor(raw + 0.5))) end
+    if raw <= knee then
+        -- Fit only below the knee. Legacy curve tables remain unchanged.
+        local lower=tonumber(p.lowRaw)
+        local value=lower and 100+(knee-100)*(raw-lower)/(knee-lower) or raw
+        return math.max(100, math.min(cap, math.floor(value + 0.5)))
+    end
     local h = cap - knee
     local u = (raw - knee) / h
     local a, b, d = tonumber(p.a) or 0.495, tonumber(p.b) or 0.58, tonumber(p.c) or 0.29
     local z = u + (a * u * u + b * u ^ 4) / (1 + d * u ^ 3)
     return math.max(100, math.min(cap, math.floor(knee + h * (1 - math.exp(-z)) + 0.5)))
 end
+
+-- Bonus shares must improve even negative raw ratings; positive ratings retain
+-- their existing arithmetic exactly. Setup slider values never enter this.
+function M.bonusRaw(raw,share)return raw*(raw<0 and 1-share or 1+share) end
 
 function M.buildCar(st, drive)
     assert(type(st) == "table" and finite(st.mass) and st.mass > 0, "No usable vehicle mass")
@@ -96,14 +105,32 @@ function M.buildCar(st, drive)
         c.df200.F, c.df200.R = na.dfF200, na.dfR200
     end
     local curve, maxRPM, peakRPM = {}, 0, 0
+    local propulsion={}
+    if st.driveline and st.driveline.normalized then
+        for _,path in ipairs(st.driveline.paths or {})do if path.engine then propulsion[path.engine]=true end end
+    end
     for _, e in ipairs(st.engines or {}) do
-        maxRPM, peakRPM = math.max(maxRPM,e.maxRPM or 0), math.max(peakRPM,e.maxPowerRPM or 0)
-        for _, p in ipairs(e.torque or {}) do curve[p[1]] = (curve[p[1]] or 0) + p[2] end
+        -- Hydraulic accessory motors are not road propulsion. Their RPM
+        -- must not set a diesel truck's launch/shift speed or add drive power.
+        if not next(propulsion) or propulsion[e.name] then
+            maxRPM, peakRPM = math.max(maxRPM,e.maxRPM or 0), math.max(peakRPM,e.maxPowerRPM or 0)
+            for _, p in ipairs(e.torque or {}) do curve[p[1]] = (curve[p[1]] or 0) + p[2] end
+        end
     end
     assert(next(curve), "No supported engine torque curve")
     if maxRPM == 0 then maxRPM = 8000 end
     if peakRPM == 0 then peakRPM = maxRPM end
-    c.shiftRPM = math.min(math.max((st.shift or {}).highShiftUpRPM or 0,peakRPM*1.05),maxRPM)
+    local shift=(st.shift or {}).highShiftUpRPM or 0
+    -- BeamNG can specify one shift target per gear (e.g. automatic BX).
+    if type(shift)=='table' then
+        local maximum=0
+        for _,rpm in pairs(shift) do if finite(rpm) then maximum=math.max(maximum,rpm) end end
+        shift=maximum
+    end
+    c.shiftRPM = math.min(math.max(shift,peakRPM*1.05),maxRPM)
+    -- A low-revving diesel cannot launch at the car model's 3000 RPM.
+    -- Use its own power-peak RPM, within the sampled torque curve, rather
+    -- than its limiter (where fuel/torque may already have been cut).
     -- v7 native: top gear runs to the rev limiter; an ECU speed limiter
     -- (vehicleController.topSpeedLimit, m/s) caps top speed
     c.maxRPM = maxRPM
@@ -111,6 +138,7 @@ function M.buildCar(st, drive)
     if finite(limit) and limit > 5 then c.topSpeedLimit = limit end
     for r,t in pairs(curve) do table.insert(c.torque,{r,t}) end
     table.sort(c.torque,function(a,b) return a[1]<b[1] end)
+    c.launchRPM=math.min(3000,c.shiftRPM,c.torque[#c.torque][1],maxRPM<3000 and peakRPM or 3000)
     local final, found, shafts = 0, false, 1
     for _, f in ipairs(st.finalDrives or {}) do
         if f.shaft then shafts = shafts * ((f.ratio or 0)>0 and f.ratio or 1)
@@ -274,7 +302,7 @@ local function curvesV6(c,p,v6)
         local r=c.axle.R.radius
         for i,gr in ipairs(c.gears) do
             local rpm=v/r*gr*60/(2*math.pi)
-            if i==1 then rpm=math.max(rpm,3000) end
+            if i==1 then rpm=math.max(rpm,c.launchRPM) end
             local cap=(nat and i==#c.gears and c.maxRPM) or c.shiftRPM*1.02
             if rpm>=1000 and rpm<=cap then
                 local fw=torqueAt(c,rpm)*gr*eff/r
@@ -296,6 +324,10 @@ local function curvesV6(c,p,v6)
         if nat and c.topSpeedLimit and v>=c.topSpeedLimit then a=0 end
         if not top and a<=0 then top=nat and c.topSpeedLimit and math.min(v,c.topSpeedLimit) or v end
         table.insert(acc,{v,math.max(a,0)})
+        -- Curves beyond the attainable top speed cannot affect a virtual lap.
+        -- In particular, do not reject a slow ATV because an axle would lift
+        -- at an impossible 400 km/h. Keep the first nonpositive sample.
+        if top then break end
     end
     return {lat=lat,brk=brk,acc=acc,top=top or 450/3.6,roll=roll}
 end
@@ -342,14 +374,14 @@ function M.compute(st,constants,drive)
         local times={mix=lap(cur,mix),fast=lap(cur,FAST),tech=lap(cur,TECH)}
         local cor=v6 and v6.correction or constants.correction
         local ratio=math.exp(cor.alpha+cor.beta*math.log(times.mix))/times.mix
-        local out={source="computed",method=constants.v7 and "formula-v7" or v6 and "formula-v6" or "formula-v2-corrected",assumptions="Sport / 40 kg fuel / warm KTS tyres"}
+        local out={ratingRevision=constants.rawRevision,source="computed",method=constants.v7 and "formula-v7" or v6 and "formula-v6" or "formula-v2-corrected",assumptions="Sport / 40 kg fuel / warm KTS tyres"}
         if cur.roll then out.rollPerG=math.floor(cur.roll*100+0.5)/100 end
         out.raw={}
         for k,field in pairs({mix="pi",fast="pi_speed",tech="pi_technical"}) do
             local scale=constants.scale[k]
             local value=scale[1]-scale[2]*math.log(times[k]*ratio)
             assert(finite(value),"Invalid rating")
-            local raw=math.max(100,math.floor(value+0.5))
+            local raw=math.floor(value+0.5)
             out.raw[field]=raw
             out[field]=M.curve(raw,constants or false)
         end

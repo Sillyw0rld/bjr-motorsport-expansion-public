@@ -8,9 +8,11 @@ import sys
 
 def lua(v):
     if isinstance(v, dict):
-        return '{' + ','.join('[%s]=%s' % (json.dumps(str(k)), lua(x)) for k, x in v.items()) + '}'
+        # Isolate each table's constants from its parent: the full factory
+        # identity census exceeds LuaJIT's 65,536 constants per function.
+        return '(function() return {' + ','.join('[%s]=%s' % (json.dumps(str(k)), lua(x)) for k, x in v.items()) + '} end)()'
     if isinstance(v, list):
-        return '{' + ','.join(lua(x) for x in v) + '}'
+        return '(function() return {' + ','.join(lua(x) for x in v) + '} end)()'
     if v is True:
         return 'true'
     if v is False:

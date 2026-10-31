@@ -91,7 +91,7 @@ M.levelAt=function(x,y,z)
 end
 M.factor=function(x,y,z) return 1-M.GRIP_LOSS*M.levelAt(x,y,z) end
 M.flush=function()
- if not online or not TriggerServerEvent then return 0 end
+ if not online or (not require('ge/extensions/raceprep/frontend').isCareer() and not TriggerServerEvent) then return 0 end
  local keys={};for k in pairs(pending) do keys[#keys+1]=k end;table.sort(keys)
  local rows,sent={},{}
  for _,k in ipairs(keys) do

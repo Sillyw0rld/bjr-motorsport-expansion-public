@@ -2,6 +2,137 @@
 
 Versions: v2.<minor>.<patch>.<build> (build = number of commits).
 
+## Public releases at a glance
+
+Each public release in a few lines. The details for every version follow below.
+
+### v2.36.1 hotfix: no more freezes in the Upgrades window (2026-10-31)
+
+- **No more freezes in Upgrades.** The game was working out PI estimates one by one while you
+  browsed. That's gone. For now upgrades show "Not rated yet"; your car's exact PI and class still
+  update as soon as you fit an upgrade. Estimates come back in the next update, worked out once and
+  shared, so they cost nothing while you browse.
+- **Challenges:** the Start buttons showed strange text and sometimes didn't start. Fixed.
+- **Share Tune** works again; loading a tune never changes the other player's parts.
+- **Create Crew** works again, and tells you if the name, tag or colour needs changing.
+- **Race presets:** a preset's car rules (classes, PI range, cars, upgrade limits) now show in the
+  BeamJoy lobby and on the Grid tab.
+- **Proximity radar:** cars on your left no longer show on the right.
+- **Leaderboard gaps:** the distance and time to the car ahead and behind now show from the first lap
+  on curvy tracks too, and when a gap can't be shown it says why.
+- **Rubber line:** visible again in BeamNG 0.40.
+- **Downloaded car mods:** better upgrade parts for some four-wheel-drive cars; mods that aren't
+  Automation cars are skipped properly.
+- **The window:** the Upgrade and Tuning tabs open correctly, Esc or clicking outside closes it, car
+  names show properly, and it comes back cleanly after a loading screen.
+- **Timers** (waits and cooldowns) follow real time, so they no longer run slow when the game is busy.
+- **Server owners:** after updating, your server rebuilds the upgrade parts for some cars once, and
+  players download those cars again the first time they join. Server data is kept.
+
+### v2.36 beta: engines, turbo sound, a cleaner window and fairer low PI (2026-10-28)
+
+- **Engines have a realistic limit.** Upgrades fill the room an engine has left, based on its
+  layout and size. A small engine can still gain a lot; an engine that's already very powerful
+  only gets a small tune-up. A turbo or bigger displacement raises the limit; an engine swap is
+  the way to go much faster.
+- **New induction:** twin-charged (supercharger plus turbo) and sequential twin turbos.
+- **Hear and see your boost:** turbos and superchargers you fit now make their sound, and the
+  boost gauge shows them.
+- **Cleaner window:** your own settings behind a gear icon, a rebuilt Start a race, a driver card
+  that sits beside the page, and tidier Drivers, Crews, Seasons and Challenges tabs.
+- **Every drivable BeamNG vehicle has a PI** (buses, trucks, the trophy truck, loaders), and slow cars no longer all show E 100: they spread across Class E by real performance.
+- **Fixes:** heavy lag with the window open when the server had no rivals yet; Challenges no
+  longer blocks you in free roam when no practice is running.
+
+Details: [2.33.0](#2330-beta--2026-10-28) · [2.34.0](#2340-beta--2026-10-28) ·
+[2.34.1](#2341-beta--2026-10-28) · [2.35.0](#2350-beta--2026-10-28) · [2.36.0](#2360-beta--2026-10-28)
+
+### v2.32 beta: the big update (2026-10-28)
+
+Race weekends, server-checked Rivals with ghosts, seven challenge types with daily and weekly
+targets, licences, XP, medals and achievements, crews and seasons, race presets, Build to class
+and automatic rating of new cars. [What's new since 2.16.1](#whats-new-since-2161-public-beta)
+
+### v2.16.1 beta (2026-10-22)
+
+The previous public release: rubbered racing line, marbles, track temperature, the upgrade
+workshop and Forza-style classes.
+
+## Version by version
+
+## 2.36.0 (beta) — 2026-10-28
+
+### For players
+
+- Buses, trucks and the trophy truck now have a PI, along with loaders and the other supported factory vehicles. Their badges use the same classes and rating system as cars.
+- Slow cars no longer all show E 100: their ratings now spread across Class E according to performance. 100 remains the lowest displayed PI. Each existing PI value above 300 and all class boundaries are unchanged.
+- Setup tuning still does not change PI. Unstable rig tests keep a flagged formula estimate, and the Pigeon keeps a measured rating. The rear-skid Covet Skidplate remains unsupported; unpowered crash-test rigs, props, trailers and simplified traffic vehicles are not rated.
+
+### For server owners
+
+- The updated factory seed and identity/aero catalogues include the new coverage. Older computed ratings are discarded on the formula revision change and recollected; staff-set ratings are retained.
+- No new setting is needed. Details, accuracy checks and known limitations are in the PI floor review report.
+
+## 2.35.0 (beta) — 2026-10-28
+
+### For players
+
+- **My preferences** moved to a gear icon in the window's top bar. HUD, timing tower, fuel strategy, proximity radar, reward pop-ups and rival notices are all in one panel, reachable from any tab, instead of crowding the Grid tab.
+- **Grid → Start a race** rebuilt: layout, laps and start side by side; staff picks as cards; the other presets in a tidy list with categories and search; a clear reason when the lobby can't open yet ("Choose a layout first"). The layout is pre-selected, and the empty "Race grid" section only appears once you're in a lobby.
+- **Driver card** sits in its own column beside the page instead of covering it, and shows races, wins, podiums and distance, level and licence progress bars, season position, medals and achievements.
+- **Drivers, Crews and Seasons:** driver names are clickable name chips (licence, crew tag, name) instead of grey buttons; licence progress shows what's left; seasons show medal positions and the end date in the header; the crew list shows members and season position in columns.
+- **Challenges:** the All challenges / Rivals switch and the type filters are compact; empty boards say what to do next.
+- Fixed: Challenges said "End the current practice activity first" in free roam when no practice session was running on your map.
+- The window header is quieter: the grid deadline and ready count are on the Grid tab.
+- Fixed: the remaining spots where an empty list from the server could break the window (rival notices, presets, challenge boards).
+
+### For server owners
+
+- **Manage crews** (Motorsport settings → Crews): one form with a single **Save changes** (and Undo) for name, tag and colour, instead of three separate buttons.
+
+## 2.34.1 (beta) — 2026-10-28
+
+### Fixes
+
+- Fixed heavy lag with the Motorsport Expansion window open. When the server had no rivals or challenges to send yet, the window hit an error on every screen update (thousands per minute), which slowed the game down and showed raw `{{…}}` text on the Rivals tab.
+
+## 2.34.0 (beta) — 2026-10-28
+
+### For players
+
+- Turbos and superchargers you fit to naturally aspirated Automation engines now sound like them, using BeamNG's built-in vehicle sounds. Turbo spin follows spool, so you can hear the lag; supercharger whine follows engine speed.
+- Sport turbos flutter on lift; Race turbos have a blow-off valve. Twin-charged builds blend supercharger whine into turbo spin, and sequential twins bring in a second, lower turbo tone.
+- Factory turbos and superchargers keep their own sounds. Ignition off or a stalled engine silences the added sounds, and resets or part changes clean up their sources.
+
+### For server owners
+
+- No sound files, extra downloads, or new settings are needed. The sounds use the game's normal vehicle audio volume controls. Power, PI and boost gauges are unchanged.
+
+## 2.33.0 (beta) — 2026-10-28
+
+### For players
+
+- Engine upgrades now follow the fitted engine's layout, displacement and remaining build potential. Engines already near their potential gain less than before; healthy low-output engines retain room to build. Bianka Elita uses the V16/W16 potential rather than a fixed percentage of its already high stock output.
+- Small engines with eight or more cylinders rev higher, so they keep more of their potential when they are smaller than their layout's reference size. A 3.6 l turbo V12 now has room up to about 1,400 hp instead of 960.
+- Displacement parts make the engine count as bigger: Sport as 6 % more litres, Race as 12 % more, which raises its potential.
+- A turbo or supercharger raises the potential only when fitted, including in an estimated draft. Permission to fit one does not raise an NA engine's ceiling.
+- Stage 1/2/3 use 15%/40%/70% of remaining headroom. Fully built Sport/Race combinations retain a 3%/5% tune floor. Parts, aspiration choices, rev limits, boost character, mass and tuning controls remain available.
+- Engine swaps use the donor engine's own data. Factory combustion engines use the same potential calculation; electric upgrades are unchanged. Dyno power, real PI and draft PI use the limited curves.
+
+- Added Race twin-charged and sequential twin-turbo choices for eligible naturally aspirated engines, with distinct low-rpm response, takeover timing and PI lag discounts.
+- HUD boost gauges now receive BJR:ME's simulated boost on engines without factory induction devices. Factory devices keep control of their own values.
+- The Race boost upgrade on factory-boosted Automation engines unlocks **Factory boost target** in Setup: 100% is stock positive boost; 0–115% adjusts it down or up while retaining the engine-potential limit. Stock and Sport parts do not unlock this control.
+
+### For server owners
+
+- Copy `engine-potential.example.json` to `engine-potential.json` beside `RacePrep.lua` to customize the ceiling table and stage/floor/taper settings. Restart the server after editing. Settings are sent to clients; an invalid file is logged and retained, with shipped defaults used.
+- Missing layout/displacement uses the stock-power taper, with a once-per-engine generation warning. Engine metadata is retained by the parts generator, including all six combustion-runtime swap donors.
+
+### Upgrade notes
+
+- Back up `engine-potential.json` with the other server data. Updates replace the example, not your settings. Old computed engine ratings are recalculated under the new policy. Class bands are unchanged.
+- Validation evidence, counts, build details and limits: [engine potential review](docs/reviews/ENGINE-POTENTIAL.md).
+
 ## v2.32.0 beta — the big update
 
 **The biggest BJR:ME release yet.** It brings 22 releases of work since the last public release (2.16.1.8): race weekends, server-verified Rivals, seven challenge types with daily and weekly targets, licences/XP/medals/achievements, crews and seasons, server race presets, Build to class with live PI estimates, and automatic rating of new cars. Everything is explained below, feature by feature; the version-by-version notes follow after.

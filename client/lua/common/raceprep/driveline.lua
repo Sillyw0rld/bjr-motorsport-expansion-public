@@ -10,11 +10,18 @@ end
 function M.resolve(rows,sections,driven,engineNames)
     local devices={}
     for _,row in pairs(rows or {}) do
-        if not row.name or devices[row.name] then return nil,'Missing/duplicate powertrain device' end
+        if not row.name then return nil,'Missing/duplicate powertrain device' end
+        local previous=devices[row.name]
+        -- Factory trucks can override an earlier placeholder device with a
+        -- later compiled row. Resolve explicit CID order, not pairs() order.
+        -- Ambiguous duplicates without compiled ordering still fail closed.
+        if previous and (type(previous.cid)~='number' or type(row.cid)~='number' or previous.cid==row.cid) then
+            return nil,'Missing/duplicate powertrain device'
+        end
         local d={}
         for k,v in pairs(row) do d[k]=v end
         for k,v in pairs((sections or {})[row.name] or {}) do d[k]=v end
-        devices[row.name]=d
+        if not previous or d.cid>previous.cid then devices[row.name]=d end
     end
     local results,seenWheels={},{}
     for _,d in pairs(devices) do
@@ -27,6 +34,13 @@ function M.resolve(rows,sections,driven,engineNames)
                 visited[cur.name]=true
                 if tostring(cur.type):lower():find('gearbox',1,true) then
                     gearboxes=gearboxes+1
+                elseif cur.type=='rangeBox' then
+                    -- Rate road/high range, independent of the live range
+                    -- switch. Parallel planetary hubs are followed per wheel.
+                    local high=math.huge
+                    for _,r in pairs(cur.gearRatios or {})do if positive(r)then high=math.min(high,r)end end
+                    if high==math.huge then return nil,'Invalid range ratios at '..cur.name end
+                    ratio=ratio*high
                 elseif cur.gearRatio~=nil then
                     if not positive(cur.gearRatio) then return nil,'Invalid fixed ratio at '..cur.name end
                     ratio=ratio*cur.gearRatio

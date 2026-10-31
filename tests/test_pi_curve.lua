@@ -19,9 +19,9 @@ for k,v in pairs(R.CURVE) do
     assert(clientSeed.constants.curve[k]==v and serverSeed.constants.curve[k]==v and S.CURVE[k]==v,'curve param mismatch: '..k)
 end
 
--- 1. Client and server copies give identical output everywhere; identity <= 300; never > 999
+-- 1. Client and server copies give identical output everywhere; fitted low end <= 300; never > 999
 local prev=100
-for raw=50,3000 do
+for raw=-3000,3000 do
     local c1=R.curve(raw)
     local c2=S.curve(raw)
     local c3=R.curve(raw,clientSeed.constants)
@@ -30,19 +30,19 @@ for raw=50,3000 do
     assert(c1%1==0 and c1>=100 and c1<=999,'bounds/integer violation at raw='..raw)
     assert(c1>=prev,'monotonicity violation at raw='..raw)
     prev=c1
-    if raw>=100 and raw<=300 then
-        assert(c1==raw,'curve must be exact identity for raw='..raw..', got '..c1)
+    if raw>=300 then
+        assert(c1==R.curve(raw,{knee=300,cap=999,a=.495,b=.58,c=.29}),'upper curve changed')
     end
     -- When constants.curve is absent, curve is the identity (clamped 100..999)
     local idExpected=math.max(100,math.min(999,raw))
     assert(R.curve(raw,{})==idExpected and S.curve(raw,{})==idExpected,'absent constants.curve must be identity at '..raw)
 end
 
--- 2. Smoothness (slope=1 at 300, strictly decreasing positive slope above 300)
+-- 2. Continuity at the knee; unchanged smooth upper branch with unit right slope
 local p=clientSeed.constants.curve
 local H=p.cap-p.knee
 local function cont(raw)
-    if raw<=p.knee then return raw end
+    if raw<=p.knee then return math.max(100,100+(p.knee-100)*(raw-p.lowRaw)/(p.knee-p.lowRaw)) end
     local u=(raw-p.knee)/H
     local z=u+(p.a*u*u+p.b*u^4)/(1+p.c*u^3)
     return p.knee+H*(1-math.exp(-z))
@@ -50,7 +50,8 @@ end
 local eps=1e-5
 local slopeLeft=(cont(300)-cont(300-eps))/eps
 local slopeRight=(cont(300+eps)-cont(300))/eps
-assert(math.abs(slopeLeft-1)<1e-6 and math.abs(slopeRight-1)<1e-6,'slope at 300 must be 1 (got '..slopeRight..')')
+assert(math.abs(slopeLeft-(p.knee-100)/(p.knee-p.lowRaw))<1e-6 and math.abs(slopeRight-1)<1e-6,'fitted left slope and frozen right slope at knee')
+assert(math.abs(cont(300-eps)-cont(300+eps))<2*eps,'continuous knee')
 local prevSlope=1
 for raw=301,2500 do
     local y0,y1=cont(raw-1),cont(raw)
@@ -144,7 +145,7 @@ assert(clientRemote.pi==presented.pi and clientRemote.performancePI==presented.p
 
 -- 5. Known stock cars' classes and PIs
 local known={
-    {'neonna_gt',257,'E'},
+    {'neonna_gt',296,'E'},
     {'tata_dot',R.curve(488),'C'},
     {'hawk_fm5',R.curve(513),'B'},
     {'temerario_super_gt',R.curve(809),'S'},

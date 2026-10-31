@@ -9,7 +9,16 @@
 -- RacePrepChunk joins them and fires the original event (2026-10-21).
 local N={CHUNK=300}
 local serial=0
+local Frontend=require('ge/extensions/raceprep/frontend')
+function N.available() return Frontend.isCareer() or type(rawget(_G,'TriggerServerEvent'))=='function' end
+function N.on(event,handler,source)
+ if Frontend.isCareer() then return require('ge/extensions/raceprep/career/bus').on(event,handler,source) end
+ local register=rawget(_G,'AddEventHandler')
+ if type(register)=='function' then register(event,handler,source);return true end
+ return false
+end
 function N.send(event,payload)
+ if Frontend.isCareer() then return require('ge/extensions/raceprep/career/bus').send(event,payload) end
  local trigger=rawget(_G,'TriggerServerEvent')
  if type(trigger)~='function' then return false end
  payload=tostring(payload or '')

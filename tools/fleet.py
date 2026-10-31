@@ -43,10 +43,14 @@ def _seed_configs():
     return {k.split('/')[0]: k.split('/')[1] for k in seed.get('baselines', {})}
 
 
-def discover(resources=RESOURCES, archives=None):
-    """{model: {config, archive, pc, info}} for every Automation car"""
+def discover(resources=RESOURCES, archives=None, report=None):
+    """{model: {config, archive, pc, info}} for every Automation car.
+
+    When ``report`` is a list it is filled with ``{'model', 'reason'}`` rows for
+    vehicle dirs that never qualify (native mods or unselectable exports)."""
     seed = _seed_configs()
     cars = {}
+    nonauto, seen_nonauto = [], set()
     for path in sorted(Path(resources).glob('*.zip') if archives is None else archives):
         try:
             archive = zipfile.ZipFile(path)
@@ -55,8 +59,15 @@ def discover(resources=RESOURCES, archives=None):
         with archive:
             names = archive.namelist()
             configs = {}
+            vehicle_dirs = {}
             for member in names:
                 bits = member.split('/')
+                if len(bits) == 3 and bits[0] == 'vehicles' and bits[1] != 'common':
+                    if (bits[2].endswith('.pc') or bits[2].endswith('.car')
+                            or (bits[2].startswith('info_') and bits[2].endswith('.json'))):
+                        vehicle_dirs.setdefault(bits[1], False)
+                        if bits[2].endswith('.car'):
+                            vehicle_dirs[bits[1]] = True
                 if len(bits) == 3 and bits[0] == 'vehicles' and bits[2].endswith('.pc'):
                     try:
                         pc = loose_json(archive.read(member).decode('utf8', 'replace'))
@@ -64,6 +75,12 @@ def discover(resources=RESOURCES, archives=None):
                         continue
                     if 'Camso_Engine' in (pc.get('parts') or {}):
                         configs.setdefault(bits[1], {})[bits[2][:-3]] = pc
+            for model, has_car in vehicle_dirs.items():
+                if model not in configs and model not in cars and model not in seen_nonauto:
+                    seen_nonauto.add(model)
+                    nonauto.append({'model': model, 'reason':
+                        'Automation export with no selectable parts' if has_car
+                        else 'not an Automation export'})
             for model, by_config in configs.items():
                 if model in cars:
                     continue  # first archive wins, like BeamNG's mod order
@@ -79,6 +96,9 @@ def discover(resources=RESOURCES, archives=None):
                 config = seed.get(model) if seed.get(model) in by_config else (factory or sorted(by_config))[0]
                 cars[model] = {'config': config, 'archive': str(path), 'pc': by_config[config],
                                'info': infos.get(config, {})}
+    if report is not None:
+        report += sorted((e for e in nonauto if e['model'] not in cars),
+                         key=lambda e: e['model'])
     return cars
 
 

@@ -194,7 +194,7 @@ The expansion does not alter the native radar app's settings.
 
 **Setup → Fuel** shows tank levels and a measured laps-remaining estimate after
 you complete laps in a BJR race or Rivals run. The small **Fuel strategy HUD**
-can be toggled in Grid. It uses observed consumption, not a fixed car estimate.
+can be switched on or off with the gear icon (My preferences) at the top of the window. It uses observed consumption, not a fixed car estimate.
 For a lap-limited race, the recommendation includes one reserve lap. Refuelling,
 resetting or changing the car clears the old estimate; different driving styles
 can change what fuel you actually need.
@@ -897,3 +897,111 @@ other PI/part/tyre/spec caps still apply. Existing libraries gain the six preset
 once. Keep backing up `presets.json`; a migration/write failure preserves the
 previous file. Preview calculations run on the client and do not authorize a
 server entry. Ready and verified challenge start make the final checks.
+
+
+## Engine build potential (2.33 beta)
+
+Engine upgrades fill a share of the fitted engine's remaining potential, rather
+than adding the same percentage to every engine. If an engine already makes
+near its layout/size ceiling, Race intake, ECU and exhaust still reshape it,
+but the peak gain may be small. Fully built Sport/Race parts retain a 3%/5%
+tune floor. All part choices, rev-limit effects, boost response, mass and tuning
+controls remain. Electric motors are unchanged.
+
+**Why can't I add more power?** Your engine is close to its potential already. Fit a turbo or
+supercharger (if the race allows it) or a bigger displacement to raise the limit, or swap in a
+bigger engine. Engines with eight or more cylinders that are small for their layout keep more of
+their potential, because they rev higher. Sport displacement counts the engine as 6 % bigger and
+Race displacement as 12 % bigger.
+
+The potential uses NA values until a turbo/supercharger is actually fitted;
+merely allowing induction in the rules does not count. Draft PI estimates use
+the draft's fitted aspiration. A swap uses the donor engine's layout, size and
+stock curve. Existing race engine caps continue to restrict what can be fitted.
+
+**Server settings:** beside `RacePrep.lua`, copy `engine-potential.example.json`
+to `engine-potential.json`, edit it, then restart the server. The example lists
+all layout ceilings in hp and reference displacements in litres, stage headroom
+fractions, Sport/Race tune floors, displacement scaling bounds and the missing-
+data taper. Keep the complete schema and positive numeric values. Stage
+fractions must ascend and stay at or below 1; displacement bounds must be
+ordered, and taper thresholds must ascend. Invalid JSON/settings are logged;
+the file is left intact and the shipped defaults are used. Clients receive the
+server policy automatically; editing a client's copy is not configuration for
+the server. Back up **`engine-potential.json`**. It is persistent data and is
+not replaced by an update. The `.example.json` and internal defaults may update.
+
+Missing layout or displacement retains the old package percentages below
+300 hp, tapering linearly to one quarter at 1,000 hp and above. Generation logs
+each affected engine once. Native engines retain their real parts and use a
+private compiled factory reference; no stock engine or third-party file is
+rewritten. Old computed ratings are recollected; class boundaries do not change.
+
+### Induction and boost setup (2.33.0 beta)
+
+For an eligible NA Automation engine, fit forged internals and an upgraded
+radiator, then choose **Twin-charged** or **Sequential twin turbo** in Upgrades.
+Twin-charging gives immediate supercharger response before turbo takeover;
+sequential turbos bring boost in early and hand over to a larger turbo. Review
+the draft and Apply as usual. HUD boost gauges show the simulated pressure.
+Factory-boosted engines keep their own induction devices instead of receiving a
+second simulated system.
+
+On a factory-boosted Automation engine, fit the **Race boost upgrade** to unlock
+**Factory boost target** in Setup. 100% keeps stock positive boost, lower values
+reduce it, and up to 115% raises it. The default is 115%, matching the Race
+upgrade's former maximum. Power remains bounded by the engine-potential policy;
+PI uses maximum permitted tuning even when you turn boost down. Stock and Sport
+parts do not unlock this slider. Native BeamNG engines keep their existing
+part-specific wastegate/boost settings.
+
+At the package's peak-power allowance, another part may add no peak hp while
+still changing low-rpm torque, response, cooling or revs. Check the dyno curve;
+the displayed gains follow the fitted engine's shared build-potential budget.
+
+### Fitted induction sounds (2.34.0 beta)
+
+Fit a BJR:ME turbo or supercharger to an eligible naturally aspirated Automation
+engine in **Upgrades**, then Apply. The added induction now uses BeamNG's own
+vehicle sounds: turbo spin and hiss, Sport flutter or Race blow-off on lift,
+and supercharger whine. Twin-charged builds blend the two; sequential twins
+bring in the larger turbo's lower tone as revs rise. Turbo spin follows spool,
+so it builds after the throttle opens. Anti-lag suppresses blow-off while it
+holds boost. Ignition off or a stalled engine silences these sounds.
+
+Use BeamNG's normal vehicle audio volume controls. There are no extra audio
+files or BJR:ME sound settings. Engines with a factory turbo or supercharger
+keep their own sound sources; native BeamNG induction parts remain unchanged.
+Resets and part changes remove the old added sources. This changes sound only,
+not power, PI or gauge behaviour.
+
+## My preferences (2.35 beta)
+
+The gear icon at the top of the Motorsport Expansion window opens **My preferences**: driving HUD,
+timing tower, fuel strategy HUD, proximity radar (position and brightness), reward pop-ups and
+rival notices. They're saved on your own computer only. Flags, false starts and penalties always
+show, whatever you switch off.
+
+### Factory-vehicle PI and the bottom of Class E (2.36.0 beta)
+
+Buses, semis, the MD series, the trophy truck and supported heavy machinery now
+show PI badges in the vehicle selector, using the same classes as cars. A
+Class E event uses the normal eligibility check: these vehicles can enter when
+their displayed PI meets its rules. Build to class continues to use the same
+factory/current PI checks and the parts actually available for that vehicle.
+It does not promise that a loader has enough upgrades to reach a higher class.
+
+The low end now spreads slow vehicles through E rather than clipping them all
+to E 100. Displayed PI is never below 100. Each existing value above 300 is
+preserved; a below-300 speed or technical PI may change even when overall PI
+is higher. Tuning sliders still do not change PI.
+
+A failed or unstable measurement is flagged and uses the formula estimate,
+not a lap recorded while the vehicle was damaged or tipping. The Pigeon keeps
+its measured rating. The Covet Skidplate has rear skids instead of tyres and
+remains unrated. Unpowered factory crash-test rigs, props, trailers and
+simplified AI vehicles are outside the rated fleet.
+
+After updating, computed cache entries from the previous formula revision are
+recollected automatically. Staff-set ratings are retained. No server setting
+or vehicle ZIP edit is required.

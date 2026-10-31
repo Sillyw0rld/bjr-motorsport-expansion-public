@@ -110,18 +110,8 @@ got=R.getStats(7)
 assert(got and math.abs(got.zeroTo60-want15.zeroTo60)<1e-9)
 
 print('PASS: rated PI replies never seed the live performance cache; both callback orders and stale replies handled')
--- Draft replies use the exact evaluator but cannot contaminate the actual
--- rating table, live-performance cache, or an unrelated rebuilt car.
-local previewCache=get(R.previewRating,'previews')
-local actualEntries=get(R.onStatic,'entries');local beforeEntries=0;for _ in pairs(actualEntries)do beforeEntries=beforeEntries+1 end
-local snapshot=get(R.getStats,'stats')[7]
-local current=currentIdentity();local expected=assert(R.evaluate(clone(rated),current))
-set(R.onStatic,'previewActive',{id=7,token='preview-test',key='draft-test',revision=data.vdata,identity=current,vd=data.vdata})
-R.onStatic(7,'preview-test',clone(rated))
-assert(previewCache['draft-test'].entry.pi==expected.pi and previewCache['draft-test'].entry.estimate)
-local afterEntries=0;for _ in pairs(actualEntries)do afterEntries=afterEntries+1 end;assert(beforeEntries==afterEntries and get(R.getStats,'stats')[7]==snapshot,'preview cannot publish or overwrite the actual/live rating')
-set(R.onStatic,'previewActive',{id=7,token='preview-stale',key='stale-draft',revision={},identity=current,vd=data.vdata})
-R.onStatic(7,'preview-stale',clone(rated));assert(previewCache['stale-draft'].error=='Car changed'and not previewCache['stale-draft'].entry)
-local gate=get(R.previewGate,'previewGateData');local fingerprints=R.previewGate();gate.passed=true;gate.formulaHash=fingerprints.formulaHash;gate.constantsHash=fingerprints.constantsHash;assert(R.previewGate().passed)
-gate.formulaHash='changed';assert(not R.previewGate().passed,'formula mismatch must disable normal preview activation')
-print('PASS: shared live/draft evaluator equality, no actual-cache contamination, stale preview rejection and formula-bound accuracy gate')
+-- Preview compiles are not part of the interactive path. Per-part ratings
+-- are loaded from the shared store; until that cache is present, the UI has no
+-- entry point that can request a shadow JBeam compilation.
+assert(R.previewRating==nil and R.clearPreviews==nil,'interactive preview compiler removed')
+print('PASS: no interactive preview compiler or gate activation; actual rating/stat caches remain isolated')

@@ -1,12 +1,13 @@
 {
-  "formulaHash": "99df993b",
-  "passed": true,
-  "constantsHash": "5c54c6b7",
   "schema": 1,
+  "formulaHash": "158c3026",
+  "constantsHash": "3d141909",
+  "passed": true,
   "builds": 35,
   "cars": 12,
-  "mean": 0,
+  "mean": 0.0,
   "worst": 0,
-  "date": "2026-10-27",
-  "game": "0.40.3.0.290897"
+  "date": "2026-10-28",
+  "game": "0.40.3.0.290897",
+  "evidence": "docs/reviews/pi-floor/pi-accuracy.json"
 }

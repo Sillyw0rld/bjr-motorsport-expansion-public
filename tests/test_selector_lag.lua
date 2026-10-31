@@ -6,6 +6,7 @@ package.path='client/lua/?.lua;'..package.path
 -- building: resolved once per config in the background, then cached.
 local function clone(t) local out={} for k,v in pairs(t) do out[k]=type(v)=='table' and clone(v) or v end return out end
 deepcopy=clone
+serialize=function() return "{}" end
 local identity=require('ge/extensions/raceprep/ratingIdentity')
 local parts={['/main']='car_body',['/main/engine']='engine_x'}
 local key=identity.key('m','c',parts)
@@ -17,7 +18,7 @@ jsonReadFile=function(path)
  return nil
 end
 readFile=function() return '{}' end
-local decoded={full={entries={[key]={model='m',config='c',pi=600,class='B',source='computed',parts=parts}},constants={},vehicles={}}}
+local decoded={full={entries={[key]={model='m',config='c',pi=600,class='B',source='computed',nativeEngineScales={mainEngine=.8},enginePotential=identity.hash({enginePotential='2.33.0:'..require('ge/extensions/raceprep/bjr/setupLibrary').signature(require('common/raceprep/engineSelection').settings())}),parts=parts}},constants={},vehicles={}}}
 jsonDecode=function(s) return decoded[s] or {models={}} end
 identity.flatten=function() return parts end -- the stub tree flattens to these parts
 local model={model={key='m',default_pc='c',Name='Model M'},configs={c={key='c',model_key='m',Name='Config C'}}}
@@ -41,18 +42,25 @@ print('PASS: selector tiles never compile jbeam; each config resolved once in th
 do
  local fullLoads,queuedCmds,published=0,{},{}
  package.loaded['jbeam/loader'].loadJbeam=function() fullLoads=fullLoads+1;return {vdata={nodes={},wheels={},powertrain={}}} end
- core_vehicle_manager={getVehicleData=function(id)
-  return {vdata={model='m',activeParts=parts},config={partConfigFilename='vehicles/m/c.pc'}}
- end}
+ local bundle={vdata={model='m',activeParts=parts},config={partConfigFilename='vehicles/m/c.pc'}}
+ core_vehicle_manager={getVehicleData=function(id)return bundle end}
  getObjectByID=function(id) return {getID=function() return id end,queueLuaCommand=function(_,cmd) queuedCmds[#queuedCmds+1]=cmd end} end
  MPVehicleGE={getVehicleByGameID=function(id) return {isLocal=true,serverVehicleString='1-'..id,ownerID=1} end}
  jsonEncode=function(t) return t end
  TriggerServerEvent=function(ev,payload) published[#published+1]={ev=ev,payload=payload} end
  package.loaded['ge/extensions/raceprep/net']={send=TriggerServerEvent}
+ require('common/raceprep/engineSelection').catalog().nativeEngines={engine_x={native=true}}
  R.onVehicleSpawned(10)
  local revBefore=R.catalogRevision
+ assert(R.getLiveCarData(10)==nil and #queuedCmds==0,'native live power waits until cached scaling is queued')
  R.onUpdate(1.5)
+ assert(R.getLiveCarData(10)==nil)
+ local token=queuedCmds[#queuedCmds]:match('snapshot%(%"([^%"]+)%"%)')
+ assert(token,'snapshot is queued after applying the cached scale')
+ R.onLiveSnapshot(10,token,{hp=999})
+ assert(R.getLiveCarData(10).hp==999)
  assert(fullLoads==0,'known rating: no synchronous loadJbeam on spawn')
+ local scaled=false;for _,cmd in ipairs(queuedCmds)do if cmd:find('applyNativeScales',1,true)then scaled=true end end;assert(scaled,'known native rating reapplies its canonical scale without collecting again')
  for _,cmd in ipairs(queuedCmds) do assert(not cmd:find('raceprepRating%.collect'),'known rating: no collect command on spawn') end
  assert(#published==1 and published[1].ev=='RacePrepComputedRating' and published[1].payload.key and published[1].payload.parts==nil,'known rating published immediately (short report by key)')
  R.onStatic(10,'stale-token',{mass=1200})

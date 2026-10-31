@@ -17,7 +17,7 @@ local fit=B.search({cap=700,draft={},options={{row='a',name='10',remove=true},{r
 for _=1,100 do fit.step();if fit.done then break end end;assert(fit.done and fit.result.b=='4'and not fit.result.a,'smallest sufficient PI removal')
 local waiting=true;local async=B.search({cap=600,draft={},options={},limit=10,allowed=function()return true end,predict=function()if waiting then return nil,nil,true end;return {pi=500}end},'quick');async.step();assert(not async.done);waiting=false;for _=1,20 do async.step()end;assert(async.done)
 local source=read('client/lua/ge/extensions/raceprepRatings.lua');local evaluator=assert(source:match('(local function evaluate.-)M.evaluate=evaluate'))
-assert(evaluator:find('rating.compute(st,constants,st.drive)',1,true));assert(source:find('local e,err=evaluate(st,i)',1,true)and source:find('local e,err=evaluate(st,q.identity)',1,true),'same real evaluator for draft and live rating')
+assert(evaluator:find('rating.compute(st,constants,st.drive)',1,true));assert(source:find('local e,err=evaluate(st,i)',1,true),'live rating uses the canonical evaluator');assert(not source:find('evaluate(st,q.identity)',1,true) and not source:find('previewRating',1,true),'interactive draft compilation removed')
 assert(not evaluator:find('0.495',1,true)and not evaluator:find('scale.mix',1,true),'no duplicated PI constants')
 local P=dofile('server/RacePrep/EventPresets.lua');local found=0;for _,p in ipairs(P.builtins())do if p.category=='Build to class'then found=found+1;local lo,hi=B.band(p.patch.targetClass,Rating.classOf);assert(p.patch.piMin==lo and p.patch.piMax==hi)end end;assert(found==6)
 -- 2.31.1: a saved setup is named after its file; the server must find the

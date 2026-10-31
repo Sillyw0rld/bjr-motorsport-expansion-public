@@ -110,6 +110,32 @@ local function engineData(data)
             local peak=0
             for _,p in ipairs(torque) do if p[1]*p[2]>peak then peak=p[1]*p[2];td.maxPowerRPM=p[1] end end
         end
+        if actual.type=='combustionEngine' and data.engineSpec and data.engineSpec.native then
+            assert(data.nativeBase,'Native engine factory reference unavailable')
+            local reference
+            for _,candidate in ipairs(engineData(data.nativeBase)) do if candidate.name==actual.name then reference=candidate end end
+            assert(reference,'Native engine factory identity unavailable')
+            if reference then
+                data.engineSpec.nativeTier=data.nativeBase.nativeTier
+                local scale
+                if data.statsLive then
+                    scale=(data.nativeEngineScales or {})[actual.name] or 1
+                    for _,p in ipairs(torque) do p[2]=p[2]*scale end
+                else
+                    local rated=torque
+                    if data.nativeBase.nativeMax then
+                        for _,candidate in ipairs(engineData(data.nativeBase.nativeMax)) do if candidate.name==actual.name then rated=candidate.torque;maxRPM=candidate.maxRPM end end
+                    end
+                    torque,scale=require('common/raceprep/engineEffects').limitNative(rated,reference.torque,deepcopy(data.engineSpec))
+                end
+                local peak=0;for _,p in ipairs(torque) do if p[1]*p[2]>peak then peak=p[1]*p[2];td.maxPowerRPM=p[1] end end
+                data._nativeEngineScales=data._nativeEngineScales or {};data._nativeEngineScales[actual.name]=scale
+                if not data.preview and not data.statsLive then
+                    extensions.load('raceprepPower')
+                    raceprepPower.applyNativeScale(actual,scale)
+                end
+            end
+        end
         out[#out+1]={name=actual.name,type=actual.type,maxRPM=maxRPM,maxPowerRPM=td.maxPowerRPM,torque=torque}
     end
     return out
@@ -240,7 +266,7 @@ function M.collect(data,requestID)
             shift.highShiftUpRPM=maxRPM
         end
         return {mass=round(mass,1),comY=round(sumY/mass,3),geometry=geometry,suspension=suspension,
-            engineKind=kind,engines=engines,wheels=ws,
+            engineKind=kind,engines=engines,wheels=ws,nativeEngineScales=data._nativeEngineScales,
             gearboxes=gb,finalDrives=fd,driveline=driveline,shift={highShiftUpRPM=shift.highShiftUpRPM,topSpeedLimit=tonumber(shift.topSpeedLimit)},drive=drive,
             aero=data.downforceModel and {downforceTargetFront=data.downforceModel.downforceTargetFront,
                 downforceTargetRear=data.downforceModel.downforceTargetRear,targetSpeedKMH=data.downforceModel.targetSpeedKMH,

@@ -23,7 +23,7 @@ for key,e in pairs(seed.entries) do
   if parts and I.key(e.model,e.config,parts)==key then got=got+1 end
  end
 end
-assert(want==740 and got==want,'factory lists for every parts-less native seed rating: '..got..'/'..want)
+assert(want==914 and got==want,'factory lists for every parts-less native seed rating: '..got..'/'..want)
 assert(reads()==1,'file read once')
 
 -- Rivals compares a list with BeamMP's copy of the car: MPHelpers.simplifyVehConfig
@@ -37,8 +37,9 @@ for key,e in pairs(seed.entries) do
  if e.native and not e.parts then
   local list=n.parts(key);local slots,byId={},{}
   for path,part in pairs(list) do
-   local slot,id=path:match('^(.*/([^/]+))/[^/]+$')
-   if slot then slots[#slots+1]={id=id,path=slot..'/',part=part};byId[id]=(byId[id] or 0)+1 end
+   local slot=path:sub(-#part-1)=='/'..part and path:sub(1,-#part-2)
+   local id=slot and slot:match('([^/]+)$')
+   if id then slots[#slots+1]={id=id,path=slot..'/',part=part};byId[id]=(byId[id] or 0)+1 end
   end
   local simple={}
   for _,s in ipairs(slots) do simple[byId[s.id]>1 and s.path or s.id]=s.part end
@@ -50,7 +51,7 @@ for key,e in pairs(seed.entries) do
   assert(not V.config('{}',function() return d end,R.canonical,list,e.model),key..': a changed part must not match')
  end
 end
-assert(matched==740)
+assert(matched==914)
 
 -- A list that doesn't reproduce its key's hash is refused, and so are
 -- unknown keys, wrong hashes and a missing file.

@@ -54,7 +54,9 @@ function U.modelParts(c,model)
     return c.byModel[model] or {}
 end
 U.engineInfo=function(model,parts)
-    return EngineSelection.info(model,parts)
+    local info=EngineSelection.info(model,parts)
+    -- Native engines retain their real part shop, not Camso package slots.
+    return info and not info.native and info or nil
 end
 local function copySpec(spec)
     local out={}
@@ -124,7 +126,7 @@ U.partEffect=function(vehID,name)
         for _,p in ipairs(modified) do if p[1]*p[2]>peak then peak=p[1]*p[2];peakRPM=p[1] end end
         local low=(EngineEffects.torque(curves.stock,3000,curves.limit,after,true)-EngineEffects.torque(curves.stock,3000,curves.limit,before,true))*Effects.NM_TO_LBFT
         return string.format('%s: %+.0f hp at %g rpm, %+.0f lb-ft at 3,000 rpm',option.title,b.hp-a.hp,peakRPM,low),
-            string.format('%+.1f kW, %+.1f Nm peak torque; %g rpm limit. Gains include other fitted parts; race sliders rated at maximum.',b.kw-a.kw,b.nm-a.nm,EngineEffects.revLimit(curves.limit,after)),
+            string.format('%+.1f kW, %+.1f Nm peak torque; %g rpm limit. Gains include other fitted parts; race sliders rated at maximum.',b.kw-a.kw,b.nm-a.nm,EngineEffects.revLimit(curves.limit,after))..(EngineEffects.INDUCTION_DESCRIPTIONS[option.effect.induction] and (' '..EngineEffects.INDUCTION_DESCRIPTIONS[option.effect.induction])or ''),
             nil, b.hp - a.hp
     end
     local info=catalog.parts[name]
@@ -574,7 +576,7 @@ U.packageSpec=function(vehID,number)
     spec.intake,spec.exhaust,spec.ecu,spec.cam,spec.forged,spec.displacement=nil,nil,nil,nil,nil,nil
     -- 0 = stock engine: every package part removed (forced induction and coolers stay)
     for kind,level in pairs(number==0 and {} or assert(EngineEffects.PACKAGES[number])) do spec[kind]=level end
-    if spec.induction=='turbo_large' or spec.induction=='supercharger_race' or spec.induction=='stock_upgrade' then spec.forged=true end
+    if spec.induction=='turbo_large' or spec.induction=='supercharger_race' or spec.induction=='stock_upgrade' or spec.induction=='twin_charged' or spec.induction=='turbo_sequential' then spec.forged=true end
     return spec,curves
 end
 --- is this package (0 = stock engine) what the engine has now?

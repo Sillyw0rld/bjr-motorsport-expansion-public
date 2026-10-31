@@ -72,7 +72,7 @@ function C.change(tree,path,name,model,vars)
     if transmission then node.children.Camso_Transmission=transmission end
     node.children.Camso_engine_structure={id='Camso_engine_structure',chosenPartName=option.structure,
         children=structure and structure.children or {}}
-    local reset={['$rpECUGain']=100,['$rpCamGain']=100,['$rpBoostGain']=100,['$rpAntiLag']=0}
+    local reset={['$rpECUGain']=100,['$rpCamGain']=100,['$rpFactoryBoost']=115,['$rpBoostGain']=100,['$rpAntiLag']=0}
     -- Reset variables from the outgoing donor too, preventing residual boost
     -- or rev-limit settings. Chassis/fuel settings and visual offsets stay put.
     for _,o in ipairs(C.info(model).options or {}) do

@@ -275,7 +275,7 @@ local function finalize(r)
     while #R.history > 10 do
         table.remove(R.history)
     end
-    if type(rawget(_G, "TriggerServerEvent")) == "function" then
+    if (require("ge/extensions/raceprep/frontend").isCareer() or type(rawget(_G, "TriggerServerEvent")) == "function") then
         local ok, json = pcall(jsonEncode, results)
         if ok then
             require('ge/extensions/raceprep/net').send("RacePrepRaceResult", json)

@@ -33,3 +33,23 @@ assert(not fixed and err:find('Incomplete'))
 fixed,err=D.resolve({}, {}, {FL=true},{engine=true})
 assert(not fixed and err:find('No powertrain path'))
 print('PASS: canonical native final-drive paths, parallel EV branches and unsupported topology')
+
+-- Compiled truck overrides, road-range selection and parallel planetary hubs.
+local truck={
+ {name='engine',type='combustionEngine',cid=1},
+ {name='gearbox',type='manualGearbox',inputName='engine',cid=2},
+ {name='range',type='rangeBox',inputName='gearbox',gearRatios={0,4,1},cid=3},
+ {name='diff',type='differential',inputName='range',gearRatio=1,cid=4},
+ {name='diff',type='differential',inputName='range',gearRatio=4,cid=5},
+ {name='lhub',type='shaft',inputName='diff',gearRatio=3.333,cid=6},
+ {name='rhub',type='shaft',inputName='diff',gearRatio=3.333,cid=7},
+ {name='l',type='shaft',inputName='lhub',connectedWheel='RL',cid=8},
+ {name='r',type='shaft',inputName='rhub',connectedWheel='RR',cid=9},
+ {name='accessory',type='shaft',inputName='gearbox',gearRatio=72,cid=10},
+}
+fixed,err,paths=D.resolve(truck,{}, {RL=true,RR=true},{engine=true})
+assert(fixed,err);assert(math.abs(fixed[1].ratio-4*3.333)<1e-6);assert(#paths==2)
+truck[5].cid=nil
+fixed,err=D.resolve(truck,{}, {RL=true,RR=true},{engine=true})
+assert(not fixed and err:find('duplicate'))
+print('PASS: truck CID overrides, high range and parallel hubs; ambiguous duplicates rejected')

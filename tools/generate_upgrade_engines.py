@@ -14,6 +14,7 @@ import re
 import zipfile
 from pathlib import Path
 from audit_upgrade_sources import uncomment, field
+from engine_metadata import automation as engine_metadata
 
 from runtime_paths import ROOT
 RESOURCES = Path(os.environ.get('RACEPREP_RESOURCES', 'Resources/Client'))
@@ -57,9 +58,14 @@ def source_parts(archive, model):
 
 def induction_title(level):
     """turbo_small_twin_scroll_race -> "Small turbo, twin-scroll (Race)" """
+    if level.startswith('twin_charged_'):
+        return 'Twin-charged (Race: adjustable boost, anti-lag)'
+    if level.startswith('turbo_sequential_'):
+        return 'Sequential twin turbo (Race: adjustable boost, anti-lag)'
     if level=='race_upgrade':
         return 'Race boost upgrade (existing turbo / supercharger)'
     for kind, label in (('turbo_small','Small turbo'),('turbo_large','Large turbo'),
+                        ('twin_charged','Twin-charged'),('turbo_sequential','Sequential twin turbo'),
                         ('supercharger_sport','Sport supercharger'),('supercharger_race','Race supercharger')):
         if level.startswith(kind+'_'):
             rest=level[len(kind)+1:]
@@ -85,6 +91,12 @@ def generate(resources=RESOURCES, output=None, statics=STATICS):
         with zipfile.ZipFile(car['archive']) as archive:
             fleet[model] = (car['pc'], source_parts(archive, model), car['archive'])
     catalog = {'models': {}}
+    existing = Path(output)/'lua/common/raceprep/engine-parts.json'
+    shipped = ROOT/'client/lua/common/raceprep/engine-parts.json'
+    for previous in (existing, shipped):
+        if previous.exists():
+            catalog['nativeEngines'] = json.loads(previous.read_text()).get('nativeEngines', {})
+            if catalog['nativeEngines']: break
     for model, (pc, original, archive) in fleet.items():
         stock_engine = pc['parts']['Camso_Engine']
         static = car_static(model, cars[model], statics)
@@ -133,6 +145,10 @@ def generate(resources=RESOURCES, output=None, statics=STATICS):
                 title=level.title()+(' intake' if kind=='intake' else ' ECU tune')
             p={'information':{'authors':'Sillyw0rld','name':title},'slotType':slot or f'{root}_{kind}',
                'raceprepEngine':dict(effect)}
+            if effect.get('induction')=='twin_charged':
+                p['information']['description']='Supercharger response at low rpm; turbo takes over from 50–65% of the rev limit. Forged internals and upgraded cooling required.'
+            elif effect.get('induction')=='turbo_sequential':
+                p['information']['description']='Small turbo boosts by 30% of the rev limit; large turbo takes over at 45–60%. Forged internals and upgraded cooling required.'
             if variables: p['variables']=[VARIABLE_HEADER]+variables
             if variables:
                 for variable in variables:
@@ -141,7 +157,7 @@ def generate(resources=RESOURCES, output=None, statics=STATICS):
             if extra: p.update(extra)
             kg=5 if effect.get('displacement')=='sport' else 10 if effect.get('displacement')=='race' else 0
             if effect.get('induction') and effect['induction']!='stock_upgrade':
-                kg=25 if effect['induction'] in ['turbo_large','supercharger_race'] else 15
+                kg={'twin_charged':35,'turbo_sequential':30,'turbo_large':25,'supercharger_race':25}.get(effect['induction'],15)
             if effect.get('intercooler') or effect.get('oilcooler'): kg=5
             if effect.get('radiator'): kg=RADIATORS[effect['radiator']][1]
             if kg:
@@ -161,7 +177,7 @@ def generate(resources=RESOURCES, output=None, statics=STATICS):
                 if afterfire != 1.0:
                     p['mainEngine'] = {'$*instantAfterFireCoef': afterfire, '$*sustainedAfterFireCoef': afterfire}
                 p['soundConfigExhaust'] = {'$+mainGain': gain}
-            if effect.get('inductionRace') and str(effect.get('induction', '')).startswith('turbo'):
+            if effect.get('inductionRace') and (str(effect.get('induction', '')).startswith('turbo') or effect.get('induction')=='twin_charged'):
                 p['mainEngine'] = {'$*instantAfterFireCoef': '$=1+($rpAntiLag or 0)*1.5',
                                    '$*sustainedAfterFireCoef': '$=1+($rpAntiLag or 0)*2'}
             if effect.get('oilcooler'):
@@ -203,22 +219,24 @@ def generate(resources=RESOURCES, output=None, statics=STATICS):
             children.append([slots['induction'],'','Forced induction'])
             for kind, variants in [('turbo_small',['single','twin','twin_scroll']),
                                    ('turbo_large',['single','twin','twin_scroll']),
+                                   ('twin_charged',['compound']),('turbo_sequential',['sequential']),
                                    ('supercharger_sport',['roots','twin_screw','centrifugal']),
                                    ('supercharger_race',['roots','twin_screw','centrifugal'])]:
                 # Supercharger size already specifies its Sport/Race tier.
-                tiers=['race'] if kind.endswith('_race') else ['sport'] if kind.endswith('_sport') else ['sport','race']
+                tiers=['race'] if kind in ('twin_charged','turbo_sequential') or kind.endswith('_race') else ['sport'] if kind.endswith('_sport') else ['sport','race']
                 for variant in variants:
                     for tier in tiers:
                         effect={'induction':kind,'inductionRace':tier=='race',
                                 'turboLayout' if kind.startswith('turbo') else 'superchargerType':variant}
                         variables=[['$rpBoostGain','range','%','Engine',100,0,100,'Boost effect','Only the Race version unlocks boost; PI uses maximum.',{'stepDis':1}]]
-                        if kind.startswith('turbo') and tier=='race':
+                        if (kind.startswith('turbo') or kind=='twin_charged') and tier=='race':
                             variables.append(['$rpAntiLag','range','','Engine',0,0,1,'Anti-lag','Halves spool time; adds heat and afterfire.',{'stepDis':1}])
                         add('induction',kind+'_'+variant+'_'+tier,effect,variables=variables)
         else:
             slots['induction']=f'{root}_induction';children.append([slots['induction'],'','Existing forced-induction upgrade'])
             add('induction','race_upgrade',{'induction':'stock_upgrade','inductionRace':True},
-                variables=[['$rpBoostGain','range','%','Engine',100,0,100,'Existing boost upgrade','Up to +15% existing boost; requires forged internals. Rated at maximum.',{'stepDis':1}]])
+                variables=[['$rpFactoryBoost','range','%','Engine',115,0,115,'Factory boost target','Race part only: 100% is stock boost, 0% removes positive boost, 115% is maximum. Power stays within engine potential.',{'stepDis':1}]],
+                extra={'raceprepEngine':{'induction':'stock_upgrade','inductionRace':True,'factoryBoostTarget':'$=$rpFactoryBoost'}})
         for kind in ['intercooler','oilcooler']:
             slots[kind]=f'{root}_{kind}';children.append([slots[kind],'',{'oilcooler':'Oil cooler'}.get(kind,kind.title())])
             add(kind,'race',{kind:True})
@@ -239,6 +257,9 @@ def generate(resources=RESOURCES, output=None, statics=STATICS):
         catalog['models'][model]={'stockRevLimit':engine['maxRPM'],'stockEngine':stock_engine,
                                  'stockInertia':field(source,'inertia'),'stockForcedInduction':stock_forced,
                                  'hub':hub,'slots':slots,'parts':native,'archive':archive}
+        catalog['models'][model].update(engine_metadata(archive, model))
+        if not catalog['models'][model].get('layout') or not catalog['models'][model].get('litres'):
+            print('engine potential fallback: '+stock_engine+' (layout/displacement unavailable)')
         race_parts={}
         for name,p in original.items():
             label=(name+' '+p['title']).lower()

@@ -78,7 +78,7 @@ local function myRating(veh)
 end
 
 local function send(event, payload)
-    if type(rawget(_G, "TriggerServerEvent")) == "function" then
+    if (require("ge/extensions/raceprep/frontend").isCareer() or type(rawget(_G, "TriggerServerEvent")) == "function") then
         require('ge/extensions/raceprep/net').send(event, jsonEncode(payload))
     end
 end

@@ -149,7 +149,7 @@ local function drainInbox()
 end
 L.queued=function() return inboxN-inboxAt+1 end
 L.flush=function()
- if not online or not TriggerServerEvent then return 0 end
+ if not online or (not require('ge/extensions/raceprep/frontend').isCareer() and not TriggerServerEvent) then return 0 end
  local keys={};for k in pairs(pending) do keys[#keys+1]=k end;table.sort(keys)
  local rows,sent={},{}
  for _,key in ipairs(keys) do
@@ -283,7 +283,7 @@ L.configure=function(rubber,clockValue)
  require('ge/extensions/raceprep/rubberSurface').update(enabled)
  if online and clockValue-requestClock>=30 then
   -- Only request until a reset arrives. Later additions come as deltas.
-  if not L.synced then TriggerServerEvent('RacePrepRubberGet','') end
+  if not L.synced then require('ge/extensions/raceprep/net').send('RacePrepRubberGet','') end
   requestClock=clockValue
  end
 end
@@ -499,8 +499,27 @@ end
 -- rubbered that stretch is, so the line darkens gradually.
 L.TEXTURE = 'art/raceprep/rubberstrip.png'
 L.RANGE = 200         -- draw radius around the camera, m (same decal cap/cache)
+L.FADE_SPAN = 60      -- soften the far end from 140 m, using the native fade
 L.ALPHA = 0.85        -- opacity of a fully rubbered stretch (single non-stacked line)
 L.MAX_DECALS = 1500
+
+-- 0.40's dynamic decals suppress the old low instance-alpha range. Verified
+-- against saved server rubber: .85 disappears; .95 and 1 render. Keep the
+-- density curve and remap its visual output only, once when caching a decal.
+-- Earlier game versions retain their existing appearance.
+local major, minor = tostring(rawget(_G, 'beamng_version') or ''):match('(%d+)%.(%d+)')
+local alpha040 = tonumber(major) == 0 and tonumber(minor) == 40
+-- The restored alpha exposes a grey wash with the old white tint on 0.40.
+-- Charcoal modulation keeps the existing fine scuff texture visible.
+L.VISUAL_TINT = alpha040 and .2 or 1
+-- Compensate for the narrow visible core of the feathered strip in 0.40.
+-- Preserve the measured relative width; only the displayed footprint grows.
+L.VISUAL_WIDTH_SCALE = alpha040 and 1.35 or 1
+L.visualAlpha = function(alpha)
+    if not alpha040 then return alpha end
+    if alpha <= 0 then return 0 end
+    return .9 + .1 * math.max(0, math.min(1, alpha / L.ALPHA))
+end
 
 local current = {}    -- published only after a complete budgeted rebuild
 local patches = {}
@@ -557,8 +576,8 @@ L.draw = function()
                 if (d.x-cam.x)^2+(d.y-cam.y)^2<r2 and n<L.MAX_DECALS then
                     if not d.position then
                         d.texture=L.TEXTURE;d.position=vec3(d.x,d.y,d.z)
-                        d.forwardVec=vec3(d.fx,d.fy,0);d.scale=vec3(d.width,L.STEP*2,2)
-                        d.color=ColorF(1,1,1,d.alpha);d.fadeStart=L.RANGE-30;d.fadeEnd=L.RANGE
+                        d.forwardVec=vec3(d.fx,d.fy,0);d.scale=vec3(d.width*L.VISUAL_WIDTH_SCALE,L.STEP*2,2)
+                        d.color=ColorF(L.VISUAL_TINT,L.VISUAL_TINT,L.VISUAL_TINT,L.visualAlpha(d.alpha));d.fadeStart=math.max(0,L.RANGE-L.FADE_SPAN);d.fadeEnd=L.RANGE
                     end
                     n=n+1;visible[n]=d
                 end

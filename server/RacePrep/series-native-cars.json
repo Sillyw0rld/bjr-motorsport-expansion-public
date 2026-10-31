@@ -43,9 +43,19 @@
       "config": "200bx_type_l_M"
     },
     {
+      "model": "citybus",
+      "name": "Wentward vehiclesData.citybus.Name",
+      "config": "city"
+    },
+    {
       "model": "covet",
       "name": "Ibishu vehiclesData.covet.Name",
       "config": "DXi_M"
+    },
+    {
+      "model": "dumptruck",
+      "name": "Hirochi vehiclesData.dumptruck.Name",
+      "config": "standard"
     },
     {
       "model": "etk800",
@@ -83,9 +93,19 @@
       "config": "s_v6_A"
     },
     {
+      "model": "md_series",
+      "name": "Gavril vehiclesData.md_series.Name",
+      "config": "md_70_dump"
+    },
+    {
       "model": "midsize",
       "name": "Ibishu vehiclesData.midsize.Name",
       "config": "LX_V6_A"
+    },
+    {
+      "model": "midtruck",
+      "name": "Autobello vehiclesData.midtruck.Name",
+      "config": "4x4_van_petrol"
     },
     {
       "model": "miramar",
@@ -103,6 +123,11 @@
       "config": "nine_coupe_luxe"
     },
     {
+      "model": "percheron",
+      "name": "Cherrier vehiclesData.percheron.Name",
+      "config": "xl500_6x4_fifthwheel_m"
+    },
+    {
       "model": "pessima",
       "name": "Ibishu vehiclesData.midsize.Name",
       "config": "LX_M"
@@ -116,6 +141,11 @@
       "model": "pigeon",
       "name": "Ibishu vehiclesData.pigeon.Name",
       "config": "base"
+    },
+    {
+      "model": "racetruck",
+      "name": "SP vehiclesData.racetruck.Name",
+      "config": "tt2_spec"
     },
     {
       "model": "roamer",
@@ -143,6 +173,11 @@
       "config": "sport_RS_wagon_DCT"
     },
     {
+      "model": "us_semi",
+      "name": "Gavril vehiclesData.us_semi.Name",
+      "config": "t83_sleeper"
+    },
+    {
       "model": "utv",
       "name": "Hirochi vehiclesData.utv.Name",
       "config": "turbo"
@@ -166,6 +201,11 @@
       "model": "wigeon",
       "name": "Ibishu vehiclesData.wigeon.Name",
       "config": "base"
+    },
+    {
+      "model": "wl40",
+      "name": "Hirochi vehiclesData.wl40.Name",
+      "config": "arm_bucket"
     }
   ]
 }

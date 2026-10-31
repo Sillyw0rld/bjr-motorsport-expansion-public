@@ -5,10 +5,11 @@
 -- and fuel maps per part. Always derived from a retained stock copy, never
 -- from maps already changed by a previous reset/apply (no compounding).
 local M={}
-local Effects,Selection
+local Effects,Selection,InductionSound
 local function modules()
     Effects=Effects or require('common/raceprep/engineEffects')
     Selection=Selection or require('common/raceprep/engineSelection')
+    InductionSound=InductionSound or require('common/raceprep/inductionSound')
 end
 local function clone(t)
     local out={}
@@ -23,15 +24,17 @@ end
 function M.applySpec(engine,spec)
     modules()
     if engine.type~='camsoEngine' then return false end
+    InductionSound.configure(engine,spec)
     local base=engine._raceprepPowerBase
     if not base then
         base={torque=clone(engine.torqueThrottleMap),friction=clone(engine.frictionTorqueTable),
             fuel=clone(engine.FuelUsedThrottleMap),pressure=clone(engine.peakPressureCurve),
-            idleTorque=engine.idleTorque,limits={},maxRPM=engine.maxRPM,inertia=engine.inertia}
+            pressureMap=clone(engine.PressureThrottleMap),idleTorque=engine.idleTorque,limits={},maxRPM=engine.maxRPM,inertia=engine.inertia}
         for _,key in ipairs({'maxTorqueRating','maxOverTorqueDamage'}) do base.limits[key]=engine[key] end
         engine._raceprepPowerBase=base
     end
     base.pressure=base.pressure or clone(engine.peakPressureCurve)
+    base.pressureMap=base.pressureMap or clone(engine.PressureThrottleMap)
     local stock=spec.stockRevLimit or base.maxRPM
     spec.pressurePoints={}
     for rpm=0,stock,100 do spec.pressurePoints[#spec.pressurePoints+1]={rpm,base.pressure[rpm] or 1} end
@@ -54,6 +57,9 @@ function M.applySpec(engine,spec)
     local points={}
     for rpm=0,stock,100 do points[#points+1]={rpm,(full[rpm] or 0)-(base.friction[rpm] or 0)} end
     if points[#points][1]~=stock then points[#points+1]={stock,(full[stock] or 0)-(base.friction[stock] or 0)} end
+    Effects.prepare(points,stock,spec)
+    -- The same normalization must scale friction as well as gross torque.
+    for rpm=0,limit+1 do friction[rpm]=(base.friction[math.min(rpm,stock)] or 0)*Effects.factor(rpm,stock,spec,false,1) end
     local fullAbove={}
     for rpm=stock+1,limit+1 do fullAbove[rpm]=Effects.torque(points,rpm,stock,spec,false,1)+friction[rpm] end
     local fullAtStock=full[stock] or 0
@@ -70,6 +76,20 @@ function M.applySpec(engine,spec)
         for rpm=0,limit+1 do fuels[throttle][rpm]=(row[math.min(rpm,stock)] or 0)*Effects.factor(rpm,stock,spec,false,1) end
     end
     engine.torqueThrottleMap,engine.frictionTorqueTable=fullMaps,friction
+    -- Factory Race tuning changes the export's pressure map AND the matching
+    -- torque/fuel maps. camsoEngine itself then steers its wastegate and gauges.
+    -- Always rebuild from retained originals; removing the part restores them.
+    local target=spec.induction=='stock_upgrade' and spec.inductionRace and spec.factoryBoostTarget
+    local maps=clone(base.pressureMap)
+    if target then
+        local ratio=math.max(0,math.min(115,target))/100
+        local function adjusted(p)return p>1 and 1+(p-1)*ratio or p end
+        for _,row in pairs(maps)do
+            for rpm=0,limit+1 do row[rpm]=adjusted(row[rpm] or row[math.min(rpm,stock)] or 1)end
+        end
+        for rpm,p in pairs(pressure)do pressure[rpm]=adjusted(p)end
+    end
+    if next(maps) then engine.PressureThrottleMap=maps end
     engine.torqueCurve,engine.FuelUsedThrottleMap,engine.peakPressureCurve=fullMaps[99],fuels,pressure
     engine.maxRPM,engine.maxAV=limit,limit*math.pi/30
     if engine.tempRevLimiterAV and engine.tempRevLimiterAV>=stock*math.pi/30 then engine.tempRevLimiterAV=engine.maxAV*10 end
@@ -85,7 +105,7 @@ function M.applySpec(engine,spec)
         end
     end
     engine.raceprepEngineSpec=spec
-    engine.raceprepBoost=spec.induction and spec.induction:find('turbo',1,true) and 0 or 1
+    engine.raceprepBoost=spec.induction and (spec.induction:find('turbo',1,true) or spec.induction=='twin_charged') and 0 or 1
     -- Native dyno queries use the steady curve. During physics, lightweight
     -- row proxies apply transient boost without rewriting 100 RPM maps each
     -- frame. The wrapper always restores proxies, including error paths.
@@ -125,8 +145,29 @@ function M.applySpec(engine,spec)
     engine.torqueThrottleMap,engine.frictionTorqueTable=proxyMaps,proxyFriction
     return true
 end
+function M.applyNativeScale(engine,scale)
+    modules()
+    if engine.type~='combustionEngine' then return false end
+    assert(type(scale)=='number' and scale==scale and scale>0 and scale<1000,'Invalid native engine scale')
+    local base=engine._raceprepNativeBase
+    if not base then
+        base={curve=clone(engine.torqueCurve),friction=engine.friction,dynamicFriction=engine.dynamicFriction}
+        engine._raceprepNativeBase=base
+    end
+    engine.torqueCurve=clone(base.curve);engine.friction=base.friction;engine.dynamicFriction=base.dynamicFriction
+    for rpm,t in pairs(base.curve) do engine.torqueCurve[rpm]=t*scale end
+    engine.friction=base.friction*scale;engine.dynamicFriction=base.dynamicFriction*scale
+    engine.torqueData=engine:getTorqueData();engine.maxPower=engine.torqueData.maxPower;engine.maxTorque=engine.torqueData.maxTorque
+    return true
+end
+function M.applyNativeScales(scales)
+    for _,engine in pairs(powertrain.getDevicesByCategory('engine') or {}) do
+        if scales[engine.name] then M.applyNativeScale(engine,scales[engine.name]) end
+    end
+end
 function M.apply()
     modules()
+    InductionSound.reset()
     local data=v and v.data or {}
     local selected,reason=Selection.spec(data.model,data.activeParts,data.variables and (v.config and v.config.vars) or {},data)
     M.lastError=reason
@@ -137,22 +178,45 @@ function M.apply()
     local set,default=tonumber(vars['$revLimitRPM']),def and tonumber(def.default)
     selected.revLimitTuning=(set and default) and set-default or 0
     local changed=false
-    for _,field in ipairs({'intake','exhaust','ecu','cam','forged','flywheel','induction','intercooler','oilcooler'}) do
+    for _,field in ipairs({'intake','exhaust','ecu','cam','forged','displacement','flywheel','induction','intercooler','oilcooler'}) do
         if selected[field] then changed=true end
     end
     if changed then
         for _,engine in pairs(powertrain.getDevicesByCategory('engine') or {}) do M.applySpec(engine,selected) end
     end
 end
+-- Publish only in the absence of any factory induction device. Device writers
+-- retain ownership even if a foreign/old generated part is fitted accidentally.
+function M.publishBoost(engine,spec,rpm,dt,devices)
+    modules()
+    for _,e in pairs(devices or {}) do
+        if e.turbocharger and e.turbocharger.isExisting or e.supercharger and e.supercharger.isExisting then return end
+    end
+    local gauge=Effects.gauge(spec,rpm,spec.stockRevLimit,engine.throttle or 0,engine.raceprepBoost)
+    if not gauge then return end
+    local values=electrics and electrics.values
+    if values then
+        values.boost=gauge.boost/6.8947572932;values.boostMax=gauge.maxBoost/6.8947572932
+        values.turboBoost=gauge.turboBoost/6.8947572932
+        values.superchargerBoost=gauge.superchargerBoost/6.8947572932
+    end
+    if streams and gui and streams.willSend('forcedInductionInfo') then
+        gui.send('forcedInductionInfo',{boost=gauge.boost,maxBoost=gauge.maxBoost,rpm=gauge.rpm})
+    end
+end
 function M.updateGFX(dt)
     if not Effects then return end
-    for _,engine in pairs(powertrain.getDevicesByCategory('engine') or {}) do
+    local devices=powertrain.getDevicesByCategory('engine') or {}
+    for _,engine in pairs(devices) do
         local spec=engine.raceprepEngineSpec
         if spec then
             local rpm=(engine.outputAV1 or 0)*30/math.pi
             engine.raceprepBoost=Effects.boost(engine.raceprepBoost,spec,rpm,spec.stockRevLimit,engine.throttle or 0,dt)
+            M.publishBoost(engine,spec,rpm,dt,devices)
         end
     end
+    InductionSound.update(devices,dt)
 end
+function M.onExtensionUnloaded()if InductionSound then InductionSound.reset()end end
 M.onReset=M.apply
 return M

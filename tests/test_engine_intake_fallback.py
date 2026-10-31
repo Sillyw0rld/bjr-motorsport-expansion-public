@@ -62,7 +62,7 @@ class IntakeFallback(unittest.TestCase):
     def test_shipped_engine_catalogues_have_all_existing_race_categories(self):
         catalog = json.loads((ROOT/'client/lua/common/raceprep/engine-parts.json').read_text())
         entries = list(catalog['models'].items())
-        entries += [(name, s['engineInfo']) for name, s in catalog.get('swaps', {}).items() if s.get('engineInfo')]
+        entries += [(name, s['engineInfo']) for name, s in catalog.get('swaps', {}).items() if s.get('engineInfo') and not s['engineInfo'].get('native')]
         for model, info in entries:
             for kind, value in [('intake', 'race'), ('ecu', 'race'), ('forged', True), ('flywheel', 'race')]:
                 self.assertTrue(any(p['effect'].get(kind) == value for p in info['parts'].values()), (model, kind))

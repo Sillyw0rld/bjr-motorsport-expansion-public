@@ -2,6 +2,7 @@
 -- Copyright (c) 2026 Sillyw0rld
 -- BJR boundary: use the fork's public services, never create legacy BJI globals.
 local H={id='beamjoy-revived'}
+local helpers={}
 function H.ready() return beamjoy_main and beamjoy_main.client_ready==true and beamjoy_cache and beamjoy_cache.loaded==true and MPCoreNetwork and MPCoreNetwork.isMPSession() and MPGameNetwork and MPGameNetwork.launcherConnected() end
 function H.playerID() return MPConfig and MPConfig.getPlayerServerID and tonumber(MPConfig.getPlayerServerID()) end
 function H.vehicle()
@@ -9,10 +10,13 @@ function H.vehicle()
  if v and H.own(v:getID()) then return v end
 end
 function H.own(id)
+ if helpers[id] then return true end
  if MPVehicleGE and MPVehicleGE.isOwn then return MPVehicleGE.isOwn(id)==true end
  local v=MPVehicleGE and MPVehicleGE.getVehicleByGameID and MPVehicleGE.getVehicleByGameID(id)
  return v and v.isLocal==true or false
 end
+function H.helper(id) if id then helpers[id]=true end end
+function H.unhelper(id) if id then helpers[id]=nil end end
 function H.canEdit()
  return beamjoy_permissions and BJ_PERMISSIONS and beamjoy_permissions.hasAllPermissions(nil,BJ_PERMISSIONS.SetConfig)==true or false
 end

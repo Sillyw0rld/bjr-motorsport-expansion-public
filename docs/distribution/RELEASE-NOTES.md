@@ -1,38 +1,45 @@
-# v2.32.0 beta: the big update
+# v2.35.0 beta: engines, turbo sound and a cleaner window
 
-**The biggest BJR:ME release yet.** It brings 21 releases of work since the last
-public release (2.16.1.8) together in one update. Players gain race weekends,
-server-verified Rivals and challenges, driver progression, crews and seasons, race
-presets and Build to class. Owners get more ways to organise races and new cars
-that rate themselves, without changing BJR's official results.
+This update follows the big 2.32 release. Engines now have a realistic power limit, and you can fit
+twin-charged and sequential twin-turbo setups and hear them. The Motorsport Expansion window is
+cleaner and easier to use. If you're coming from **2.16**, everything from the big update is
+included too: see [What's new since 2.16.1](../../CHANGELOG.md#whats-new-since-2161-public-beta).
 
-## Highlights — beta
+## What's new
 
-- **Race weekends:** optional practice and qualifying followed by the race in
-  one BJR event. Only the race counts. With released BJR 2.0.1, weekends run in
-  classic mode (BJR:ME-timed practice and qualifying, then a normal BJR race lobby).
-- **Rivals and ghosts:** server-verified class boards, weekly targets, factory-car
-  support, lap ghosts and notices when another driver passes your time.
-- **Progression:** automatic licences, XP/levels, achievements with rarity,
-  earned titles and a post-race card showing what you gained.
-- **Medals:** Bronze/Silver/Gold depend on the best verified time. Medals set
-  alone are provisional, then judged again when another driver confirms the board.
-- **Crews and seasons:** persistent teams, configurable driver/crew standings,
-  Hall of Fame, history and clickable driver cards.
-- **Owner controls:** presets and spec-car rules, permission settings, optional
-  Discord awards/record posts, repaired update installation and smaller packages.
-- **Challenges:** seven server-scored types (best lap, race distance, clean
-  streak, consistency, sector attack, speed trap, tyre saver) with one daily and
-  two weekly targets.
-- **Race presets:** start a race from a staff-curated library with four staff
-  picks, a class cup for every class and searchable categories.
-- **Build to class:** upgrade a car into D–R with live PI estimates per part,
-  a reviewable quick-upgrade draft and Fit to class.
-- **Automatic car rating:** new cars get their PI on an idle staff game, so
-  nobody has to drive an unrated car first.
-- **Redesigned screens:** Drivers, Crews, Seasons and staff crew management.
-- **Racing display:** live ahead/behind estimates, transparent proximity radar,
-  fuel strategy, saved/shared tunes and less unnecessary menu refreshing.
+- **Engines have a limit.** Every engine has a power potential, from its layout (four-cylinder,
+  V8, V12 and so on) and its size. Upgrades fill the room left between the car's stock power and
+  that potential: Stage 1 a little, Stage 3 most of it. An engine that's already near its limit
+  only gets a small tune-up (+3 to +5 %). Fitting a turbo or supercharger, or a bigger
+  displacement, raises the limit. Swapping in a different engine is the way to go much faster.
+  Small engines with eight or more cylinders rev higher, so they keep more of their potential.
+- **New induction choices:** twin-charged (a supercharger for low-down response, then a turbo
+  takes over) and sequential twin turbos (a small turbo early, a big one in the mid range).
+- **Turbo and supercharger sound** for the induction you fit to a car that didn't have it: turbo
+  spool and hiss, blow-off when you lift (a flutter on Sport parts), supercharger whine. Cars
+  with a factory turbo keep their own sound.
+- **Boost gauge:** the HUD and BeamNG's boost app now show the boost of the turbo or supercharger
+  you fitted.
+- **Factory boost target:** the Race boost upgrade on a factory-turbo Automation engine lets you
+  turn its boost up or down in Setup (it never changes PI).
+- **Cleaner window:** a gear icon at the top holds your own settings (HUDs, radar, pop-ups). Start
+  a race shows staff picks as cards and tells you why the lobby can't open yet. The driver card
+  sits beside the page instead of covering it. Drivers, Crews, Seasons and Challenges are tidier.
+- **Fixes:** heavy lag with the window open when the server had no rivals or challenges yet;
+  Challenges said "End the current practice activity first" in free roam.
+
+## For server owners
+
+- **Upgrade from 2.32:** stop the server, back up `Resources/Server/RacePrep/`, unzip the new
+  download over your server folder and start it with the start script. Players download the new
+  version when they join. Car ratings with engine upgrades are worked out again under the new
+  limits on the first start; class bands don't change.
+- **Engine limits are adjustable.** Copy `engine-potential.example.json` to
+  `engine-potential.json` next to `RacePrep.lua` and change the power ceilings or how much each
+  stage adds. Restart the server after editing. If the file has a mistake, the server says so in
+  the console and uses the defaults.
+- **Manage crews** has one Save button for a crew's name, tag and colour.
+- Coming from **2.16**? Follow the steps below instead.
 
 ## Upgrading from 2.16 — beta
 
@@ -64,7 +71,7 @@ that rate themselves, without changing BJR's official results.
    shows imported progress; old unverified laps remain archived but do not rank
    on verified Rivals boards. There are no reward cards for imported old races.
    New servers start repeating monthly seasons with finish points and a clean
-   bonus; medal/weekly season points start off. Personal notices can be muted in Grid.
+   bonus; medal/weekly season points start off. Personal notices can be muted with the gear icon at the top of the window.
 7. **Review Motorsport settings before a race night.** Check permissions,
    weekend defaults, entry limits and season scoring. Discord stays off unless
    configured. Test a normal race and, with a compatible BJR build, a weekend.
@@ -86,10 +93,13 @@ that rate themselves, without changing BJR's official results.
 - Network interruptions can invalidate a lap or suppress a pop-up. Reward totals
   remain saved when a race card is missed. Restore write access before restarting
   after a storage error; not every older data file has the newer corruption safeguards.
+- Turbo and supercharger sounds for fitted induction are new in this release and have only
+  been checked on one computer. Whether other players hear your turbo depends on BeamMP running
+  the vehicle sound on their side; report it on Discord if they don't.
 - Native tyre PI still needs refinement. Performance figures are estimates, not
   measured lap guarantees. Fuel strategy does not add pit servicing.
 
 ## Full changelog — beta
 
-Read the [full public changelog](../../CHANGELOG.md#whats-new-since-2161-public-beta)
-and the [everyday guide](USAGE.md) for settings, permissions and backups.
+Read the [full public changelog](../../CHANGELOG.md) (a short summary of each public release at the
+top) and the [everyday guide](USAGE.md) for settings, permissions and backups.

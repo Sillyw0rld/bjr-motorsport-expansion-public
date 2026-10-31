@@ -5,7 +5,8 @@
 local P={}
 local H
 local function bjr() return rawget(_G,'raceprepBJR')~=nil end
-local function host() H=H or require('ge/extensions/raceprep/bjr/host');return H end
+local Frontend=require('ge/extensions/raceprep/frontend')
+local function host() H=H or Frontend.host();return H end
 local context,vehicles,scenario,message={},{},{},{}
 local snapshot
 local function normalRace()
@@ -58,6 +59,7 @@ end
 setmetatable(context,{__index=function(_,key)
  if key=='User' then return {playerID=host().playerID()} end
  if key=='Players' then
+  if Frontend.isCareer() then return {[0]={playerID=0}} end
   local out={}
   for _,p in pairs(beamjoy_players and beamjoy_players.players or {}) do if p.playerID then out[p.playerID]=p end end
   return out
@@ -80,7 +82,7 @@ scenario.get=function() return normalRace() end
 scenario.isFreeroam=function() return host().session()==nil end
 message.flash=function(_,text) host().notice(text) end
 function P.get(name)
- if not bjr() then return rawget(_G,name) end
+ if not bjr() and not Frontend.isCareer() then return rawget(_G,name) end
  if name=='BJI' then return {CLIENT_READY=host().ready()} end
  if name=='BJI_Context' then return context end
  if name=='BJI_Veh' then return vehicles end

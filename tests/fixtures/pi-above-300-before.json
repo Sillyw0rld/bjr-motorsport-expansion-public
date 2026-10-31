@@ -1,0 +1,1359 @@
+{
+ "base": "96b12a493815c0217459112a87b0e3fb6bcf0867",
+ "entries": {
+  "hawk_trackeater_ssr/48f8e/4918607d": {
+   "pi": 867,
+   "pi_speed": 853,
+   "pi_technical": 887
+  },
+  "laser__tamera/af69f/f7265cae": {
+   "pi": 821,
+   "pi_speed": 829,
+   "pi_technical": 803
+  },
+  "laser__tamere/adf77/e4d86a0b": {
+   "pi": 840,
+   "pi_speed": 840,
+   "pi_technical": 840
+  },
+  "hawk_trackeater_ssr_1000/45694/84449172": {
+   "pi": 799,
+   "pi_speed": 785,
+   "pi_technical": 822
+  },
+  "temerario__super_gt_b/4ab40/bca0b307": {
+   "pi": 773,
+   "pi_speed": 777,
+   "pi_technical": 764
+  },
+  "temerario_super_gt/dbbf1/31994d70": {
+   "pi": 769,
+   "pi_speed": 767,
+   "pi_technical": 772
+  },
+  "hartis__gt_rr/0fdab/3a84107b": {
+   "pi": 746,
+   "pi_speed": 749,
+   "pi_technical": 738
+  },
+  "hawk_satanas_svr/38f38/6d184515": {
+   "pi": 778,
+   "pi_speed": 778,
+   "pi_technical": 777
+  },
+  "hawk300sxrr/343f0/1a390cbb": {
+   "pi": 752,
+   "pi_speed": 742,
+   "pi_technical": 768
+  },
+  "hawk_911_turbo/82d8f/a3aa02e9": {
+   "pi": 614,
+   "pi_speed": 602,
+   "pi_technical": 636
+  },
+  "hawk_911_turbo_plane_edition/f14e5/b2f9b154": {
+   "pi": 604,
+   "pi_speed": 585,
+   "pi_technical": 642
+  },
+  "giselle__flying_400/e7102/f70319b4": {
+   "pi": 607,
+   "pi_speed": 600,
+   "pi_technical": 621
+  },
+  "guiness_copper/534b2/27979591": {
+   "pi": 588,
+   "pi_speed": 592,
+   "pi_technical": 578
+  },
+  "guiness_copper_a/534b2/9dd98111": {
+   "pi": 583,
+   "pi_speed": 586,
+   "pi_technical": 573
+  },
+  "guiness_copper_b/534b2/932a1a05": {
+   "pi": 579,
+   "pi_speed": 588,
+   "pi_technical": 556
+  },
+  "hawk300sx/2b4b7/abccd96a": {
+   "pi": 576,
+   "pi_speed": 609,
+   "pi_technical": 501
+  },
+  "hawk_twenty_two_rs/9116d/fe0bc81d": {
+   "pi": 499,
+   "pi_speed": 541,
+   "pi_technical": 406
+  },
+  "hartis_clone_gt/43e92/87c1debc": {
+   "pi": 572,
+   "pi_speed": 593,
+   "pi_technical": 523
+  },
+  "la_clonita__super_duper/40335/77c92725": {
+   "pi": 492,
+   "pi_speed": 544,
+   "pi_technical": 379
+  },
+  "la_clonita__super_duper_b/40335/81cff417": {
+   "pi": 497,
+   "pi_speed": 562,
+   "pi_technical": 359
+  },
+  "hawk_ae86_grand_touring/f567e/cf6e25d9": {
+   "pi": 549,
+   "pi_speed": 562,
+   "pi_technical": 519
+  },
+  "limace_lory/d88ec/bcc14374": {
+   "pi": 497,
+   "pi_speed": 534,
+   "pi_technical": 413
+  },
+  "giselle_clone_flying_400/e7102/f86b0f10": {
+   "pi": 494,
+   "pi_speed": 533,
+   "pi_technical": 407
+  },
+  "mascara_gt/4ba0c/acb28b81": {
+   "pi": 547,
+   "pi_speed": 526,
+   "pi_technical": 589
+  },
+  "hawk_fm5_v1_1/33da0/cb58da42": {
+   "pi": 531,
+   "pi_speed": 533,
+   "pi_technical": 524
+  },
+  "hawk_aime3_competition/8cd27/65ae0186": {
+   "pi": 497,
+   "pi_speed": 535,
+   "pi_technical": 412
+  },
+  "firestarter_clone_kalalalac/76976/e5d279d3": {
+   "pi": 499,
+   "pi_speed": 503,
+   "pi_technical": 489
+  },
+  "hartis_se/7c2cd/70c32b08": {
+   "pi": 566,
+   "pi_speed": 581,
+   "pi_technical": 530
+  },
+  "la_clone_clone_povite_vite_super_duper/40335/8b5cf3ac": {
+   "pi": 314,
+   "pi_speed": 448
+  },
+  "hawk_fm5/6024e/4b4d1d55": {
+   "pi": 509,
+   "pi_speed": 514,
+   "pi_technical": 497
+  },
+  "hawkgrandtouring/f8173/dfb29521": {
+   "pi": 488,
+   "pi_speed": 538,
+   "pi_technical": 381
+  },
+  "tata__dot_b/e8e8a/53c70fd3": {
+   "pi": 506,
+   "pi_speed": 512,
+   "pi_technical": 490
+  },
+  "bianka_elita/d1501/153d2574": {
+   "pi": 490,
+   "pi_speed": 526,
+   "pi_technical": 407
+  },
+  "hawk_focal_rs/1b892/068162dc": {
+   "pi": 571,
+   "pi_speed": 565,
+   "pi_technical": 583
+  },
+  "tata_dot/6fedf/415b12f4": {
+   "pi": 485,
+   "pi_speed": 495,
+   "pi_technical": 463
+  },
+  "hawk_troglodyte_2000r/20355/04988a48": {
+   "pi": 441,
+   "pi_speed": 437,
+   "pi_technical": 447
+  },
+  "hawk_twenty_two_rt_s/4812c/9bb1b906": {
+   "pi": 459,
+   "pi_speed": 496,
+   "pi_technical": 382
+  },
+  "hawk_twenty_two_rt_sport/4812c/d72563ce": {
+   "pi": 457,
+   "pi_speed": 473,
+   "pi_technical": 419
+  },
+  "la_povite_confort/cbb32/8b351b62": {
+   "pi_speed": 401
+  },
+  "la_clone_povite_vite/25e95/da9a9322": {
+   "pi": 313,
+   "pi_speed": 420
+  },
+  "hawk_pony_rs/b0192/46998b19": {
+   "pi": 330,
+   "pi_speed": 380
+  },
+  "la_povite/cdc12/2c0a065c": {
+   "pi_speed": 400
+  },
+  "hawkgascrisiscorvette/38e33/d606523d": {
+   "pi": 426,
+   "pi_speed": 414,
+   "pi_technical": 449
+  },
+  "hawk_911b/d3505/1763170c": {
+   "pi": 418,
+   "pi_speed": 431,
+   "pi_technical": 389
+  },
+  "giselle_flying_c/d6cd4/680318de": {
+   "pi": 394,
+   "pi_speed": 440
+  },
+  "hawk_911_plane_edition/d3505/d6d74800": {
+   "pi": 404,
+   "pi_speed": 414,
+   "pi_technical": 381
+  },
+  "hawk_twenty_two_rt/4812c/2799e68d": {
+   "pi_speed": 348
+  },
+  "miota_r_topspeed/1dca0/ae536fbe": {
+   "pi": 436,
+   "pi_speed": 423,
+   "pi_technical": 464
+  },
+  "miota_r/1dca0/80618252": {
+   "pi": 411,
+   "pi_speed": 389,
+   "pi_technical": 460
+  },
+  "old__mistique_c/38024/49240465": {
+   "pi_technical": 327
+  },
+  "old__mistique_b/38024/0bacadcb": {
+   "pi_speed": 325
+  },
+  "cichlid_snapdragon/b100f/0456a623": {
+   "pi": 396,
+   "pi_speed": 408,
+   "pi_technical": 370
+  },
+  "hawk_viviv_si/12cb2/39ed8fb4": {
+   "pi": 306,
+   "pi_speed": 301,
+   "pi_technical": 316
+  },
+  "hawk_3000gt/ac010/698002ae": {
+   "pi": 422,
+   "pi_speed": 448,
+   "pi_technical": 363
+  },
+  "arrow_awd_2_0/ffc8a/271560c6": {
+   "pi": 432,
+   "pi_speed": 460,
+   "pi_technical": 368
+  },
+  "arrow_awd/ffc8a/34b105ae": {
+   "pi": 475,
+   "pi_speed": 493,
+   "pi_technical": 437
+  },
+  "autobello/150_track/ebbca82f": {
+   "pi": 373,
+   "pi_speed": 372,
+   "pi_technical": 375
+  },
+  "bastion/redtail_A/b4205db5": {
+   "pi": 326,
+   "pi_speed": 340
+  },
+  "bastion/sport_gt_M/622ad937": {
+   "pi": 358,
+   "pi_speed": 395
+  },
+  "bluebuck/track/b5c766c1": {
+   "pi": 430,
+   "pi_speed": 457,
+   "pi_technical": 368
+  },
+  "bolide/320gtt_targa/cea5e28e": {
+   "pi": 376,
+   "pi_speed": 426
+  },
+  "bolide/350/79c3a7a3": {
+   "pi_speed": 333
+  },
+  "bolide/race/05f35786": {
+   "pi": 651,
+   "pi_speed": 667,
+   "pi_technical": 614
+  },
+  "burnside/gasser_late/0d01b8d1": {
+   "pi": 319,
+   "pi_speed": 383
+  },
+  "bx/track_M/2b7f6698": {
+   "pi": 580,
+   "pi_speed": 591,
+   "pi_technical": 555
+  },
+  "covet/turbo_evolution/af9224ee": {
+   "pi": 316,
+   "pi_speed": 370
+  },
+  "covet/turbo_race/0a9373c4": {
+   "pi": 568,
+   "pi_speed": 588,
+   "pi_technical": 523
+  },
+  "etk800/844_track_M/f75c1b37": {
+   "pi": 452,
+   "pi_speed": 472,
+   "pi_technical": 409
+  },
+  "etkc/kc4_250_M/4f2aee62": {
+   "pi": 318,
+   "pi_speed": 352
+  },
+  "etkc/kc6x_360_A/08542b5f": {
+   "pi": 443,
+   "pi_speed": 461,
+   "pi_technical": 400
+  },
+  "etkc/race_DCT/4c26e424": {
+   "pi": 612,
+   "pi_speed": 613,
+   "pi_technical": 607
+  },
+  "etki/2400tix_sport_evo_M/806e68ef": {
+   "pi": 302,
+   "pi_speed": 332
+  },
+  "etki/race/b928d528": {
+   "pi": 384,
+   "pi_speed": 419,
+   "pi_technical": 305
+  },
+  "fullsize/track/d42f2832": {
+   "pi": 461,
+   "pi_speed": 482,
+   "pi_technical": 412
+  },
+  "lansdale/38_race_late_M/c9e92fc0": {
+   "pi": 441,
+   "pi_speed": 444,
+   "pi_technical": 428
+  },
+  "legran/race/8355cf12": {
+   "pi": 406,
+   "pi_speed": 406,
+   "pi_technical": 402
+  },
+  "midsize/race/69b92ece": {
+   "pi": 547,
+   "pi_speed": 544,
+   "pi_technical": 551
+  },
+  "miramar/race/f9eae25c": {
+   "pi": 387,
+   "pi_speed": 393,
+   "pi_technical": 372
+  },
+  "moonhawk/race/4ed824ea": {
+   "pi": 443,
+   "pi_speed": 499,
+   "pi_technical": 328
+  },
+  "nine/nine_gasser/417d76a8": {
+   "pi_speed": 329
+  },
+  "pessima/hillclimb/67ff9229": {
+   "pi": 636,
+   "pi_speed": 631,
+   "pi_technical": 643
+  },
+  "pickup/d15_track_awd_M/0ce8d531": {
+   "pi": 376,
+   "pi_speed": 382,
+   "pi_technical": 362
+  },
+  "roamer/street_tuned/b006b5a9": {
+   "pi": 307,
+   "pi_speed": 345
+  },
+  "sbr/base_RWD_M/da762467": {
+   "pi_speed": 320
+  },
+  "sbr/electric_500/1432ccca": {
+   "pi": 500,
+   "pi_speed": 492,
+   "pi_technical": 515
+  },
+  "sbr/hillclimb/31317b81": {
+   "pi": 743,
+   "pi_speed": 732,
+   "pi_technical": 764
+  },
+  "scintilla/gt/cfdd695f": {
+   "pi": 601,
+   "pi_speed": 616,
+   "pi_technical": 566
+  },
+  "scintilla/gts_corse/6cce494b": {
+   "pi": 642,
+   "pi_speed": 661,
+   "pi_technical": 599
+  },
+  "scintilla/race/6b1a2c3c": {
+   "pi": 716,
+   "pi_speed": 730,
+   "pi_technical": 686
+  },
+  "sunburst2/sport_RS2_DCT/754d73d8": {
+   "pi": 418,
+   "pi_speed": 439,
+   "pi_technical": 373
+  },
+  "sunburst2/track_attack/d5cc116d": {
+   "pi": 596,
+   "pi_speed": 578,
+   "pi_technical": 631
+  },
+  "vivace/ardente_ev_sport/149106a0": {
+   "pi": 396,
+   "pi_speed": 406,
+   "pi_technical": 372
+  },
+  "vivace/hillclimb_SQ/47bda6b5": {
+   "pi": 717,
+   "pi_speed": 701,
+   "pi_technical": 746
+  },
+  "wendover/hillclimb/0bc66a91": {
+   "pi": 588,
+   "pi_speed": 563,
+   "pi_technical": 634
+  },
+  "wigeon/mantis/5f641931": {
+   "pi": 434,
+   "pi_speed": 463,
+   "pi_technical": 367
+  },
+  "autobello/Drag/8834dde1": {
+   "pi": 424,
+   "pi_speed": 470,
+   "pi_technical": 323
+  },
+  "autobello/street/deaef26d": {
+   "pi": 475,
+   "pi_speed": 499,
+   "pi_technical": 423
+  },
+  "barstow/custom/7d7bff17": {
+   "pi": 333,
+   "pi_speed": 359
+  },
+  "bastion/battlehawk_A/d0d9f14b": {
+   "pi": 313,
+   "pi_speed": 322
+  },
+  "bastion/drag/0efaae46": {
+   "pi": 381,
+   "pi_speed": 388,
+   "pi_technical": 359
+  },
+  "bastion/drift/c04b83da": {
+   "pi_speed": 305
+  },
+  "bastion/hotlap/595f2ddc": {
+   "pi": 427,
+   "pi_speed": 411,
+   "pi_technical": 452
+  },
+  "bastion/sport_M/08d8c16c": {
+   "pi_speed": 330
+  },
+  "bastion/street_tuned/0c0156f5": {
+   "pi": 393,
+   "pi_speed": 433,
+   "pi_technical": 383
+  },
+  "bluebuck/custom/5f8ae669": {
+   "pi_speed": 301
+  },
+  "bolide/320gtt/77ef4bc2": {
+   "pi": 437,
+   "pi_speed": 473,
+   "pi_technical": 358
+  },
+  "bolide/320gtt_us/b2882738": {
+   "pi": 430,
+   "pi_speed": 467,
+   "pi_technical": 349
+  },
+  "bolide/350_targa_us/83e47c59": {
+   "pi": 332,
+   "pi_speed": 371
+  },
+  "bolide/390gt/8083b02c": {
+   "pi": 398,
+   "pi_speed": 433,
+   "pi_technical": 320
+  },
+  "bolide/390gt_targa/18060384": {
+   "pi": 400,
+   "pi_speed": 435,
+   "pi_technical": 323
+  },
+  "bolide/390gt_us/7dbbc5f6": {
+   "pi": 396,
+   "pi_speed": 432,
+   "pi_technical": 318
+  },
+  "bolide/polizia/808d666d": {
+   "pi": 332,
+   "pi_speed": 372
+  },
+  "bolide/rally_asphalt/bec1e93c": {
+   "pi": 469,
+   "pi_speed": 462,
+   "pi_technical": 478
+  },
+  "bolide/topspeed/69a18838": {
+   "pi": 670,
+   "pi_speed": 688,
+   "pi_technical": 632
+  },
+  "burnside/custom/5be1100f": {
+   "pi_speed": 322
+  },
+  "bx/240bx_coupe_rally_asp/38aea4fb": {
+   "pi": 418,
+   "pi_speed": 439,
+   "pi_technical": 377
+  },
+  "bx/drag_A/d0b8d764": {
+   "pi": 443,
+   "pi_speed": 487,
+   "pi_technical": 339
+  },
+  "bx/powerglow/66c811eb": {
+   "pi": 524,
+   "pi_speed": 532,
+   "pi_technical": 510
+  },
+  "bx/pro_drift_M/f97f9f1d": {
+   "pi": 474,
+   "pi_speed": 506,
+   "pi_technical": 403
+  },
+  "bx/street_tuned_M/3ce6dcf6": {
+   "pi": 441,
+   "pi_speed": 473,
+   "pi_technical": 361
+  },
+  "covet/custom/67f5babe": {
+   "pi": 369,
+   "pi_speed": 405
+  },
+  "covet/rally_asphalt/c341cd22": {
+   "pi": 360,
+   "pi_speed": 360,
+   "pi_technical": 357
+  },
+  "covet/turbo_rally/8af8bdaf": {
+   "pi_speed": 320
+  },
+  "etk800/844_250_M/11c23063": {
+   "pi_speed": 303
+  },
+  "etk800/846_340_A/570361a0": {
+   "pi": 357,
+   "pi_speed": 381,
+   "pi_technical": 313
+  },
+  "etk800/846_ttsport_heritage_M/47f1bbfc": {
+   "pi": 414,
+   "pi_speed": 455,
+   "pi_technical": 322
+  },
+  "etk800/846x_ttsport_plus_DCT/c3bd3b6f": {
+   "pi": 444,
+   "pi_speed": 479,
+   "pi_technical": 364
+  },
+  "etk800/856x_310d_A/aba392bc": {
+   "pi": 317,
+   "pi_speed": 346
+  },
+  "etk800/rennspecht_8r_A/d9fb5206": {
+   "pi": 397,
+   "pi_speed": 422,
+   "pi_technical": 355
+  },
+  "etkc/kc4_250_A/f5f59e36": {
+   "pi": 318,
+   "pi_speed": 351
+  },
+  "etkc/kc6_360_M/beb6e803": {
+   "pi": 447,
+   "pi_speed": 469,
+   "pi_technical": 399
+  },
+  "etkc/kc6x_310d_driving_experience_M/e3701518": {
+   "pi": 397,
+   "pi_speed": 421,
+   "pi_technical": 345
+  },
+  "etkc/kc6x_340_police_highway_A/7b57a1a4": {
+   "pi": 434,
+   "pi_speed": 452,
+   "pi_technical": 391
+  },
+  "etkc/kc6x_trackday_A/eaf7054f": {
+   "pi": 596,
+   "pi_speed": 596,
+   "pi_technical": 592
+  },
+  "etkc/kc8_drift_M/19bdc0ad": {
+   "pi": 519,
+   "pi_speed": 554,
+   "pi_technical": 445
+  },
+  "etkc/kc8_ttsport_DCT/b8001af3": {
+   "pi": 416,
+   "pi_speed": 447,
+   "pi_technical": 347
+  },
+  "etkc/kc8x_ttsport_plus_DCT/27906048": {
+   "pi": 478,
+   "pi_speed": 503,
+   "pi_technical": 422
+  },
+  "etkc/rennspecht_kr_A/d52fbfa8": {
+   "pi": 510,
+   "pi_speed": 530,
+   "pi_technical": 464
+  },
+  "etki/2400ti_sport_evo_M/5488c798": {
+   "pi": 305,
+   "pi_speed": 336
+  },
+  "etki/custom/00816c76": {
+   "pi_speed": 333
+  },
+  "etki/rally_am_asphalt/4e75da2f": {
+   "pi_speed": 326
+  },
+  "fullsize/custom2/5da31212": {
+   "pi": 373,
+   "pi_speed": 402,
+   "pi_technical": 306
+  },
+  "hopper/drag/cc027512": {
+   "pi": 326,
+   "pi_speed": 394
+  },
+  "lansdale/44_drag_late_M/bd6a04df": {
+   "pi": 620,
+   "pi_speed": 623,
+   "pi_technical": 608
+  },
+  "midsize/custom/cc3b7e1f": {
+   "pi": 424,
+   "pi_speed": 454,
+   "pi_technical": 357
+  },
+  "midsize/drag/e876a891": {
+   "pi": 435,
+   "pi_speed": 417,
+   "pi_technical": 467
+  },
+  "midsize/LX_V6_sport_M/5c361199": {
+   "pi_speed": 305
+  },
+  "miramar/custom/ced9e298": {
+   "pi": 311,
+   "pi_speed": 326
+  },
+  "moonhawk/drag/6cde3763": {
+   "pi": 362,
+   "pi_speed": 453
+  },
+  "moonhawk/drift/2330856d": {
+   "pi_speed": 313
+  },
+  "nine/nine_hotbeams/d08443d2": {
+   "pi": 549,
+   "pi_speed": 550,
+   "pi_technical": 540
+  },
+  "nine/powerglow/9dbaf61c": {
+   "pi": 491,
+   "pi_speed": 445,
+   "pi_technical": 582
+  },
+  "pessima/custom/66a9d1bf": {
+   "pi": 359,
+   "pi_speed": 387
+  },
+  "pessima/drift/392d2e54": {
+   "pi_speed": 317
+  },
+  "roamer/drag/74749661": {
+   "pi": 422,
+   "pi_speed": 461,
+   "pi_technical": 336
+  },
+  "sbr/base_RWD_DCT/aec9e00d": {
+   "pi_speed": 325
+  },
+  "sbr/custom/c3e5eb0b": {
+   "pi": 457,
+   "pi_speed": 474,
+   "pi_technical": 414
+  },
+  "sbr/drift/8c1063ab": {
+   "pi": 493,
+   "pi_speed": 480,
+   "pi_technical": 517
+  },
+  "sbr/electric_800/635e4667": {
+   "pi": 565,
+   "pi_speed": 557,
+   "pi_technical": 578
+  },
+  "sbr/hillclimb_SQ/18094250": {
+   "pi": 666,
+   "pi_speed": 630,
+   "pi_technical": 735
+  },
+  "sbr/rally_am_asphalt/70ebae97": {
+   "pi": 461,
+   "pi_speed": 441,
+   "pi_technical": 500
+  },
+  "sbr/S_AWD_DCT/e9dd6282": {
+   "pi": 383,
+   "pi_speed": 405,
+   "pi_technical": 329
+  },
+  "sbr/S_RWD_DCT/897562e4": {
+   "pi": 388,
+   "pi_speed": 410,
+   "pi_technical": 335
+  },
+  "sbr/TT_AWD_S2_DCT/ebcbd7ac": {
+   "pi": 492,
+   "pi_speed": 507,
+   "pi_technical": 455
+  },
+  "sbr/TT_AWD_S_DCT/46000867": {
+   "pi": 420,
+   "pi_speed": 441,
+   "pi_technical": 372
+  },
+  "sbr/TT_RWD_S_DCT/2bcef050": {
+   "pi": 424,
+   "pi_speed": 445,
+   "pi_technical": 374
+  },
+  "scintilla/dark_owl/f453f499": {
+   "pi": 598,
+   "pi_speed": 621,
+   "pi_technical": 546
+  },
+  "scintilla/gts/35e20b5e": {
+   "pi": 612,
+   "pi_speed": 629,
+   "pi_technical": 573
+  },
+  "scintilla/gts_spider/31d14575": {
+   "pi": 602,
+   "pi_speed": 618,
+   "pi_technical": 561
+  },
+  "scintilla/gtx/b8a80871": {
+   "pi": 619,
+   "pi_speed": 627,
+   "pi_technical": 598
+  },
+  "scintilla/offroad/93728c99": {
+   "pi": 397,
+   "pi_speed": 424,
+   "pi_technical": 339
+  },
+  "scintilla/rally/45af90fd": {
+   "pi": 721,
+   "pi_speed": 728,
+   "pi_technical": 707
+  },
+  "sunburst2/drift_street/e0fa4f08": {
+   "pi_speed": 311
+  },
+  "sunburst2/gendarmerie/d3b28bb2": {
+   "pi": 382,
+   "pi_speed": 404,
+   "pi_technical": 331
+  },
+  "sunburst2/offroad/b79a2d53": {
+   "pi": 340,
+   "pi_speed": 378
+  },
+  "sunburst2/rally_pro_gravel/bd1d221d": {
+   "pi": 311,
+   "pi_speed": 317
+  },
+  "sunburst2/sport_RS_DCT/65a0025c": {
+   "pi": 403,
+   "pi_speed": 424,
+   "pi_technical": 357
+  },
+  "sunburst2/sport_RS_wagon_DCT/c7f892da": {
+   "pi": 401,
+   "pi_speed": 422,
+   "pi_technical": 355
+  },
+  "sunburst2/sport_S_DCT/0ae6b7c3": {
+   "pi": 334,
+   "pi_speed": 359
+  },
+  "sunburst2/sport_S_wagon_DCT/3f16f393": {
+   "pi": 330,
+   "pi_speed": 355
+  },
+  "sunburst2/trackday_M/8f388e2c": {
+   "pi": 609,
+   "pi_speed": 610,
+   "pi_technical": 604
+  },
+  "vivace/ardente_230_DCT/f758f28b": {
+   "pi": 346,
+   "pi_speed": 366,
+   "pi_technical": 303
+  },
+  "vivace/ardente_carabinieri/3457459f": {
+   "pi_speed": 312
+  },
+  "vivace/ardente_carminsport/c777310d": {
+   "pi": 427,
+   "pi_speed": 442,
+   "pi_technical": 393
+  },
+  "vivace/ardente_race/1fc36201": {
+   "pi": 344,
+   "pi_speed": 386
+  },
+  "vivace/ardente_rally_asphalt/6695f726": {
+   "pi": 542,
+   "pi_speed": 536,
+   "pi_technical": 552
+  },
+  "vivace/ardente_S_310_DCT/513e6382": {
+   "pi": 430,
+   "pi_speed": 447,
+   "pi_technical": 392
+  },
+  "vivace/ardente_S_410Q_DCT/5c4121ec": {
+   "pi": 453,
+   "pi_speed": 470,
+   "pi_technical": 416
+  },
+  "vivace/gravel_SQ/62750da3": {
+   "pi": 371,
+   "pi_speed": 394,
+   "pi_technical": 315
+  },
+  "vivace/race_SQ/3bd2bd97": {
+   "pi": 421,
+   "pi_speed": 448,
+   "pi_technical": 366
+  },
+  "vivace/vivace_230S_DCT/bc03be43": {
+   "pi_speed": 329
+  },
+  "vivace/vivace_S_270_DCT/45669d8f": {
+   "pi": 339,
+   "pi_speed": 366
+  },
+  "vivace/vivace_S_310_DCT/5982b430": {
+   "pi": 373,
+   "pi_speed": 402,
+   "pi_technical": 306
+  },
+  "vivace/vivace_S_350q_DCT/dcec2b2e": {
+   "pi": 375,
+   "pi_speed": 400,
+   "pi_technical": 314
+  },
+  "vivace/vivace_S_410q_DCT/4cf6c4c7": {
+   "pi": 417,
+   "pi_speed": 442,
+   "pi_technical": 360
+  },
+  "wendover/race/cd28056b": {
+   "pi": 444,
+   "pi_speed": 405,
+   "pi_technical": 521
+  },
+  "wendover/Street_tuned/96f38a3a": {
+   "pi": 355,
+   "pi_speed": 355,
+   "pi_technical": 351
+  },
+  "autobello/autobuggy_baja_extreme/06e8d6aa": {
+   "pi": 423,
+   "pi_speed": 460,
+   "pi_technical": 340
+  },
+  "autobello/autobuggy_baja_unlimited/c010e388": {
+   "pi_speed": 309
+  },
+  "barstow/drag/50df2522": {
+   "pi": 369,
+   "pi_speed": 423
+  },
+  "bastion/battlehawk_M/923fd5d8": {
+   "pi": 310,
+   "pi_speed": 319
+  },
+  "bastion/luxe_v8_A/edae1288": {
+   "pi_speed": 305
+  },
+  "bastion/sport_A/f33cc6fb": {
+   "pi_speed": 332
+  },
+  "bastion/sport_gt_A/c215f0b6": {
+   "pi": 359,
+   "pi_speed": 400
+  },
+  "bluebuck/drag/9c935382": {
+   "pi": 347,
+   "pi_speed": 422
+  },
+  "bolide/320gtt_targa_us/502f0b6c": {
+   "pi": 432,
+   "pi_speed": 469,
+   "pi_technical": 353
+  },
+  "bolide/350_targa/d4917a4d": {
+   "pi": 334,
+   "pi_speed": 372
+  },
+  "bolide/350_us/07d97fdf": {
+   "pi": 329,
+   "pi_speed": 369
+  },
+  "bolide/390gt_strada/71ff9fa1": {
+   "pi": 428,
+   "pi_speed": 463,
+   "pi_technical": 348
+  },
+  "bolide/390gt_targa_us/ced75e18": {
+   "pi": 400,
+   "pi_speed": 436,
+   "pi_technical": 321
+  },
+  "bolide/clubracer/f917b7d0": {
+   "pi": 502,
+   "pi_speed": 517,
+   "pi_technical": 470
+  },
+  "bolide/notte/ba4fd3fd": {
+   "pi": 610,
+   "pi_speed": 624,
+   "pi_technical": 578
+  },
+  "bolide/rally_gravel/909b1149": {
+   "pi_speed": 306
+  },
+  "burnside/drag/00d9a6d6": {
+   "pi": 433,
+   "pi_speed": 489,
+   "pi_technical": 308
+  },
+  "burnside/powerglow/dacc722d": {
+   "pi": 360,
+   "pi_speed": 400
+  },
+  "burnside/ratrod/70459934": {
+   "pi_speed": 342
+  },
+  "bx/runner_M/34e3669b": {
+   "pi": 500,
+   "pi_speed": 537,
+   "pi_technical": 409
+  },
+  "covet/drag/ff18597d": {
+   "pi": 485,
+   "pi_speed": 497,
+   "pi_technical": 456
+  },
+  "covet/race/5ca18ed1": {
+   "pi": 518,
+   "pi_speed": 518,
+   "pi_technical": 513
+  },
+  "covet/runner/e6b91a92": {
+   "pi": 472,
+   "pi_speed": 468,
+   "pi_technical": 476
+  },
+  "covet/turbo/188e0da1": {
+   "pi_speed": 326
+  },
+  "etk800/844_250_A/fe6f9f61": {
+   "pi_speed": 301
+  },
+  "etk800/846_310d_A/8e66aaa0": {
+   "pi": 328,
+   "pi_speed": 354
+  },
+  "etk800/846_340_M/355939ee": {
+   "pi": 356,
+   "pi_speed": 382,
+   "pi_technical": 309
+  },
+  "etk800/846_ttSport_custom_DCT/5e120491": {
+   "pi": 474,
+   "pi_speed": 506,
+   "pi_technical": 415
+  },
+  "etk800/846x_driving_experience_A/653d740f": {
+   "pi": 342,
+   "pi_speed": 368
+  },
+  "etk800/856_ttsport_DCT/50751177": {
+   "pi": 414,
+   "pi_speed": 443,
+   "pi_technical": 349
+  },
+  "etk800/856x_340_A/4167b840": {
+   "pi": 346,
+   "pi_speed": 374
+  },
+  "etk800/856xc_300_A/b665ffb9": {
+   "pi_speed": 329
+  },
+  "etk800/858_drift_M/571b8d56": {
+   "pi": 487,
+   "pi_speed": 521,
+   "pi_technical": 410
+  },
+  "etkc/kc4_street_tuned_M/96d2de64": {
+   "pi": 463,
+   "pi_speed": 486,
+   "pi_technical": 413
+  },
+  "etkc/kc6_360_A/238cfa95": {
+   "pi": 448,
+   "pi_speed": 468,
+   "pi_technical": 404
+  },
+  "etkc/kc6x_310d_A/cb40c82a": {
+   "pi": 408,
+   "pi_speed": 428,
+   "pi_technical": 361
+  },
+  "etkc/kc6x_360_M/20923820": {
+   "pi": 441,
+   "pi_speed": 461,
+   "pi_technical": 394
+  },
+  "etkc/kc8_ttsport_heritage_M/eb3db5b7": {
+   "pi": 442,
+   "pi_speed": 476,
+   "pi_technical": 364
+  },
+  "etki/cool/9aa6bece": {
+   "pi": 474,
+   "pi_speed": 483,
+   "pi_technical": 451
+  },
+  "etki/drift/98bb91e6": {
+   "pi_speed": 318
+  },
+  "fullsize/drag/62a675b6": {
+   "pi": 355,
+   "pi_speed": 408
+  },
+  "fullsize/drift/a681d951": {
+   "pi": 393,
+   "pi_speed": 437
+  },
+  "lansdale/38_tuner_late_M/75c1f65d": {
+   "pi_speed": 329
+  },
+  "lansdale/44_tuner_special_AWD_SC_M/adecf90d": {
+   "pi": 371,
+   "pi_speed": 442
+  },
+  "midsize/special/a2674f7e": {
+   "pi_speed": 304
+  },
+  "nine/nine_dragvan/93fed820": {
+   "pi": 326,
+   "pi_speed": 312,
+   "pi_technical": 350
+  },
+  "nine/nine_hotrod_60s/34250e06": {
+   "pi": 346,
+   "pi_speed": 396
+  },
+  "nine/nine_restomod_coupe/b89beb97": {
+   "pi": 311,
+   "pi_speed": 344
+  },
+  "nine/nine_tasti_hotrod/bcd2e5a0": {
+   "pi": 443,
+   "pi_speed": 354,
+   "pi_technical": 633
+  },
+  "pessima/custom2/81171d74": {
+   "pi": 428,
+   "pi_speed": 429,
+   "pi_technical": 420
+  },
+  "pessima/race/9f36bffb": {
+   "pi": 559,
+   "pi_speed": 533,
+   "pi_technical": 609
+  },
+  "pessima/rally/b6897765": {
+   "pi": 320,
+   "pi_speed": 341
+  },
+  "pickup/d15_longbed_drag_A/b27c4a48": {
+   "pi": 402,
+   "pi_speed": 433,
+   "pi_technical": 336
+  },
+  "sbr/electric_300/cd41d575": {
+   "pi": 416,
+   "pi_speed": 416,
+   "pi_technical": 412
+  },
+  "sbr/powerglow/5d7653b7": {
+   "pi": 488,
+   "pi_speed": 503,
+   "pi_technical": 452
+  },
+  "sbr/S_AWD_M/d9e27d2c": {
+   "pi": 380,
+   "pi_speed": 403,
+   "pi_technical": 326
+  },
+  "sbr/S_RWD_M/812513de": {
+   "pi": 386,
+   "pi_speed": 408,
+   "pi_technical": 332
+  },
+  "sbr/track/d2daaa0f": {
+   "pi": 657,
+   "pi_speed": 623,
+   "pi_technical": 724
+  },
+  "sbr/TT_AWD_S2_M/1e9d0506": {
+   "pi": 489,
+   "pi_speed": 504,
+   "pi_technical": 452
+  },
+  "sbr/TT_AWD_S_M/e2654fd1": {
+   "pi": 417,
+   "pi_speed": 438,
+   "pi_technical": 368
+  },
+  "sbr/TT_RWD_S_M/092b688e": {
+   "pi": 421,
+   "pi_speed": 443,
+   "pi_technical": 371
+  },
+  "scintilla/custom/a1f36783": {
+   "pi": 671,
+   "pi_speed": 692,
+   "pi_technical": 622
+  },
+  "scintilla/drag/464f551a": {
+   "pi": 720,
+   "pi_speed": 727,
+   "pi_technical": 702
+  },
+  "scintilla/gt_spider/02aa1304": {
+   "pi": 590,
+   "pi_speed": 605,
+   "pi_technical": 553
+  },
+  "scintilla/gts_corse_spider/394ab4f3": {
+   "pi": 631,
+   "pi_speed": 650,
+   "pi_technical": 587
+  },
+  "scintilla/gts_polizia/2776159b": {
+   "pi": 612,
+   "pi_speed": 628,
+   "pi_technical": 572
+  },
+  "scintilla/gts_topspeed/27d5fa9f": {
+   "pi": 627,
+   "pi_speed": 650,
+   "pi_technical": 578
+  },
+  "scintilla/gtx_spider/f1e9477c": {
+   "pi": 608,
+   "pi_speed": 617,
+   "pi_technical": 586
+  },
+  "sunburst2/drift_pro/112654c6": {
+   "pi": 473,
+   "pi_speed": 474,
+   "pi_technical": 463
+  },
+  "sunburst2/interceptor/c0d57434": {
+   "pi": 388,
+   "pi_speed": 410,
+   "pi_technical": 337
+  },
+  "sunburst2/itasha/f24242fc": {
+   "pi": 456,
+   "pi_speed": 474,
+   "pi_technical": 419
+  },
+  "sunburst2/polizia/a2970699": {
+   "pi": 324,
+   "pi_speed": 350
+  },
+  "sunburst2/rally_am_asphalt/4deff6d0": {
+   "pi": 462,
+   "pi_speed": 434,
+   "pi_technical": 515
+  },
+  "sunburst2/rally_pro_asphalt/a4545688": {
+   "pi": 514,
+   "pi_speed": 488,
+   "pi_technical": 561
+  },
+  "sunburst2/sport_RS2_wagon_DCT/9865bad7": {
+   "pi": 416,
+   "pi_speed": 437,
+   "pi_technical": 371
+  },
+  "sunburst2/sport_RS_M/81f14cb1": {
+   "pi": 400,
+   "pi_speed": 423,
+   "pi_technical": 353
+  },
+  "sunburst2/sport_RS_wagon_M/d038bd6c": {
+   "pi": 398,
+   "pi_speed": 421,
+   "pi_technical": 350
+  },
+  "sunburst2/sport_S_M/eebf7546": {
+   "pi_speed": 312
+  },
+  "sunburst2/sport_S_wagon_M/fa4bb811": {
+   "pi_speed": 308
+  },
+  "sunburst2/street_tuned/b8575b66": {
+   "pi": 443,
+   "pi_speed": 450,
+   "pi_technical": 391
+  },
+  "utv/custom/40779759": {
+   "pi": 533,
+   "pi_speed": 519,
+   "pi_technical": 559
+  },
+  "vivace/ardente_190d_DCT/433207ab": {
+   "pi_speed": 315
+  },
+  "vivace/ardente_190d_M/a0026bbd": {
+   "pi_speed": 315
+  },
+  "vivace/ardente_230_M/8af8cc0c": {
+   "pi": 345,
+   "pi_speed": 364,
+   "pi_technical": 302
+  },
+  "vivace/ardente_gendarmerie/07b5884c": {
+   "pi": 426,
+   "pi_speed": 443,
+   "pi_technical": 388
+  },
+  "vivace/ardente_rally/b4f38663": {
+   "pi": 350,
+   "pi_speed": 374
+  },
+  "vivace/ardente_S_310_M/1e01ca19": {
+   "pi": 431,
+   "pi_speed": 447,
+   "pi_technical": 394
+  },
+  "vivace/ardente_S_410Q_M/a5b03d4f": {
+   "pi": 456,
+   "pi_speed": 471,
+   "pi_technical": 422
+  },
+  "vivace/ardente_track/e10f31a5": {
+   "pi": 590,
+   "pi_speed": 583,
+   "pi_technical": 603
+  },
+  "vivace/ardente_tuned/b6fcad8c": {
+   "pi": 487,
+   "pi_speed": 508,
+   "pi_technical": 440
+  },
+  "vivace/asphalt_SQ/3c90a4a5": {
+   "pi": 565,
+   "pi_speed": 555,
+   "pi_technical": 578
+  },
+  "vivace/trackday_M/440f063d": {
+   "pi": 561,
+   "pi_speed": 552,
+   "pi_technical": 575
+  },
+  "vivace/vivace_S_270_M/0e924947": {
+   "pi": 339,
+   "pi_speed": 366
+  },
+  "vivace/vivace_S_310_M/c5b00dc0": {
+   "pi": 374,
+   "pi_speed": 401,
+   "pi_technical": 308
+  },
+  "vivace/vivace_S_350q_M/38f2d89e": {
+   "pi": 376,
+   "pi_speed": 400,
+   "pi_technical": 318
+  },
+  "vivace/vivace_S_410q_M/bdb63c9f": {
+   "pi": 419,
+   "pi_speed": 442,
+   "pi_technical": 364
+  },
+  "vivace/vivace_S_gendarmerie/b150f803": {
+   "pi": 366,
+   "pi_speed": 394
+  },
+  "wendover/super/6efa56f2": {
+   "pi": 368,
+   "pi_speed": 352,
+   "pi_technical": 394
+  },
+  "hawk_vipere_s/74843/9002261e": {
+   "pi": 435,
+   "pi_speed": 467,
+   "pi_technical": 363
+  }
+ }
+}

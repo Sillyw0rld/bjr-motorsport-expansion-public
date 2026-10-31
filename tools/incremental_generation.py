@@ -57,7 +57,10 @@ def inspect(beammp, donors=None):
     registry = donor_registry.load(donors)
     source = canonical({k: registry[k] for k in ('engines', 'drivetrains')})
     inputs = {'generator': generator_hash(), 'donors': digest(json.dumps(source, sort_keys=True).encode()), 'cars': {}}
-    cars = fleet.discover(client)
+    nonauto = []
+    cars = fleet.discover(client, report=nonauto)
+    for entry in nonauto:
+        print(f"skipped: {entry['model']} — {entry['reason']}")
     for model, row in sorted(cars.items()):
         path = Path(row['archive'])
         stat = path.stat()

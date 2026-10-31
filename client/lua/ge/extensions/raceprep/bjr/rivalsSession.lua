@@ -1,6 +1,6 @@
 -- SPDX-License-Identifier: AGPL-3.0-or-later
 -- Copyright (c) 2026 Sillyw0rld
-local Host=require('ge/extensions/raceprep/bjr/host')
+local Host=require('ge/extensions/raceprep/frontend').host()
 local Tracker=require('ge/extensions/raceprep/bjr/lapTracker')
 local Ghost=require('ge/extensions/raceprep/bjr/rivalsGhost')
 local M={}

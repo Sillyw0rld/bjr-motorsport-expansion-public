@@ -141,6 +141,12 @@ def inspect_recipient(model, car_info):
         info_path = f'vehicles/{model}/info_{cfg}.json'
         info_json = json.loads(z.read(info_path)) if info_path in names else {}
         stock_drive = info_json.get('Drivetrain')
+        if isinstance(stock_drive, str):
+            stock_drive = stock_drive.strip().upper()
+            if stock_drive == '4WD':
+                stock_drive = 'AWD'
+        if stock_drive not in ('FWD', 'RWD', 'AWD'):
+            stock_drive = None
         stock_engine = parts.get('Camso_Engine', '')
         stock_trans = parts.get('Camso_Transmission', '')
         stock_tc = parts.get('Camso_TransferCase', '')
@@ -286,6 +292,8 @@ def inspect_recipient(model, car_info):
 
 
 def incompatibility(rec, layout):
+    if not rec['stockDrive']:
+        return 'Stock drivetrain is unknown'
     if rec['stockDrive'] == layout:
         return 'Already the stock drivetrain layout'
     if rec['engineDevice'] == 'electricMotor' or not rec['stockTransmission']:

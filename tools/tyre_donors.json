@@ -1280,6 +1280,46 @@
   "sourceSha256": "ce4e530cea78ed42444ff2b2abf165e54fc4031dc29ea55e849ce3aef2035ce5"
  },
  {
+  "model": "hawk_origin_type_s",
+  "axle": "front",
+  "compound": "standard",
+  "title": "Origin Type-S 185/55/17 Radial Medium Magnesium Front Wheels",
+  "tireWidthMM": 185.0,
+  "radiusM": 0.32,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.33268,
+   "fullLoadCoef": 0.1085,
+   "loadSensitivitySlope": 0.000198,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "116712554efbda0d59466c8989889a5131614de84c26a50e04271e144bb35b4a"
+ },
+ {
+  "model": "hawk_origin_type_s",
+  "axle": "rear",
+  "compound": "standard",
+  "title": "Origin Type-S 185/55/17 Radial Medium Magnesium Rear Wheels",
+  "tireWidthMM": 185.0,
+  "radiusM": 0.32,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.33268,
+   "fullLoadCoef": 0.1085,
+   "loadSensitivitySlope": 0.00017010000000000001,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "9fb6754a2b2b90a5b883817c7af278f18a81c912a0b759b85dbd517d06549a8e"
+ },
+ {
   "model": "hawk_pony_rs",
   "axle": "front",
   "compound": "sport",
@@ -3158,6 +3198,46 @@
    "stribeckVelMult": 2.3
   },
   "sourceSha256": "5528805167b2fc34b0020d28089d426012d9ecb7f92c2d33e69cf85c2f47f5d7"
+ },
+ {
+  "model": "tatu_aa",
+  "axle": "front",
+  "compound": "standard",
+  "title": "AA 185/50/15 Radial Medium Alloy Front Wheels",
+  "tireWidthMM": 185.0,
+  "radiusM": 0.2875,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 0.9996,
+   "noLoadCoef": 1.181328,
+   "fullLoadCoef": 0.1008,
+   "loadSensitivitySlope": 0.00021,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "bcf8c7623b89953c20f9f893be47cb6e60ce8e17e1139f9f076faaab95e12a07"
+ },
+ {
+  "model": "tatu_aa",
+  "axle": "rear",
+  "compound": "standard",
+  "title": "AA 185/50/15 Radial Medium Alloy Rear Wheels",
+  "tireWidthMM": 185.0,
+  "radiusM": 0.2875,
+  "coefficients": {
+   "frictionCoef": 1.0,
+   "slidingFrictionCoef": 1.0710000000000002,
+   "noLoadCoef": 1.181328,
+   "fullLoadCoef": 0.1008,
+   "loadSensitivitySlope": 0.0001764,
+   "softnessCoef": 0.6,
+   "treadCoef": 0.5,
+   "stribeckExponent": 2.16,
+   "stribeckVelMult": 2.05
+  },
+  "sourceSha256": "2fae188532b0179af1310bf5c32707b5c6bb027c9753f73ccfe01bb314932811"
  },
  {
   "model": "temerario__super_gt_b",

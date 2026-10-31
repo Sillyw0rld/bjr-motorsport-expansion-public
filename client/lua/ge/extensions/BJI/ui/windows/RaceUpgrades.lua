@@ -58,13 +58,15 @@ local function slotList(vehID)
     local d = core_vehicle_manager and core_vehicle_manager.getVehicleData(vehID)
     local snapshot=rawget(_G,"raceprepRatings") and ((raceprepRatings.getLiveCarData and raceprepRatings.getLiveCarData(vehID)) or (raceprepRatings.getCarData and raceprepRatings.getCarData(vehID)))
     -- labels computed before the engine data arrived say "reading dyno...": refresh them
-    local stale = cache.pending and os.clock() - (cache.at or 0) > 1
+    -- wall-clock staleness: os.clock() is CPU time and lags under load
+    local wnow=(Engine and Engine.Platform and Engine.Platform.getSystemTimeMS and Engine.Platform.getSystemTimeMS()/1000) or os.clock()
+    local stale = cache.pending and wnow - (cache.at or 0) > 1
     if stale or cache.vehID ~= vehID or cache.vdata ~= (d and d.vdata) or cache.snapshot~=snapshot then
         cache.snapshot=snapshot
         cache.vehID, cache.vdata = vehID, d and d.vdata
         local ok, list = pcall(upgrades.list, vehID)
         cache.list = ok and list or {}
-        cache.at, cache.pending = os.clock(), false
+        cache.at, cache.pending = wnow, false
         for _, e in ipairs(cache.list) do
             for _, o in ipairs(e.options or {}) do
                 if tostring(o.title):find("reading dyno", 1, true) then cache.pending = true end
